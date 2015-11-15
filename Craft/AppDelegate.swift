@@ -16,6 +16,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
+        
+        UIAdapter.shared.config(UIScreen.mainScreen().bounds)
+        self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
+        self.window!.backgroundColor = UIColor.whiteColor()
+        let startViewController = MainTabbar(nibName:nil, bundle: nil)
+        self.window!.rootViewController = startViewController
+        UINavigationBar.appearance().tintColor = UIColor.whiteColor()
+        
+        UIApplication.sharedApplication().setStatusBarStyle(UIStatusBarStyle.LightContent, animated: true)
+        self.window!.makeKeyAndVisible()
+        
         return true
     }
 
