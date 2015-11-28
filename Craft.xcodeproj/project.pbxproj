@@ -9,6 +9,11 @@
 /* Begin PBXBuildFile section */
 		184867821BF8506F00016A4E /* SliderMain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184867811BF8506F00016A4E /* SliderMain.swift */; };
 		184867841BF851AE00016A4E /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184867831BF851AE00016A4E /* Common.swift */; };
+		18A593CE1C0996DB00458308 /* ActivityMain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A593CD1C0996DB00458308 /* ActivityMain.swift */; };
+		18A593D51C099BBB00458308 /* ActivityUserTableSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A593D41C099BBB00458308 /* ActivityUserTableSource.swift */; };
+		18A593D81C099C5300458308 /* TableViewBaseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A593D71C099C5300458308 /* TableViewBaseCell.swift */; };
+		18A593DA1C099C5A00458308 /* BaseTextfiledDeletgate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A593D91C099C5A00458308 /* BaseTextfiledDeletgate.swift */; };
+		18A593DC1C099D4100458308 /* CellType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A593DB1C099D4100458308 /* CellType.swift */; };
 		18A824461BEDCDF200084589 /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A824451BEDCDF200084589 /* LoginController.swift */; };
 		18A8244A1BEDCF0E00084589 /* UIAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A824491BEDCF0E00084589 /* UIAdapter.swift */; };
 		18A8244F1BEDCF9400084589 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A8244E1BEDCF9400084589 /* BaseViewController.swift */; };
@@ -47,6 +52,11 @@
 /* Begin PBXFileReference section */
 		184867811BF8506F00016A4E /* SliderMain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SliderMain.swift; sourceTree = "<group>"; };
 		184867831BF851AE00016A4E /* Common.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Common.swift; sourceTree = "<group>"; };
+		18A593CD1C0996DB00458308 /* ActivityMain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ActivityMain.swift; path = ActivityMain/ActivityMain.swift; sourceTree = "<group>"; };
+		18A593D41C099BBB00458308 /* ActivityUserTableSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityUserTableSource.swift; sourceTree = "<group>"; };
+		18A593D71C099C5300458308 /* TableViewBaseCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewBaseCell.swift; sourceTree = "<group>"; };
+		18A593D91C099C5A00458308 /* BaseTextfiledDeletgate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseTextfiledDeletgate.swift; sourceTree = "<group>"; };
+		18A593DB1C099D4100458308 /* CellType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CellType.swift; sourceTree = "<group>"; };
 		18A824451BEDCDF200084589 /* LoginController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoginController.swift; path = Modules/Login/LoginController.swift; sourceTree = "<group>"; };
 		18A824491BEDCF0E00084589 /* UIAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIAdapter.swift; sourceTree = "<group>"; };
 		18A8244E1BEDCF9400084589 /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
@@ -133,9 +143,62 @@
 			name = Model;
 			sourceTree = "<group>";
 		};
+		18A593D01C09974000458308 /* ActivityMain */ = {
+			isa = PBXGroup;
+			children = (
+				18A593D31C09975700458308 /* Model */,
+				18A593D21C09975100458308 /* Controller */,
+				18A593D11C09974C00458308 /* View */,
+			);
+			name = ActivityMain;
+			sourceTree = "<group>";
+		};
+		18A593D11C09974C00458308 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		18A593D21C09975100458308 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				18A593CD1C0996DB00458308 /* ActivityMain.swift */,
+				18A593D41C099BBB00458308 /* ActivityUserTableSource.swift */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		18A593D31C09975700458308 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		18A593D61C099C4700458308 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				18A593DD1C099D4E00458308 /* BaseTableViewCell */,
+				18A8244E1BEDCF9400084589 /* BaseViewController.swift */,
+				18A593D91C099C5A00458308 /* BaseTextfiledDeletgate.swift */,
+			);
+			name = Common;
+			sourceTree = "<group>";
+		};
+		18A593DD1C099D4E00458308 /* BaseTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				18A593D71C099C5300458308 /* TableViewBaseCell.swift */,
+				18A593DB1C099D4100458308 /* CellType.swift */,
+			);
+			name = BaseTableViewCell;
+			sourceTree = "<group>";
+		};
 		18A824401BEDCD6100084589 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				18A593D01C09974000458308 /* ActivityMain */,
 				1848677D1BF84D4200016A4E /* SliderMain */,
 				18A8247D1BEE2F7A00084589 /* SignUp */,
 				18A824771BEE269500084589 /* MainTabbar */,
@@ -196,7 +259,7 @@
 		18A8244D1BEDCF5000084589 /* Basic */ = {
 			isa = PBXGroup;
 			children = (
-				18A8244E1BEDCF9400084589 /* BaseViewController.swift */,
+				18A593D61C099C4700458308 /* Common */,
 			);
 			name = Basic;
 			sourceTree = "<group>";
@@ -564,8 +627,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				18A593D51C099BBB00458308 /* ActivityUserTableSource.swift in Sources */,
 				18A8245C1BEDF62D00084589 /* ChooseSideCollectionSource.swift in Sources */,
 				18A8244A1BEDCF0E00084589 /* UIAdapter.swift in Sources */,
+				18A593DA1C099C5A00458308 /* BaseTextfiledDeletgate.swift in Sources */,
 				18A8245A1BEDF5CC00084589 /* ChooseSideCollectionCell.swift in Sources */,
 				18A8244F1BEDCF9400084589 /* BaseViewController.swift in Sources */,
 				184867841BF851AE00016A4E /* Common.swift in Sources */,
@@ -573,8 +638,11 @@
 				18AF8CA51BEDCCCB00539C0E /* AppDelegate.swift in Sources */,
 				18A824461BEDCDF200084589 /* LoginController.swift in Sources */,
 				184867821BF8506F00016A4E /* SliderMain.swift in Sources */,
+				18A593DC1C099D4100458308 /* CellType.swift in Sources */,
+				18A593D81C099C5300458308 /* TableViewBaseCell.swift in Sources */,
 				18A824821BEE2FCA00084589 /* SignUp.swift in Sources */,
 				18A824581BEDED8900084589 /* ChooseSide.swift in Sources */,
+				18A593CE1C0996DB00458308 /* ActivityMain.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

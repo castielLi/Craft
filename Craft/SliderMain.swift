@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SliderMain: UIViewController {
+class SliderMain: ViewControllerBase {
 
     
     var signUpController : SignUp?
@@ -50,13 +50,13 @@ class SliderMain: UIViewController {
     }
 
 
+    var backGroundImage : UIImageView?
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
         
-        self.view.backgroundColor = UIColor.greenColor()
         self.view.alpha = 0
         let loginView = LoginController(nibName: nil, bundle: nil)
         self.tabBarController?.presentViewController(loginView, animated: false, completion: nil)
@@ -73,6 +73,17 @@ class SliderMain: UIViewController {
 
         
     }
+    
+    override func initView() {
+        setBackGroundImage()
+    }
+    
+    
+    func setBackGroundImage(){
+        self.backGroundImage = UIImageView(frame: CGRectMake(0, 0, self.view.frame.width, self.view.frame.height))
+        self.backGroundImage!.image = UIImage(named: "MainBackGround4")
+        self.view.addSubview(backGroundImage!)
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -83,15 +94,19 @@ class SliderMain: UIViewController {
         let x = recongnizer.translationInView(self.view).x
         let trueDistance = distance + x // 实时距离
         
+        if trueDistance < 0 {
+           return
+        }
+        
         // 如果 UIPanGestureRecognizer 结束，则激活自动停靠
         if recongnizer.state == UIGestureRecognizerState.Ended {
             
             if trueDistance > Common.screenWidth * (Proportion / 3) {
                 showLeft()
-            } else if trueDistance < Common.screenWidth * -(Proportion / 3) {
-                showRight()
-            } else {
+                self.navigationController!.setNavigationBarHidden(true, animated: true)
+            }else {
                 showHome()
+                self.navigationController!.setNavigationBarHidden(false, animated: true)
             }
             
             return
@@ -123,11 +138,7 @@ class SliderMain: UIViewController {
         distance = 0
         doTheAnimate(1)
     }
-    // 展示右视图
-    func showRight() {
-        distance = self.view.center.x * -(FullDistance + Proportion / 2)
-        doTheAnimate(self.Proportion)
-    }
+    
     // 执行三种试图展示
     func doTheAnimate(proportion: CGFloat) {
         UIView.animateWithDuration(0.3, delay: 0, options: UIViewAnimationOptions.CurveEaseInOut, animations: { () -> Void in

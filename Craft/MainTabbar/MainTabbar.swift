@@ -19,8 +19,8 @@ class MainTabbar: UITabBarController {
         
         self.navigationController?.navigationBar.barTintColor = UIColor.whiteColor()
         
-        let messageView = SignUp(nibName: nil, bundle: nil)
-        let messageNav = UINavigationController(rootViewController: messageView)
+//        let messageView = SignUp(nibName: nil, bundle: nil)
+//        let messageNav = UINavigationController(rootViewController: messageView)
 //        messageNav.navigationBar.barTintColor = UIColor.whiteColor()
         
         
@@ -28,40 +28,40 @@ class MainTabbar: UITabBarController {
         let sliderMainNav = UINavigationController(rootViewController: sliderMain)
         sliderMainNav.navigationBar.barTintColor = UIColor.whiteColor()
         
-        let settingView = SignUp(nibName: nil, bundle: nil)
-        let settingNav = UINavigationController(rootViewController: settingView)
-        settingNav.navigationBar.barTintColor = UIColor.whiteColor()
+        let activityView = ActivityMain(nibName: nil, bundle: nil)
+        let activityNav = UINavigationController(rootViewController: activityView)
+        activityNav.navigationBar.barTintColor = UIColor.whiteColor()
         
         
-        let controllers = [messageNav,sliderMainNav,settingNav]
+        let controllers = [sliderMainNav,activityNav]
         
         let attributes = [
             NSForegroundColorAttributeName : UIColor(red: 42/255, green: 122/255, blue: 193/255, alpha: 1)
         ]
         
-        let messageItem = UITabBarItem(title: "消息", image: nil, tag: 11)
-        messageItem.image = UIImage(named: "Account")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal)
-        messageItem.selectedImage = UIImage(named: "Account_checked")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal)
+//        let messageItem = UITabBarItem(title: "消息", image: nil, tag: 11)
+//        messageItem.image = UIImage(named: "Account")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal)
+//        messageItem.selectedImage = UIImage(named: "Account_checked")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal)
         
         let signUpItem = UITabBarItem(title: "报名", image: nil, tag: 12)
         signUpItem.image = UIImage(named: "Account")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal)
         signUpItem.selectedImage = UIImage(named: "Account_checked")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal)
         
-        let settingItem = UITabBarItem(title: "设置", image: nil, tag: 13)
-        settingItem.image = UIImage(named: "Account")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal)
-        settingItem.selectedImage = UIImage(named:"Account_checked")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal)
+        let activityItem = UITabBarItem(title: "活动", image: nil, tag: 13)
+        activityItem.image = UIImage(named: "Account")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal)
+        activityItem.selectedImage = UIImage(named:"Account_checked")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal)
         
         
-        messageView.tabBarItem = messageItem
+//        messageView.tabBarItem = messageItem
         sliderMain.tabBarItem = signUpItem
-        settingView.tabBarItem = settingItem
-        messageItem.setTitleTextAttributes(attributes, forState: UIControlState.Selected)
+        activityView.tabBarItem = activityItem
+//        messageItem.setTitleTextAttributes(attributes, forState: UIControlState.Selected)
         signUpItem.setTitleTextAttributes(attributes, forState: UIControlState.Selected)
-        settingItem.setTitleTextAttributes(attributes, forState: UIControlState.Selected)
+        activityItem.setTitleTextAttributes(attributes, forState: UIControlState.Selected)
         
         self.tabBar.barTintColor = UIColor.whiteColor()
         self.setViewControllers(controllers, animated: true)
-        self.selectedIndex = 1
+        self.selectedIndex = 0
 
         // Do any additional setup after loading the view.
     }
