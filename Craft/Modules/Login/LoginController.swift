@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import AVFoundation
 
 class LoginController: ViewControllerBase {
     
@@ -19,6 +19,8 @@ class LoginController: ViewControllerBase {
     var passwordLabel : UILabel?
     
     var loginButton : UIButton?
+    var player : AVAudioPlayer?
+    var service : LoginService?
 
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
@@ -74,10 +76,41 @@ class LoginController: ViewControllerBase {
         // Do any additional setup after loading the view.
     }
     
+    override func onLoad() {
+        service = LoginService()
+        service!.login("", pwd: "") { (result) -> Void in
+            
+        }
+    }
+    
     override func initView() {
          setBackGroundImage()
          setEnterPart()
         setLoginButton()
+        beginSound()
+    }
+    
+    func beginSound(){
+
+        let customQueue = dispatch_queue_create("pcmPlayer", nil)
+        dispatch_async(customQueue, {
+            let mainBundle = NSBundle.mainBundle()
+                        let filePath = mainBundle.pathForResource("wow_main_theme", ofType:"mp3")
+                        let url = NSURL(fileURLWithPath: filePath!)
+                        let fileData = NSData(contentsOfURL: url)
+                        do{
+                        self.player = try AVAudioPlayer(data: fileData!)
+                        }catch{
+                
+                        }
+
+                        if self.player!.prepareToPlay() && self.player!.play(){
+                            /* Successfully started playing */
+                        } else {
+                            /* Failed to play */
+                        }
+            })
+
     }
     
     func setBackGroundImage(){

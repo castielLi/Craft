@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		184867821BF8506F00016A4E /* SliderMain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184867811BF8506F00016A4E /* SliderMain.swift */; };
 		184867841BF851AE00016A4E /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184867831BF851AE00016A4E /* Common.swift */; };
+		18610C4C1C12C88300B864F2 /* wow_main_theme.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 18610C4B1C12C88300B864F2 /* wow_main_theme.mp3 */; };
+		18610C4E1C12D48600B864F2 /* RestService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18610C4D1C12D48600B864F2 /* RestService.swift */; };
+		18610C511C12DCC500B864F2 /* LoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18610C501C12DCC500B864F2 /* LoginService.swift */; };
+		18610C531C12E15600B864F2 /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18610C521C12E15600B864F2 /* StringExtensions.swift */; };
 		18A593CE1C0996DB00458308 /* ActivityMain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A593CD1C0996DB00458308 /* ActivityMain.swift */; };
 		18A593D51C099BBB00458308 /* ActivityUserTableSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A593D41C099BBB00458308 /* ActivityUserTableSource.swift */; };
 		18A593D81C099C5300458308 /* TableViewBaseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A593D71C099C5300458308 /* TableViewBaseCell.swift */; };
@@ -29,6 +33,7 @@
 		18AF8CAF1BEDCCCB00539C0E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 18AF8CAD1BEDCCCB00539C0E /* LaunchScreen.storyboard */; };
 		18AF8CBA1BEDCCCB00539C0E /* CraftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18AF8CB91BEDCCCB00539C0E /* CraftTests.swift */; };
 		18AF8CC51BEDCCCB00539C0E /* CraftUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18AF8CC41BEDCCCB00539C0E /* CraftUITests.swift */; };
+		18E6046E1C0EC50800620499 /* ApiResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E6046D1C0EC50800620499 /* ApiResult.swift */; };
 		26FDEB84629869B329580E24 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FFF7E3FA5773E8C0E92800CE /* Pods.framework */; };
 /* End PBXBuildFile section */
 
@@ -52,6 +57,10 @@
 /* Begin PBXFileReference section */
 		184867811BF8506F00016A4E /* SliderMain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SliderMain.swift; sourceTree = "<group>"; };
 		184867831BF851AE00016A4E /* Common.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Common.swift; sourceTree = "<group>"; };
+		18610C4B1C12C88300B864F2 /* wow_main_theme.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = wow_main_theme.mp3; sourceTree = "<group>"; };
+		18610C4D1C12D48600B864F2 /* RestService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestService.swift; sourceTree = "<group>"; };
+		18610C501C12DCC500B864F2 /* LoginService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginService.swift; sourceTree = "<group>"; };
+		18610C521C12E15600B864F2 /* StringExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
 		18A593CD1C0996DB00458308 /* ActivityMain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ActivityMain.swift; path = ActivityMain/ActivityMain.swift; sourceTree = "<group>"; };
 		18A593D41C099BBB00458308 /* ActivityUserTableSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityUserTableSource.swift; sourceTree = "<group>"; };
 		18A593D71C099C5300458308 /* TableViewBaseCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewBaseCell.swift; sourceTree = "<group>"; };
@@ -79,6 +88,7 @@
 		18AF8CC01BEDCCCB00539C0E /* CraftUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CraftUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		18AF8CC41BEDCCCB00539C0E /* CraftUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CraftUITests.swift; sourceTree = "<group>"; };
 		18AF8CC61BEDCCCB00539C0E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		18E6046D1C0EC50800620499 /* ApiResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiResult.swift; sourceTree = "<group>"; };
 		35FFEC4388D0F109F79B4A61 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		A816835E20B22F39AE004838 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		FFF7E3FA5773E8C0E92800CE /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -141,6 +151,22 @@
 			children = (
 			);
 			name = Model;
+			sourceTree = "<group>";
+		};
+		18610C4A1C12C6FA00B864F2 /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				18610C4B1C12C88300B864F2 /* wow_main_theme.mp3 */,
+			);
+			name = Resource;
+			sourceTree = "<group>";
+		};
+		18610C4F1C12DCB400B864F2 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				18610C501C12DCC500B864F2 /* LoginService.swift */,
+			);
+			name = Service;
 			sourceTree = "<group>";
 		};
 		18A593D01C09974000458308 /* ActivityMain */ = {
@@ -211,6 +237,7 @@
 		18A824411BEDCD8B00084589 /* Login */ = {
 			isa = PBXGroup;
 			children = (
+				18610C4F1C12DCB400B864F2 /* Service */,
 				18A824441BEDCDB600084589 /* Controller */,
 				18A824431BEDCDAC00084589 /* View */,
 				18A824421BEDCDA600084589 /* Model */,
@@ -252,6 +279,7 @@
 		18A824481BEDCEC700084589 /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				18610C4D1C12D48600B864F2 /* RestService.swift */,
 			);
 			name = Network;
 			sourceTree = "<group>";
@@ -301,6 +329,7 @@
 		18A8245D1BEDFF4700084589 /* OtherTools */ = {
 			isa = PBXGroup;
 			children = (
+				18610C521C12E15600B864F2 /* StringExtensions.swift */,
 			);
 			name = OtherTools;
 			sourceTree = "<group>";
@@ -394,6 +423,8 @@
 		18AF8CA31BEDCCCB00539C0E /* Craft */ = {
 			isa = PBXGroup;
 			children = (
+				18610C4A1C12C6FA00B864F2 /* Resource */,
+				18E6046A1C0EC45B00620499 /* NetWork */,
 				18A8245D1BEDFF4700084589 /* OtherTools */,
 				18A8244D1BEDCF5000084589 /* Basic */,
 				18A824481BEDCEC700084589 /* Network */,
@@ -425,6 +456,14 @@
 				18AF8CC61BEDCCCB00539C0E /* Info.plist */,
 			);
 			path = CraftUITests;
+			sourceTree = "<group>";
+		};
+		18E6046A1C0EC45B00620499 /* NetWork */ = {
+			isa = PBXGroup;
+			children = (
+				18E6046D1C0EC50800620499 /* ApiResult.swift */,
+			);
+			name = NetWork;
 			sourceTree = "<group>";
 		};
 		583278BE556209F15C6BD56C /* Frameworks */ = {
@@ -555,6 +594,7 @@
 				18AF8CAF1BEDCCCB00539C0E /* LaunchScreen.storyboard in Resources */,
 				18AF8CAC1BEDCCCB00539C0E /* Assets.xcassets in Resources */,
 				18A824511BEDD55500084589 /* Storyboard.storyboard in Resources */,
+				18610C4C1C12C88300B864F2 /* wow_main_theme.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -627,9 +667,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				18610C511C12DCC500B864F2 /* LoginService.swift in Sources */,
 				18A593D51C099BBB00458308 /* ActivityUserTableSource.swift in Sources */,
 				18A8245C1BEDF62D00084589 /* ChooseSideCollectionSource.swift in Sources */,
 				18A8244A1BEDCF0E00084589 /* UIAdapter.swift in Sources */,
+				18E6046E1C0EC50800620499 /* ApiResult.swift in Sources */,
 				18A593DA1C099C5A00458308 /* BaseTextfiledDeletgate.swift in Sources */,
 				18A8245A1BEDF5CC00084589 /* ChooseSideCollectionCell.swift in Sources */,
 				18A8244F1BEDCF9400084589 /* BaseViewController.swift in Sources */,
@@ -637,6 +679,8 @@
 				18A8247C1BEE2B5D00084589 /* MainTabbar.swift in Sources */,
 				18AF8CA51BEDCCCB00539C0E /* AppDelegate.swift in Sources */,
 				18A824461BEDCDF200084589 /* LoginController.swift in Sources */,
+				18610C531C12E15600B864F2 /* StringExtensions.swift in Sources */,
+				18610C4E1C12D48600B864F2 /* RestService.swift in Sources */,
 				184867821BF8506F00016A4E /* SliderMain.swift in Sources */,
 				18A593DC1C099D4100458308 /* CellType.swift in Sources */,
 				18A593D81C099C5300458308 /* TableViewBaseCell.swift in Sources */,
