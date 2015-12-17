@@ -29,9 +29,9 @@ class LoginService{
     
     func login(phoneNumber:String,pwd:String,handler:((result:ApiResult) -> Void)?)
     {
-        let parameters = ["phoneNumber":phoneNumber,"Password":pwd.md5]
+//        let parameters = ["phoneNumber":phoneNumber,"Password":pwd.md5]
         
-        _restService!.alamofirePost("/Account/Login",parameters: parameters,completionHandler:{(result:ApiResult,data:AnyObject?) in
+        _restService!.alamofirePost("/common/test",parameters: nil,completionHandler:{(result:ApiResult,data:AnyObject?) in
             if(result.success!)
             {
                 let token: AnyObject = data!.objectForKey("AccessToken")!

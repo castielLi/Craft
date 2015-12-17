@@ -11,7 +11,7 @@ import XCGLogger
 import Alamofire
 
 let _sharedService: RESTService = { RESTService() }()
-let _baseUrl = "http://www.igenhao.cn:86/api"
+let _baseUrl = "115.120.172.191/wow"
 //let _baseUrl = "http://10.10.120.95:86/api"
 
 
