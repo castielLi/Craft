@@ -58,8 +58,10 @@ class SliderMain: ViewControllerBase {
         // Do any additional setup after loading the view.
         
         self.view.alpha = 0
+        
         let loginView = LoginController(nibName: nil, bundle: nil)
-        self.tabBarController?.presentViewController(loginView, animated: false, completion: nil)
+        let loginNav = UINavigationController(rootViewController: loginView)
+        self.tabBarController?.presentViewController(loginNav, animated: false, completion: nil)
         
         //透明导航栏
         self.navigationController!.navigationBar.barStyle = UIBarStyle.BlackTranslucent
@@ -101,7 +103,7 @@ class SliderMain: ViewControllerBase {
         // 如果 UIPanGestureRecognizer 结束，则激活自动停靠
         if recongnizer.state == UIGestureRecognizerState.Ended {
             
-            if trueDistance > Common.screenWidth * (Proportion / 3) {
+            if trueDistance > Common.screenWidth * (Proportion / 2) {
                 showLeft()
                 self.navigationController!.setNavigationBarHidden(true, animated: true)
             }else {

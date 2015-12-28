@@ -1,6 +1,6 @@
 use_frameworks!
 
-pod "AFNetworking", "~> 2.0"
+pod 'AFNetworking', '~> 2.0'
 pod 'Masonry', '~> 0.6.1’
 pod 'XCGLogger', '~> 3.0'
 pod 'SwiftyJSON', '~> 2.3'

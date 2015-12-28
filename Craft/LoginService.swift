@@ -27,19 +27,14 @@ class LoginService{
     }
     
     
-    func login(phoneNumber:String,pwd:String,handler:((result:ApiResult) -> Void)?)
+    func login(account:String,pwd:String,handler:((result:ApiResult) -> Void)?)
     {
-//        let parameters = ["phoneNumber":phoneNumber,"Password":pwd.md5]
+        let parameters = ["userName":account,"password":pwd]
         
-        _restService!.alamofirePost("/common/test",parameters: nil,completionHandler:{(result:ApiResult,data:AnyObject?) in
+        _restService!.alamofirePost("/common/login",parameters: parameters,completionHandler:{(result:ApiResult,data:AnyObject?) in
             if(result.success!)
             {
-                let token: AnyObject = data!.objectForKey("AccessToken")!
-                self._restService!.setHeader(token as! String)
-                if token.count > 0 {
-                    
-                }
-                print(self._restService!.getHeader())
+
                
             }else{
                 handler!(result: result)

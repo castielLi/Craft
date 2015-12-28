@@ -21,6 +21,9 @@ class LoginController: ViewControllerBase {
     var loginButton : UIButton?
     var player : AVAudioPlayer?
     var service : LoginService?
+    
+    var forgetPassword : UILabel?
+    var register : UILabel?
 
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
@@ -34,7 +37,7 @@ class LoginController: ViewControllerBase {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        self.navigationController?.setNavigationBarHidden(true, animated: false)
+        self.navigationController!.setNavigationBarHidden(true, animated: false)
         self.tabBarController?.tabBar.hidden = true
         
         let nc = NSNotificationCenter.defaultCenter()
@@ -72,13 +75,19 @@ class LoginController: ViewControllerBase {
         super.viewDidLoad()
         
         self.backGroundImage?.backgroundColor = UIColor.whiteColor()
+        
+        let backButton = UIBarButtonItem()
+        self.navigationItem.backBarButtonItem = backButton
+        self.navigationItem.backBarButtonItem?.title = ""
+        
+        
 
         // Do any additional setup after loading the view.
     }
     
     override func onLoad() {
         service = LoginService()
-        service!.login("", pwd: "") { (result) -> Void in
+        service!.login("jack", pwd: "123") { (result) -> Void in
             
         }
     }
@@ -86,9 +95,57 @@ class LoginController: ViewControllerBase {
     override func initView() {
          setBackGroundImage()
          setEnterPart()
-        setLoginButton()
-        beginSound()
+         setRegister()
+         setForgetPassword()
+         setLoginButton()
+//         beginSound()
     }
+    
+    func setRegister(){
+         self.register = UILabel()
+         self.register!.text = "没有帐号？"
+         self.register!.textColor = UIColor(red: 150/255, green: 132/255, blue: 68/255, alpha: 1)
+         self.register!.font = UIFont(name: "TimesNewRomanPS-BoldMT", size: UIAdapter.shared.transferHeight(9))
+         self.view.addSubview(self.register!)
+         self.register!.mas_makeConstraints{ make in
+           make.top.equalTo()(self.passwordTextfield!.mas_bottom).with().offset()(UIAdapter.shared.transferHeight(3))
+           make.left.equalTo()(self.passwordTextfield!)
+         }
+        
+         let registerTap = UITapGestureRecognizer(target: self, action: "registerLabelClick:")
+         registerTap.numberOfTapsRequired = 1
+         self.register!.userInteractionEnabled = true
+         self.register!.addGestureRecognizer(registerTap)
+    }
+    
+    func registerLabelClick( sender : UITapGestureRecognizer){
+       let registerView = RegisterController(nibName: nil, bundle: nil)
+       self.navigationController!.pushViewController(registerView, animated: true)
+    }
+    
+    
+    func setForgetPassword(){
+        self.forgetPassword = UILabel()
+        self.forgetPassword!.text = "忘记密码"
+        self.forgetPassword!.textColor = UIColor(red: 150/255, green: 132/255, blue: 68/255, alpha: 1)
+        self.forgetPassword!.font = UIFont(name: "TimesNewRomanPS-BoldMT", size: UIAdapter.shared.transferHeight(9))
+        self.view.addSubview(self.forgetPassword!)
+        self.forgetPassword!.mas_makeConstraints{ make in
+            make.top.equalTo()(self.passwordTextfield!.mas_bottom).with().offset()(UIAdapter.shared.transferHeight(3))
+            make.right.equalTo()(self.passwordTextfield!)
+        }
+        
+        let forgetPasswordTap = UITapGestureRecognizer(target: self, action: "forgetPasswordLabelClick:")
+        forgetPasswordTap.numberOfTapsRequired = 1
+        self.forgetPassword!.userInteractionEnabled = true
+        self.forgetPassword!.addGestureRecognizer(forgetPasswordTap)
+    }
+    
+    func forgetPasswordLabelClick( sender : UITapGestureRecognizer){
+        let forgetPasswordView = ForgetPassword(nibName: nil, bundle: nil)
+        self.navigationController!.pushViewController(forgetPasswordView, animated: true)
+    }
+    
     
     func beginSound(){
 
@@ -215,6 +272,8 @@ class LoginController: ViewControllerBase {
         self.passwordLabel!.hidden = true
         self.accountLabel!.hidden = true
         self.loginButton!.hidden = true
+        self.register!.hidden = true
+        self.forgetPassword!.hidden = true
         
         self.definesPresentationContext = true
         let chooseSideView = ChooseSide(nibName: nil, bundle: nil)

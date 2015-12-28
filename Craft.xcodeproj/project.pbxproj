@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		182647781C2E689C0078D4C2 /* ForgetPassword.swift in Sources */ = {isa = PBXBuildFile; fileRef = 182647761C2E689C0078D4C2 /* ForgetPassword.swift */; };
+		182647791C2E689C0078D4C2 /* RegisterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 182647771C2E689C0078D4C2 /* RegisterController.swift */; };
 		184867821BF8506F00016A4E /* SliderMain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184867811BF8506F00016A4E /* SliderMain.swift */; };
 		184867841BF851AE00016A4E /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184867831BF851AE00016A4E /* Common.swift */; };
 		18610C4C1C12C88300B864F2 /* wow_main_theme.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 18610C4B1C12C88300B864F2 /* wow_main_theme.mp3 */; };
@@ -55,6 +57,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		182647761C2E689C0078D4C2 /* ForgetPassword.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ForgetPassword.swift; path = Modules/Login/ForgetPassword.swift; sourceTree = "<group>"; };
+		182647771C2E689C0078D4C2 /* RegisterController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RegisterController.swift; path = Modules/Login/RegisterController.swift; sourceTree = "<group>"; };
 		184867811BF8506F00016A4E /* SliderMain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SliderMain.swift; sourceTree = "<group>"; };
 		184867831BF851AE00016A4E /* Common.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Common.swift; sourceTree = "<group>"; };
 		18610C4B1C12C88300B864F2 /* wow_main_theme.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = wow_main_theme.mp3; sourceTree = "<group>"; };
@@ -262,6 +266,8 @@
 		18A824441BEDCDB600084589 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				182647761C2E689C0078D4C2 /* ForgetPassword.swift */,
+				182647771C2E689C0078D4C2 /* RegisterController.swift */,
 				18A824451BEDCDF200084589 /* LoginController.swift */,
 			);
 			name = Controller;
@@ -669,6 +675,7 @@
 			files = (
 				18610C511C12DCC500B864F2 /* LoginService.swift in Sources */,
 				18A593D51C099BBB00458308 /* ActivityUserTableSource.swift in Sources */,
+				182647791C2E689C0078D4C2 /* RegisterController.swift in Sources */,
 				18A8245C1BEDF62D00084589 /* ChooseSideCollectionSource.swift in Sources */,
 				18A8244A1BEDCF0E00084589 /* UIAdapter.swift in Sources */,
 				18E6046E1C0EC50800620499 /* ApiResult.swift in Sources */,
@@ -678,6 +685,7 @@
 				184867841BF851AE00016A4E /* Common.swift in Sources */,
 				18A8247C1BEE2B5D00084589 /* MainTabbar.swift in Sources */,
 				18AF8CA51BEDCCCB00539C0E /* AppDelegate.swift in Sources */,
+				182647781C2E689C0078D4C2 /* ForgetPassword.swift in Sources */,
 				18A824461BEDCDF200084589 /* LoginController.swift in Sources */,
 				18610C531C12E15600B864F2 /* StringExtensions.swift in Sources */,
 				18610C4E1C12D48600B864F2 /* RestService.swift in Sources */,
