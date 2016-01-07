@@ -20,7 +20,7 @@ class SignUp: ViewControllerBase {
     
     var panGesture : UIPanGestureRecognizer?
    
-    
+    var ovalShapeLayer: CAShapeLayer?
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
@@ -34,7 +34,7 @@ class SignUp: ViewControllerBase {
 
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        
+        setAnimationLayer()
     }
     
        
@@ -75,11 +75,53 @@ class SignUp: ViewControllerBase {
         self.view.addSubview(self.joinButton!)
         
         self.joinButton!.backgroundColor = UIColor(red: 83/255, green: 86/255, blue: 93/255, alpha: 0.9)
+        self.joinButton!.addTarget(self, action: "joinButtonClick:", forControlEvents: UIControlEvents.TouchUpInside)
+    }
+    
+    func setAnimationLayer(){
+        ovalShapeLayer = CAShapeLayer()
+        ovalShapeLayer!.fillColor = UIColor.clearColor().CGColor
+        ovalShapeLayer!.lineWidth = 8.0
+        ovalShapeLayer!.lineCap = kCALineCapRound
+        let refreshRadius = UIAdapter.shared.transferWidth(100)
         
-//        self.joinButton!.mas_makeConstraints{ make in
-//           make.centerX.equalTo()(self.view)
-//           make.centerY.equalTo()(self.view)
-//        }
+
+        ovalShapeLayer!.path =   UIBezierPath(arcCenter: CGPoint(x: self.joinButton!.center.x , y: self.joinButton!.frame.origin.y + refreshRadius ), radius: refreshRadius, startAngle: CGFloat(-M_PI*1/2), endAngle: CGFloat(M_PI*3/2), clockwise: true).CGPath
+        
+        
+        
+        
+        let values = NSMutableArray()
+        let times = [0.0,0.5,1.0]
+        
+        
+        values.addObject(UIColor.greenColor().CGColor)
+        values.addObject(UIColor.orangeColor().CGColor)
+        
+        
+        let strokeEndAnimation = CAKeyframeAnimation(keyPath: "strokeColor")
+        strokeEndAnimation.values = values as [AnyObject]
+        strokeEndAnimation.keyTimes = times
+        strokeEndAnimation.calculationMode = kCAAnimationDiscrete
+        strokeEndAnimation.removedOnCompletion = false
+        strokeEndAnimation.timeOffset = 0;
+        strokeEndAnimation.fillMode = kCAFillModeForwards;
+        
+        let animation = CABasicAnimation(keyPath: "strokeEnd")
+        animation.fromValue = 0.0
+        animation.toValue = 1.0
+        animation.removedOnCompletion = false
+        animation.timeOffset = 0
+        animation.fillMode = kCAFillModeForwards
+        
+        
+        let strokeAnimationGroup = CAAnimationGroup()
+        strokeAnimationGroup.duration = 10
+        strokeAnimationGroup.removedOnCompletion = false
+        strokeAnimationGroup.animations = [strokeEndAnimation,animation]
+        ovalShapeLayer!.addAnimation(strokeAnimationGroup, forKey: nil)
+    
+        self.joinButton!.layer.addSublayer(ovalShapeLayer!)
     }
     
     func updateTimer(sender: NSTimer) {
@@ -107,7 +149,9 @@ class SignUp: ViewControllerBase {
          self.verifyRequestCount -= 1
     }
     
-    
+    func joinButtonClick(sender : UIButton){
+        self.view.layer.setNeedsDisplay()
+    }
     
 
     /*

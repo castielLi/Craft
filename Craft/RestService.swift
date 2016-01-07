@@ -87,33 +87,6 @@ class RESTService {
             }
         }
         dataTask.resume()
-        
-        
-        
-//        let m = AFHTTPRequestOperationManager()
-//        m.requestSerializer = AFJSONRequestSerializer()
-//        m.requestSerializer.setValue("application/json", forHTTPHeaderField: "Content-Type")
-//        
-//        m.POST(url, parameters: parameters!, success: { (AFHTTPRequestOperation, AnyObject) -> Void in
-//          
-//            }) { (AFHTTPRequestOperation, NSError) -> Void in
-//               print(NSError)
-//        }
-        
-        
-        
-//        Alamofire
-//            .request(.POST, url,parameters:parameters , encoding: .JSON , headers: [
-//                "Content-Type": "application/json"
-//                ]
-//)
-//            .responseJSON{ json in
-//               
-//                print("res data:",json)
-//               
-//                
-//        }
-     
    }
 }
 
