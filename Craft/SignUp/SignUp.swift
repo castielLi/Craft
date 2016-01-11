@@ -34,6 +34,10 @@ class SignUp: ViewControllerBase {
 
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
         setAnimationLayer()
     }
     
@@ -86,7 +90,7 @@ class SignUp: ViewControllerBase {
         let refreshRadius = UIAdapter.shared.transferWidth(100)
         
 
-        ovalShapeLayer!.path =   UIBezierPath(arcCenter: CGPoint(x: self.joinButton!.center.x , y: self.joinButton!.frame.origin.y + refreshRadius ), radius: refreshRadius, startAngle: CGFloat(-M_PI*1/2), endAngle: CGFloat(M_PI*3/2), clockwise: true).CGPath
+        ovalShapeLayer!.path =   UIBezierPath(arcCenter: CGPoint(x: refreshRadius , y: refreshRadius ), radius: refreshRadius - CGFloat(5), startAngle: CGFloat(-M_PI*1/2), endAngle: CGFloat(M_PI*3/2), clockwise: true).CGPath
         
         
         
@@ -150,7 +154,14 @@ class SignUp: ViewControllerBase {
     }
     
     func joinButtonClick(sender : UIButton){
-        self.view.layer.setNeedsDisplay()
+        for layer in self.joinButton!.layer.sublayers!{
+            layer.removeFromSuperlayer()
+        }
+        setAnimationLayer()
+        
+        let date = NSDate().dateByAddingTimeInterval(5)
+        let note = SignLocalNotification(title: "地狱火堡垒", deadLine: date )
+        SendNotification.SendLocalNotifation(note)
     }
     
 
