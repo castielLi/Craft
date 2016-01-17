@@ -14,11 +14,8 @@ class MainTabbar: UITabBarController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
 
-        self.tabBar.alpha = 0.5
-        
-        self.navigationController?.navigationBar.barTintColor = UIColor.whiteColor()
-        
 //        let messageView = SignUp(nibName: nil, bundle: nil)
 //        let messageNav = UINavigationController(rootViewController: messageView)
 //        messageNav.navigationBar.barTintColor = UIColor.whiteColor()

@@ -12,8 +12,10 @@ class SliderMain: ViewControllerBase {
 
     
     var signUpController : SignUp?
-     var firstTime : Bool = true
+    var firstTime : Bool = true
     var distance: CGFloat = 0
+    
+    var calendar : CalendarView?
     
     let FullDistance: CGFloat = 0.78
     let Proportion: CGFloat = 0.77
@@ -28,7 +30,7 @@ class SliderMain: ViewControllerBase {
 
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        self.tabBarController?.tabBar.hidden = false 
+        self.tabBarController!.tabBar.hidden = true
         
         let nc = NSNotificationCenter.defaultCenter()
         nc.addObserver(self, selector: Selector("showCurrentView:"), name: "loginDisappear", object: nil)
@@ -42,7 +44,7 @@ class SliderMain: ViewControllerBase {
                 self.view.alpha = 1
                 }, completion: { (finished) -> Void in
                     self.view.layer.removeAllAnimations()
-                    self.tabBarController?.tabBar.hidden = false
+                    self.tabBarController?.tabBar.hidden = true
                     self.navigationController?.setNavigationBarHidden(false, animated: true)
             })
         }
@@ -78,13 +80,20 @@ class SliderMain: ViewControllerBase {
     
     override func initView() {
         setBackGroundImage()
+        setCalenderView()
     }
     
     
     func setBackGroundImage(){
         self.backGroundImage = UIImageView(frame: CGRectMake(0, 0, self.view.frame.width, self.view.frame.height))
-        self.backGroundImage!.image = UIImage(named: "MainBackGround4")
+        self.backGroundImage!.image = UIImage(named: "LoginBackGround")
         self.view.addSubview(backGroundImage!)
+    }
+    
+    
+    func setCalenderView(){
+         self.calendar = CalendarView(frame: self.view.frame)
+         self.view.addSubview(self.calendar!)
     }
 
     override func didReceiveMemoryWarning() {

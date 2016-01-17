@@ -8,7 +8,7 @@
 
 import Foundation
 
-class SignLocalNotification{
+class LocalNotification{
     var title : String?
     var deadLine : NSDate?
     var UUID : String?

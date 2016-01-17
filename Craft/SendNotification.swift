@@ -12,7 +12,7 @@ struct SendNotification {
     
     static let ITEMS_KEY = "SignNotification"
     
-    static func SendLocalNotifation(note : SignLocalNotification){
+    static func SendLocalNotifation(note : LocalNotification){
 //        var todoDictionary = NSUserDefaults.standardUserDefaults().dictionaryForKey(ITEMS_KEY) ?? Dictionary() // if todoItems hasn't been set in user defaults, initialize todoDictionary to an empty dictionary using nil-coalescing operator (??)
 //        
 //        todoDictionary[note.UUID!] = ["deadline": note.deadLine!, "title": note.title!, "UUID": note.UUID! ] // store NSData representation of todo item in dictionary with UUID as key

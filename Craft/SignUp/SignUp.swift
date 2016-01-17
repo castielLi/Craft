@@ -160,7 +160,7 @@ class SignUp: ViewControllerBase {
         setAnimationLayer()
         
         let date = NSDate().dateByAddingTimeInterval(5)
-        let note = SignLocalNotification(title: "地狱火堡垒", deadLine: date )
+        let note = LocalNotification(title: "地狱火堡垒", deadLine: date )
         SendNotification.SendLocalNotifation(note)
     }
     

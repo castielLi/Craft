@@ -21,7 +21,13 @@ class ForgetPassword: ViewControllerBase {
     
     var verification : UITextField?
     
+    var backgroundImage : UIImageView?
+    
     var verificationButton : UIButton?
+    
+    var confirmButton : UIButton?
+    var backButton : UIButton?
+    
     var service : LoginService?
     var timer:NSTimer?
     var verifyRequestCount:Int?
@@ -39,12 +45,7 @@ class ForgetPassword: ViewControllerBase {
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        let registerButton = UIButton(frame: CGRectMake(0, 0, UIAdapter.shared.transferWidth(35), UIAdapter.shared.transferHeight(15)))
-        registerButton.setTitle("完成", forState: UIControlState.Normal)
-        registerButton.titleLabel?.font = UIAdapter.shared.transferFont(12)
-        registerButton.addTarget(self, action: "registerButtonClick:", forControlEvents: UIControlEvents.TouchUpInside)
-        let customButton = UIBarButtonItem(customView: registerButton)
-        self.navigationItem.rightBarButtonItem = customButton
+        self.navigationController!.setNavigationBarHidden(true, animated: false)
     }
     
     override func viewDidLoad() {
@@ -60,11 +61,9 @@ class ForgetPassword: ViewControllerBase {
     
     
     override func initView(){
-        setBackGround()
-        setTitle()
+        setBackGroundImage()
         setEnterView()
-        setValidButton()
-        
+        setConfirmButton()
     }
     
     override func registerEvents() {
@@ -79,104 +78,134 @@ class ForgetPassword: ViewControllerBase {
         service = LoginService()
     }
     
-    
-    func setTitle(){
-        self.view.backgroundColor = UIColor.whiteColor()
-        self.navigationController?.setNavigationBarHidden(false, animated: false)
-        self.navigationController?.navigationBar
+    func setBackGroundImage(){
+        self.backGroundImage = UIImageView(frame: CGRectMake(0, 0, self.view.frame.width, self.view.frame.height))
+        self.backGroundImage!.image = UIImage(named: "LoginBackGround")
+        self.view.addSubview(self.backGroundImage!)
     }
-    
-    func setBackGround(){
-        backGroundImage = UIImageView(frame: CGRectMake(0, 0, self.view.frame.width, self.view.frame.height))
-        backGroundImage!.image = UIImage(named: "registerBackGround")
-        self.view.addSubview(backGroundImage!)
-    }
-    
-    
+
     
     func setEnterView(){
         
-        phoneNumber = UITextField()
-        phoneNumber!.placeholder = "请输入帐号"
-        self.view!.addSubview(phoneNumber!)
+        self.phoneNumber = UITextField()
+        self.phoneNumber!.backgroundColor = UIColor.whiteColor()
+        self.phoneNumber!.alpha = 0.3
+        self.phoneNumber!.layer.cornerRadius = 5
+        self.phoneNumber!.layer.masksToBounds = true
+        self.phoneNumber!.layer.borderWidth = 1
+        self.phoneNumber!.layer.borderColor = UIColor(red: 123/255, green: 95/255, blue: 75/255, alpha: 1).CGColor
+        
+        self.view!.addSubview(self.phoneNumber!)
         
         self.phoneNumber!.mas_makeConstraints{ make in
-            make.right.equalTo()(self.view.mas_right).with().offset()(UIAdapter.shared.transferWidth( -120 ))
-            make.left.equalTo()(self.view.mas_left).with().offset()(UIAdapter.shared.transferWidth( 20 ))
-            make.top.equalTo()(self.view.mas_top).with().offset()(UIAdapter.shared.transferHeight( 80 ))
-            make.bottom.equalTo()(self.view.mas_top).with().offset()(UIAdapter.shared.transferHeight(120))
+            make.top.equalTo()(self.view!.mas_top).with().offset()(UIAdapter.shared.transferHeight(170))
+            make.bottom.equalTo()(self.view!.mas_top).with().offset()(UIAdapter.shared.transferHeight(200))
+            make.left.equalTo()(self.view!.mas_left).with().offset()(UIAdapter.shared.transferWidth(60))
+            make.right.equalTo()(self.view!.mas_right).with().offset()(UIAdapter.shared.transferWidth(-60))
         }
         
         
+    
         self.verification = UITextField()
-        self.verification!.placeholder = "请输入验证码"
+        self.verification!.backgroundColor = UIColor.whiteColor()
+        self.verification!.alpha = 0.3
+        self.verification!.layer.cornerRadius = 5
+        self.verification!.layer.masksToBounds = true
+        self.verification!.layer.borderWidth = 1
+        self.verification!.layer.borderColor = UIColor(red: 123/255, green: 95/255, blue: 75/255, alpha: 1).CGColor
+        
         self.view!.addSubview(self.verification!)
         
         self.verification!.mas_makeConstraints{ make in
-            make.height.equalTo()(self.phoneNumber!.mas_height)
-            make.right.equalTo()(self.view.mas_right).with().offset()(UIAdapter.shared.transferWidth( -20 ))
-            make.left.equalTo()(self.view.mas_left).with().offset()(UIAdapter.shared.transferWidth( 20 ))
-            make.top.equalTo()(self.phoneNumber!.mas_bottom).with().offset()( UIAdapter.shared.transferHeight( 10 ) )
-            make.height.equalTo()(self.phoneNumber)
+            make.top.equalTo()(self.phoneNumber!.mas_bottom).with().offset()(UIAdapter.shared.transferHeight(10))
+            make.bottom.equalTo()(self.phoneNumber!.mas_bottom).with().offset()(UIAdapter.shared.transferHeight(40))
+            make.left.equalTo()(self.view!.mas_left).with().offset()(UIAdapter.shared.transferWidth(60))
+            make.right.equalTo()(self.view!.mas_left).with().offset()(self.view.frame.width / 2 - UIAdapter.shared.transferWidth(5))
         }
         
-        self.password = UITextField()
-        self.password!.placeholder = "请输入密码"
-        self.view!.addSubview(self.password!)
-        
-        self.password!.mas_makeConstraints{ make in
-            make.height.equalTo()(self.phoneNumber!.mas_height)
-            make.left.equalTo()(self.verification!.mas_left)
-            make.right.equalTo()(self.verification!.mas_right)
-            make.top.equalTo()(self.verification!.mas_bottom).with().offset()( UIAdapter.shared.transferHeight(10) )
-            make.height.equalTo()(self.phoneNumber)
-        }
-        
-        
-    }
-    
-    
-    func setValidButton(){
         
         self.verificationButton = UIButton(frame: CGRectMake(0, 0, UIAdapter.shared.transferWidth(100), UIAdapter.shared.transferHeight(100)))
-        self.verificationButton!.setTitle("获取验证码", forState: UIControlState.Normal)
-        self.verificationButton!.titleLabel!.font = UIAdapter.shared.transferFont(14)
-        self.verificationButton!.backgroundColor = UIColor.orangeColor()
+        self.verificationButton!.setBackgroundImage(UIImage(named: "valideButton"), forState: UIControlState.Normal)
+        self.verificationButton!.setTitle("发送验证码", forState: UIControlState.Normal)
+        self.verificationButton!.titleLabel!.font = UIAdapter.shared.transferFont(11)
+        self.verificationButton!.setTitleColor(UIColor(red: 89/255, green: 89/255, blue: 89/255, alpha: 1), forState: UIControlState.Normal)
         self.verificationButton!.layer.masksToBounds = true
         self.verificationButton!.layer.cornerRadius = 5
         self.view!.addSubview(verificationButton!)
         
         self.verificationButton!.mas_makeConstraints{ make in
-            make.top.equalTo()(self.phoneNumber!.mas_top)
-            make.bottom.equalTo()(self.phoneNumber!.mas_bottom)
-            make.left.equalTo()(self.phoneNumber!.mas_right).with().offset()(UIAdapter.shared.transferWidth(2))
-            make.right.equalTo()(self.view!.mas_right).with().offset()(UIAdapter.shared.transferWidth(-20))
+            make.top.equalTo()(self.verification!.mas_top)
+            make.bottom.equalTo()(self.verification!.mas_bottom)
+            make.left.equalTo()(self.view!.mas_left).with().offset()(UIAdapter.shared.transferWidth(5) + self.view.frame.width / 2)
+            make.right.equalTo()(self.view!.mas_right).with().offset()(UIAdapter.shared.transferWidth(-60))
         }
         verificationButton!.addTarget(self, action: "VerifyCodeButtonClick:", forControlEvents: UIControlEvents.TouchUpInside)
+        
+        
+        
+        self.password = UITextField()
+        self.password!.backgroundColor = UIColor.whiteColor()
+        self.password!.alpha = 0.3
+        self.password!.layer.cornerRadius = 5
+        self.password!.layer.masksToBounds = true
+        self.password!.layer.borderWidth = 1
+        self.password!.layer.borderColor = UIColor(red: 123/255, green: 95/255, blue: 75/255, alpha: 1).CGColor
+        
+        self.view!.addSubview(self.password!)
+        
+        self.password!.mas_makeConstraints{ make in
+            make.top.equalTo()(self.verificationButton!.mas_bottom).with().offset()(UIAdapter.shared.transferHeight(10))
+            make.bottom.equalTo()(self.verificationButton!.mas_bottom).with().offset()(UIAdapter.shared.transferHeight(40))
+            make.left.equalTo()(self.view!.mas_left).with().offset()(UIAdapter.shared.transferWidth(60))
+            make.right.equalTo()(self.view!.mas_right).with().offset()(UIAdapter.shared.transferWidth(-60))
+        }
+
+        
+    }
+    
+    func setConfirmButton(){
+        self.confirmButton = UIButton()
+        self.confirmButton!.backgroundColor = UIColor.clearColor()
+        self.confirmButton!.titleLabel?.font = UIFont(name: "TimesNewRomanPS-BoldMT", size: UIAdapter.shared.transferHeight(12))
+        self.confirmButton!.setTitle("确    认", forState: UIControlState.Normal)
+        self.confirmButton!.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
+        self.confirmButton!.addTarget(self, action: "confirmButtonClick:", forControlEvents: UIControlEvents.TouchUpInside)
+        self.view!.addSubview(confirmButton!)
+        
+        self.confirmButton!.mas_makeConstraints{make in
+            make.top.equalTo()(self.password!.mas_bottom).with().offset()(UIAdapter.shared.transferHeight(10))
+            make.bottom.equalTo()(self.password!.mas_bottom).with().offset()(UIAdapter.shared.transferHeight(30))
+            make.left.equalTo()(self.phoneNumber?.mas_left)
+            make.right.equalTo()(self.phoneNumber?.mas_right)
+        }
+        
+        self.backButton = UIButton()
+        self.backButton!.backgroundColor = UIColor.clearColor()
+        self.backButton!.titleLabel?.font = UIFont(name: "TimesNewRomanPS-BoldMT", size: UIAdapter.shared.transferHeight(12))
+        self.backButton!.setTitle("返    回", forState: UIControlState.Normal)
+        self.backButton!.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
+        self.backButton!.addTarget(self, action: "backButtonClick:", forControlEvents: UIControlEvents.TouchUpInside)
+        self.view!.addSubview(backButton!)
+        
+        self.backButton!.mas_makeConstraints{make in
+            make.top.equalTo()(self.confirmButton!.mas_bottom).with().offset()(UIAdapter.shared.transferHeight(10))
+            make.bottom.equalTo()(self.confirmButton!.mas_bottom).with().offset()(UIAdapter.shared.transferHeight(30))
+            make.left.equalTo()(self.phoneNumber?.mas_left)
+            make.right.equalTo()(self.phoneNumber?.mas_right)
+        }
+    }
+
+    
+    
+    
+    func confirmButtonClick (sender : UIButton){
+        
+        
     }
     
     
-    func registerButtonClick (sender : UIButton){
-        
-//        let validate:Bool = self.Validate()
-//        if(!validate) {return}
-//        
-//        let phone = self.phoneNumber!.text
-//        let pwd1 = self.password!.text
-//        let verify = self.verification!.text
-        
-//        self.showProgress()
-//        service!.getBackPassword(phone, pwd: pwd1, code: verify) { (result, data) -> Void in
-//            self.closeProgress()
-//            if(result.success!){
-//            
-//                self.navigationController?.popViewControllerAnimated(true)
-//            }else{
-//               MsgBoxHelper.showOkMessage(result.message!, title: "")
-//            }
-//        }
-        
-        
+    func backButtonClick(sender : UIButton){
+        self.navigationController!.popViewControllerAnimated(true)
     }
     
     func VerifyCodeButtonClick(sender:UIButton)

@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		181758591C4B7D98008913DB /* CustomTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181758581C4B7D98008913DB /* CustomTabBarController.swift */; };
+		1817585B1C4B8CB5008913DB /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1817585A1C4B8CB5008913DB /* CalendarView.swift */; };
+		1817585D1C4B8D45008913DB /* CustomLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1817585C1C4B8D45008913DB /* CustomLayout.swift */; };
 		182647781C2E689C0078D4C2 /* ForgetPassword.swift in Sources */ = {isa = PBXBuildFile; fileRef = 182647761C2E689C0078D4C2 /* ForgetPassword.swift */; };
 		182647791C2E689C0078D4C2 /* RegisterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 182647771C2E689C0078D4C2 /* RegisterController.swift */; };
 		184867821BF8506F00016A4E /* SliderMain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184867811BF8506F00016A4E /* SliderMain.swift */; };
@@ -15,7 +18,7 @@
 		18610C4E1C12D48600B864F2 /* RestService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18610C4D1C12D48600B864F2 /* RestService.swift */; };
 		18610C511C12DCC500B864F2 /* LoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18610C501C12DCC500B864F2 /* LoginService.swift */; };
 		18610C531C12E15600B864F2 /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18610C521C12E15600B864F2 /* StringExtensions.swift */; };
-		187464951C3F9FAC009E4041 /* SignLocalNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187464941C3F9FAC009E4041 /* SignLocalNotification.swift */; };
+		187464951C3F9FAC009E4041 /* LocalNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187464941C3F9FAC009E4041 /* LocalNotification.swift */; };
 		187464971C3FA3DD009E4041 /* SendNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187464961C3FA3DD009E4041 /* SendNotification.swift */; };
 		18A593CE1C0996DB00458308 /* ActivityMain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A593CD1C0996DB00458308 /* ActivityMain.swift */; };
 		18A593D51C099BBB00458308 /* ActivityUserTableSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A593D41C099BBB00458308 /* ActivityUserTableSource.swift */; };
@@ -59,6 +62,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		181758581C4B7D98008913DB /* CustomTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTabBarController.swift; sourceTree = "<group>"; };
+		1817585A1C4B8CB5008913DB /* CalendarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
+		1817585C1C4B8D45008913DB /* CustomLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomLayout.swift; sourceTree = "<group>"; };
 		182647761C2E689C0078D4C2 /* ForgetPassword.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ForgetPassword.swift; path = Modules/Login/ForgetPassword.swift; sourceTree = "<group>"; };
 		182647771C2E689C0078D4C2 /* RegisterController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RegisterController.swift; path = Modules/Login/RegisterController.swift; sourceTree = "<group>"; };
 		184867811BF8506F00016A4E /* SliderMain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SliderMain.swift; sourceTree = "<group>"; };
@@ -67,7 +73,7 @@
 		18610C4D1C12D48600B864F2 /* RestService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestService.swift; sourceTree = "<group>"; };
 		18610C501C12DCC500B864F2 /* LoginService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginService.swift; sourceTree = "<group>"; };
 		18610C521C12E15600B864F2 /* StringExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
-		187464941C3F9FAC009E4041 /* SignLocalNotification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignLocalNotification.swift; sourceTree = "<group>"; };
+		187464941C3F9FAC009E4041 /* LocalNotification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalNotification.swift; sourceTree = "<group>"; };
 		187464961C3FA3DD009E4041 /* SendNotification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SendNotification.swift; sourceTree = "<group>"; };
 		18A593CD1C0996DB00458308 /* ActivityMain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ActivityMain.swift; path = ActivityMain/ActivityMain.swift; sourceTree = "<group>"; };
 		18A593D41C099BBB00458308 /* ActivityUserTableSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityUserTableSource.swift; sourceTree = "<group>"; };
@@ -142,6 +148,8 @@
 		1848677E1BF84D5700016A4E /* View */ = {
 			isa = PBXGroup;
 			children = (
+				1817585A1C4B8CB5008913DB /* CalendarView.swift */,
+				1817585C1C4B8D45008913DB /* CustomLayout.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -181,7 +189,7 @@
 			isa = PBXGroup;
 			children = (
 				187464961C3FA3DD009E4041 /* SendNotification.swift */,
-				187464941C3F9FAC009E4041 /* SignLocalNotification.swift */,
+				187464941C3F9FAC009E4041 /* LocalNotification.swift */,
 			);
 			name = Notification;
 			sourceTree = "<group>";
@@ -225,6 +233,7 @@
 				18A593DD1C099D4E00458308 /* BaseTableViewCell */,
 				18A8244E1BEDCF9400084589 /* BaseViewController.swift */,
 				18A593D91C099C5A00458308 /* BaseTextfiledDeletgate.swift */,
+				181758581C4B7D98008913DB /* CustomTabBarController.swift */,
 			);
 			name = Common;
 			sourceTree = "<group>";
@@ -687,18 +696,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1817585D1C4B8D45008913DB /* CustomLayout.swift in Sources */,
 				18610C511C12DCC500B864F2 /* LoginService.swift in Sources */,
-				187464951C3F9FAC009E4041 /* SignLocalNotification.swift in Sources */,
+				187464951C3F9FAC009E4041 /* LocalNotification.swift in Sources */,
 				18A593D51C099BBB00458308 /* ActivityUserTableSource.swift in Sources */,
 				182647791C2E689C0078D4C2 /* RegisterController.swift in Sources */,
 				18A8245C1BEDF62D00084589 /* ChooseSideCollectionSource.swift in Sources */,
 				18A8244A1BEDCF0E00084589 /* UIAdapter.swift in Sources */,
+				1817585B1C4B8CB5008913DB /* CalendarView.swift in Sources */,
 				18E6046E1C0EC50800620499 /* ApiResult.swift in Sources */,
 				18A593DA1C099C5A00458308 /* BaseTextfiledDeletgate.swift in Sources */,
 				18A8245A1BEDF5CC00084589 /* ChooseSideCollectionCell.swift in Sources */,
 				18A8244F1BEDCF9400084589 /* BaseViewController.swift in Sources */,
 				187464971C3FA3DD009E4041 /* SendNotification.swift in Sources */,
 				184867841BF851AE00016A4E /* Common.swift in Sources */,
+				181758591C4B7D98008913DB /* CustomTabBarController.swift in Sources */,
 				18A8247C1BEE2B5D00084589 /* MainTabbar.swift in Sources */,
 				18AF8CA51BEDCCCB00539C0E /* AppDelegate.swift in Sources */,
 				182647781C2E689C0078D4C2 /* ForgetPassword.swift in Sources */,
