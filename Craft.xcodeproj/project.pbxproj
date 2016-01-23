@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		180141051C53525800BE13B1 /* ImageOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180141041C53525800BE13B1 /* ImageOperation.swift */; };
+		180141071C53534700BE13B1 /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 180141061C53534700BE13B1 /* CoreImage.framework */; };
 		181758591C4B7D98008913DB /* CustomTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181758581C4B7D98008913DB /* CustomTabBarController.swift */; };
 		1817585B1C4B8CB5008913DB /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1817585A1C4B8CB5008913DB /* CalendarView.swift */; };
 		1817585D1C4B8D45008913DB /* CustomLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1817585C1C4B8D45008913DB /* CustomLayout.swift */; };
@@ -28,7 +30,6 @@
 		18A824461BEDCDF200084589 /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A824451BEDCDF200084589 /* LoginController.swift */; };
 		18A8244A1BEDCF0E00084589 /* UIAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A824491BEDCF0E00084589 /* UIAdapter.swift */; };
 		18A8244F1BEDCF9400084589 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A8244E1BEDCF9400084589 /* BaseViewController.swift */; };
-		18A824511BEDD55500084589 /* Storyboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 18A824501BEDD55500084589 /* Storyboard.storyboard */; };
 		18A824581BEDED8900084589 /* ChooseSide.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A824571BEDED8900084589 /* ChooseSide.swift */; };
 		18A8245A1BEDF5CC00084589 /* ChooseSideCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A824591BEDF5CC00084589 /* ChooseSideCollectionCell.swift */; };
 		18A8245C1BEDF62D00084589 /* ChooseSideCollectionSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A8245B1BEDF62D00084589 /* ChooseSideCollectionSource.swift */; };
@@ -62,6 +63,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		180141041C53525800BE13B1 /* ImageOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageOperation.swift; sourceTree = "<group>"; };
+		180141061C53534700BE13B1 /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = System/Library/Frameworks/CoreImage.framework; sourceTree = SDKROOT; };
 		181758581C4B7D98008913DB /* CustomTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTabBarController.swift; sourceTree = "<group>"; };
 		1817585A1C4B8CB5008913DB /* CalendarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
 		1817585C1C4B8D45008913DB /* CustomLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomLayout.swift; sourceTree = "<group>"; };
@@ -83,7 +86,6 @@
 		18A824451BEDCDF200084589 /* LoginController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoginController.swift; path = Modules/Login/LoginController.swift; sourceTree = "<group>"; };
 		18A824491BEDCF0E00084589 /* UIAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIAdapter.swift; sourceTree = "<group>"; };
 		18A8244E1BEDCF9400084589 /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
-		18A824501BEDD55500084589 /* Storyboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Storyboard.storyboard; sourceTree = "<group>"; };
 		18A824521BEDD86500084589 /* Craft-bridge-header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Craft-bridge-header.h"; sourceTree = "<group>"; };
 		18A824571BEDED8900084589 /* ChooseSide.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChooseSide.swift; sourceTree = "<group>"; };
 		18A824591BEDF5CC00084589 /* ChooseSideCollectionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChooseSideCollectionCell.swift; path = ChooseSide/ChooseSideCollectionCell.swift; sourceTree = "<group>"; };
@@ -113,6 +115,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				180141071C53534700BE13B1 /* CoreImage.framework in Frameworks */,
 				18A824761BEE0C1900084589 /* CoreGraphics.framework in Frameworks */,
 				26FDEB84629869B329580E24 /* Pods.framework in Frameworks */,
 			);
@@ -359,6 +362,7 @@
 			children = (
 				187464981C3FAA25009E4041 /* Notification */,
 				18610C521C12E15600B864F2 /* StringExtensions.swift */,
+				180141041C53525800BE13B1 /* ImageOperation.swift */,
 			);
 			name = OtherTools;
 			sourceTree = "<group>";
@@ -463,7 +467,6 @@
 				18AF8CAB1BEDCCCB00539C0E /* Assets.xcassets */,
 				18AF8CAD1BEDCCCB00539C0E /* LaunchScreen.storyboard */,
 				18AF8CB01BEDCCCB00539C0E /* Info.plist */,
-				18A824501BEDD55500084589 /* Storyboard.storyboard */,
 				18A824521BEDD86500084589 /* Craft-bridge-header.h */,
 			);
 			path = Craft;
@@ -498,6 +501,7 @@
 		583278BE556209F15C6BD56C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				180141061C53534700BE13B1 /* CoreImage.framework */,
 				18A824751BEE0C1900084589 /* CoreGraphics.framework */,
 				FFF7E3FA5773E8C0E92800CE /* Pods.framework */,
 			);
@@ -622,7 +626,6 @@
 			files = (
 				18AF8CAF1BEDCCCB00539C0E /* LaunchScreen.storyboard in Resources */,
 				18AF8CAC1BEDCCCB00539C0E /* Assets.xcassets in Resources */,
-				18A824511BEDD55500084589 /* Storyboard.storyboard in Resources */,
 				18610C4C1C12C88300B864F2 /* wow_main_theme.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -711,6 +714,7 @@
 				187464971C3FA3DD009E4041 /* SendNotification.swift in Sources */,
 				184867841BF851AE00016A4E /* Common.swift in Sources */,
 				181758591C4B7D98008913DB /* CustomTabBarController.swift in Sources */,
+				180141051C53525800BE13B1 /* ImageOperation.swift in Sources */,
 				18A8247C1BEE2B5D00084589 /* MainTabbar.swift in Sources */,
 				18AF8CA51BEDCCCB00539C0E /* AppDelegate.swift in Sources */,
 				182647781C2E689C0078D4C2 /* ForgetPassword.swift in Sources */,

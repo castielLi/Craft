@@ -17,6 +17,7 @@ class SignUp: ViewControllerBase {
     var verifyRequestCount : Int = 5
 
     var joinButton : UIButton?
+    var joinButtonBackGround : UIImageView?
     
     var panGesture : UIPanGestureRecognizer?
    
@@ -38,6 +39,7 @@ class SignUp: ViewControllerBase {
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
+        setCircleRing()
         setAnimationLayer()
     }
     
@@ -58,6 +60,7 @@ class SignUp: ViewControllerBase {
     
     override func initView() {
         setBackGround()
+        setButtonBackGround()
         setButton()
     }
     
@@ -71,15 +74,50 @@ class SignUp: ViewControllerBase {
         self.timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: "updateTimer:", userInfo: nil, repeats: true)
     }
     
+    func setButtonBackGround(){
+        self.joinButtonBackGround = UIImageView(frame: CGRectMake( (self.view.frame.width - UIAdapter.shared.transferWidth(200)) / 2 ,
+            (self.view.frame.height - UIAdapter.shared.transferWidth(200)) - 88 ,UIAdapter.shared.transferWidth(200), UIAdapter.shared.transferWidth(200)))
+        self.joinButtonBackGround!.layer.masksToBounds = true
+        self.joinButtonBackGround!.layer.cornerRadius = UIAdapter.shared.transferWidth(100)
+        
+    
+        let beffect = UIBlurEffect(style: UIBlurEffectStyle.Light)
+        let view = UIVisualEffectView(effect: beffect)
+        
+        view.frame = self.joinButtonBackGround!.bounds
+        self.joinButtonBackGround!.addSubview(view)
+        self.view.addSubview(self.joinButtonBackGround!)
+    }
+    
     func setButton(){
         self.joinButton = UIButton(frame: CGRectMake( (self.view.frame.width - UIAdapter.shared.transferWidth(200)) / 2 ,
-           (self.view.frame.height - UIAdapter.shared.transferWidth(200)) / 2 + 64 ,UIAdapter.shared.transferWidth(200), UIAdapter.shared.transferWidth(200)))
+           (self.view.frame.height - UIAdapter.shared.transferWidth(200)) - 88 ,UIAdapter.shared.transferWidth(200), UIAdapter.shared.transferWidth(200)))
         self.joinButton!.layer.masksToBounds = true
         self.joinButton!.layer.cornerRadius = UIAdapter.shared.transferWidth(100)
         self.view.addSubview(self.joinButton!)
         
-        self.joinButton!.backgroundColor = UIColor(red: 83/255, green: 86/255, blue: 93/255, alpha: 0.9)
         self.joinButton!.addTarget(self, action: "joinButtonClick:", forControlEvents: UIControlEvents.TouchUpInside)
+        self.joinButton!.alpha = 0.9
+    }
+    
+    func setCircleRing(){
+        
+        let refreshRadius = UIAdapter.shared.transferWidth(100)
+        let circlePath = UIBezierPath(arcCenter: CGPoint(x: refreshRadius , y: refreshRadius ), radius: refreshRadius - CGFloat(10), startAngle: CGFloat(-M_PI*1/2), endAngle: CGFloat(M_PI*3/2), clockwise: true)
+
+        
+        let shapeLayer = CAShapeLayer()
+        shapeLayer.path = circlePath.CGPath
+        
+        //change the fill color
+        shapeLayer.fillColor = UIColor.clearColor().CGColor
+        //you can change the stroke color
+        shapeLayer.strokeColor = UIColor(red: 58/255, green: 54/255, blue: 55/255, alpha: 0.5).CGColor
+        //you can change the line width
+        shapeLayer.lineWidth = 8.0
+        
+        self.joinButton!.layer.addSublayer(shapeLayer)
+    
     }
     
     func setAnimationLayer(){
@@ -90,11 +128,8 @@ class SignUp: ViewControllerBase {
         let refreshRadius = UIAdapter.shared.transferWidth(100)
         
 
-        ovalShapeLayer!.path =   UIBezierPath(arcCenter: CGPoint(x: refreshRadius , y: refreshRadius ), radius: refreshRadius - CGFloat(5), startAngle: CGFloat(-M_PI*1/2), endAngle: CGFloat(M_PI*3/2), clockwise: true).CGPath
-        
-        
-        
-        
+        ovalShapeLayer!.path =   UIBezierPath(arcCenter: CGPoint(x: refreshRadius , y: refreshRadius ), radius: refreshRadius - CGFloat(10), startAngle: CGFloat(-M_PI*1/2), endAngle: CGFloat(M_PI*3/2), clockwise: true).CGPath
+
         let values = NSMutableArray()
         let times = [0.0,0.5,1.0]
         
@@ -157,6 +192,7 @@ class SignUp: ViewControllerBase {
         for layer in self.joinButton!.layer.sublayers!{
             layer.removeFromSuperlayer()
         }
+        setCircleRing()
         setAnimationLayer()
         
         let date = NSDate().dateByAddingTimeInterval(5)
