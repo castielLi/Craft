@@ -97,7 +97,7 @@ class LoginController: ViewControllerBase {
          setRegister()
          setForgetPassword()
          setLoginButton()
-//         beginSound()
+         beginSound()
     }
     
     
