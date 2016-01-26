@@ -12,7 +12,7 @@ class CustomLayout: UICollectionViewLayout {
     
     //内容区域总大小，不是可见区域
     override func collectionViewContentSize() -> CGSize {
-        return CGSizeMake(collectionView!.bounds.size.width, CGFloat(collectionView!.bounds.size.height) + UIAdapter.shared.transferHeight(10))
+        return CGSizeMake(collectionView!.bounds.size.width, CGFloat(collectionView!.bounds.size.height) + 1)
     }
     
     //所有单元格位置属性

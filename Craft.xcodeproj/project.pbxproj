@@ -12,6 +12,7 @@
 		181758591C4B7D98008913DB /* CustomTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181758581C4B7D98008913DB /* CustomTabBarController.swift */; };
 		1817585B1C4B8CB5008913DB /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1817585A1C4B8CB5008913DB /* CalendarView.swift */; };
 		1817585D1C4B8D45008913DB /* CustomLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1817585C1C4B8D45008913DB /* CustomLayout.swift */; };
+		181C3E9F1C57ABB600A822D0 /* CalendearCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181C3E9E1C57ABB600A822D0 /* CalendearCell.swift */; };
 		182647781C2E689C0078D4C2 /* ForgetPassword.swift in Sources */ = {isa = PBXBuildFile; fileRef = 182647761C2E689C0078D4C2 /* ForgetPassword.swift */; };
 		182647791C2E689C0078D4C2 /* RegisterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 182647771C2E689C0078D4C2 /* RegisterController.swift */; };
 		184867821BF8506F00016A4E /* SliderMain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184867811BF8506F00016A4E /* SliderMain.swift */; };
@@ -68,6 +69,7 @@
 		181758581C4B7D98008913DB /* CustomTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTabBarController.swift; sourceTree = "<group>"; };
 		1817585A1C4B8CB5008913DB /* CalendarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
 		1817585C1C4B8D45008913DB /* CustomLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomLayout.swift; sourceTree = "<group>"; };
+		181C3E9E1C57ABB600A822D0 /* CalendearCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendearCell.swift; sourceTree = "<group>"; };
 		182647761C2E689C0078D4C2 /* ForgetPassword.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ForgetPassword.swift; path = Modules/Login/ForgetPassword.swift; sourceTree = "<group>"; };
 		182647771C2E689C0078D4C2 /* RegisterController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RegisterController.swift; path = Modules/Login/RegisterController.swift; sourceTree = "<group>"; };
 		184867811BF8506F00016A4E /* SliderMain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SliderMain.swift; sourceTree = "<group>"; };
@@ -153,6 +155,7 @@
 			children = (
 				1817585A1C4B8CB5008913DB /* CalendarView.swift */,
 				1817585C1C4B8D45008913DB /* CustomLayout.swift */,
+				181C3E9E1C57ABB600A822D0 /* CalendearCell.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -720,6 +723,7 @@
 				182647781C2E689C0078D4C2 /* ForgetPassword.swift in Sources */,
 				18A824461BEDCDF200084589 /* LoginController.swift in Sources */,
 				18610C531C12E15600B864F2 /* StringExtensions.swift in Sources */,
+				181C3E9F1C57ABB600A822D0 /* CalendearCell.swift in Sources */,
 				18610C4E1C12D48600B864F2 /* RestService.swift in Sources */,
 				184867821BF8506F00016A4E /* SliderMain.swift in Sources */,
 				18A593DC1C099D4100458308 /* CellType.swift in Sources */,

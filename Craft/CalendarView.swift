@@ -33,10 +33,10 @@ class CalendarView: UIView , UICollectionViewDataSource , UICollectionViewDelega
         let layout = CustomLayout()
         
         
-        self.collectionView = UICollectionView(frame: CGRectMake(UIAdapter.shared.transferWidth(10), UIAdapter.shared.transferHeight(170), UIAdapter.shared.transferWidth(200), UIAdapter.shared.transferHeight(200)), collectionViewLayout: layout)
+        self.collectionView = UICollectionView(frame: CGRectMake(UIAdapter.shared.transferWidth(10), UIAdapter.shared.transferHeight(210), UIAdapter.shared.transferWidth(200), UIAdapter.shared.transferHeight(170)), collectionViewLayout: layout)
         
         //注册CollectionViewCell
-        collectionView!.registerClass(UICollectionViewCell.self, forCellWithReuseIdentifier: "ViewCell")
+        collectionView!.registerClass(CalendearCell.self, forCellWithReuseIdentifier: "ViewCell")
         
         //collection背景颜色
         collectionView!.backgroundColor = UIColor.clearColor()
@@ -80,13 +80,6 @@ class CalendarView: UIView , UICollectionViewDataSource , UICollectionViewDelega
         var currentMotnDays:Int!
         var nextFirstDay:Int?
         
-        /**
-        *  销毁之前的cell
-        */
-        for i in 1...cellData.count{
-            self.collectionView!.viewWithTag(i)?.removeFromSuperview()
-        }
-        
         currentMonth = month
         nextMonth = (month != 12) ? month + 1 : 1
         year = (month == 12) ? year + 1 : year
@@ -122,13 +115,6 @@ class CalendarView: UIView , UICollectionViewDataSource , UICollectionViewDelega
         var beforeMonth:Int!
         var beforeMonthDays:Int!
         var beforeFirstDay:Int?
-        
-        /**
-        *  销毁之前的cell
-        */
-        for i in 1...cellData.count{
-            self.collectionView!.viewWithTag(i)?.removeFromSuperview()
-        }
         
         //计算上个月和下个月的月份
         beforeMonth = (month != 1) ? (month - 1) : 12
@@ -231,22 +217,16 @@ class CalendarView: UIView , UICollectionViewDataSource , UICollectionViewDelega
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let identify:String = "ViewCell"
         
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(identify, forIndexPath: indexPath) as UICollectionViewCell
+        var cell = collectionView.dequeueReusableCellWithReuseIdentifier(identify, forIndexPath: indexPath) as? CalendearCell
         
-        let label = UILabel()
-        label.frame = cell.bounds
-        label.textAlignment = .Center
-        label.backgroundColor = UIColor.clearColor()
-        label.textColor = UIColor.whiteColor()
-        label.layer.cornerRadius = UIAdapter.shared.transferWidth(2)
-        label.layer.borderWidth = 1
-        label.layer.borderColor = UIColor(red: 112/255, green: 87/255, blue: 62/255, alpha: 1).CGColor
-        label.layer.masksToBounds = true
-        label.text = cellData[indexPath.item]
-        label.tag = indexPath.item + 1
-        cell.addSubview(label)
         
-        return cell
+        if cell == nil{
+             cell = CalendearCell(frame: CGRect(x: 0, y: 0, width: UIAdapter.shared.transferWidth(23), height: UIAdapter.shared.transferWidth(23)))
+        }
+        
+        cell!.contentLabel!.text = cellData[indexPath.item]
+        cell!.contentLabel!.tag = indexPath.item + 1
+        return cell!
     }
 
     
