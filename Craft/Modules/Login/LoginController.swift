@@ -9,17 +9,20 @@
 import UIKit
 import AVFoundation
 
+
 class LoginController: ViewControllerBase {
     
     var backGroundImage : UIImageView?
     var acccountTextfield : UITextField?
     var passwordTextfield : UITextField?
 
+    var iconImage : UIImageView?
     
     var loginButton : UIButton?
     var registerButton : UIButton?
     var player : AVAudioPlayer?
     var service : LoginService?
+    
     
     var forgetPassword : UILabel?
     var register : UILabel?
@@ -38,6 +41,8 @@ class LoginController: ViewControllerBase {
         super.viewWillAppear(animated)
         self.navigationController!.setNavigationBarHidden(true, animated: false)
         self.tabBarController?.tabBar.hidden = true
+        
+        self.setIconAnimation()
         
         let nc = NSNotificationCenter.defaultCenter()
         nc.addObserver(self, selector: Selector("ChooseSideDialogDisappear:"), name: "AfterChooseSide", object: nil)
@@ -93,16 +98,13 @@ class LoginController: ViewControllerBase {
     
     override func initView() {
          setBackGroundImage()
+         setIconImage()
          setEnterPart()
          setRegister()
          setForgetPassword()
          setLoginButton()
-         beginSound()
+//         beginSound()
     }
-    
-    
-  
-    
     
     func setForgetPassword(){
         self.forgetPassword = UILabel()
@@ -155,6 +157,49 @@ class LoginController: ViewControllerBase {
         self.backGroundImage!.image = UIImage(named: "LoginBackGround")
         self.view.addSubview(self.backGroundImage!)
     }
+    
+    
+    func setIconImage(){
+        self.iconImage = UIImageView(frame: CGRectMake(0, 0, UIAdapter.shared.transferWidth(80), UIAdapter.shared.transferWidth(80)))
+        self.iconImage!.image = UIImage(named: "icon")
+        self.backGroundImage!.addSubview(iconImage!)
+        
+        self.iconImage!.mas_makeConstraints{ make in
+            make.centerX.equalTo()(self.view)
+            make.top.equalTo()(self.view.mas_top).with().offset()(UIAdapter.shared.transferHeight(100))
+        }
+        
+    }
+    
+    func setIconAnimation(){
+        
+        
+        let values = [0, 0, (M_PI)]
+        let times = [0.0,0.35 , 0.55,1]
+        
+        let animation = CAKeyframeAnimation(keyPath: "transform.rotation.y")
+        animation.values = values as [AnyObject]
+        animation.keyTimes = times
+        animation.removedOnCompletion = false
+        animation.timeOffset = 0;
+
+        
+        var imageTransform = CATransform3DIdentity
+        imageTransform.m34 = 1.0/500
+        animation.speed = 0.1
+        animation.repeatCount =  Float.infinity
+        
+        iconImage!.layer.addAnimation(animation, forKey: "rotation")
+        
+        let xAnimation = CABasicAnimation(keyPath: "position.x")
+        xAnimation.toValue = -self.iconImage!.frame.size.width
+        xAnimation.fromValue = self.view.frame.width + self.iconImage!.frame.size.width
+        xAnimation.speed = 0.1
+        xAnimation.repeatDuration = 10
+        iconImage!.layer.addAnimation(xAnimation, forKey: "position.x")
+        self.iconImage!.layer.transform = imageTransform
+    }
+    
     
     func setEnterPart(){
         
