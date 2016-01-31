@@ -23,7 +23,9 @@ class CalendarView: UIView , UICollectionViewDataSource , UICollectionViewDelega
     var beforeMonthButton = UIButton()
     var yearLabel = UILabel()
     var monthLabel = UILabel()
-
+    
+    var theLock = NSLock()
+    var mark = 2
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -70,6 +72,37 @@ class CalendarView: UIView , UICollectionViewDataSource , UICollectionViewDelega
         
     }
     
+    func scrollViewDidScroll(scrollView: UIScrollView) {
+        let y = scrollView.contentOffset.y
+        
+        print("\(y)")
+        if y > 20{
+            dispatch(2.0, scrollMenu: 1)
+        }else if y < -20{
+            dispatch(2.0, scrollMenu: 0)
+        }
+        
+    }
+    
+    /**
+     线程 0向上 1向下
+     */
+    func dispatch(time:NSTimeInterval, scrollMenu:Int){
+        let time: NSTimeInterval = time
+        let delay = dispatch_time(DISPATCH_TIME_NOW, Int64(time * Double(NSEC_PER_SEC)))
+
+        if mark == 2{
+            mark = scrollMenu
+            if scrollMenu == 0{
+                self.calculateBeforeFirstDay()
+            }else if scrollMenu == 1{
+                self.calculateNextFirstDay()
+            }
+            dispatch_after(delay, dispatch_get_main_queue(), { () -> Void in
+               self.mark = 2
+            })
+        }
+    }
     
     /**
      计算下个月的一号信息
@@ -106,6 +139,7 @@ class CalendarView: UIView , UICollectionViewDataSource , UICollectionViewDelega
         self.collectionView!.reloadData()
         self.yearLabel.text = "\(year)"
         self.monthLabel.text = "\(month)"
+        print("这是\(currentMonth)月")
     }
     
     /**

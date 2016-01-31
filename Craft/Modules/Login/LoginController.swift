@@ -182,22 +182,18 @@ class LoginController: ViewControllerBase {
         animation.keyTimes = times
         animation.removedOnCompletion = false
         animation.timeOffset = 0;
-
         
-        var imageTransform = CATransform3DIdentity
-        imageTransform.m34 = 1.0/500
-        animation.speed = 0.1
         animation.repeatCount =  Float.infinity
+        animation.duration = 2
         
         iconImage!.layer.addAnimation(animation, forKey: "rotation")
         
         let xAnimation = CABasicAnimation(keyPath: "position.x")
         xAnimation.toValue = -self.iconImage!.frame.size.width
         xAnimation.fromValue = self.view.frame.width + self.iconImage!.frame.size.width
-        xAnimation.speed = 0.1
-        xAnimation.repeatDuration = 10
+        xAnimation.duration = 3
+        xAnimation.repeatCount = Float.infinity
         iconImage!.layer.addAnimation(xAnimation, forKey: "position.x")
-        self.iconImage!.layer.transform = imageTransform
     }
     
     
