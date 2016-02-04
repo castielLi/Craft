@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		180141051C53525800BE13B1 /* ImageOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180141041C53525800BE13B1 /* ImageOperation.swift */; };
 		180141071C53534700BE13B1 /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 180141061C53534700BE13B1 /* CoreImage.framework */; };
+		180E193F1C62E39D00987CE6 /* ChatRoom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180E193E1C62E39D00987CE6 /* ChatRoom.swift */; };
+		180E19441C62EE7C00987CE6 /* libstdc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 180E19431C62EE7C00987CE6 /* libstdc++.tbd */; };
+		180E194B1C63204900987CE6 /* MainMenuProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180E194A1C63204900987CE6 /* MainMenuProtocol.swift */; };
+		180E194F1C6326C700987CE6 /* ChatContactList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180E194E1C6326C700987CE6 /* ChatContactList.swift */; };
 		181758591C4B7D98008913DB /* CustomTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181758581C4B7D98008913DB /* CustomTabBarController.swift */; };
 		1817585B1C4B8CB5008913DB /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1817585A1C4B8CB5008913DB /* CalendarView.swift */; };
 		1817585D1C4B8D45008913DB /* CustomLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1817585C1C4B8D45008913DB /* CustomLayout.swift */; };
@@ -66,6 +70,10 @@
 /* Begin PBXFileReference section */
 		180141041C53525800BE13B1 /* ImageOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageOperation.swift; sourceTree = "<group>"; };
 		180141061C53534700BE13B1 /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = System/Library/Frameworks/CoreImage.framework; sourceTree = SDKROOT; };
+		180E193E1C62E39D00987CE6 /* ChatRoom.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChatRoom.swift; path = ChatRoom/ChatRoom.swift; sourceTree = "<group>"; };
+		180E19431C62EE7C00987CE6 /* libstdc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.tbd"; path = "usr/lib/libstdc++.tbd"; sourceTree = SDKROOT; };
+		180E194A1C63204900987CE6 /* MainMenuProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainMenuProtocol.swift; sourceTree = "<group>"; };
+		180E194E1C6326C700987CE6 /* ChatContactList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChatContactList.swift; path = ChatRoom/ChatContactList.swift; sourceTree = "<group>"; };
 		181758581C4B7D98008913DB /* CustomTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTabBarController.swift; sourceTree = "<group>"; };
 		1817585A1C4B8CB5008913DB /* CalendarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
 		1817585C1C4B8D45008913DB /* CustomLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomLayout.swift; sourceTree = "<group>"; };
@@ -117,6 +125,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				180E19441C62EE7C00987CE6 /* libstdc++.tbd in Frameworks */,
 				180141071C53534700BE13B1 /* CoreImage.framework in Frameworks */,
 				18A824761BEE0C1900084589 /* CoreGraphics.framework in Frameworks */,
 				26FDEB84629869B329580E24 /* Pods.framework in Frameworks */,
@@ -140,6 +149,47 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		180E193A1C62E26C00987CE6 /* Chat */ = {
+			isa = PBXGroup;
+			children = (
+				180E193D1C62E28300987CE6 /* View */,
+				180E193C1C62E27C00987CE6 /* Controller */,
+				180E193B1C62E27500987CE6 /* Model */,
+			);
+			name = Chat;
+			sourceTree = "<group>";
+		};
+		180E193B1C62E27500987CE6 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		180E193C1C62E27C00987CE6 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				180E193E1C62E39D00987CE6 /* ChatRoom.swift */,
+				180E194E1C6326C700987CE6 /* ChatContactList.swift */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		180E193D1C62E28300987CE6 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		180E19471C631FFD00987CE6 /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				180E194A1C63204900987CE6 /* MainMenuProtocol.swift */,
+			);
+			name = Protocol;
+			sourceTree = "<group>";
+		};
 		1848677D1BF84D4200016A4E /* SliderMain */ = {
 			isa = PBXGroup;
 			children = (
@@ -256,6 +306,7 @@
 		18A824401BEDCD6100084589 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				180E193A1C62E26C00987CE6 /* Chat */,
 				18A593D01C09974000458308 /* ActivityMain */,
 				1848677D1BF84D4200016A4E /* SliderMain */,
 				18A8247D1BEE2F7A00084589 /* SignUp */,
@@ -459,6 +510,7 @@
 		18AF8CA31BEDCCCB00539C0E /* Craft */ = {
 			isa = PBXGroup;
 			children = (
+				180E19471C631FFD00987CE6 /* Protocol */,
 				18610C4A1C12C6FA00B864F2 /* Resource */,
 				18E6046A1C0EC45B00620499 /* NetWork */,
 				18A8245D1BEDFF4700084589 /* OtherTools */,
@@ -504,6 +556,7 @@
 		583278BE556209F15C6BD56C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				180E19431C62EE7C00987CE6 /* libstdc++.tbd */,
 				180141061C53534700BE13B1 /* CoreImage.framework */,
 				18A824751BEE0C1900084589 /* CoreGraphics.framework */,
 				FFF7E3FA5773E8C0E92800CE /* Pods.framework */,
@@ -720,14 +773,17 @@
 				180141051C53525800BE13B1 /* ImageOperation.swift in Sources */,
 				18A8247C1BEE2B5D00084589 /* MainTabbar.swift in Sources */,
 				18AF8CA51BEDCCCB00539C0E /* AppDelegate.swift in Sources */,
+				180E193F1C62E39D00987CE6 /* ChatRoom.swift in Sources */,
 				182647781C2E689C0078D4C2 /* ForgetPassword.swift in Sources */,
 				18A824461BEDCDF200084589 /* LoginController.swift in Sources */,
 				18610C531C12E15600B864F2 /* StringExtensions.swift in Sources */,
 				181C3E9F1C57ABB600A822D0 /* CalendearCell.swift in Sources */,
 				18610C4E1C12D48600B864F2 /* RestService.swift in Sources */,
+				180E194F1C6326C700987CE6 /* ChatContactList.swift in Sources */,
 				184867821BF8506F00016A4E /* SliderMain.swift in Sources */,
 				18A593DC1C099D4100458308 /* CellType.swift in Sources */,
 				18A593D81C099C5300458308 /* TableViewBaseCell.swift in Sources */,
+				180E194B1C63204900987CE6 /* MainMenuProtocol.swift in Sources */,
 				18A824821BEE2FCA00084589 /* SignUp.swift in Sources */,
 				18A824581BEDED8900084589 /* ChooseSide.swift in Sources */,
 				18A593CE1C0996DB00458308 /* ActivityMain.swift in Sources */,
@@ -866,7 +922,7 @@
 				INFOPLIST_FILE = Craft/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.app.castiel.craft.Craft;
+				PRODUCT_BUNDLE_IDENTIFIER = com.app.castiel.Craft;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Craft/Craft-bridge-header.h";
 				"SWIFT_OBJC_BRIDGING_HEADER[arch=*]" = "Craft/Craft-bridge-header.h";
@@ -881,7 +937,7 @@
 				INFOPLIST_FILE = Craft/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.app.castiel.craft.Craft;
+				PRODUCT_BUNDLE_IDENTIFIER = com.app.castiel.Craft;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Craft/Craft-bridge-header.h";
 				"SWIFT_OBJC_BRIDGING_HEADER[arch=*]" = "Craft/Craft-bridge-header.h";

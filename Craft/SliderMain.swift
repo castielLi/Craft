@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SliderMain: ViewControllerBase {
+class SliderMain: ViewControllerBase , MainMenuProtocol{
 
     
     var signUpController : SignUp?
@@ -70,7 +70,13 @@ class SliderMain: ViewControllerBase {
         self.navigationController!.navigationBar.setBackgroundImage(UIImage(named: "navigationBackGround"), forBarMetrics: UIBarMetrics.Default)
         
         
+        let backButton = UIBarButtonItem()
+        self.navigationItem.backBarButtonItem = backButton
+        self.navigationItem.backBarButtonItem!.title = ""
+        
+        
         self.signUpController = SignUp(nibName: nil, bundle: nil)
+        self.signUpController!.mainMenuProtocal = self
         self.view.addSubview(self.signUpController!.view)
         self.signUpController!.panGesture = UIPanGestureRecognizer(target: self, action: Selector("pan:"))
         self.signUpController!.view.addGestureRecognizer(self.signUpController!.panGesture!)
@@ -159,6 +165,9 @@ class SliderMain: ViewControllerBase {
     }
     
 
+    func PushNewController(vc : UIViewController){
+       self.navigationController!.pushViewController(vc, animated: true)
+    }
     
 
     /*

@@ -286,6 +286,23 @@ class LoginController: ViewControllerBase {
         self.forgetPassword!.hidden = true
         
         self.definesPresentationContext = true
+        
+        
+        //融云登录        
+        RCIM.sharedRCIM().connectWithToken("WR2i0I07FA3sS6yv3j5G8slRWzGSVmtCYmURsUlF14+e5Rr9BT+O3cQMFJ+FPDFeOIACenxFpzL7O3U2PAtoUA==",
+            success: { (userId) -> Void in
+                print("登陆成功。当前登录的用户ID：\(userId)")
+            }, error: { (status) -> Void in
+                print("登陆的错误码为:\(status.rawValue)")
+            }, tokenIncorrect: {
+                //token过期或者不正确。
+                //如果设置了token有效期并且token过期，请重新请求您的服务器获取新的token
+                //如果没有设置token有效期却提示token错误，请检查您客户端和服务器的appkey是否匹配，还有检查您获取token的流程。
+                print("token错误")
+        })
+        
+        
+        
         let chooseSideView = ChooseSide(nibName: nil, bundle: nil)
         let dialogViewNav = UINavigationController(rootViewController: chooseSideView)
         dialogViewNav.modalPresentationStyle = UIModalPresentationStyle.OverFullScreen

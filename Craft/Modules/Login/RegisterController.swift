@@ -242,6 +242,13 @@ class RegisterController: ViewControllerBase {
         var validate:Bool = self.Validate()
         if(!validate) {return}
         
+//        [[EaseMob sharedInstance].chatManager asyncRegisterNewAccount:@"8001" password:@"111111" withCompletion:^(NSString *username, NSString *password, EMError *error) {
+//            if (!error) {
+//                NSLog(@"注册成功");
+//            }
+//        } onQueue:nil];
+        
+        
 //        if !self.isSelected! {
 //            MsgBoxHelper.showOkMessage("必须接受xx协议", title: "")
 //            return
@@ -250,6 +257,9 @@ class RegisterController: ViewControllerBase {
 //        var phone = self.phoneNumber!.text
 //        var pwd1 = self.password!.text
 //        var verify = self.verification!.text
+        
+           
+        
 //        
 //        self.showProgress()
 //        

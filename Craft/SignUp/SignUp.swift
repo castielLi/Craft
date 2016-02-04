@@ -20,12 +20,18 @@ class SignUp: ViewControllerBase {
     var joinButtonBackGround : UIImageView?
     
     var panGesture : UIPanGestureRecognizer?
+    
+    
+    
+    var chatRoom : UIButton?
+    var mainMenuProtocal : MainMenuProtocol?
    
     var ovalShapeLayer: CAShapeLayer?
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
 //        self.backGroundImageNumber = (random() % 4) + 1
+        
         
     }
 
@@ -62,6 +68,22 @@ class SignUp: ViewControllerBase {
         setBackGround()
         setButtonBackGround()
         setButton()
+        setChatRoom()
+    }
+    
+    func setChatRoom(){
+        chatRoom = UIButton()
+        chatRoom!.bounds.size = CGSize(width: UIAdapter.shared.transferWidth(15), height: UIAdapter.shared.transferWidth(15))
+        chatRoom!.layer.cornerRadius = UIAdapter.shared.transferWidth(15/2)
+        chatRoom!.layer.masksToBounds = true
+        chatRoom!.setBackgroundImage(UIImage(named: "Chat"), forState: UIControlState.Normal)
+        chatRoom!.addTarget(self, action: "ChatRoomClick:", forControlEvents: UIControlEvents.TouchUpInside)
+        self.view.addSubview(self.chatRoom!)
+        
+        self.chatRoom!.mas_makeConstraints{ make in
+           make.left.equalTo()(self.view).with().offset()(UIAdapter.shared.transferWidth(15))
+           make.top.equalTo()(self.view!.mas_bottom).with().offset()(-44 - UIAdapter.shared.transferWidth(15))
+        }
     }
     
     func setBackGround(){
@@ -200,6 +222,15 @@ class SignUp: ViewControllerBase {
         SendNotification.SendLocalNotifation(note)
     }
     
+    
+    func ChatRoomClick(sender : UIButton){
+       
+        let chat = ChatContactList()
+//        chat.conversationType = RCConversationType.ConversationType_PRIVATE
+//        chat.targetId = "1"
+//        chat.title = "hello"
+        self.mainMenuProtocal!.PushNewController(chat)
+    }
 
     /*
     // MARK: - Navigation
