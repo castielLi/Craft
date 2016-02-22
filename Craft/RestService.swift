@@ -10,7 +10,7 @@ import AFNetworking
 import XCGLogger
 import Alamofire
 
-let _sharedService: RESTService = { RESTService() }()
+private let _sharedService: RESTService = { RESTService() }()
 let _baseUrl = "http://120.25.127.229:8080/wow/api"
 //let _baseUrl = "http://10.10.120.95:86/api"
 

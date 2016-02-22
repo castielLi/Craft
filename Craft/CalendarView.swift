@@ -35,7 +35,7 @@ class CalendarView: UIView , UICollectionViewDataSource , UICollectionViewDelega
         let layout = CustomLayout()
         
         
-        self.collectionView = UICollectionView(frame: CGRectMake(UIAdapter.shared.transferWidth(10), UIAdapter.shared.transferHeight(210), UIAdapter.shared.transferWidth(200), UIAdapter.shared.transferHeight(170)), collectionViewLayout: layout)
+        self.collectionView = UICollectionView(frame: CGRectMake(UIAdapter.shared.transferWidth(10), UIAdapter.shared.transferHeight(210), UIAdapter.shared.transferWidth(192), UIAdapter.shared.transferHeight(160)), collectionViewLayout: layout)
         
         //注册CollectionViewCell
         collectionView!.registerClass(CalendearCell.self, forCellWithReuseIdentifier: "ViewCell")
@@ -49,17 +49,34 @@ class CalendarView: UIView , UICollectionViewDataSource , UICollectionViewDelega
         
         self.addSubview(self.collectionView!)
         
-        nextMonthButton.frame = CGRectMake(0, 500, 100, 40)
-        nextMonthButton.setTitle("下个月", forState: .Normal)
-        nextMonthButton.backgroundColor = UIColor.redColor()
+        nextMonthButton.layer.cornerRadius = UIAdapter.shared.transferWidth(2)
+        nextMonthButton.layer.masksToBounds = true
+        nextMonthButton.layer.borderWidth = 1
+        nextMonthButton.layer.borderColor = UIColor(red: 112/255, green: 87/255, blue: 62/255, alpha: 1).CGColor
         nextMonthButton.addTarget(self, action: Selector("calculateNextFirstDay"), forControlEvents: .TouchUpInside)
         self.addSubview(nextMonthButton)
         
-        beforeMonthButton.frame = CGRectMake(200, 500, 100, 40)
-        beforeMonthButton.setTitle("上个月", forState: .Normal)
-        beforeMonthButton.backgroundColor = UIColor.redColor()
+        self.nextMonthButton.mas_makeConstraints{ make in
+           make.bottom.equalTo()(self.collectionView!.mas_bottom).with().offset()(UIAdapter.shared.transferHeight(10))
+           make.top.equalTo()(self.collectionView!.mas_bottom).with().offset()(UIAdapter.shared.transferHeight(2))
+           make.left.equalTo()(self.collectionView!.mas_right).with().offset()(UIAdapter.shared.transferWidth(-20))
+           make.right.equalTo()(self.collectionView!)
+        }
+        
+        beforeMonthButton.layer.cornerRadius = UIAdapter.shared.transferWidth(2)
+        beforeMonthButton.layer.masksToBounds = true
+        beforeMonthButton.layer.borderWidth = 1
+        beforeMonthButton.layer.borderColor = UIColor(red: 112/255, green: 87/255, blue: 62/255, alpha: 1).CGColor
         beforeMonthButton.addTarget(self, action: Selector("calculateBeforeFirstDay"), forControlEvents: .TouchUpInside)
         self.addSubview(beforeMonthButton)
+        
+        self.beforeMonthButton.mas_makeConstraints{ make in
+            make.top.equalTo()(self.collectionView!.mas_top).with().offset()(UIAdapter.shared.transferHeight(-10))
+            make.bottom.equalTo()(self.collectionView!.mas_top).with().offset()(UIAdapter.shared.transferHeight(-2))
+            make.left.equalTo()(self.collectionView!.mas_right).with().offset()(UIAdapter.shared.transferWidth(-20))
+            make.right.equalTo()(self.collectionView!)
+        }
+
         
         yearLabel.text = "\(year)"
         yearLabel.frame = CGRectMake(360, 100, 50, 30)

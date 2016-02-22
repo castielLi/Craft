@@ -250,6 +250,21 @@
 			name = Notification;
 			sourceTree = "<group>";
 		};
+		1899D6EB1C6484880094B65C /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				1899D6EC1C6484910094B65C /* SliderMenu */,
+			);
+			name = Common;
+			sourceTree = "<group>";
+		};
+		1899D6EC1C6484910094B65C /* SliderMenu */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = SliderMenu;
+			sourceTree = "<group>";
+		};
 		18A593D01C09974000458308 /* ActivityMain */ = {
 			isa = PBXGroup;
 			children = (
@@ -306,6 +321,7 @@
 		18A824401BEDCD6100084589 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				1899D6EB1C6484880094B65C /* Common */,
 				180E193A1C62E26C00987CE6 /* Chat */,
 				18A593D01C09974000458308 /* ActivityMain */,
 				1848677D1BF84D4200016A4E /* SliderMain */,
@@ -364,6 +380,7 @@
 		18A824481BEDCEC700084589 /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				18E6046D1C0EC50800620499 /* ApiResult.swift */,
 				18610C4D1C12D48600B864F2 /* RestService.swift */,
 			);
 			name = Network;
@@ -512,7 +529,6 @@
 			children = (
 				180E19471C631FFD00987CE6 /* Protocol */,
 				18610C4A1C12C6FA00B864F2 /* Resource */,
-				18E6046A1C0EC45B00620499 /* NetWork */,
 				18A8245D1BEDFF4700084589 /* OtherTools */,
 				18A8244D1BEDCF5000084589 /* Basic */,
 				18A824481BEDCEC700084589 /* Network */,
@@ -543,14 +559,6 @@
 				18AF8CC61BEDCCCB00539C0E /* Info.plist */,
 			);
 			path = CraftUITests;
-			sourceTree = "<group>";
-		};
-		18E6046A1C0EC45B00620499 /* NetWork */ = {
-			isa = PBXGroup;
-			children = (
-				18E6046D1C0EC50800620499 /* ApiResult.swift */,
-			);
-			name = NetWork;
 			sourceTree = "<group>";
 		};
 		583278BE556209F15C6BD56C /* Frameworks */ = {

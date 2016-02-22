@@ -21,18 +21,20 @@ class SignUp: ViewControllerBase {
     
     var panGesture : UIPanGestureRecognizer?
     
+    var sliderMenu : UIButton?
+    var menuIsOpen : Bool = false
     
     
     var chatRoom : UIButton?
+    var collectionOfStone : UIButton?
+    
     var mainMenuProtocal : MainMenuProtocol?
    
     var ovalShapeLayer: CAShapeLayer?
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-//        self.backGroundImageNumber = (random() % 4) + 1
-        
-        
+ 
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -52,11 +54,17 @@ class SignUp: ViewControllerBase {
        
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "报  名"
         self.view.backgroundColor = UIColor.grayColor()
-        
-        
         // Do any additional setup after loading the view.
+        
+        
+        
+        //修改 menu
+        sliderMenu = UIButton()
+        sliderMenu!.frame = CGRect(x: self.view!.frame.width - 44, y: 0, width: 44, height: view.frame.height)
+        sliderMenu!.backgroundColor = UIColor.redColor()
+        sliderMenu!.hidden = true
+        self.view!.addSubview(sliderMenu!)
     }
     
     override func didReceiveMemoryWarning() {
@@ -69,7 +77,9 @@ class SignUp: ViewControllerBase {
         setButtonBackGround()
         setButton()
         setChatRoom()
+        setStone()
     }
+    
     
     func setChatRoom(){
         chatRoom = UIButton()
@@ -86,6 +96,23 @@ class SignUp: ViewControllerBase {
         }
     }
     
+    func setStone(){
+        collectionOfStone = UIButton()
+        collectionOfStone!.bounds.size = CGSize(width: UIAdapter.shared.transferWidth(15), height: UIAdapter.shared.transferWidth(15))
+        collectionOfStone!.layer.cornerRadius = UIAdapter.shared.transferWidth(15/2)
+        collectionOfStone!.layer.masksToBounds = true
+        collectionOfStone!.setBackgroundImage(UIImage(named: "Chat"), forState: UIControlState.Normal)
+        collectionOfStone!.addTarget(self, action: "StoneClick:", forControlEvents: UIControlEvents.TouchUpInside)
+        self.view.addSubview(self.collectionOfStone!)
+        
+        self.collectionOfStone!.mas_makeConstraints{ make in
+            make.left.equalTo()(self.chatRoom!.mas_right).with().offset()(UIAdapter.shared.transferWidth(5))
+            make.top.equalTo()(self.view!.mas_bottom).with().offset()(-44 - UIAdapter.shared.transferWidth(15))
+        }
+    }
+    
+
+    
     func setBackGround(){
         self.backGroundImage = UIImageView(frame: CGRectMake(0, 0, self.view.frame.width, self.view.frame.height))
         self.backGroundImage!.image = UIImage(named: "MainBackGround\(self.backGroundImageNumber)")
@@ -94,6 +121,8 @@ class SignUp: ViewControllerBase {
         
         self.verifyRequestCount = 5
         self.timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: "updateTimer:", userInfo: nil, repeats: true)
+        
+       
     }
     
     func setButtonBackGround(){
@@ -226,10 +255,19 @@ class SignUp: ViewControllerBase {
     func ChatRoomClick(sender : UIButton){
        
         let chat = ChatContactList()
-//        chat.conversationType = RCConversationType.ConversationType_PRIVATE
-//        chat.targetId = "1"
-//        chat.title = "hello"
         self.mainMenuProtocal!.PushNewController(chat)
+    }
+    
+    func StoneClick(sender : UIButton){
+        if !self.menuIsOpen {
+
+            self.sliderMenu!.hidden = false
+        }else{
+
+           self.sliderMenu?.hidden = true
+        
+        }
+        self.menuIsOpen = !self.menuIsOpen
     }
 
     /*
