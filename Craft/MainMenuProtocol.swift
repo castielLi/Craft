@@ -10,4 +10,5 @@ import Foundation
 
 protocol MainMenuProtocol {
     func PushNewController(vc : UIViewController)
+    func ChooseTab(selectIndex : Int)
 }

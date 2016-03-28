@@ -20,6 +20,9 @@ class SliderMain: ViewControllerBase , MainMenuProtocol{
     let FullDistance: CGFloat = 0.78
     let Proportion: CGFloat = 0.77
     
+    var reviewTable : UITableView?
+    var reviewTableSource : ReviewTableSource?
+    
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)        
     }
@@ -34,6 +37,30 @@ class SliderMain: ViewControllerBase , MainMenuProtocol{
         
         let nc = NSNotificationCenter.defaultCenter()
         nc.addObserver(self, selector: Selector("showCurrentView:"), name: "loginDisappear", object: nil)
+        
+//        
+//        let viewAnimation = CABasicAnimation(keyPath: "position.x")
+//        viewAnimation.duration = 0.3
+//        viewAnimation.removedOnCompletion = false
+//        viewAnimation.timingFunction = CAMediaTimingFunction( name: kCAMediaTimingFunctionEaseOut)
+//        viewAnimation.fromValue = UIScreen.mainScreen().bounds.width
+//        
+//        self.view!.layer.addAnimation(viewAnimation, forKey: nil)
+//        self.signUpController!.view!.layer.addAnimation(viewAnimation, forKey: nil)
+        
+        
+        let menuButton = UIButton(frame: CGRect(x: 0, y: 0, width: UIAdapter.shared.transferWidth(40), height: UIAdapter.shared.transferHeight(20)) )
+        menuButton.setTitle("Menu", forState: UIControlState.Normal)
+        menuButton.titleLabel!.textColor = UIColor.whiteColor()
+        menuButton.addTarget(self, action: "MenuClick:", forControlEvents: UIControlEvents.TouchUpInside)
+        
+        let rightBarButton = UIBarButtonItem(customView: menuButton)
+        self.navigationItem.rightBarButtonItem = rightBarButton
+        
+    }
+    
+    func MenuClick(sender : UIButton){
+       self.signUpController!.MenuClick()
     }
     
     func showCurrentView(sender : NSNotification){
@@ -86,7 +113,22 @@ class SliderMain: ViewControllerBase , MainMenuProtocol{
     
     override func initView() {
         setBackGroundImage()
+        setCalenderActivitiesReview()
         setCalenderView()
+    }
+    
+    func setCalenderActivitiesReview(){
+        
+        self.reviewTableSource = ReviewTableSource()
+        
+        self.reviewTable = UITableView(frame: CGRect(x: UIAdapter.shared.transferWidth(10), y: UIAdapter.shared.transferHeight(50) + 64, width: UIAdapter.shared.transferWidth(192), height: UIAdapter.shared.transferHeight(100)))
+        self.reviewTable!.dataSource = self.reviewTableSource!
+        self.reviewTable!.delegate = self.reviewTableSource!
+        self.reviewTable!.showsVerticalScrollIndicator = false
+        self.reviewTable!.backgroundColor = UIColor.clearColor()
+        self.reviewTable!.separatorStyle = UITableViewCellSeparatorStyle.None
+        self.reviewTable!.pagingEnabled = true
+        self.view!.addSubview(reviewTable!)
     }
     
     
@@ -98,7 +140,7 @@ class SliderMain: ViewControllerBase , MainMenuProtocol{
     
     
     func setCalenderView(){
-         self.calendar = CalendarView(frame: self.view.frame)
+         self.calendar = CalendarView(frame: CGRectMake(UIAdapter.shared.transferWidth(10), UIAdapter.shared.transferHeight(170) + 64, UIAdapter.shared.transferWidth(192), UIAdapter.shared.transferHeight(160)))
          self.view.addSubview(self.calendar!)
     }
 
@@ -169,6 +211,10 @@ class SliderMain: ViewControllerBase , MainMenuProtocol{
        self.navigationController!.pushViewController(vc, animated: true)
     }
     
+    func ChooseTab(selectIndex : Int){
+       self.tabBarController!.selectedIndex =  selectIndex
+    }
+
 
     /*
     // MARK: - Navigation

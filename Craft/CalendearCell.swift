@@ -21,7 +21,7 @@ class CalendearCell: UICollectionViewCell {
         contentLabel!.textColor = UIColor.whiteColor()
         contentLabel!.layer.cornerRadius = UIAdapter.shared.transferWidth(2)
         contentLabel!.layer.borderWidth = 1
-        contentLabel!.layer.borderColor = UIColor(red: 112/255, green: 87/255, blue: 62/255, alpha: 1).CGColor
+        contentLabel!.layer.borderColor = Resources.Color.goldenEdge.CGColor
         contentLabel!.layer.masksToBounds = true
         self.addSubview(contentLabel!)
 

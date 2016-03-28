@@ -35,7 +35,7 @@ class CalendarView: UIView , UICollectionViewDataSource , UICollectionViewDelega
         let layout = CustomLayout()
         
         
-        self.collectionView = UICollectionView(frame: CGRectMake(UIAdapter.shared.transferWidth(10), UIAdapter.shared.transferHeight(210), UIAdapter.shared.transferWidth(192), UIAdapter.shared.transferHeight(160)), collectionViewLayout: layout)
+        self.collectionView = UICollectionView(frame: CGRectMake(0, UIAdapter.shared.transferHeight(10), UIAdapter.shared.transferWidth(192), UIAdapter.shared.transferHeight(160)), collectionViewLayout: layout)
         
         //注册CollectionViewCell
         collectionView!.registerClass(CalendearCell.self, forCellWithReuseIdentifier: "ViewCell")
@@ -278,6 +278,18 @@ class CalendarView: UIView , UICollectionViewDataSource , UICollectionViewDelega
         cell!.contentLabel!.text = cellData[indexPath.item]
         cell!.contentLabel!.tag = indexPath.item + 1
         return cell!
+    }
+    
+    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        let cell = collectionView.cellForItemAtIndexPath(indexPath)
+        
+        cell!.backgroundColor = Resources.Color.goldenEdge
+    }
+    
+    func collectionView(collectionView: UICollectionView, didDeselectItemAtIndexPath indexPath: NSIndexPath) {
+        let cell = collectionView.cellForItemAtIndexPath(indexPath)
+        
+        cell!.backgroundColor = UIColor.clearColor()
     }
 
     

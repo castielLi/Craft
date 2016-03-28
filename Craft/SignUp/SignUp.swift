@@ -10,27 +10,26 @@ import UIKit
 
 class SignUp: ViewControllerBase {
 
-   
     var backGroundImage : UIImageView?
     var backGroundImageNumber : Int = 1
     var timer:NSTimer?
     var verifyRequestCount : Int = 5
-
-    var joinButton : UIButton?
-    var joinButtonBackGround : UIImageView?
-    
+    var timeView : TimerView?
+    var activityMainView : ActivityMainView?
     var panGesture : UIPanGestureRecognizer?
-    
-    var sliderMenu : UIButton?
+
     var menuIsOpen : Bool = false
-    
-    
-    var chatRoom : UIButton?
+    var TimerLimit : UIButton?
     var collectionOfStone : UIButton?
-    
     var mainMenuProtocal : MainMenuProtocol?
-   
     var ovalShapeLayer: CAShapeLayer?
+    
+    var disappearTimerSwipe : UISwipeGestureRecognizer?
+    var disappearActivitySwipe : UISwipeGestureRecognizer?
+    var timerVisible : Bool = false
+    var activityVisible : Bool = false
+    
+    var rightMenu : RightMenu?
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
@@ -43,6 +42,15 @@ class SignUp: ViewControllerBase {
 
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        
+        let center = NSNotificationCenter.defaultCenter()
+        center.addObserver(self,
+            selector: Selector("activitiesDialogDisappear:"), name: "dismissAcitivtiesDialog", object: nil)
+        self._hasNotification = true
+        
+        
+        
+        
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -57,14 +65,6 @@ class SignUp: ViewControllerBase {
         self.view.backgroundColor = UIColor.grayColor()
         // Do any additional setup after loading the view.
         
-        
-        
-        //修改 menu
-        sliderMenu = UIButton()
-        sliderMenu!.frame = CGRect(x: self.view!.frame.width - 44, y: 0, width: 44, height: view.frame.height)
-        sliderMenu!.backgroundColor = UIColor.redColor()
-        sliderMenu!.hidden = true
-        self.view!.addSubview(sliderMenu!)
     }
     
     override func didReceiveMemoryWarning() {
@@ -74,23 +74,30 @@ class SignUp: ViewControllerBase {
     
     override func initView() {
         setBackGround()
-        setButtonBackGround()
-        setButton()
-        setChatRoom()
+        setRightMenu()
+        setTimerView()
+        setActivityMainView()
+        setTimerLimit()
         setStone()
     }
     
-    
-    func setChatRoom(){
-        chatRoom = UIButton()
-        chatRoom!.bounds.size = CGSize(width: UIAdapter.shared.transferWidth(15), height: UIAdapter.shared.transferWidth(15))
-        chatRoom!.layer.cornerRadius = UIAdapter.shared.transferWidth(15/2)
-        chatRoom!.layer.masksToBounds = true
-        chatRoom!.setBackgroundImage(UIImage(named: "Chat"), forState: UIControlState.Normal)
-        chatRoom!.addTarget(self, action: "ChatRoomClick:", forControlEvents: UIControlEvents.TouchUpInside)
-        self.view.addSubview(self.chatRoom!)
+    func setRightMenu(){
+        self.rightMenu = RightMenu(frame: CGRect(x: UIScreen.mainScreen().bounds.width + UIAdapter.shared.transferWidth(50) , y: (UIScreen.mainScreen().bounds.height - UIAdapter.shared.transferHeight(70)) / 2, width: UIAdapter.shared.transferWidth(50), height: UIAdapter.shared.transferHeight(70)))
+        self.view.addSubview(self.rightMenu!)
         
-        self.chatRoom!.mas_makeConstraints{ make in
+    }
+    
+    
+    func setTimerLimit(){
+        TimerLimit = UIButton()
+        TimerLimit!.bounds.size = CGSize(width: UIAdapter.shared.transferWidth(15), height: UIAdapter.shared.transferWidth(15))
+        TimerLimit!.layer.cornerRadius = UIAdapter.shared.transferWidth(15/2)
+        TimerLimit!.layer.masksToBounds = true
+        TimerLimit!.setBackgroundImage(UIImage(named: "Chat"), forState: UIControlState.Normal)
+        TimerLimit!.addTarget(self, action: "TimerLimitClick:", forControlEvents: UIControlEvents.TouchUpInside)
+        self.view.addSubview(self.TimerLimit!)
+        
+        self.TimerLimit!.mas_makeConstraints{ make in
            make.left.equalTo()(self.view).with().offset()(UIAdapter.shared.transferWidth(15))
            make.top.equalTo()(self.view!.mas_bottom).with().offset()(-44 - UIAdapter.shared.transferWidth(15))
         }
@@ -106,11 +113,10 @@ class SignUp: ViewControllerBase {
         self.view.addSubview(self.collectionOfStone!)
         
         self.collectionOfStone!.mas_makeConstraints{ make in
-            make.left.equalTo()(self.chatRoom!.mas_right).with().offset()(UIAdapter.shared.transferWidth(5))
+            make.right.equalTo()(self.view!.mas_right).with().offset()(UIAdapter.shared.transferWidth(-15))
             make.top.equalTo()(self.view!.mas_bottom).with().offset()(-44 - UIAdapter.shared.transferWidth(15))
         }
     }
-    
 
     
     func setBackGround(){
@@ -125,31 +131,22 @@ class SignUp: ViewControllerBase {
        
     }
     
-    func setButtonBackGround(){
-        self.joinButtonBackGround = UIImageView(frame: CGRectMake( (self.view.frame.width - UIAdapter.shared.transferWidth(200)) / 2 ,
+    func setTimerView(){
+        self.timeView = TimerView(frame: CGRectMake( (self.view.frame.width - UIAdapter.shared.transferWidth(200)) / 2 ,
             (self.view.frame.height - UIAdapter.shared.transferWidth(200)) - 88 ,UIAdapter.shared.transferWidth(200), UIAdapter.shared.transferWidth(200)))
-        self.joinButtonBackGround!.layer.masksToBounds = true
-        self.joinButtonBackGround!.layer.cornerRadius = UIAdapter.shared.transferWidth(100)
-        
-    
-        let beffect = UIBlurEffect(style: UIBlurEffectStyle.Light)
-        let view = UIVisualEffectView(effect: beffect)
-        
-        view.frame = self.joinButtonBackGround!.bounds
-        self.joinButtonBackGround!.addSubview(view)
-        self.view.addSubview(self.joinButtonBackGround!)
+        self.view.addSubview(self.timeView!)
     }
     
-    func setButton(){
-        self.joinButton = UIButton(frame: CGRectMake( (self.view.frame.width - UIAdapter.shared.transferWidth(200)) / 2 ,
-           (self.view.frame.height - UIAdapter.shared.transferWidth(200)) - 88 ,UIAdapter.shared.transferWidth(200), UIAdapter.shared.transferWidth(200)))
-        self.joinButton!.layer.masksToBounds = true
-        self.joinButton!.layer.cornerRadius = UIAdapter.shared.transferWidth(100)
-        self.view.addSubview(self.joinButton!)
+    
+    func setActivityMainView(){
+       self.activityMainView = ActivityMainView(frame: CGRect(x: -UIAdapter.shared.transferWidth(240), y: 64 + UIAdapter.shared.transferHeight(15), width: UIAdapter.shared.transferWidth(240), height: UIAdapter.shared.transferHeight(300)))
         
-        self.joinButton!.addTarget(self, action: "joinButtonClick:", forControlEvents: UIControlEvents.TouchUpInside)
-        self.joinButton!.alpha = 0.9
+       self.view.addSubview(self.activityMainView!)
+       self.activityMainView!.hidden = true
+        
+       self.activityMainView!.testButton!.addTarget(self, action: "testButtonClick:", forControlEvents: UIControlEvents.TouchUpInside)
     }
+    
     
     func setCircleRing(){
         
@@ -167,7 +164,7 @@ class SignUp: ViewControllerBase {
         //you can change the line width
         shapeLayer.lineWidth = 8.0
         
-        self.joinButton!.layer.addSublayer(shapeLayer)
+        self.timeView!.joinButton!.layer.addSublayer(shapeLayer)
     
     }
     
@@ -180,7 +177,7 @@ class SignUp: ViewControllerBase {
         
 
         ovalShapeLayer!.path =   UIBezierPath(arcCenter: CGPoint(x: refreshRadius , y: refreshRadius ), radius: refreshRadius - CGFloat(10), startAngle: CGFloat(-M_PI*1/2), endAngle: CGFloat(M_PI*3/2), clockwise: true).CGPath
-
+        
         let values = NSMutableArray()
         let times = [0.0,0.5,1.0]
         
@@ -211,7 +208,7 @@ class SignUp: ViewControllerBase {
         strokeAnimationGroup.animations = [strokeEndAnimation,animation]
         ovalShapeLayer!.addAnimation(strokeAnimationGroup, forKey: nil)
     
-        self.joinButton!.layer.addSublayer(ovalShapeLayer!)
+        self.timeView!.joinButton!.layer.addSublayer(ovalShapeLayer!)
     }
     
     func updateTimer(sender: NSTimer) {
@@ -239,36 +236,107 @@ class SignUp: ViewControllerBase {
          self.verifyRequestCount -= 1
     }
     
-    func joinButtonClick(sender : UIButton){
-        for layer in self.joinButton!.layer.sublayers!{
-            layer.removeFromSuperlayer()
-        }
-        setCircleRing()
-        setAnimationLayer()
-        
-        let date = NSDate().dateByAddingTimeInterval(5)
-        let note = LocalNotification(title: "地狱火堡垒", deadLine: date )
-        SendNotification.SendLocalNotifation(note)
-    }
     
-    
-    func ChatRoomClick(sender : UIButton){
+    func TimerLimitClick(sender : UIButton){
        
-        let chat = ChatContactList()
-        self.mainMenuProtocal!.PushNewController(chat)
+//        let chat = ChatContactList()
+//        self.mainMenuProtocal!.PushNewController(chat)
+        
+        self.displayActivity()
     }
     
-    func StoneClick(sender : UIButton){
+    func MenuClick(){
         if !self.menuIsOpen {
 
-            self.sliderMenu!.hidden = false
+//            self.rightMenu!.hidden = false
+            
+            UIView.animateWithDuration(0.3, animations: { () -> Void in
+                self.rightMenu!.frame.origin.x = UIScreen.mainScreen().bounds.width - UIAdapter.shared.transferWidth(50) - 5
+            })
+            
         }else{
-
-           self.sliderMenu?.hidden = true
+//
+//           self.rightMenu?.hidden = true
+            
+            UIView.animateWithDuration(0.3, animations: { () -> Void in
+                self.rightMenu!.frame.origin.x = UIScreen.mainScreen().bounds.width + UIAdapter.shared.transferWidth(50)
+            })
         
         }
         self.menuIsOpen = !self.menuIsOpen
     }
+    
+    func StoneClick(sender : UIButton){
+//        self.mainMenuProtocal!.ChooseTab(1)
+        
+        self.displayTimer()
+    }
+    
+    
+    func displayTimer(){
+       
+        UIView.animateWithDuration(0.5, delay: 0, options: UIViewAnimationOptions.CurveEaseInOut, animations: { () -> Void in
+            self.timeView!.frame.origin.y = -(self.view.frame.height - UIAdapter.shared.transferWidth(200) - 88 )
+            
+            }) { (success) -> Void in
+                if success {
+                    
+                    UIView.animateWithDuration(1, delay: 0, usingSpringWithDamping: 100, initialSpringVelocity: 5, options: UIViewAnimationOptions.CurveEaseOut, animations: { () -> Void in
+                        
+                        self.activityMainView!.hidden = false
+                        self.activityMainView!.frame.origin.x = 0
+                        
+                        }, completion: nil)
+                    
+                }
+        }   
+
+    }
+    
+    
+    func displayActivity(){
+        UIView.animateWithDuration(0.3, delay: 0, options: UIViewAnimationOptions.CurveEaseIn, animations: { () -> Void in
+            self.activityMainView!.frame.origin.x = -UIAdapter.shared.transferWidth(240)
+            
+            }) { (success) -> Void in
+                if success {
+                    
+                    UIView.animateWithDuration(0.8, delay: 0, usingSpringWithDamping: 100, initialSpringVelocity: 18, options: UIViewAnimationOptions.CurveEaseOut, animations: { () -> Void in
+                        
+                        self.timeView!.frame.origin.y = self.view.frame.height - UIAdapter.shared.transferWidth(200) - 88
+                        self.activityMainView!.hidden = true
+                        
+                        }, completion: nil)
+                    
+                }
+         }
+    
+    }
+    
+    
+    func testButtonClick(sender : UIButton){
+        
+        UIView.animateWithDuration(0.4, delay: 0, options: UIViewAnimationOptions.CurveEaseInOut, animations: { () -> Void in
+            self.activityMainView!.frame.origin.x = -UIAdapter.shared.transferWidth(240)
+            
+            }) { (success) -> Void in
+                if success {
+                    let activitiesView = MyActivities(nibName: nil, bundle: nil)
+                    let activitiesNav = UINavigationController(rootViewController: activitiesView)
+                    activitiesNav.modalPresentationStyle = UIModalPresentationStyle.OverFullScreen
+                    self.presentViewController(activitiesNav, animated: false, completion: nil)
+                }
+        }
+    }
+    
+    func activitiesDialogDisappear(sender : NSNotification){
+        UIView.animateWithDuration(1, delay: 0, usingSpringWithDamping: 100, initialSpringVelocity: 5, options: UIViewAnimationOptions.CurveEaseOut, animations: { () -> Void in
+            
+            self.activityMainView!.frame.origin.x = 0
+            
+            }, completion: nil)
+    }
+
 
     /*
     // MARK: - Navigation
