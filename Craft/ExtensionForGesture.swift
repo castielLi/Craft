@@ -8,11 +8,12 @@
 
 import Foundation
 
-extension SignUp{
+extension SignUp : UIGestureRecognizerDelegate{
    
     func addTimerSwipe(){
         self.disappearTimerSwipe = UISwipeGestureRecognizer(target: self, action: "disappearTimer:")
         self.disappearTimerSwipe!.direction = UISwipeGestureRecognizerDirection.Down
+        self.disappearTimerSwipe!.delegate = self
         self.view.addGestureRecognizer(self.disappearTimerSwipe!)
     }
     
@@ -21,13 +22,26 @@ extension SignUp{
     }
     
     func addActivitySwipe(){
-        self.disappearTimerSwipe = UISwipeGestureRecognizer(target: self, action: "disappearActivity:")
-        self.disappearTimerSwipe!.direction = UISwipeGestureRecognizerDirection.Left
-        self.view.addGestureRecognizer(self.disappearTimerSwipe!)
+        self.disappearActivitySwipe = UISwipeGestureRecognizer(target: self, action: "disappearActivity:")
+        self.disappearActivitySwipe!.direction = UISwipeGestureRecognizerDirection.Left
+        self.disappearActivitySwipe!.delegate = self
+        self.view.addGestureRecognizer(self.disappearActivitySwipe!)
     }
     
     func disappearActivity(sender : UISwipeGestureRecognizer){
        self.displayActivity()
+    }
+    
+    func gestureRecognizer(gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWithGestureRecognizer otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        if gestureRecognizer is UISwipeGestureRecognizer{
+            
+            if self.view.frame.origin.x > 0 {
+               return false
+            }
+            return true
+        } else {
+            return false
+        }
     }
 
 }

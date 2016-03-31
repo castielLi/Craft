@@ -712,6 +712,7 @@
 				TargetAttributes = {
 					18AF8CA01BEDCCCB00539C0E = {
 						CreatedOnToolsVersion = 7.1;
+						DevelopmentTeam = 2B5FR9H7XS;
 					};
 					18AF8CB41BEDCCCB00539C0E = {
 						CreatedOnToolsVersion = 7.1;
@@ -999,11 +1000,14 @@
 			baseConfigurationReference = A816835E20B22F39AE004838 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = Craft/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.app.castiel.Craft;
+				PRODUCT_BUNDLE_IDENTIFIER = com.app.castiel.wowcraft;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Craft/Craft-bridge-header.h";
 				"SWIFT_OBJC_BRIDGING_HEADER[arch=*]" = "Craft/Craft-bridge-header.h";
 			};
@@ -1014,11 +1018,14 @@
 			baseConfigurationReference = 35FFEC4388D0F109F79B4A61 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = Craft/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.app.castiel.Craft;
+				PRODUCT_BUNDLE_IDENTIFIER = com.app.castiel.wowcraft;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Craft/Craft-bridge-header.h";
 				"SWIFT_OBJC_BRIDGING_HEADER[arch=*]" = "Craft/Craft-bridge-header.h";
 			};

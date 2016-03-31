@@ -21,8 +21,6 @@ class CalendarView: UIView , UICollectionViewDataSource , UICollectionViewDelega
     
     var nextMonthButton = UIButton()
     var beforeMonthButton = UIButton()
-    var yearLabel = UILabel()
-    var monthLabel = UILabel()
     
     var theLock = NSLock()
     var mark = 2
@@ -35,7 +33,7 @@ class CalendarView: UIView , UICollectionViewDataSource , UICollectionViewDelega
         let layout = CustomLayout()
         
         
-        self.collectionView = UICollectionView(frame: CGRectMake(0, UIAdapter.shared.transferHeight(10), UIAdapter.shared.transferWidth(192), UIAdapter.shared.transferHeight(160)), collectionViewLayout: layout)
+        self.collectionView = UICollectionView(frame: CGRectMake(0, UIAdapter.shared.transferHeight(10), UIAdapter.shared.transferWidth(202), UIAdapter.shared.transferHeight(160)), collectionViewLayout: layout)
         
         //注册CollectionViewCell
         collectionView!.registerClass(CalendearCell.self, forCellWithReuseIdentifier: "ViewCell")
@@ -76,15 +74,6 @@ class CalendarView: UIView , UICollectionViewDataSource , UICollectionViewDelega
             make.left.equalTo()(self.collectionView!.mas_right).with().offset()(UIAdapter.shared.transferWidth(-20))
             make.right.equalTo()(self.collectionView!)
         }
-
-        
-        yearLabel.text = "\(year)"
-        yearLabel.frame = CGRectMake(360, 100, 50, 30)
-        self.addSubview(yearLabel)
-        
-        monthLabel.text = "\(month)"
-        monthLabel.frame = CGRectMake(360, 150, 50, 30)
-        self.addSubview(monthLabel)
 
         
     }
@@ -154,8 +143,6 @@ class CalendarView: UIView , UICollectionViewDataSource , UICollectionViewDelega
         createCellData()
         
         self.collectionView!.reloadData()
-        self.yearLabel.text = "\(year)"
-        self.monthLabel.text = "\(month)"
         print("这是\(currentMonth)月")
     }
     

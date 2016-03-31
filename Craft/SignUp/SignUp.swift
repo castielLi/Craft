@@ -48,8 +48,8 @@ class SignUp: ViewControllerBase {
             selector: Selector("activitiesDialogDisappear:"), name: "dismissAcitivtiesDialog", object: nil)
         self._hasNotification = true
         
-        
-        
+        self.addTimerSwipe()
+        self.addActivitySwipe()
         
     }
     
@@ -242,6 +242,10 @@ class SignUp: ViewControllerBase {
 //        let chat = ChatContactList()
 //        self.mainMenuProtocal!.PushNewController(chat)
         
+        if self.view.frame.origin.x > 0 {
+            return
+        }
+        
         self.displayActivity()
     }
     
@@ -268,7 +272,6 @@ class SignUp: ViewControllerBase {
     
     func StoneClick(sender : UIButton){
 //        self.mainMenuProtocal!.ChooseTab(1)
-        
         self.displayTimer()
     }
     
