@@ -57,12 +57,37 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         UIApplication.sharedApplication().setStatusBarStyle(UIStatusBarStyle.LightContent, animated: true)
         self.window!.makeKeyAndVisible()
-        
 
-        let types: UIUserNotificationType = [.Alert, .Badge, .Sound]
-        let settings = UIUserNotificationSettings(forTypes: types, categories: nil)
-        application.registerUserNotificationSettings(settings)
-        application.registerForRemoteNotifications()
+        
+        let completeAction = UIMutableUserNotificationAction()
+        completeAction.identifier = "OK" // the unique identifier for this action
+        completeAction.title = "OK" // title for the action button
+        completeAction.activationMode = .Background // UIUserNotificationActivationMode.Background - don't bring app to foreground
+        completeAction.authenticationRequired = false // don't require unlocking before performing action
+        completeAction.destructive = true // display action in red
+        
+        let cancelAction = UIMutableUserNotificationAction()
+        cancelAction.identifier = "Cancel"
+        if #available(iOS 9.0, *) {
+            cancelAction.parameters = [UIUserNotificationTextInputActionButtonTitleKey : "Send"]
+        } else {
+            // Fallback on earlier versions
+        }
+        cancelAction.title = "Cancel"
+        if #available(iOS 9.0, *) {
+            cancelAction.behavior = UIUserNotificationActionBehavior.TextInput
+        } else {
+            // Fallback on earlier versions
+        }
+        cancelAction.activationMode = .Background
+        cancelAction.destructive = false
+        cancelAction.authenticationRequired = false
+        
+        let todoCategory = UIMutableUserNotificationCategory() // notification categories allow us to create groups of actions that we can associate with a notification
+        todoCategory.identifier = "TODO_CATEGORY"
+        todoCategory.setActions([cancelAction, completeAction], forContext: .Minimal) // UIUserNotificationActionContext.Default (4 actions max)
+        
+        application.registerUserNotificationSettings(UIUserNotificationSettings(forTypes: [.Alert, .Badge , .Sound], categories: NSSet(array: [todoCategory]) as? Set<UIUserNotificationCategory>))
     
         return true
     }
@@ -94,6 +119,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
     }
     
+    func application(application: UIApplication, didReceiveLocalNotification notification: UILocalNotification) {
+        application.applicationIconBadgeNumber -= 1
+    }
     
+    
+    func application(application: UIApplication, handleActionWithIdentifier identifier: String?, forLocalNotification notification: UILocalNotification, withResponseInfo responseInfo: [NSObject : AnyObject], completionHandler: () -> Void) {
+       print("hello")
+       completionHandler()
+    }
 }
 

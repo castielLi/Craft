@@ -8,8 +8,9 @@
 
 import UIKit
 
-class SignUp: ViewControllerBase {
+class SignUp: ViewControllerBase , UITableViewDelegate , UITableViewDataSource {
 
+    var firstTime : Bool = true
     var backGroundImage : UIImageView?
     var backGroundImageNumber : Int = 1
     var timer:NSTimer?
@@ -42,27 +43,94 @@ class SignUp: ViewControllerBase {
 
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+         self.tabBarController!.tabBar.hidden = true
+        let nc = NSNotificationCenter.defaultCenter()
+        nc.addObserver(self, selector: "showCurrentView:", name: "loginDisappear", object: nil)
+        
         
         let center = NSNotificationCenter.defaultCenter()
         center.addObserver(self,
-            selector: Selector("activitiesDialogDisappear:"), name: "dismissAcitivtiesDialog", object: nil)
+        selector: "activitiesDialogDisappear:", name: "dismissAcitivtiesDialog", object: nil)
         self._hasNotification = true
+        
+        let menuButton = UIButton(frame: CGRect(x: 0, y: 0, width: UIAdapter.shared.transferWidth(40), height: UIAdapter.shared.transferHeight(20)) )
+        menuButton.setTitle("Menu", forState: UIControlState.Normal)
+        menuButton.titleLabel!.textColor = UIColor.whiteColor()
+        menuButton.addTarget(self, action: "MenuClick:", forControlEvents: UIControlEvents.TouchUpInside)
+        
+        let rightBarButton = UIBarButtonItem(customView: menuButton)
+        self.navigationItem.rightBarButtonItem = rightBarButton
+        
+        
+        let calendarButton = UIButton(frame: CGRect(x: 0, y: 0, width: UIAdapter.shared.transferWidth(40), height: UIAdapter.shared.transferHeight(20)) )
+        calendarButton.setTitle("calendar", forState: UIControlState.Normal)
+        calendarButton.titleLabel!.textColor = UIColor.whiteColor()
+        calendarButton.addTarget(self, action: "calenderClick:", forControlEvents: UIControlEvents.TouchUpInside)
+
+        
+        let leftBarButton = UIBarButtonItem(customView: calendarButton)
+        self.navigationItem.leftBarButtonItem = leftBarButton
+
         
         self.addTimerSwipe()
         self.addActivitySwipe()
         
+        
+        let animation = CASpringAnimation(keyPath: "position.x")
+        animation.damping = 12
+        animation.stiffness = 100
+        animation.mass = 1
+        animation.initialVelocity = 0
+        animation.duration = animation.settlingDuration
+        animation.removedOnCompletion = false
+        animation.timingFunction = CAMediaTimingFunction( name: kCAMediaTimingFunctionEaseOut)
+        animation.fromValue = -UIAdapter.shared.transferWidth(150)
+        
+        self.timeView!.layer.addAnimation(animation, forKey: nil)
+        self.activityMainView!.layer.addAnimation(animation, forKey: nil)
+    }
+    
+    func showCurrentView(sender : NSNotification){
+        if self.firstTime {
+            self.tabBarController?.tabBar.hidden = true
+            self.navigationController?.setNavigationBarHidden(true, animated: false)
+            UIView.animateWithDuration(1, animations: { () -> Void in
+                self.view.alpha = 1
+                self.timeView!.alpha = 1
+                self.setCircleRing()
+                self.setAnimationLayer()
+                }, completion: { (finished) -> Void in
+                    self.view.layer.removeAllAnimations()
+                    self.tabBarController?.tabBar.hidden = true
+                    self.navigationController?.setNavigationBarHidden(false, animated: true) 
+            })
+        }
+        self.firstTime = false
+    }
+
+    func calenderClick(sender : UIButton){
+        self.tabBarController?.selectedIndex = 0
+    }
+    
+    func MenuClick(sender : UIButton){
+        self.MenuClick()
     }
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        setCircleRing()
-        setAnimationLayer()
     }
     
        
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = UIColor.grayColor()
+        self.view.alpha = 0
+        let loginView = LoginController(nibName: nil, bundle: nil)
+        let loginNav = UINavigationController(rootViewController: loginView)
+        self.tabBarController?.presentViewController(loginNav, animated: false, completion: nil)
+        
+        self.navigationController!.navigationBar.barStyle = UIBarStyle.BlackTranslucent
+        self.navigationController!.navigationBar.setBackgroundImage(UIImage(named: "navigationBackGround"), forBarMetrics: UIBarMetrics.Default)
+        
         // Do any additional setup after loading the view.
         
     }
@@ -85,6 +153,21 @@ class SignUp: ViewControllerBase {
         self.rightMenu = RightMenu(frame: CGRect(x: UIScreen.mainScreen().bounds.width + UIAdapter.shared.transferWidth(50) , y: (UIScreen.mainScreen().bounds.height - UIAdapter.shared.transferHeight(70)) / 2, width: UIAdapter.shared.transferWidth(50), height: UIAdapter.shared.transferHeight(70)))
         self.view.addSubview(self.rightMenu!)
         
+  
+        self.rightMenu!.chatRoom?.addTarget(self, action: "chatRoomClick:", forControlEvents: UIControlEvents.TouchUpInside)
+        
+        self.rightMenu!.setting!.addTarget(self, action: "settingClick:", forControlEvents: UIControlEvents.TouchUpInside)
+        
+    }
+    
+    func chatRoomClick(sender :UIButton){
+        let chat = ChatContactList()
+        self.navigationController?.pushViewController(chat, animated: true)
+    }
+    
+    func settingClick(sender :UIButton){
+        let chat = ChatContactList()
+        self.navigationController?.pushViewController(chat, animated: true)
     }
     
     
@@ -135,16 +218,20 @@ class SignUp: ViewControllerBase {
         self.timeView = TimerView(frame: CGRectMake( (self.view.frame.width - UIAdapter.shared.transferWidth(200)) / 2 ,
             (self.view.frame.height - UIAdapter.shared.transferWidth(200)) - 88 ,UIAdapter.shared.transferWidth(200), UIAdapter.shared.transferWidth(200)))
         self.view.addSubview(self.timeView!)
+        self.timeView!.joinButton!.addTarget(self, action: "joinButtonClick:", forControlEvents: UIControlEvents.TouchUpInside)
+        self.timeView!.alpha = 0
     }
     
     
     func setActivityMainView(){
-       self.activityMainView = ActivityMainView(frame: CGRect(x: -UIAdapter.shared.transferWidth(240), y: 64 + UIAdapter.shared.transferHeight(15), width: UIAdapter.shared.transferWidth(240), height: UIAdapter.shared.transferHeight(300)))
+       self.activityMainView = ActivityMainView(frame: CGRect(x: -UIAdapter.shared.transferWidth(240), y: 64 + UIAdapter.shared.transferHeight(15), width: UIAdapter.shared.transferWidth(240), height: UIAdapter.shared.transferHeight(350)))
         
        self.view.addSubview(self.activityMainView!)
        self.activityMainView!.hidden = true
+       self.activityMainView!.activityTabel!.delegate = self
+       self.activityMainView!.activityTabel!.dataSource = self
         
-       self.activityMainView!.testButton!.addTarget(self, action: "testButtonClick:", forControlEvents: UIControlEvents.TouchUpInside)
+       self.activityMainView!.addNewActivity!.addTarget(self, action: "AddNewActivity:", forControlEvents: UIControlEvents.TouchUpInside)
     }
     
     
@@ -238,10 +325,6 @@ class SignUp: ViewControllerBase {
     
     
     func TimerLimitClick(sender : UIButton){
-       
-//        let chat = ChatContactList()
-//        self.mainMenuProtocal!.PushNewController(chat)
-        
         if self.view.frame.origin.x > 0 {
             return
         }
@@ -317,14 +400,29 @@ class SignUp: ViewControllerBase {
     }
     
     
-    func testButtonClick(sender : UIButton){
+        func joinButtonClick(sender : UIButton){
+            for layer in self.timeView!.joinButton!.layer.sublayers!{
+                layer.removeFromSuperlayer()
+            }
+            setCircleRing()
+            setAnimationLayer()
+    
+            let date = NSDate().dateByAddingTimeInterval(5)
+            let note = LocalNotification(title: "地狱火堡垒", deadLine: date , activityId: 1 )
+            SendNotification.SendLocalNotifation(note)
+            
+//            SendNotification.RemoveNotificationFromUUID(1)
+        }
+    
+    
+    func AddNewActivity(sender : UIButton){
         
         UIView.animateWithDuration(0.4, delay: 0, options: UIViewAnimationOptions.CurveEaseInOut, animations: { () -> Void in
             self.activityMainView!.frame.origin.x = -UIAdapter.shared.transferWidth(240)
             
             }) { (success) -> Void in
                 if success {
-                    let activitiesView = MyActivities(nibName: nil, bundle: nil)
+                    let activitiesView = AddNewActivityController(nibName: nil, bundle: nil)
                     let activitiesNav = UINavigationController(rootViewController: activitiesView)
                     activitiesNav.modalPresentationStyle = UIModalPresentationStyle.OverFullScreen
                     self.presentViewController(activitiesNav, animated: false, completion: nil)
@@ -340,6 +438,70 @@ class SignUp: ViewControllerBase {
             }, completion: nil)
     }
 
+    
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 10
+    }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        var cell = tableView.dequeueReusableCellWithIdentifier("activityItemCell")
+        
+        if cell == nil{
+            cell = TableViewBaseCell(style: UITableViewCellStyle.Default, reuseIdentifier: "activityItemCell", cellHeight: UIAdapter.shared.transferHeight(80))
+        }
+        
+        cell!.textLabel?.text = "hello world"
+        return cell!
+    }
+    
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return UIAdapter.shared.transferHeight(80)
+    }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        displayActivityDetail()
+    }
+    
+    func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+        
+        var rotation = CATransform3DMakeRotation( CGFloat(0.3 * M_PI) , 0.0, 0.5, 0.0);
+        rotation.m34 = 1.0 / -600;
+        
+        
+        //2. Define the initial state (Before the animation)
+        //        cell.layer.shadowColor = UIColor.blackColor().CGColor
+        //        cell.layer.shadowOffset = CGSizeMake(10, 10);
+        
+        cell.layer.transform = rotation;
+        cell.layer.anchorPoint = CGPointMake(0.5, 0.5);
+        
+        
+        UIView.beginAnimations("rotation", context: nil)
+        UIView.setAnimationDuration(0.8)
+        //3. Define the final state (After the animation) and commit the animation
+        cell.layer.transform = CATransform3DIdentity;
+        cell.alpha = 1;
+        cell.layer.shadowOffset = CGSizeMake(0, 0);
+        UIView.commitAnimations()
+    }
+
+    
+    
+    func displayActivityDetail(){
+        UIView.animateWithDuration(0.4, delay: 0, options: UIViewAnimationOptions.CurveEaseInOut, animations: { () -> Void in
+            self.activityMainView!.frame.origin.x = -UIAdapter.shared.transferWidth(240)
+            
+        }) { (success) -> Void in
+            if success {
+                let activitiesView = MyActivities(nibName: nil, bundle: nil)
+                let activitiesNav = UINavigationController(rootViewController: activitiesView)
+                activitiesNav.modalPresentationStyle = UIModalPresentationStyle.OverFullScreen
+                self.presentViewController(activitiesNav, animated: false, completion: nil)
+            }
+        }
+
+    }
 
     /*
     // MARK: - Navigation

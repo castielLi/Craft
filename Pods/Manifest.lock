@@ -21,6 +21,9 @@ PODS:
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
   - Alamofire (3.1.5)
+  - FMDB (2.6.2):
+    - FMDB/standard (= 2.6.2)
+  - FMDB/standard (2.6.2)
   - Masonry (0.6.4)
   - RongCloudIMKit (2.4.7)
   - SVProgressHUD (1.1.3)
@@ -30,6 +33,7 @@ PODS:
 DEPENDENCIES:
   - AFNetworking (~> 2.0)
   - Alamofire (~> 3.1)
+  - FMDB (~> 2.6)
   - Masonry (~> 0.6.1)
   - RongCloudIMKit (= 2.4.7)
   - SVProgressHUD (~> 1.1.3)
@@ -39,6 +43,7 @@ DEPENDENCIES:
 SPEC CHECKSUMS:
   AFNetworking: cb8d14a848e831097108418f5d49217339d4eb60
   Alamofire: 5f730ba29fd113b7ddd71c1e65d0c630acf5d7b0
+  FMDB: 854a0341b4726e53276f2a8996f06f1b80f9259a
   Masonry: 281802d04d787ea2973179ee8bcb50500579ede2
   RongCloudIMKit: d24685a8f2ea63e79aa2653a3275d7c64ea611ac
   SVProgressHUD: 748080e4f36e603f6c02aec292664239df5279c1

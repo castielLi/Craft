@@ -15,51 +15,20 @@ class MainTabbar: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-
-//        let messageView = SignUp(nibName: nil, bundle: nil)
-//        let messageNav = UINavigationController(rootViewController: messageView)
-//        messageNav.navigationBar.barTintColor = UIColor.whiteColor()
-        
-        
         let sliderMain = SliderMain(nibName: nil, bundle: nil)
         let sliderMainNav = UINavigationController(rootViewController: sliderMain)
         sliderMainNav.navigationBar.barTintColor = UIColor.whiteColor()
         
-        let activityView = ActivityMain(nibName: nil, bundle: nil)
-        let activityNav = UINavigationController(rootViewController: activityView)
-        activityNav.navigationBar.barTintColor = UIColor.whiteColor()
+        let signView = SignUp(nibName: nil, bundle: nil)
+        let signNav = UINavigationController(rootViewController: signView)
+        signNav.navigationBar.barTintColor = UIColor.whiteColor()
         
         
-        let controllers = [sliderMainNav,activityNav]
-        
-        let attributes = [
-            NSForegroundColorAttributeName : UIColor(red: 42/255, green: 122/255, blue: 193/255, alpha: 1)
-        ]
-        
-//        let messageItem = UITabBarItem(title: "消息", image: nil, tag: 11)
-//        messageItem.image = UIImage(named: "Account")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal)
-//        messageItem.selectedImage = UIImage(named: "Account_checked")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal)
-        
-        let signUpItem = UITabBarItem(title: "报名", image: nil, tag: 12)
-        signUpItem.image = UIImage(named: "Account")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal)
-        signUpItem.selectedImage = UIImage(named: "Account_checked")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal)
-        
-        let activityItem = UITabBarItem(title: "活动", image: nil, tag: 13)
-        activityItem.image = UIImage(named: "Account")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal)
-        activityItem.selectedImage = UIImage(named:"Account_checked")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal)
-        
-        
-//        messageView.tabBarItem = messageItem
-        sliderMain.tabBarItem = signUpItem
-        activityView.tabBarItem = activityItem
-//        messageItem.setTitleTextAttributes(attributes, forState: UIControlState.Selected)
-        signUpItem.setTitleTextAttributes(attributes, forState: UIControlState.Selected)
-        activityItem.setTitleTextAttributes(attributes, forState: UIControlState.Selected)
+        let controllers = [sliderMainNav,signNav]
         
         self.tabBar.barTintColor = UIColor.whiteColor()
         self.setViewControllers(controllers, animated: true)
-        self.selectedIndex = 0
-
+        self.selectedIndex = 1
         // Do any additional setup after loading the view.
     }
 

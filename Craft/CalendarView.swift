@@ -27,13 +27,13 @@ class CalendarView: UIView , UICollectionViewDataSource , UICollectionViewDelega
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
+
         createCellData()
         
         let layout = CustomLayout()
         
         
-        self.collectionView = UICollectionView(frame: CGRectMake(0, UIAdapter.shared.transferHeight(10), UIAdapter.shared.transferWidth(202), UIAdapter.shared.transferHeight(160)), collectionViewLayout: layout)
+        self.collectionView = UICollectionView(frame: CGRectMake(UIAdapter.shared.transferWidth(15) , UIAdapter.shared.transferHeight(10), self.frame.width - UIAdapter.shared.transferWidth(30), UIAdapter.shared.transferHeight(210)), collectionViewLayout: layout)
         
         //注册CollectionViewCell
         collectionView!.registerClass(CalendearCell.self, forCellWithReuseIdentifier: "ViewCell")
@@ -264,6 +264,21 @@ class CalendarView: UIView , UICollectionViewDataSource , UICollectionViewDelega
         
         cell!.contentLabel!.text = cellData[indexPath.item]
         cell!.contentLabel!.tag = indexPath.item + 1
+        cell!.normalLabel!.text = cellData[indexPath.item]
+        cell!.normalLabel!.tag = indexPath.item + 1
+        
+        if indexPath.row % 4 == 0 {
+           cell!.normalLabel!.hidden = true
+           cell!.contentLabel!.hidden = false
+           cell!.iconImage!.hidden = false
+        }else{
+            cell!.normalLabel!.hidden = false
+            cell!.contentLabel!.hidden = true
+            cell!.iconImage!.hidden = true
+
+           
+        }
+        
         return cell!
     }
     

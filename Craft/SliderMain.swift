@@ -10,18 +10,11 @@ import UIKit
 
 class SliderMain: ViewControllerBase , MainMenuProtocol{
 
-    
-    var signUpController : SignUp?
-    var firstTime : Bool = true
-    var distance: CGFloat = 0
-    
     var calendar : CalendarView?
-    
-    let FullDistance: CGFloat = 0.78
-    let Proportion: CGFloat = 0.77
-    
     var reviewTable : UITableView?
     var reviewTableSource : ReviewTableSource?
+    var rightMenu : RightMenu?
+    var menuIsOpen : Bool = false
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)        
@@ -35,20 +28,7 @@ class SliderMain: ViewControllerBase , MainMenuProtocol{
         super.viewWillAppear(animated)
         self.tabBarController!.tabBar.hidden = true
         
-        let nc = NSNotificationCenter.defaultCenter()
-        nc.addObserver(self, selector: "showCurrentView:", name: "loginDisappear", object: nil)
-        
-//        
-//        let viewAnimation = CABasicAnimation(keyPath: "position.x")
-//        viewAnimation.duration = 0.3
-//        viewAnimation.removedOnCompletion = false
-//        viewAnimation.timingFunction = CAMediaTimingFunction( name: kCAMediaTimingFunctionEaseOut)
-//        viewAnimation.fromValue = UIScreen.mainScreen().bounds.width
-//        
-//        self.view!.layer.addAnimation(viewAnimation, forKey: nil)
-//        self.signUpController!.view!.layer.addAnimation(viewAnimation, forKey: nil)
-        
-        
+
         let menuButton = UIButton(frame: CGRect(x: 0, y: 0, width: UIAdapter.shared.transferWidth(40), height: UIAdapter.shared.transferHeight(20)) )
         menuButton.setTitle("Menu", forState: UIControlState.Normal)
         menuButton.titleLabel!.textColor = UIColor.whiteColor()
@@ -57,29 +37,35 @@ class SliderMain: ViewControllerBase , MainMenuProtocol{
         let rightBarButton = UIBarButtonItem(customView: menuButton)
         self.navigationItem.rightBarButtonItem = rightBarButton
         
+        let activityButton = UIButton(frame: CGRect(x: 0, y: 0, width: UIAdapter.shared.transferWidth(40), height: UIAdapter.shared.transferHeight(20)) )
+        activityButton.setTitle("activity", forState: UIControlState.Normal)
+        activityButton.titleLabel!.textColor = UIColor.whiteColor()
+        activityButton.addTarget(self, action: "activityClick:", forControlEvents: UIControlEvents.TouchUpInside)
+        
+        
+        let leftBarButton = UIBarButtonItem(customView: activityButton)
+        self.navigationItem.leftBarButtonItem = leftBarButton
+
+        
+        let alphaAnimation = CABasicAnimation(keyPath: "opacity")
+        alphaAnimation.duration = 0.8
+        alphaAnimation.fromValue = 0.3
+        alphaAnimation.toValue = 1
+
+        self.reviewTable!.layer.addAnimation(alphaAnimation, forKey: nil)
+        self.calendar!.layer.addAnimation(alphaAnimation, forKey: nil)
         
     }
 
     
     func MenuClick(sender : UIButton){
-       self.signUpController!.MenuClick()
+       self.MenuClick()
     }
     
-    func showCurrentView(sender : NSNotification){
-        if !self.firstTime {
-            self.tabBarController?.tabBar.hidden = true
-            self.navigationController?.setNavigationBarHidden(true, animated: false)
-            UIView.animateWithDuration(1, animations: { () -> Void in
-                self.view.alpha = 1
-                }, completion: { (finished) -> Void in
-                    self.view.layer.removeAllAnimations()
-                    self.tabBarController?.tabBar.hidden = true
-                    self.navigationController?.setNavigationBarHidden(false, animated: true)
-            })
-        }
-        self.firstTime = false
+    func activityClick(sender : UIButton){
+       self.tabBarController?.selectedIndex = 1
     }
-
+    
 
     var backGroundImage : UIImageView?
     
@@ -87,13 +73,6 @@ class SliderMain: ViewControllerBase , MainMenuProtocol{
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        
-        self.view.alpha = 0
-        
-        let loginView = LoginController(nibName: nil, bundle: nil)
-        let loginNav = UINavigationController(rootViewController: loginView)
-        self.tabBarController?.presentViewController(loginNav, animated: false, completion: nil)
-        
         //透明导航栏
         self.navigationController!.navigationBar.barStyle = UIBarStyle.BlackTranslucent
         self.navigationController!.navigationBar.setBackgroundImage(UIImage(named: "navigationBackGround"), forBarMetrics: UIBarMetrics.Default)
@@ -103,13 +82,7 @@ class SliderMain: ViewControllerBase , MainMenuProtocol{
         self.navigationItem.backBarButtonItem = backButton
         self.navigationItem.backBarButtonItem!.title = ""
         
-        
-        self.signUpController = SignUp(nibName: nil, bundle: nil)
-        self.signUpController!.mainMenuProtocal = self
-        self.view.addSubview(self.signUpController!.view)
-        self.signUpController!.panGesture = UIPanGestureRecognizer(target: self, action: Selector("pan:"))
-        self.signUpController!.view.addGestureRecognizer(self.signUpController!.panGesture!)
-
+        self.view.backgroundColor = UIColor.whiteColor()
         
     }
     
@@ -117,13 +90,36 @@ class SliderMain: ViewControllerBase , MainMenuProtocol{
         setBackGroundImage()
         setCalenderActivitiesReview()
         setCalenderView()
+        setRightMenu()
     }
+    
+    
+    func setRightMenu(){
+        self.rightMenu = RightMenu(frame: CGRect(x: UIScreen.mainScreen().bounds.width + UIAdapter.shared.transferWidth(50) , y: (UIScreen.mainScreen().bounds.height - UIAdapter.shared.transferHeight(70)) / 2, width: UIAdapter.shared.transferWidth(50), height: UIAdapter.shared.transferHeight(70)))
+        self.view.addSubview(self.rightMenu!)
+        
+        self.rightMenu!.chatRoom?.addTarget(self, action: "chatRoomClick:", forControlEvents: UIControlEvents.TouchUpInside)
+        
+        self.rightMenu!.setting!.addTarget(self, action: "settingClick:", forControlEvents: UIControlEvents.TouchUpInside)
+        
+    }
+    
+    func chatRoomClick(sender :UIButton){
+        let chat = ChatContactList()
+        self.navigationController?.pushViewController(chat, animated: true)
+    }
+    
+    func settingClick(sender :UIButton){
+        let chat = ChatContactList()
+        self.navigationController?.pushViewController(chat, animated: true)
+    }
+
     
     func setCalenderActivitiesReview(){
         
         self.reviewTableSource = ReviewTableSource()
         
-        self.reviewTable = UITableView(frame: CGRect(x: UIAdapter.shared.transferWidth(10), y: UIAdapter.shared.transferHeight(50) + 64, width: UIAdapter.shared.transferWidth(202), height: UIAdapter.shared.transferHeight(100)))
+        self.reviewTable = UITableView(frame: CGRect(x: UIAdapter.shared.transferWidth(20) , y: UIAdapter.shared.transferHeight(30) + 64, width: self.view.frame.size.width - UIAdapter.shared.transferWidth(40) , height: UIAdapter.shared.transferHeight(100)))
         self.reviewTable!.dataSource = self.reviewTableSource!
         self.reviewTable!.delegate = self.reviewTableSource!
         self.reviewTable!.showsVerticalScrollIndicator = false
@@ -131,8 +127,8 @@ class SliderMain: ViewControllerBase , MainMenuProtocol{
         self.reviewTable!.separatorStyle = UITableViewCellSeparatorStyle.None
         self.reviewTable!.pagingEnabled = true
         self.view!.addSubview(reviewTable!)
-        self.reviewTable!.transform = CGAffineTransformScale(CGAffineTransformIdentity, 0.6 , 0.6)
-        self.reviewTable!.alpha = 0
+//        self.reviewTable!.transform = CGAffineTransformScale(CGAffineTransformIdentity, 0.6 , 0.6)
+//        self.reviewTable!.alpha = 0
     }
     
     
@@ -144,108 +140,17 @@ class SliderMain: ViewControllerBase , MainMenuProtocol{
     
     
     func setCalenderView(){
-         self.calendar = CalendarView(frame: CGRectMake(UIAdapter.shared.transferWidth(15), UIAdapter.shared.transferHeight(170) + 64, UIAdapter.shared.transferWidth(202), UIAdapter.shared.transferHeight(160)))
+         self.calendar = CalendarView(frame: CGRectMake(0, UIAdapter.shared.transferHeight(130) + 64, self.view.frame.size.width, UIAdapter.shared.transferHeight(160)))
          self.view.addSubview(self.calendar!)
-         self.calendar!.transform = CGAffineTransformScale(CGAffineTransformIdentity, 0.6 , 0.6)
-         self.calendar!.alpha = 0
+//         self.calendar!.transform = CGAffineTransformScale(CGAffineTransformIdentity, 0.6 , 0.6)          
+//         self.calendar!.alpha = 0
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-    func pan(recongnizer: UIPanGestureRecognizer) {
-        
-        let x = recongnizer.translationInView(self.view).x
-        let trueDistance = distance + x // 实时距离
-        
-        if trueDistance < 0 {
-           return
-        }
-        
-        // 如果 UIPanGestureRecognizer 结束，则激活自动停靠
-        if recongnizer.state == UIGestureRecognizerState.Ended {
-            
-            if trueDistance > Common.screenWidth * (Proportion / 2) {
-                showLeft()
-                self.navigationController!.setNavigationBarHidden(true, animated: true)
-            }else {
-                showHome()
-                self.navigationController!.setNavigationBarHidden(false, animated: true)
-            }
-            
-            return
-        }
-        
-        // 计算缩放比例
-        let direction = recongnizer.view!.frame.origin.x >= 0 ? -1 : 1
-        var proportion: CGFloat = recongnizer.view!.frame.origin.x >= 0 ? -1 : 1
-        proportion *= trueDistance / Common.screenWidth
-        proportion *= 1 - Proportion
-        proportion /= 0.87
-        proportion += 1
-        if proportion <= Proportion { // 若比例已经达到最小，则不再继续动画
-            return
-        }
-        // 执行平移和缩放动画
-        
-        
-        
-        recongnizer.view!.center = CGPointMake(self.view.center.x + trueDistance, self.view.center.y)
-        recongnizer.view!.transform = CGAffineTransformScale(CGAffineTransformIdentity, proportion, proportion)
-        self.calendar!.transform = CGAffineTransformScale(CGAffineTransformIdentity, (1-proportion) * 2 + 0.6, (1-proportion) * 2 + 0.6)
-        self.reviewTable!.transform = CGAffineTransformScale(CGAffineTransformIdentity, (1-proportion) * 2 + 0.6, (1-proportion) * 2  + 0.6)
-        
-        let current = UIScreen.mainScreen().bounds.width * 0.78 / 22
-        
-        self.calendar!.alpha = (1 - proportion) * 5
-        self.reviewTable!.alpha = (1 - proportion) * 5
-        
-        self.calendar!.frame.origin.x = (-trueDistance * 0.2 * CGFloat(direction))
-        self.reviewTable!.frame.origin.x = (-trueDistance * 0.2 * CGFloat(direction))
-       
-    }
-    
-    // 封装三个方法，便于后期调用
-    
-    // 展示左视图
-    func showLeft() {
-        distance = self.view.center.x * (FullDistance + Proportion / 2) + UIAdapter.shared.transferWidth(30)
-        doTheAnimate(self.Proportion , calendarProportion: 1 , alpha: 1)
-    }
-    // 展示主视图
-    func showHome() {
-        distance = 0
-        doTheAnimate(1,calendarProportion: 0.6 , alpha: 0)
-    }
-    
-    // 执行三种试图展示
-    func doTheAnimate(proportion: CGFloat , calendarProportion : CGFloat , alpha : CGFloat) {
-        UIView.animateWithDuration(0.3, delay: 0, options: UIViewAnimationOptions.CurveEaseInOut, animations: { () -> Void in
-            self.signUpController!.view.center = CGPointMake(self.view.center.x + self.distance , self.view.center.y)
-            
-            
-            self.calendar!.transform = CGAffineTransformScale(CGAffineTransformIdentity, calendarProportion, calendarProportion)
-            self.reviewTable!.transform = CGAffineTransformScale(CGAffineTransformIdentity, calendarProportion, calendarProportion)
-            
-            self.calendar!.alpha = alpha
-            self.reviewTable!.alpha = alpha
-            
-            if alpha > 0{
-                self.calendar!.frame.origin.x = UIAdapter.shared.transferWidth(15)
-                self.reviewTable!.frame.origin.x = UIAdapter.shared.transferWidth(10)
-            }else{
-                self.calendar!.frame.origin.x = -UIAdapter.shared.transferWidth(217)
-                self.reviewTable!.frame.origin.x = -UIAdapter.shared.transferWidth(212)
-            }
-            
-            
-            self.signUpController!.view.transform = CGAffineTransformScale(CGAffineTransformIdentity, proportion, proportion)
-            }, completion: nil)
-    }
-    
-
+   
     func PushNewController(vc : UIViewController){
        self.navigationController!.pushViewController(vc, animated: true)
     }
@@ -254,7 +159,27 @@ class SliderMain: ViewControllerBase , MainMenuProtocol{
        self.tabBarController!.selectedIndex =  selectIndex
     }
     
-    
+    func MenuClick(){
+        if !self.menuIsOpen {
+            
+            //            self.rightMenu!.hidden = false
+            
+            UIView.animateWithDuration(0.3, animations: { () -> Void in
+                self.rightMenu!.frame.origin.x = UIScreen.mainScreen().bounds.width - UIAdapter.shared.transferWidth(50) - 5
+            })
+            
+        }else{
+            //
+            //           self.rightMenu?.hidden = true
+            
+            UIView.animateWithDuration(0.3, animations: { () -> Void in
+                self.rightMenu!.frame.origin.x = UIScreen.mainScreen().bounds.width + UIAdapter.shared.transferWidth(50)
+            })
+            
+        }
+        self.menuIsOpen = !self.menuIsOpen
+    }
+
 
 
     /*

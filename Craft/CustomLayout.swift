@@ -40,7 +40,7 @@ class CustomLayout: UICollectionViewLayout {
         let lineSpacing = 5
         
         //单元格变长
-        let cellSide:CGFloat = UIAdapter.shared.transferWidth(23)
+        let cellSide:CGFloat = (UIScreen.mainScreen().bounds.width - UIAdapter.shared.transferWidth(30) - 40)/7
         
         //内部间隙，左右5
         let insets = UIEdgeInsetsMake(2, 5, 2, 5)
