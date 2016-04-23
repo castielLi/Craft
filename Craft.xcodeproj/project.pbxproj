@@ -56,6 +56,7 @@
 		18AF8CBA1BEDCCCB00539C0E /* CraftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18AF8CB91BEDCCCB00539C0E /* CraftTests.swift */; };
 		18AF8CC51BEDCCCB00539C0E /* CraftUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18AF8CC41BEDCCCB00539C0E /* CraftUITests.swift */; };
 		18AFE5D11CBE6FF1000DAD84 /* AddNewActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18AFE5D01CBE6FF1000DAD84 /* AddNewActivity.swift */; };
+		18E259CB1CCA5F6000743FCA /* DropDownSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E259CA1CCA5F6000743FCA /* DropDownSelection.swift */; };
 		18E6046E1C0EC50800620499 /* ApiResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E6046D1C0EC50800620499 /* ApiResult.swift */; };
 		18E8F4BB1CC8F78C001EDD14 /* DBHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E8F4BA1CC8F78C001EDD14 /* DBHelper.swift */; };
 		18F7E4671C97B2EF007E3459 /* ReviewTableSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F7E4661C97B2EF007E3459 /* ReviewTableSource.swift */; };
@@ -139,6 +140,7 @@
 		18AF8CC41BEDCCCB00539C0E /* CraftUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CraftUITests.swift; sourceTree = "<group>"; };
 		18AF8CC61BEDCCCB00539C0E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		18AFE5D01CBE6FF1000DAD84 /* AddNewActivity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AddNewActivity.swift; path = SignUp/AddNewActivity.swift; sourceTree = "<group>"; };
+		18E259CA1CCA5F6000743FCA /* DropDownSelection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DropDownSelection.swift; sourceTree = "<group>"; };
 		18E6046D1C0EC50800620499 /* ApiResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiResult.swift; sourceTree = "<group>"; };
 		18E8F4BA1CC8F78C001EDD14 /* DBHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DBHelper.swift; sourceTree = "<group>"; };
 		18F7E4661C97B2EF007E3459 /* ReviewTableSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReviewTableSource.swift; sourceTree = "<group>"; };
@@ -629,6 +631,14 @@
 			path = CraftUITests;
 			sourceTree = "<group>";
 		};
+		18E259C61CCA5EF400743FCA /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				18E259CA1CCA5F6000743FCA /* DropDownSelection.swift */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
 		18E8F4B91CC8F742001EDD14 /* Database */ = {
 			isa = PBXGroup;
 			children = (
@@ -640,6 +650,7 @@
 		18F7E46C1C97F3CA007E3459 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				18E259C61CCA5EF400743FCA /* Controller */,
 				18F7E46D1C97F3E2007E3459 /* View */,
 			);
 			name = Common;
@@ -894,6 +905,7 @@
 				180E194F1C6326C700987CE6 /* ChatContactList.swift in Sources */,
 				18F7E4671C97B2EF007E3459 /* ReviewTableSource.swift in Sources */,
 				184867821BF8506F00016A4E /* SliderMain.swift in Sources */,
+				18E259CB1CCA5F6000743FCA /* DropDownSelection.swift in Sources */,
 				1893E2E01C7C604C00F74A2B /* MyActivities.swift in Sources */,
 				18F7E4711C97FCC2007E3459 /* Resource.swift in Sources */,
 				18A593DC1C099D4100458308 /* CellType.swift in Sources */,

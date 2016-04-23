@@ -16,7 +16,13 @@ class MyActivities: ViewControllerBase ,UIGestureRecognizerDelegate , UITableVie
     var button : UIButton?
     var blankTap : UITapGestureRecognizer?
     
+    
+    var scroll : UIScrollView?
     var table : UITableView?
+    
+    var raidDropdown : UIButton?
+    var raidTitle : UITextView?
+    var raidContent : UITextView?
     
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
@@ -60,27 +66,28 @@ class MyActivities: ViewControllerBase ,UIGestureRecognizerDelegate , UITableVie
 
         self.cancelView!.layer.addAnimation(cancelAnimation, forKey: nil)
         
-        self.table!.delegate = self
-        self.table!.dataSource = self
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.view.backgroundColor = UIColor.clearColor()
-//        self.view.alpha = 0.8
         
              // Do any additional setup after loading the view.
     }
     
     override func initView() {
         setActivitiesView()
+        setScroll()
+        setBlaBlaControls()
+        setRaidMember()
         setCancelView()
         setTapForBackgroundView()
     }
+   
     
     func setTapForBackgroundView(){
-         self.blankTap = UITapGestureRecognizer(target: self, action: "BlankSpaceTap:")
+         self.blankTap = UITapGestureRecognizer(target: self, action: #selector(MyActivities.BlankSpaceTap(_:)))
          self.blankTap!.numberOfTapsRequired = 1
          self.blankTap!.delegate = self
          self.view.addGestureRecognizer(self.blankTap!)
@@ -101,6 +108,58 @@ class MyActivities: ViewControllerBase ,UIGestureRecognizerDelegate , UITableVie
         }
     }
     
+    
+    func setScroll(){
+        
+        self.scroll = UIScrollView(frame: CGRect(x: 0, y: 0, width: UIAdapter.shared.transferWidth(240), height: UIAdapter.shared.transferHeight(300)))
+        self.scroll!.contentSize = CGSize(width: UIAdapter.shared.transferWidth(240) , height: UIAdapter.shared.transferHeight(500))
+        self.scroll?.backgroundColor = UIColor.brownColor()
+        self.activitiesView!.addSubview(self.scroll!)
+        
+        self.scroll?.mas_makeConstraints{ make in
+           make.top.equalTo()(self.activitiesView!.mas_top).with().offset()(UIAdapter.shared.transferHeight(25))
+           make.bottom.equalTo()(self.activitiesView!).with().offset()( -UIAdapter.shared.transferHeight(15) )
+           make.left.equalTo()(self.activitiesView!).with().offset()(UIAdapter.shared.transferWidth(20))
+           make.right.equalTo()(self.activitiesView!).with().offset()(UIAdapter.shared.transferWidth(-20))
+        }
+    }
+    
+    func setBlaBlaControls(){
+        self.raidDropdown = UIButton(frame: CGRect(x: 0, y: 0, width: 100, height: 50))
+        self.raidDropdown!.backgroundColor = UIColor.blackColor()
+        self.raidDropdown!.setTitle("副本", forState: UIControlState.Normal)
+        self.raidDropdown?.addTarget(self, action: "raidDropDown:", forControlEvents: UIControlEvents.TouchUpInside)
+        self.scroll!.addSubview(self.raidDropdown!)
+        
+        self.raidTitle = UITextView(frame: CGRect(x: 0, y: 60, width: 200, height: 50))
+        self.raidTitle!.backgroundColor = UIColor.blackColor()
+        self.scroll!.addSubview(self.raidTitle!)
+        
+        self.raidContent = UITextView(frame: CGRect(x: 0, y: 120, width: 200, height: 100))
+        self.raidContent!.backgroundColor = UIColor.blackColor()
+        self.scroll!.addSubview(self.raidContent!)
+
+    }
+    
+    func raidDropDown(sender : UIButton){
+        
+        let dropDown = DropDownSelection(nibName: nil, bundle: nil)
+        dropDown.modalPresentationStyle = UIModalPresentationStyle.OverCurrentContext
+
+        self.presentViewController(dropDown, animated: true, completion: nil)
+    }
+    
+    
+    func setRaidMember(){
+           self.table = UITableView(frame: CGRect(x: 30, y: 270, width: 400, height: 300))
+           self.table!.backgroundColor = UIColor.blueColor()
+        
+           self.scroll!.addSubview(self.table!)
+           self.table!.delegate = self
+           self.table!.dataSource = self
+        
+    }
+    
     func setActivitiesView(){
         self.activitiesView = UIImageView(frame: CGRect(x: 0, y: 64 + UIAdapter.shared.transferHeight(15), width: UIAdapter.shared.transferWidth(280), height: UIAdapter.shared.transferHeight(340)))
         self.activitiesView!.userInteractionEnabled = true
@@ -113,10 +172,7 @@ class MyActivities: ViewControllerBase ,UIGestureRecognizerDelegate , UITableVie
         self.view.addSubview(self.activitiesView!)
         
         
-        self.table = UITableView(frame: CGRect(x: 0, y: 0, width: self.activitiesView!.bounds.width, height: self.activitiesView!.bounds.height))
-        self.table!.backgroundColor = UIColor.clearColor()
-       
-        self.activitiesView!.addSubview(self.table!)
+
 
     }
     
@@ -129,6 +185,8 @@ class MyActivities: ViewControllerBase ,UIGestureRecognizerDelegate , UITableVie
         self.cancelView!.layer.borderColor = UIColor.grayColor().CGColor
         self.cancelView!.layer.masksToBounds = true
         self.view.addSubview(self.cancelView!)
+        
+        self.cancelView!.hidden = true
         
         self.cancelView!.mas_makeConstraints{ make in
            make.right.equalTo()(self.view)

@@ -204,12 +204,15 @@ class SignUp: ViewControllerBase , UITableViewDelegate , UITableViewDataSource {
     
     func setBackGround(){
         self.backGroundImage = UIImageView(frame: CGRectMake(0, 0, self.view.frame.width, self.view.frame.height))
-        self.backGroundImage!.image = UIImage(named: "MainBackGround\(self.backGroundImageNumber)")
+        self.backGroundImage!.image = UIImage(named: "MainBackGround2")
         self.backGroundImageNumber += 1
         self.view.addSubview(self.backGroundImage!)
         
-        self.verifyRequestCount = 5
-        self.timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: "updateTimer:", userInfo: nil, repeats: true)
+        
+        //变幻背景图片
+        
+//        self.verifyRequestCount = 5
+//        self.timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: "updateTimer:", userInfo: nil, repeats: true)
         
        
     }
