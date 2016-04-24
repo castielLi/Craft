@@ -9,8 +9,14 @@
 import UIKit
 
 class CalendarView: UIView , UICollectionViewDataSource , UICollectionViewDelegate{
+    
+    
+    let cellWidth = (UIScreen.mainScreen().bounds.width - UIAdapter.shared.transferWidth(30) - 40)/7
 
     var collectionView: UICollectionView?
+    
+    var cellSelectedBlock : ((frame : CGRect)->Void)?
+    var cellCancelSelectedBlock : ((frame : CGRect)->Void)?
     
     var cellData: [String] = ["日", "一", "二", "三", "四", "五", "六"]
     
@@ -22,6 +28,8 @@ class CalendarView: UIView , UICollectionViewDataSource , UICollectionViewDelega
     var nextMonthButton = UIButton()
     var beforeMonthButton = UIButton()
     
+
+    
     var theLock = NSLock()
     var mark = 2
     
@@ -32,8 +40,7 @@ class CalendarView: UIView , UICollectionViewDataSource , UICollectionViewDelega
         
         let layout = CustomLayout()
         
-        
-        self.collectionView = UICollectionView(frame: CGRectMake(UIAdapter.shared.transferWidth(15) , UIAdapter.shared.transferHeight(10), self.frame.width - UIAdapter.shared.transferWidth(30), UIAdapter.shared.transferHeight(210)), collectionViewLayout: layout)
+        self.collectionView = UICollectionView(frame: CGRectMake(UIAdapter.shared.transferWidth(15) , 0, self.frame.width - UIAdapter.shared.transferWidth(30), UIAdapter.shared.transferHeight(200) ), collectionViewLayout: layout)
         
         //注册CollectionViewCell
         collectionView!.registerClass(CalendearCell.self, forCellWithReuseIdentifier: "ViewCell")
@@ -74,8 +81,9 @@ class CalendarView: UIView , UICollectionViewDataSource , UICollectionViewDelega
             make.left.equalTo()(self.collectionView!.mas_right).with().offset()(UIAdapter.shared.transferWidth(-20))
             make.right.equalTo()(self.collectionView!)
         }
-
         
+        
+       
     }
     
     func scrollViewDidScroll(scrollView: UIScrollView) {
@@ -259,7 +267,7 @@ class CalendarView: UIView , UICollectionViewDataSource , UICollectionViewDelega
         
         
         if cell == nil{
-             cell = CalendearCell(frame: CGRect(x: 0, y: 0, width: UIAdapter.shared.transferWidth(23), height: UIAdapter.shared.transferWidth(23)))
+             cell = CalendearCell(frame: CGRect(x: 0, y: 0, width: cellWidth, height: cellWidth))
         }
         
         cell!.contentLabel!.text = cellData[indexPath.item]
@@ -279,6 +287,8 @@ class CalendarView: UIView , UICollectionViewDataSource , UICollectionViewDelega
            
         }
         
+        cell!.backgroundColor = UIColor.clearColor()
+        
         return cell!
     }
     
@@ -286,12 +296,16 @@ class CalendarView: UIView , UICollectionViewDataSource , UICollectionViewDelega
         let cell = collectionView.cellForItemAtIndexPath(indexPath)
         
         cell!.backgroundColor = Resources.Color.goldenEdge
+        self.cellSelectedBlock!(frame: cell!.frame)
+
     }
     
     func collectionView(collectionView: UICollectionView, didDeselectItemAtIndexPath indexPath: NSIndexPath) {
         let cell = collectionView.cellForItemAtIndexPath(indexPath)
         
         cell!.backgroundColor = UIColor.clearColor()
+        
+        self.cellCancelSelectedBlock!(frame: cell!.frame)
     }
 
     

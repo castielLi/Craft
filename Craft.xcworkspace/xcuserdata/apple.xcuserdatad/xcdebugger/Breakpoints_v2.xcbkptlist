@@ -9,13 +9,13 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Craft/MyActivities.swift"
-            timestampString = "483075731.414763"
+            filePath = "Craft/SliderMain.swift"
+            timestampString = "483187788.316797"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "147"
-            endingLineNumber = "147"
-            landmarkName = "raidDropDown(_:)"
+            startingLineNumber = "198"
+            endingLineNumber = "198"
+            landmarkName = "gestureRecognizer(_:shouldReceiveTouch:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -25,13 +25,13 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Craft/MyActivities.swift"
-            timestampString = "483075868.355563"
+            filePath = "Craft/SliderMain.swift"
+            timestampString = "483187788.316797"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "149"
-            endingLineNumber = "149"
-            landmarkName = "raidDropDown(_:)"
+            startingLineNumber = "200"
+            endingLineNumber = "200"
+            landmarkName = "gestureRecognizer(_:shouldReceiveTouch:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
