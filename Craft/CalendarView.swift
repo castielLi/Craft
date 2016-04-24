@@ -40,7 +40,7 @@ class CalendarView: UIView , UICollectionViewDataSource , UICollectionViewDelega
         
         let layout = CustomLayout()
         
-        self.collectionView = UICollectionView(frame: CGRectMake(UIAdapter.shared.transferWidth(15) , 0, self.frame.width - UIAdapter.shared.transferWidth(30), UIAdapter.shared.transferHeight(200) ), collectionViewLayout: layout)
+        self.collectionView = UICollectionView(frame: CGRectMake(UIAdapter.shared.transferWidth(15) , 0, self.frame.width - UIAdapter.shared.transferWidth(30), UIAdapter.shared.transferHeight(205) ), collectionViewLayout: layout)
         
         //注册CollectionViewCell
         collectionView!.registerClass(CalendearCell.self, forCellWithReuseIdentifier: "ViewCell")
@@ -62,8 +62,8 @@ class CalendarView: UIView , UICollectionViewDataSource , UICollectionViewDelega
         self.addSubview(nextMonthButton)
         
         self.nextMonthButton.mas_makeConstraints{ make in
-           make.bottom.equalTo()(self.collectionView!.mas_bottom).with().offset()(UIAdapter.shared.transferHeight(10))
-           make.top.equalTo()(self.collectionView!.mas_bottom).with().offset()(UIAdapter.shared.transferHeight(2))
+           make.bottom.equalTo()(self.collectionView!.mas_bottom).with().offset()(UIAdapter.shared.transferHeight(20))
+           make.top.equalTo()(self.collectionView!.mas_bottom).with().offset()(UIAdapter.shared.transferHeight(12))
            make.left.equalTo()(self.collectionView!.mas_right).with().offset()(UIAdapter.shared.transferWidth(-20))
            make.right.equalTo()(self.collectionView!)
         }
@@ -76,8 +76,8 @@ class CalendarView: UIView , UICollectionViewDataSource , UICollectionViewDelega
         self.addSubview(beforeMonthButton)
         
         self.beforeMonthButton.mas_makeConstraints{ make in
-            make.top.equalTo()(self.collectionView!.mas_top).with().offset()(UIAdapter.shared.transferHeight(-10))
-            make.bottom.equalTo()(self.collectionView!.mas_top).with().offset()(UIAdapter.shared.transferHeight(-2))
+            make.top.equalTo()(self.collectionView!.mas_top).with().offset()(UIAdapter.shared.transferHeight(-18))
+            make.bottom.equalTo()(self.collectionView!.mas_top).with().offset()(UIAdapter.shared.transferHeight(-10))
             make.left.equalTo()(self.collectionView!.mas_right).with().offset()(UIAdapter.shared.transferWidth(-20))
             make.right.equalTo()(self.collectionView!)
         }
