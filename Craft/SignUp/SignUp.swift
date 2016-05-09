@@ -12,6 +12,7 @@ class SignUp: ViewControllerBase , UITableViewDelegate , UITableViewDataSource {
 
     var firstTime : Bool = true
     var backGroundImage : UIImageView?
+    var bloodBackGroundImage : UIImageView?
     var backGroundImageNumber : Int = 1
     var timer:NSTimer?
     var verifyRequestCount : Int = 5
@@ -88,6 +89,14 @@ class SignUp: ViewControllerBase , UITableViewDelegate , UITableViewDataSource {
         
         self.timeView!.layer.addAnimation(animation, forKey: nil)
         self.activityMainView!.layer.addAnimation(animation, forKey: nil)
+        
+        let xAnimation = CABasicAnimation(keyPath: "position.x")
+        xAnimation.toValue = self.view!.frame.size.width * 2
+        xAnimation.fromValue = -self.view!.frame.size.width / 2
+        xAnimation.duration = 20
+        xAnimation.repeatCount = Float.infinity
+        bloodBackGroundImage!.layer.addAnimation(xAnimation, forKey: "position.x")
+        
     }
     
     func showCurrentView(sender : NSNotification){
@@ -130,6 +139,7 @@ class SignUp: ViewControllerBase , UITableViewDelegate , UITableViewDataSource {
         
         self.navigationController!.navigationBar.barStyle = UIBarStyle.BlackTranslucent
         self.navigationController!.navigationBar.setBackgroundImage(UIImage(named: "navigationBackGround"), forBarMetrics: UIBarMetrics.Default)
+        
         
         // Do any additional setup after loading the view.
         
@@ -204,9 +214,15 @@ class SignUp: ViewControllerBase , UITableViewDelegate , UITableViewDataSource {
     
     func setBackGround(){
         self.backGroundImage = UIImageView(frame: CGRectMake(0, 0, self.view.frame.width, self.view.frame.height))
-        self.backGroundImage!.image = UIImage(named: "MainBackGround2")
+        self.backGroundImage!.image = UIImage(named: "MainBackGround")
         self.backGroundImageNumber += 1
         self.view.addSubview(self.backGroundImage!)
+        
+        
+        self.bloodBackGroundImage = UIImageView(frame: CGRectMake(0, 0, self.view.frame.width, self.view.frame.height))
+        self.bloodBackGroundImage!.image = UIImage(named: "blood")
+        self.view.addSubview(self.bloodBackGroundImage!)
+        
         
         
         //变幻背景图片
@@ -227,14 +243,31 @@ class SignUp: ViewControllerBase , UITableViewDelegate , UITableViewDataSource {
     
     
     func setActivityMainView(){
-       self.activityMainView = ActivityMainView(frame: CGRect(x: -UIAdapter.shared.transferWidth(240), y: 64 + UIAdapter.shared.transferHeight(15), width: UIAdapter.shared.transferWidth(240), height: UIAdapter.shared.transferHeight(350)))
+       self.activityMainView = ActivityMainView(frame: CGRect(x: -UIAdapter.shared.transferWidth(240), y: 64 + UIAdapter.shared.transferHeight(15), width: UIAdapter.shared.transferWidth(290), height: UIAdapter.shared.transferHeight(370)))
         
        self.view.addSubview(self.activityMainView!)
        self.activityMainView!.hidden = true
        self.activityMainView!.activityTabel!.delegate = self
        self.activityMainView!.activityTabel!.dataSource = self
+       self.activityMainView!.activityTabel!.separatorStyle = UITableViewCellSeparatorStyle.None
+       self.activityMainView!.activityTabel!.showsVerticalScrollIndicator = false
+       self.activityMainView!.activityTabel!.showsHorizontalScrollIndicator = false
         
+       self.activityMainView!.searchActivityButton!.addTarget(self, action: "searchActivityClick:", forControlEvents: UIControlEvents.TouchUpInside)
+        
+       self.activityMainView!.MyActivityButton!.addTarget(self, action: "myActivityClick:", forControlEvents: UIControlEvents.TouchUpInside)
+
        self.activityMainView!.addNewActivity!.addTarget(self, action: "AddNewActivity:", forControlEvents: UIControlEvents.TouchUpInside)
+    }
+    
+    func searchActivityClick(sender : UIButton){
+        sender.setImage(UIImage(named: "searchActivity_selected"), forState: UIControlState.Normal)
+        self.activityMainView!.MyActivityButton!.setImage(UIImage(named: "myActivity"), forState: UIControlState.Normal)
+    }
+    
+    func myActivityClick(sender : UIButton){
+        sender.setImage(UIImage(named: "myActivity_selected"), forState: UIControlState.Normal)
+        self.activityMainView!.searchActivityButton!.setImage(UIImage(named: "searchActivity"), forState: UIControlState.Normal)
     }
     
     
@@ -448,52 +481,86 @@ class SignUp: ViewControllerBase , UITableViewDelegate , UITableViewDataSource {
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        var cell = tableView.dequeueReusableCellWithIdentifier("activityItemCell")
+        var cell = tableView.dequeueReusableCellWithIdentifier("activityItemCell") as? ActivityItemCell
         
         if cell == nil{
-            cell = TableViewBaseCell(style: UITableViewCellStyle.Default, reuseIdentifier: "activityItemCell", cellHeight: UIAdapter.shared.transferHeight(80))
+            cell = ActivityItemCell(style: UITableViewCellStyle.Value1, reuseIdentifier: "activityItemCell", cellHeight: UIAdapter.shared.transferHeight(65),cellWidth: self.activityMainView!.activityTabel!.bounds.width )
         }
         
-        cell!.textLabel?.text = "hello world"
+        cell!.backgroundImage!.image = UIImage(named: "activityItem")
+        cell!.iconImage!.image = UIImage(named: "challenge")
+        cell!.raidName!.text = "纳克萨玛斯"
+        cell!.dutyPart!.damageLabel!.text = "13"
+        cell!.dutyPart!.tankLabel!.text = "3"
+        cell!.dutyPart!.healLabel!.text = "4"
+        cell!.contentLabel!.text = "老1-老4,来熟练工，不墨迹 老1-老4,来熟练工，不墨迹 老1-老4,来熟练工，不墨迹"
+        cell!.leadName!.text = "伊莎贝拉殿下"
+        
+        if indexPath.row % 3 == 0 {
+//           cell!.timePart!.firstPart!.text = "27"
+//           cell!.timePart!.midPart!.font = UIFont(name: "DINAlternate-Bold", size: UIAdapter.shared.transferHeight(20))
+//           cell!.timePart!.midPart!.text = "days"
+            cell!.timePart!.firstPart?.text = "165"
+            cell!.timePart!.midPart!.text = ":"
+            cell!.timePart!.midPart!.font = UIFont(name: "DB LCD Temp", size: UIAdapter.shared.transferHeight(20))
+            cell!.timePart!.secondPart!.text = "43"
+        }else{
+        cell!.timePart!.firstPart?.text = "07"
+        cell!.timePart!.midPart!.text = ":"
+        cell!.timePart!.midPart!.font = UIFont(name: "DB LCD Temp", size: UIAdapter.shared.transferHeight(20))
+        cell!.timePart!.secondPart!.text = "43"
+        }
+        
+//        cell!.textLabel?.text = "hello world"
+        
+        cell!.selectionStyle = UITableViewCellSelectionStyle.None
         return cell!
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return UIAdapter.shared.transferHeight(80)
+        return UIAdapter.shared.transferHeight(65)
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let cell = tableView.cellForRowAtIndexPath(indexPath) as! ActivityItemCell
+        cell.backgroundImage!.image = UIImage(named: "activityItem_click")
         displayActivityDetail()
     }
     
-    func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
-        
-        var rotation = CATransform3DMakeRotation( CGFloat(0.3 * M_PI) , 0.0, 0.5, 0.0);
-        rotation.m34 = 1.0 / -600;
-        
-        
-        //2. Define the initial state (Before the animation)
-        //        cell.layer.shadowColor = UIColor.blackColor().CGColor
-        //        cell.layer.shadowOffset = CGSizeMake(10, 10);
-        
-        cell.layer.transform = rotation;
-        cell.layer.anchorPoint = CGPointMake(0.5, 0.5);
-        
-        
-        UIView.beginAnimations("rotation", context: nil)
-        UIView.setAnimationDuration(0.8)
-        //3. Define the final state (After the animation) and commit the animation
-        cell.layer.transform = CATransform3DIdentity;
-        cell.alpha = 1;
-        cell.layer.shadowOffset = CGSizeMake(0, 0);
-        UIView.commitAnimations()
+    func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
+        let cell = tableView.cellForRowAtIndexPath(indexPath) as! ActivityItemCell
+        cell.backgroundImage!.image = UIImage(named: "activityItem")
     }
+    
+    //table animation
+//    func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+//        
+//        var rotation = CATransform3DMakeRotation( CGFloat(0.3 * M_PI) , 0.0, 0.5, 0.0);
+//        rotation.m34 = 1.0 / -600;
+//        
+//        
+//        //2. Define the initial state (Before the animation)
+//        //        cell.layer.shadowColor = UIColor.blackColor().CGColor
+//        //        cell.layer.shadowOffset = CGSizeMake(10, 10);
+//        
+//        cell.layer.transform = rotation;
+//        cell.layer.anchorPoint = CGPointMake(0.5, 0.5);
+//        
+//        
+//        UIView.beginAnimations("rotation", context: nil)
+//        UIView.setAnimationDuration(0.8)
+//        //3. Define the final state (After the animation) and commit the animation
+//        cell.layer.transform = CATransform3DIdentity;
+//        cell.alpha = 1;
+//        cell.layer.shadowOffset = CGSizeMake(0, 0);
+//        UIView.commitAnimations()
+//    }
 
     
     
     func displayActivityDetail(){
         UIView.animateWithDuration(0.4, delay: 0, options: UIViewAnimationOptions.CurveEaseInOut, animations: { () -> Void in
-            self.activityMainView!.frame.origin.x = -UIAdapter.shared.transferWidth(240)
+            self.activityMainView!.frame.origin.x = -UIAdapter.shared.transferWidth(280)
             
         }) { (success) -> Void in
             if success {

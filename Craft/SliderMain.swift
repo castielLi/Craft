@@ -12,6 +12,7 @@ class SliderMain: ViewControllerBase , MainMenuProtocol , UIGestureRecognizerDel
 
     var calendar : CalendarView?
 //    var reviewTable : UITableView?
+    var bloodBackGroundImage : UIImageView?
     var reviewTableSource : ReviewTableSource?
     var rightMenu : RightMenu?
     var menuIsOpen : Bool = false
@@ -59,6 +60,13 @@ class SliderMain: ViewControllerBase , MainMenuProtocol , UIGestureRecognizerDel
 
 //        self.reviewTable!.layer.addAnimation(alphaAnimation, forKey: nil)
         self.calendar!.layer.addAnimation(alphaAnimation, forKey: nil)
+        
+        let xAnimation = CABasicAnimation(keyPath: "position.x")
+        xAnimation.toValue = self.view!.frame.size.width * 2
+        xAnimation.fromValue = -self.view!.frame.size.width / 2
+        xAnimation.duration = 20
+        xAnimation.repeatCount = Float.infinity
+        bloodBackGroundImage!.layer.addAnimation(xAnimation, forKey: "position.x")
         
     }
 
@@ -151,8 +159,12 @@ class SliderMain: ViewControllerBase , MainMenuProtocol , UIGestureRecognizerDel
     
     func setBackGroundImage(){
         self.backGroundImage = UIImageView(frame: CGRectMake(0, 0, self.view.frame.width, self.view.frame.height))
-        self.backGroundImage!.image = UIImage(named: "LoginBackGround")
+        self.backGroundImage!.image = UIImage(named: "MainBackGround")
         self.view.addSubview(backGroundImage!)
+        
+        self.bloodBackGroundImage = UIImageView(frame: CGRectMake(0, 0, self.view.frame.width, self.view.frame.height))
+        self.bloodBackGroundImage!.image = UIImage(named: "blood")
+        self.view.addSubview(self.bloodBackGroundImage!)
     }
     
     

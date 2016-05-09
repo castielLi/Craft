@@ -35,6 +35,9 @@
 		189052FA1CA66310006EFE69 /* TimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189052F91CA66310006EFE69 /* TimerView.swift */; };
 		189052FC1CA66943006EFE69 /* ActivityMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189052FB1CA66943006EFE69 /* ActivityMainView.swift */; };
 		189053001CA6733C006EFE69 /* ExtensionForGesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189052FF1CA6733C006EFE69 /* ExtensionForGesture.swift */; };
+		1892E8CE1CDDAA2C002AAEBF /* ActivityItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1892E8CD1CDDAA2C002AAEBF /* ActivityItemCell.swift */; };
+		1892E8D11CDE3BED002AAEBF /* dutyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1892E8D01CDE3BED002AAEBF /* dutyView.swift */; };
+		1892E8D31CDE46D9002AAEBF /* Time.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1892E8D21CDE46D9002AAEBF /* Time.swift */; };
 		1893E2E01C7C604C00F74A2B /* MyActivities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1893E2DF1C7C604C00F74A2B /* MyActivities.swift */; };
 		18A593CE1C0996DB00458308 /* ActivityMain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A593CD1C0996DB00458308 /* ActivityMain.swift */; };
 		18A593D51C099BBB00458308 /* ActivityUserTableSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A593D41C099BBB00458308 /* ActivityUserTableSource.swift */; };
@@ -112,6 +115,9 @@
 		189052F91CA66310006EFE69 /* TimerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TimerView.swift; path = SignUp/TimerView.swift; sourceTree = "<group>"; };
 		189052FB1CA66943006EFE69 /* ActivityMainView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ActivityMainView.swift; path = SignUp/ActivityMainView.swift; sourceTree = "<group>"; };
 		189052FF1CA6733C006EFE69 /* ExtensionForGesture.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtensionForGesture.swift; sourceTree = "<group>"; };
+		1892E8CD1CDDAA2C002AAEBF /* ActivityItemCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ActivityItemCell.swift; path = SignUp/ActivityItemCell.swift; sourceTree = "<group>"; };
+		1892E8D01CDE3BED002AAEBF /* dutyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = dutyView.swift; path = Common/dutyView.swift; sourceTree = "<group>"; };
+		1892E8D21CDE46D9002AAEBF /* Time.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Time.swift; path = Common/Time.swift; sourceTree = "<group>"; };
 		1893E2DF1C7C604C00F74A2B /* MyActivities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyActivities.swift; sourceTree = "<group>"; };
 		18A593CD1C0996DB00458308 /* ActivityMain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ActivityMain.swift; path = ActivityMain/ActivityMain.swift; sourceTree = "<group>"; };
 		18A593D41C099BBB00458308 /* ActivityUserTableSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityUserTableSource.swift; sourceTree = "<group>"; };
@@ -314,13 +320,24 @@
 			children = (
 				189052F91CA66310006EFE69 /* TimerView.swift */,
 				189052FB1CA66943006EFE69 /* ActivityMainView.swift */,
+				1892E8CD1CDDAA2C002AAEBF /* ActivityItemCell.swift */,
 			);
 			name = Activity;
+			sourceTree = "<group>";
+		};
+		1892E8CF1CDE3BCD002AAEBF /* View */ = {
+			isa = PBXGroup;
+			children = (
+				1892E8D01CDE3BED002AAEBF /* dutyView.swift */,
+				1892E8D21CDE46D9002AAEBF /* Time.swift */,
+			);
+			name = View;
 			sourceTree = "<group>";
 		};
 		1899D6EB1C6484880094B65C /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				1892E8CF1CDE3BCD002AAEBF /* View */,
 			);
 			name = Common;
 			sourceTree = "<group>";
@@ -756,7 +773,7 @@
 				TargetAttributes = {
 					18AF8CA01BEDCCCB00539C0E = {
 						CreatedOnToolsVersion = 7.1;
-						DevelopmentTeam = 2B5FR9H7XS;
+						DevelopmentTeam = JJ43G346UA;
 					};
 					18AF8CB41BEDCCCB00539C0E = {
 						CreatedOnToolsVersion = 7.1;
@@ -870,6 +887,7 @@
 			files = (
 				1817585D1C4B8D45008913DB /* CustomLayout.swift in Sources */,
 				181518411C958C4000AA4F33 /* MyAcitivitiesView.swift in Sources */,
+				1892E8CE1CDDAA2C002AAEBF /* ActivityItemCell.swift in Sources */,
 				189052FC1CA66943006EFE69 /* ActivityMainView.swift in Sources */,
 				18610C511C12DCC500B864F2 /* LoginService.swift in Sources */,
 				18E8F4BB1CC8F78C001EDD14 /* DBHelper.swift in Sources */,
@@ -897,6 +915,7 @@
 				180E193F1C62E39D00987CE6 /* ChatRoom.swift in Sources */,
 				187F97A01CA962A3009CC7A9 /* RightMenu.swift in Sources */,
 				182647781C2E689C0078D4C2 /* ForgetPassword.swift in Sources */,
+				1892E8D11CDE3BED002AAEBF /* dutyView.swift in Sources */,
 				18A824461BEDCDF200084589 /* LoginController.swift in Sources */,
 				18F7E46F1C97F454007E3459 /* DutyDisplayView.swift in Sources */,
 				18610C531C12E15600B864F2 /* StringExtensions.swift in Sources */,
@@ -905,6 +924,7 @@
 				180E194F1C6326C700987CE6 /* ChatContactList.swift in Sources */,
 				18F7E4671C97B2EF007E3459 /* ReviewTableSource.swift in Sources */,
 				184867821BF8506F00016A4E /* SliderMain.swift in Sources */,
+				1892E8D31CDE46D9002AAEBF /* Time.swift in Sources */,
 				18E259CB1CCA5F6000743FCA /* DropDownSelection.swift in Sources */,
 				1893E2E01C7C604C00F74A2B /* MyActivities.swift in Sources */,
 				18F7E4711C97FCC2007E3459 /* Resource.swift in Sources */,
@@ -1053,7 +1073,7 @@
 				INFOPLIST_FILE = Craft/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.app.castiel.wowcraft;
+				PRODUCT_BUNDLE_IDENTIFIER = com.castiel.app.craft;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Craft/Craft-bridge-header.h";
@@ -1071,7 +1091,7 @@
 				INFOPLIST_FILE = Craft/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.app.castiel.wowcraft;
+				PRODUCT_BUNDLE_IDENTIFIER = com.castiel.app.craft;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Craft/Craft-bridge-header.h";

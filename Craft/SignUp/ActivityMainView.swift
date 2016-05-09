@@ -33,12 +33,7 @@ class ActivityMainView: UIView {
         super.init(frame: frame)
         self.activityMainView = UIImageView(frame: CGRect(x: 0, y: 0, width: self.frame.width, height: self.frame.height))
         self.activityMainView!.userInteractionEnabled = true
-        self.activityMainView!.backgroundColor = UIColor(red: 30/255, green: 69/255, blue: 102/255, alpha: 1)
-        self.activityMainView!.alpha = 0.7
-        self.activityMainView!.layer.cornerRadius = 5
-        self.activityMainView!.layer.borderWidth = 2
-        self.activityMainView!.layer.borderColor = UIColor.grayColor().CGColor
-        self.activityMainView!.layer.masksToBounds = true
+        self.activityMainView!.image = UIImage(named: "MyActivity")
         self.addSubview(self.activityMainView!)
         
         setSearchTextField()
@@ -50,86 +45,82 @@ class ActivityMainView: UIView {
     
     func setSearchTextField(){
         searchTextField = UITextField()
-        searchTextField!.layer.borderWidth = 1
-        searchTextField!.layer.borderColor = UIColor.lightGrayColor().CGColor
-        searchTextField!.layer.masksToBounds = true
         searchTextField!.placeholder = "查找活动"
         self.addSubview(searchTextField!)
         
         self.searchTextField!.mas_makeConstraints{ make in
-           make.top.equalTo()(self.activityMainView!).with().offset()(UIAdapter.shared.transferHeight(20))
-           make.right.equalTo()(self.activityMainView!).with().offset()(UIAdapter.shared.transferWidth(-50))
+           make.top.equalTo()(self.activityMainView!).with().offset()(UIAdapter.shared.transferHeight(27))
+           make.right.equalTo()(self.activityMainView!).with().offset()(UIAdapter.shared.transferWidth(-110))
            make.bottom.equalTo()(self.activityMainView!.mas_top).with().offset()(UIAdapter.shared.transferHeight(45))
-           make.left.equalTo()(self.activityMainView!).with().offset()(UIAdapter.shared.transferWidth(20))
+           make.left.equalTo()(self.activityMainView!).with().offset()(UIAdapter.shared.transferWidth(18))
         }
     }
     
     func setSearchButton(){
             searchButton = UIButton()
-            searchButton!.setTitle("X", forState: UIControlState.Normal)
-            searchButton!.backgroundColor = UIColor.blackColor()
+            searchButton!.setImage(UIImage(named: "search"), forState: UIControlState.Normal)
             self.addSubview(searchButton!)
             
             self.searchButton!.mas_makeConstraints{ make in
-                make.top.equalTo()(self.searchTextField!)
-                make.right.equalTo()(self.activityMainView!).with().offset()(UIAdapter.shared.transferWidth(-30))
-                make.bottom.equalTo()(self.searchTextField!)
+                make.top.equalTo()(self.searchTextField!).with().offset()(1)
+                make.right.equalTo()(self.searchTextField!).with().offset()(UIAdapter.shared.transferWidth(25))
+                make.bottom.equalTo()(self.searchTextField!).with().offset()(-1)
                 make.left.equalTo()(self.searchTextField!.mas_right)
             }
     }
     
     func setAddNewButton(){
         addNewActivity = UIButton()
-        
-        addNewActivity!.backgroundColor = UIColor.blackColor()
-        addNewActivity!.setTitle("A", forState: UIControlState.Normal)
+        addNewActivity!.setImage(UIImage(named: "create"), forState: UIControlState.Normal)
         self.activityMainView!.addSubview(addNewActivity!)
         
         self.addNewActivity!.mas_makeConstraints{ make in
-            make.top.equalTo()(self.searchTextField!)
-            make.right.equalTo()(self.activityMainView!.mas_right)
-            make.bottom.equalTo()(self.searchTextField!)
-            make.left.equalTo()(self.searchButton!.mas_right)
+            make.top.equalTo()(self.searchButton!)
+            make.right.equalTo()(self.activityMainView!.mas_right).with().offset()(-UIAdapter.shared.transferWidth(23))
+            make.bottom.equalTo()(self.searchButton!)
+            make.left.equalTo()(self.searchButton!.mas_right).with().offset()(UIAdapter.shared.transferWidth(12))
         }
     }
     
     func setActivityTabel(){
        self.activityTabel = UITableView()
-       self.activityTabel!.backgroundColor = UIColor.lightGrayColor()
+       self.activityTabel!.backgroundColor = UIColor.blackColor()
        self.addSubview(activityTabel!)
     
         self.activityTabel!.mas_makeConstraints{ make in
-          make.right.equalTo()(self.activityMainView!).with().offset()(UIAdapter.shared.transferWidth(-20))
-            make.left.equalTo()(self.activityMainView!).with().offset()(UIAdapter.shared.transferWidth(20))
-            make.top.equalTo()(self.searchTextField!.mas_bottom).with().offset()(UIAdapter.shared.transferHeight(10))
-            make.bottom.equalTo()(self.searchTextField!.mas_bottom).with().offset()(UIAdapter.shared.transferHeight(250))
+          make.right.equalTo()(self.addNewActivity!)
+            make.left.equalTo()(self.searchTextField!)
+            make.top.equalTo()(self.searchTextField!.mas_bottom)
+            make.bottom.equalTo()(self.activityMainView!.mas_bottom).with().offset()(UIAdapter.shared.transferHeight(-50))
         }
     }
     
     func setTabButton(){
         MyActivityButton = UIButton()
-        MyActivityButton!.setTitle("我的团队", forState: UIControlState.Normal)
+        MyActivityButton!.setImage(UIImage(named: "myActivity_selected"), forState: UIControlState.Highlighted)
+        MyActivityButton!.setImage(UIImage(named: "myActivity_selected"), forState: UIControlState.Normal)
         MyActivityButton!.backgroundColor = UIColor.blackColor()
         self.addSubview(MyActivityButton!)
         
         MyActivityButton!.mas_makeConstraints{make in
-            make.top.equalTo()(self.activityTabel!.mas_bottom).with().offset()(UIAdapter.shared.transferHeight(10))
+            make.top.equalTo()(self.activityTabel!.mas_bottom).with().offset()(UIAdapter.shared.transferHeight(17))
 
-           make.left.equalTo()(self.activityMainView!).with().offset()(UIAdapter.shared.transferWidth(40))
-           make.bottom.equalTo()(self.activityMainView!).with().offset()(-UIAdapter.shared.transferHeight(5))
-           make.right.equalTo()(self.activityMainView!.mas_left).with().offset()(self.frame.width / 2)
+           make.left.equalTo()(self.activityTabel!)
+           make.bottom.equalTo()(self.activityMainView!).with().offset()(-UIAdapter.shared.transferHeight(8))
+           make.right.equalTo()(self.activityMainView!.mas_left).with().offset()(self.frame.width / 2 - 10)
         }
         
         searchActivityButton = UIButton()
-        searchActivityButton!.setTitle("搜索团队", forState: UIControlState.Normal)
+        searchActivityButton!.setImage(UIImage(named: "searchActivity"), forState: UIControlState.Normal)
+        searchActivityButton!.setImage(UIImage(named: "searchActivity_selected"), forState: UIControlState.Highlighted)
         searchActivityButton!.backgroundColor = UIColor.blackColor()
         self.addSubview(searchActivityButton!)
         
         searchActivityButton!.mas_makeConstraints{make in
-            make.top.equalTo()(self.activityTabel!.mas_bottom).with().offset()(UIAdapter.shared.transferHeight(10))
-            make.right.equalTo()(self.activityMainView!).with().offset()(UIAdapter.shared.transferWidth(-40))
-            make.bottom.equalTo()(self.activityMainView!).with().offset()(-UIAdapter.shared.transferHeight(5))
-            make.left.equalTo()(self.activityMainView!.mas_right).with().offset()(-(self.frame.width / 2))
+            make.top.equalTo()(self.activityTabel!.mas_bottom).with().offset()(UIAdapter.shared.transferHeight(17))
+            make.right.equalTo()(self.activityTabel!)
+            make.bottom.equalTo()(self.activityMainView!).with().offset()(-UIAdapter.shared.transferHeight(8))
+            make.left.equalTo()(self.activityMainView!.mas_right).with().offset()(-(self.frame.width / 2 - 10))
         }
     }
 

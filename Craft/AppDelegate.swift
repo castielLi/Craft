@@ -47,6 +47,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         RCIM.sharedRCIM().initWithAppKey("pkfcgjstfdgr8")
         
+        UMessage.startWithAppkey("572b270d67e58eabeb0030be", launchOptions: launchOptions)
+        
         
         UIAdapter.shared.config(UIScreen.mainScreen().bounds)
         self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
@@ -61,10 +63,33 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let completeAction = UIMutableUserNotificationAction()
         completeAction.identifier = "OK" // the unique identifier for this action
-        completeAction.title = "OK" // title for the action button
+        completeAction.title = "接受" // title for the action button
         completeAction.activationMode = .Background // UIUserNotificationActivationMode.Background - don't bring app to foreground
         completeAction.authenticationRequired = false // don't require unlocking before performing action
-        completeAction.destructive = true // display action in red
+//        completeAction.destructive = true // display action in red
+        
+        let refuseAction = UIMutableUserNotificationAction()
+        refuseAction.identifier = "Refuse"
+        if #available(iOS 9.0, *) {
+            refuseAction.parameters = [UIUserNotificationTextInputActionButtonTitleKey : "Send"]
+        } else {
+            // Fallback on earlier versions
+        }
+        refuseAction.title = "拒绝"
+        if #available(iOS 9.0, *) {
+            refuseAction.behavior = UIUserNotificationActionBehavior.TextInput
+        } else {
+            // Fallback on earlier versions
+        }
+        refuseAction.activationMode = .Background
+        refuseAction.destructive = false
+        refuseAction.authenticationRequired = false
+        
+        let todoCategory = UIMutableUserNotificationCategory() // notification categories allow us to create groups of actions that we can associate with a notification
+        todoCategory.identifier = "Invite_Category"
+        todoCategory.setActions([refuseAction, completeAction], forContext: .Default) // UIUserNotificationActionContext.Default (4 actions max)
+        
+        
         
         let cancelAction = UIMutableUserNotificationAction()
         cancelAction.identifier = "Cancel"
@@ -73,7 +98,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         } else {
             // Fallback on earlier versions
         }
-        cancelAction.title = "Cancel"
+        cancelAction.title = "取消"
         if #available(iOS 9.0, *) {
             cancelAction.behavior = UIUserNotificationActionBehavior.TextInput
         } else {
@@ -83,11 +108,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         cancelAction.destructive = false
         cancelAction.authenticationRequired = false
         
-        let todoCategory = UIMutableUserNotificationCategory() // notification categories allow us to create groups of actions that we can associate with a notification
-        todoCategory.identifier = "TODO_CATEGORY"
-        todoCategory.setActions([cancelAction, completeAction], forContext: .Minimal) // UIUserNotificationActionContext.Default (4 actions max)
         
-        application.registerUserNotificationSettings(UIUserNotificationSettings(forTypes: [.Alert, .Badge , .Sound], categories: NSSet(array: [todoCategory]) as? Set<UIUserNotificationCategory>))
+        let cancelCategory = UIMutableUserNotificationCategory() // notification categories allow us to create groups of actions that we can associate with a notification
+        cancelCategory.identifier = "Notification_Category"
+        cancelCategory.setActions([cancelAction], forContext: .Default) // UIUserNotificationActionContext.Default (4 actions max)
+        
+        
+        let settings = UIUserNotificationSettings(forTypes: [.Alert, .Badge , .Sound], categories: NSSet(array: [todoCategory,cancelCategory]) as? Set<UIUserNotificationCategory>)
+        
+        UMessage.registerRemoteNotificationAndUserNotificationSettings(settings)
+
+//        UIApplication.sharedApplication().registerUserNotificationSettings(settings)
+        
+        UMessage.setLogEnabled(true)
     
         return true
     }
@@ -119,10 +152,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
     }
     
+    func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {
+        UMessage.didReceiveRemoteNotification(userInfo);
+    }
+    
+    
+    func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
+        UMessage.registerDeviceToken(deviceToken)
+    }
+    
     func application(application: UIApplication, didReceiveLocalNotification notification: UILocalNotification) {
         application.applicationIconBadgeNumber -= 1
     }
     
+    
+    func application(application: UIApplication, handleActionWithIdentifier identifier: String?, forRemoteNotification userInfo: [NSObject : AnyObject], completionHandler: () -> Void) {
+        print("umessage")
+        completionHandler()
+    }
     
     func application(application: UIApplication, handleActionWithIdentifier identifier: String?, forLocalNotification notification: UILocalNotification, withResponseInfo responseInfo: [NSObject : AnyObject], completionHandler: () -> Void) {
        print("hello")
