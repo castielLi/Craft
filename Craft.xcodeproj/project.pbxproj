@@ -65,6 +65,8 @@
 		18AF8CC51BEDCCCB00539C0E /* CraftUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18AF8CC41BEDCCCB00539C0E /* CraftUITests.swift */; };
 		18AFE5D11CBE6FF1000DAD84 /* AddNewActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18AFE5D01CBE6FF1000DAD84 /* AddNewActivity.swift */; };
 		18E259CB1CCA5F6000743FCA /* DropDownSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E259CA1CCA5F6000743FCA /* DropDownSelection.swift */; };
+		18E43FBA1CE0D1F000F9A382 /* PlaySound.m in Sources */ = {isa = PBXBuildFile; fileRef = 18E43FB91CE0D1F000F9A382 /* PlaySound.m */; };
+		18E43FBD1CE0E2E300F9A382 /* SoundResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E43FBC1CE0E2E300F9A382 /* SoundResource.swift */; };
 		18E6046E1C0EC50800620499 /* ApiResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E6046D1C0EC50800620499 /* ApiResult.swift */; };
 		18E8F4BB1CC8F78C001EDD14 /* DBHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E8F4BA1CC8F78C001EDD14 /* DBHelper.swift */; };
 		18F7E4671C97B2EF007E3459 /* ReviewTableSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F7E4661C97B2EF007E3459 /* ReviewTableSource.swift */; };
@@ -157,6 +159,9 @@
 		18AF8CC61BEDCCCB00539C0E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		18AFE5D01CBE6FF1000DAD84 /* AddNewActivity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AddNewActivity.swift; path = SignUp/AddNewActivity.swift; sourceTree = "<group>"; };
 		18E259CA1CCA5F6000743FCA /* DropDownSelection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DropDownSelection.swift; sourceTree = "<group>"; };
+		18E43FB91CE0D1F000F9A382 /* PlaySound.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlaySound.m; sourceTree = "<group>"; };
+		18E43FBB1CE0D20500F9A382 /* PlaySound.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PlaySound.h; sourceTree = "<group>"; };
+		18E43FBC1CE0E2E300F9A382 /* SoundResource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SoundResource.swift; sourceTree = "<group>"; };
 		18E6046D1C0EC50800620499 /* ApiResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiResult.swift; sourceTree = "<group>"; };
 		18E8F4BA1CC8F78C001EDD14 /* DBHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DBHelper.swift; sourceTree = "<group>"; };
 		18F7E4661C97B2EF007E3459 /* ReviewTableSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReviewTableSource.swift; sourceTree = "<group>"; };
@@ -527,6 +532,7 @@
 		18A8245D1BEDFF4700084589 /* OtherTools */ = {
 			isa = PBXGroup;
 			children = (
+				18E43FB61CE0C7D300F9A382 /* PlaySound */,
 				18E8F4B91CC8F742001EDD14 /* Database */,
 				187464981C3FAA25009E4041 /* Notification */,
 				18610C521C12E15600B864F2 /* StringExtensions.swift */,
@@ -669,6 +675,16 @@
 				18E259CA1CCA5F6000743FCA /* DropDownSelection.swift */,
 			);
 			name = Controller;
+			sourceTree = "<group>";
+		};
+		18E43FB61CE0C7D300F9A382 /* PlaySound */ = {
+			isa = PBXGroup;
+			children = (
+				18E43FB91CE0D1F000F9A382 /* PlaySound.m */,
+				18E43FBB1CE0D20500F9A382 /* PlaySound.h */,
+				18E43FBC1CE0E2E300F9A382 /* SoundResource.swift */,
+			);
+			name = PlaySound;
 			sourceTree = "<group>";
 		};
 		18E8F4B91CC8F742001EDD14 /* Database */ = {
@@ -908,6 +924,7 @@
 				1817585D1C4B8D45008913DB /* CustomLayout.swift in Sources */,
 				181518411C958C4000AA4F33 /* MyAcitivitiesView.swift in Sources */,
 				1892E8CE1CDDAA2C002AAEBF /* ActivityItemCell.swift in Sources */,
+				18E43FBD1CE0E2E300F9A382 /* SoundResource.swift in Sources */,
 				189052FC1CA66943006EFE69 /* ActivityMainView.swift in Sources */,
 				18610C511C12DCC500B864F2 /* LoginService.swift in Sources */,
 				18E8F4BB1CC8F78C001EDD14 /* DBHelper.swift in Sources */,
@@ -945,6 +962,7 @@
 				18F7E4671C97B2EF007E3459 /* ReviewTableSource.swift in Sources */,
 				184867821BF8506F00016A4E /* SliderMain.swift in Sources */,
 				1892E8D31CDE46D9002AAEBF /* Time.swift in Sources */,
+				18E43FBA1CE0D1F000F9A382 /* PlaySound.m in Sources */,
 				18E259CB1CCA5F6000743FCA /* DropDownSelection.swift in Sources */,
 				1893E2E01C7C604C00F74A2B /* MyActivities.swift in Sources */,
 				18F7E4711C97FCC2007E3459 /* Resource.swift in Sources */,

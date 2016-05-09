@@ -7,9 +7,11 @@
 //
 
 import UIKit
+import AVFoundation
 
 class SignUp: ViewControllerBase , UITableViewDelegate , UITableViewDataSource {
 
+    var soundPlay :PlaySound?
     var firstTime : Bool = true
     var backGroundImage : UIImageView?
     var bloodBackGroundImage : UIImageView?
@@ -35,7 +37,7 @@ class SignUp: ViewControllerBase , UITableViewDelegate , UITableViewDataSource {
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
- 
+        soundPlay = PlaySound.sharedData()
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -253,6 +255,9 @@ class SignUp: ViewControllerBase , UITableViewDelegate , UITableViewDataSource {
        self.activityMainView!.activityTabel!.showsVerticalScrollIndicator = false
        self.activityMainView!.activityTabel!.showsHorizontalScrollIndicator = false
         
+        
+       self.activityMainView!.searchButton!.addTarget(self, action: "searchButtonClick:", forControlEvents: UIControlEvents.TouchUpInside)
+        
        self.activityMainView!.searchActivityButton!.addTarget(self, action: "searchActivityClick:", forControlEvents: UIControlEvents.TouchUpInside)
         
        self.activityMainView!.MyActivityButton!.addTarget(self, action: "myActivityClick:", forControlEvents: UIControlEvents.TouchUpInside)
@@ -261,11 +266,27 @@ class SignUp: ViewControllerBase , UITableViewDelegate , UITableViewDataSource {
     }
     
     func searchActivityClick(sender : UIButton){
+        
+        let soundId = soundPlay!.sound.valueForKey(SoundResource.clickEventSound) as! String
+        let id = UInt32(soundId)
+        AudioServicesPlaySystemSound(id!);
+        
         sender.setImage(UIImage(named: "searchActivity_selected"), forState: UIControlState.Normal)
         self.activityMainView!.MyActivityButton!.setImage(UIImage(named: "myActivity"), forState: UIControlState.Normal)
     }
     
+    func searchButtonClick(sender : UIButton){
+        let soundId = soundPlay!.sound.valueForKey(SoundResource.clickEventSound) as! String
+        let id = UInt32(soundId)
+        AudioServicesPlaySystemSound(id!);
+    }
+    
     func myActivityClick(sender : UIButton){
+        
+        let soundId = soundPlay!.sound.valueForKey(SoundResource.clickEventSound) as! String
+        let id = UInt32(soundId)
+        AudioServicesPlaySystemSound(id!);
+        
         sender.setImage(UIImage(named: "myActivity_selected"), forState: UIControlState.Normal)
         self.activityMainView!.searchActivityButton!.setImage(UIImage(named: "searchActivity"), forState: UIControlState.Normal)
     }
@@ -361,6 +382,11 @@ class SignUp: ViewControllerBase , UITableViewDelegate , UITableViewDataSource {
     
     
     func TimerLimitClick(sender : UIButton){
+        
+        let soundId = soundPlay!.sound.valueForKey(SoundResource.clickEventSound) as! String
+        let id = UInt32(soundId)
+        AudioServicesPlaySystemSound(id!);
+        
         if self.view.frame.origin.x > 0 {
             return
         }
@@ -369,6 +395,11 @@ class SignUp: ViewControllerBase , UITableViewDelegate , UITableViewDataSource {
     }
     
     func MenuClick(){
+        
+        let soundId = soundPlay!.sound.valueForKey(SoundResource.clickEventSound) as! String
+        let id = UInt32(soundId)
+        AudioServicesPlaySystemSound(id!);
+        
         if !self.menuIsOpen {
 
 //            self.rightMenu!.hidden = false
@@ -391,12 +422,20 @@ class SignUp: ViewControllerBase , UITableViewDelegate , UITableViewDataSource {
     
     func StoneClick(sender : UIButton){
 //        self.mainMenuProtocal!.ChooseTab(1)
+        let soundId = soundPlay!.sound.valueForKey(SoundResource.clickEventSound) as! String
+        let id = UInt32(soundId)
+        AudioServicesPlaySystemSound(id!);
+        
         self.displayTimer()
     }
     
     
     func displayTimer(){
        
+        let soundId = soundPlay!.sound.valueForKey(SoundResource.swishout) as! String
+        let id = UInt32(soundId)
+        AudioServicesPlaySystemSound(id!);
+        
         UIView.animateWithDuration(0.5, delay: 0, options: UIViewAnimationOptions.CurveEaseInOut, animations: { () -> Void in
             self.timeView!.frame.origin.y = -(self.view.frame.height - UIAdapter.shared.transferWidth(200) - 88 )
             
@@ -417,12 +456,17 @@ class SignUp: ViewControllerBase , UITableViewDelegate , UITableViewDataSource {
     
     
     func displayActivity(){
+        
+        let soundId = soundPlay!.sound.valueForKey(SoundResource.swishout) as! String
+        let id = UInt32(soundId)
+        AudioServicesPlaySystemSound(id!);
+        
         UIView.animateWithDuration(0.3, delay: 0, options: UIViewAnimationOptions.CurveEaseIn, animations: { () -> Void in
             self.activityMainView!.frame.origin.x = -UIAdapter.shared.transferWidth(240)
             
             }) { (success) -> Void in
                 if success {
-                    
+ 
                     UIView.animateWithDuration(0.8, delay: 0, usingSpringWithDamping: 100, initialSpringVelocity: 18, options: UIViewAnimationOptions.CurveEaseOut, animations: { () -> Void in
                         
                         self.timeView!.frame.origin.y = self.view.frame.height - UIAdapter.shared.transferWidth(200) - 88
@@ -437,6 +481,11 @@ class SignUp: ViewControllerBase , UITableViewDelegate , UITableViewDataSource {
     
     
         func joinButtonClick(sender : UIButton){
+            
+            let soundId = soundPlay!.sound.valueForKey(SoundResource.clickEventSound) as! String
+            let id = UInt32(soundId)
+            AudioServicesPlaySystemSound(id!);
+            
             for layer in self.timeView!.joinButton!.layer.sublayers!{
                 layer.removeFromSuperlayer()
             }
@@ -453,6 +502,14 @@ class SignUp: ViewControllerBase , UITableViewDelegate , UITableViewDataSource {
     
     func AddNewActivity(sender : UIButton){
         
+        let soundId = soundPlay!.sound.valueForKey(SoundResource.clickEventSound) as! String
+        let id = UInt32(soundId)
+        AudioServicesPlaySystemSound(id!);
+        
+        let swishinId = soundPlay!.sound.valueForKey(SoundResource.swishinSound) as! String
+        let swishinid = UInt32(swishinId)
+        AudioServicesPlaySystemSound(swishinid!);
+        
         UIView.animateWithDuration(0.4, delay: 0, options: UIViewAnimationOptions.CurveEaseInOut, animations: { () -> Void in
             self.activityMainView!.frame.origin.x = -UIAdapter.shared.transferWidth(240)
             
@@ -467,6 +524,11 @@ class SignUp: ViewControllerBase , UITableViewDelegate , UITableViewDataSource {
     }
     
     func activitiesDialogDisappear(sender : NSNotification){
+        
+        let soundId = soundPlay!.sound.valueForKey(SoundResource.swishout) as! String
+        let id = UInt32(soundId)
+        AudioServicesPlaySystemSound(id!);
+        
         UIView.animateWithDuration(1, delay: 0, usingSpringWithDamping: 100, initialSpringVelocity: 5, options: UIViewAnimationOptions.CurveEaseOut, animations: { () -> Void in
             
             self.activityMainView!.frame.origin.x = 0
@@ -524,6 +586,11 @@ class SignUp: ViewControllerBase , UITableViewDelegate , UITableViewDataSource {
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let cell = tableView.cellForRowAtIndexPath(indexPath) as! ActivityItemCell
         cell.backgroundImage!.image = UIImage(named: "activityItem_click")
+        
+        let soundId = soundPlay!.sound.valueForKey(SoundResource.clickEventSound) as! String
+        let id = UInt32(soundId)
+        AudioServicesPlaySystemSound(id!);
+        
         displayActivityDetail()
     }
     
@@ -559,11 +626,18 @@ class SignUp: ViewControllerBase , UITableViewDelegate , UITableViewDataSource {
     
     
     func displayActivityDetail(){
+        
         UIView.animateWithDuration(0.4, delay: 0, options: UIViewAnimationOptions.CurveEaseInOut, animations: { () -> Void in
             self.activityMainView!.frame.origin.x = -UIAdapter.shared.transferWidth(280)
             
         }) { (success) -> Void in
             if success {
+                
+                let swishinId = self.soundPlay!.sound.valueForKey(SoundResource.swishinSound) as! String
+                let swishinid = UInt32(swishinId)
+                AudioServicesPlaySystemSound(swishinid!);
+
+                
                 let activitiesView = MyActivities(nibName: nil, bundle: nil)
                 let activitiesNav = UINavigationController(rootViewController: activitiesView)
                 activitiesNav.modalPresentationStyle = UIModalPresentationStyle.OverFullScreen

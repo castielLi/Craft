@@ -121,7 +121,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        UIApplication.sharedApplication().registerUserNotificationSettings(settings)
         
         UMessage.setLogEnabled(true)
-    
+        
+        let customQueue = dispatch_queue_create("initSystemSound", nil)
+        dispatch_async(customQueue, {
+            PlaySound.sharedData()
+        })
+
         return true
     }
 
