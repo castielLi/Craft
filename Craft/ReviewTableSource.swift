@@ -36,7 +36,7 @@ class ReviewTableSource : NSObject , UITableViewDataSource , UITableViewDelegate
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return 1
     }
     
     

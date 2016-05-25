@@ -36,6 +36,9 @@ class ActivityItemCell: TableViewBaseCell{
         iconImage =  UIImageView(frame: CGRect(x: UIAdapter.shared.transferWidth(5) , y: UIAdapter.shared.transferHeight(5), width: UIAdapter.shared.transferWidth(40) , height: cellHeight - UIAdapter.shared.transferHeight(20)))
         self.addSubview(iconImage!)
         
+        
+//         self.raidName = AnimatedMaskLabel(frame: CGRect(x: UIAdapter.shared.transferWidth(51), y: UIAdapter.shared.transferHeight(5), width: UIAdapter.shared.transferWidth(100), height:  UIAdapter.shared.transferHeight(20)),type: "raid")
+        
         self.raidName = UILabel()
         self.raidName!.textColor = UIColor.whiteColor()
         self.addSubview(raidName!)

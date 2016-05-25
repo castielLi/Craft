@@ -58,6 +58,8 @@
 		18A824761BEE0C1900084589 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18A824751BEE0C1900084589 /* CoreGraphics.framework */; };
 		18A8247C1BEE2B5D00084589 /* MainTabbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A8247B1BEE2B5D00084589 /* MainTabbar.swift */; };
 		18A824821BEE2FCA00084589 /* SignUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A824811BEE2FCA00084589 /* SignUp.swift */; };
+		18A93DB51CE83E2D005EF64F /* AnimatedMaskLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A93DB41CE83E2D005EF64F /* AnimatedMaskLabel.swift */; };
+		18A93DB71CE83E52005EF64F /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18A93DB61CE83E52005EF64F /* QuartzCore.framework */; };
 		18AF8CA51BEDCCCB00539C0E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18AF8CA41BEDCCCB00539C0E /* AppDelegate.swift */; };
 		18AF8CAC1BEDCCCB00539C0E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 18AF8CAB1BEDCCCB00539C0E /* Assets.xcassets */; };
 		18AF8CAF1BEDCCCB00539C0E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 18AF8CAD1BEDCCCB00539C0E /* LaunchScreen.storyboard */; };
@@ -146,6 +148,8 @@
 		18A824751BEE0C1900084589 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		18A8247B1BEE2B5D00084589 /* MainTabbar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MainTabbar.swift; path = MainTabbar/MainTabbar.swift; sourceTree = "<group>"; };
 		18A824811BEE2FCA00084589 /* SignUp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SignUp.swift; path = SignUp/SignUp.swift; sourceTree = "<group>"; };
+		18A93DB41CE83E2D005EF64F /* AnimatedMaskLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimatedMaskLabel.swift; sourceTree = "<group>"; };
+		18A93DB61CE83E52005EF64F /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		18AF8CA11BEDCCCB00539C0E /* Craft.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Craft.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		18AF8CA41BEDCCCB00539C0E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		18AF8CAB1BEDCCCB00539C0E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -178,6 +182,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				18A93DB71CE83E52005EF64F /* QuartzCore.framework in Frameworks */,
 				180E19441C62EE7C00987CE6 /* libstdc++.tbd in Frameworks */,
 				180141071C53534700BE13B1 /* CoreImage.framework in Frameworks */,
 				18A824761BEE0C1900084589 /* CoreGraphics.framework in Frameworks */,
@@ -401,6 +406,7 @@
 		18A593D61C099C4700458308 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				18A93DB01CE83DB3005EF64F /* Label */,
 				18A593DD1C099D4E00458308 /* BaseTableViewCell */,
 				18A8244E1BEDCF9400084589 /* BaseViewController.swift */,
 				18A593D91C099C5A00458308 /* BaseTextfiledDeletgate.swift */,
@@ -609,6 +615,14 @@
 			name = Controller;
 			sourceTree = "<group>";
 		};
+		18A93DB01CE83DB3005EF64F /* Label */ = {
+			isa = PBXGroup;
+			children = (
+				18A93DB41CE83E2D005EF64F /* AnimatedMaskLabel.swift */,
+			);
+			name = Label;
+			sourceTree = "<group>";
+		};
 		18AF8C981BEDCCCB00539C0E = {
 			isa = PBXGroup;
 			children = (
@@ -716,6 +730,7 @@
 		583278BE556209F15C6BD56C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				18A93DB61CE83E52005EF64F /* QuartzCore.framework */,
 				180E19431C62EE7C00987CE6 /* libstdc++.tbd */,
 				180141061C53534700BE13B1 /* CoreImage.framework */,
 				18A824751BEE0C1900084589 /* CoreGraphics.framework */,
@@ -938,6 +953,7 @@
 				1817585B1C4B8CB5008913DB /* CalendarView.swift in Sources */,
 				18F7E46B1C97EE69007E3459 /* reviewTableCell.swift in Sources */,
 				189053001CA6733C006EFE69 /* ExtensionForGesture.swift in Sources */,
+				18A93DB51CE83E2D005EF64F /* AnimatedMaskLabel.swift in Sources */,
 				18E6046E1C0EC50800620499 /* ApiResult.swift in Sources */,
 				18A593DA1C099C5A00458308 /* BaseTextfiledDeletgate.swift in Sources */,
 				18A8245A1BEDF5CC00084589 /* ChooseSideCollectionCell.swift in Sources */,

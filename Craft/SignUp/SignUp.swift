@@ -56,23 +56,28 @@ class SignUp: ViewControllerBase , UITableViewDelegate , UITableViewDataSource {
         selector: "activitiesDialogDisappear:", name: "dismissAcitivtiesDialog", object: nil)
         self._hasNotification = true
         
-        let menuButton = UIButton(frame: CGRect(x: 0, y: 0, width: UIAdapter.shared.transferWidth(40), height: UIAdapter.shared.transferHeight(20)) )
-        menuButton.setTitle("Menu", forState: UIControlState.Normal)
-        menuButton.titleLabel!.textColor = UIColor.whiteColor()
+        let menuButton = UIButton(frame: CGRect(x: 0, y: 0, width: UIAdapter.shared.transferWidth(30), height: UIAdapter.shared.transferHeight(12)) )
+        menuButton.setBackgroundImage(UIImage(named: "friend"), forState: UIControlState.Normal)
         menuButton.addTarget(self, action: "MenuClick:", forControlEvents: UIControlEvents.TouchUpInside)
         
         let rightBarButton = UIBarButtonItem(customView: menuButton)
         self.navigationItem.rightBarButtonItem = rightBarButton
         
         
-        let calendarButton = UIButton(frame: CGRect(x: 0, y: 0, width: UIAdapter.shared.transferWidth(40), height: UIAdapter.shared.transferHeight(20)) )
-        calendarButton.setTitle("calendar", forState: UIControlState.Normal)
-        calendarButton.titleLabel!.textColor = UIColor.whiteColor()
-        calendarButton.addTarget(self, action: "calenderClick:", forControlEvents: UIControlEvents.TouchUpInside)
+        let calendarButton = UIButton(frame: CGRect(x: 0, y: 0, width: UIAdapter.shared.transferWidth(30), height: UIAdapter.shared.transferHeight(12)) )
+        calendarButton.setBackgroundImage(UIImage(named: "daily"), forState: UIControlState.Normal)
 
+        calendarButton.addTarget(self, action: "calenderClick:", forControlEvents: UIControlEvents.TouchUpInside)
+        
         
         let leftBarButton = UIBarButtonItem(customView: calendarButton)
         self.navigationItem.leftBarButtonItem = leftBarButton
+        
+        
+        let activityButton = UIButton(frame: CGRect(x: 0, y: 0, width: UIAdapter.shared.transferWidth(30), height: UIAdapter.shared.transferHeight(18)) )
+        activityButton.setBackgroundImage(UIImage(named: "activity"), forState: UIControlState.Normal)
+        
+        self.navigationItem.titleView = activityButton
 
         
         self.addTimerSwipe()
@@ -104,7 +109,7 @@ class SignUp: ViewControllerBase , UITableViewDelegate , UITableViewDataSource {
     func showCurrentView(sender : NSNotification){
         if self.firstTime {
             self.tabBarController?.tabBar.hidden = true
-            self.navigationController?.setNavigationBarHidden(true, animated: false)
+//            self.navigationController?.setNavigationBarHidden(true, animated: false)
             UIView.animateWithDuration(1, animations: { () -> Void in
                 self.view.alpha = 1
                 self.timeView!.alpha = 1
@@ -113,17 +118,23 @@ class SignUp: ViewControllerBase , UITableViewDelegate , UITableViewDataSource {
                 }, completion: { (finished) -> Void in
                     self.view.layer.removeAllAnimations()
                     self.tabBarController?.tabBar.hidden = true
-                    self.navigationController?.setNavigationBarHidden(false, animated: true) 
+//                    self.navigationController?.setNavigationBarHidden(false, animated: true) 
             })
         }
         self.firstTime = false
     }
 
     func calenderClick(sender : UIButton){
+        let soundId = soundPlay!.sound.valueForKey(SoundResource.clickEventSound) as! String
+        let id = UInt32(soundId)
+        AudioServicesPlaySystemSound(id!);
         self.tabBarController?.selectedIndex = 0
     }
     
     func MenuClick(sender : UIButton){
+        let soundId = soundPlay!.sound.valueForKey(SoundResource.clickEventSound) as! String
+        let id = UInt32(soundId)
+        AudioServicesPlaySystemSound(id!);
         self.MenuClick()
     }
     
@@ -237,7 +248,7 @@ class SignUp: ViewControllerBase , UITableViewDelegate , UITableViewDataSource {
     
     func setTimerView(){
         self.timeView = TimerView(frame: CGRectMake( (self.view.frame.width - UIAdapter.shared.transferWidth(200)) / 2 ,
-            (self.view.frame.height - UIAdapter.shared.transferWidth(200)) - 88 ,UIAdapter.shared.transferWidth(200), UIAdapter.shared.transferWidth(200)))
+            (self.view.frame.height - UIAdapter.shared.transferWidth(200)) - 88 - 64 ,UIAdapter.shared.transferWidth(200), UIAdapter.shared.transferWidth(200)))
         self.view.addSubview(self.timeView!)
         self.timeView!.joinButton!.addTarget(self, action: "joinButtonClick:", forControlEvents: UIControlEvents.TouchUpInside)
         self.timeView!.alpha = 0
@@ -245,7 +256,7 @@ class SignUp: ViewControllerBase , UITableViewDelegate , UITableViewDataSource {
     
     
     func setActivityMainView(){
-       self.activityMainView = ActivityMainView(frame: CGRect(x: -UIAdapter.shared.transferWidth(240), y: 64 + UIAdapter.shared.transferHeight(15), width: UIAdapter.shared.transferWidth(290), height: UIAdapter.shared.transferHeight(370)))
+       self.activityMainView = ActivityMainView(frame: CGRect(x: -UIAdapter.shared.transferWidth(240), y:  UIAdapter.shared.transferHeight(15), width: UIAdapter.shared.transferWidth(290), height: UIAdapter.shared.transferHeight(370)))
         
        self.view.addSubview(self.activityMainView!)
        self.activityMainView!.hidden = true
@@ -431,10 +442,11 @@ class SignUp: ViewControllerBase , UITableViewDelegate , UITableViewDataSource {
     
     
     func displayTimer(){
-       
+        if self.activityMainView!.frame.origin.x < 0{
         let soundId = soundPlay!.sound.valueForKey(SoundResource.swishout) as! String
         let id = UInt32(soundId)
         AudioServicesPlaySystemSound(id!);
+        }
         
         UIView.animateWithDuration(0.5, delay: 0, options: UIViewAnimationOptions.CurveEaseInOut, animations: { () -> Void in
             self.timeView!.frame.origin.y = -(self.view.frame.height - UIAdapter.shared.transferWidth(200) - 88 )

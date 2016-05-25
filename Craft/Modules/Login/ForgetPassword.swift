@@ -7,11 +7,10 @@
 //
 
 import UIKit
-import XCGLogger
+
 
 class ForgetPassword: ViewControllerBase {
    
-    let logger = XCGLogger()
     
     var backGroundImage : UIImageView?
     
@@ -35,7 +34,6 @@ class ForgetPassword: ViewControllerBase {
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-        logger.info("testing......")
         
     }
     

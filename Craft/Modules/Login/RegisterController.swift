@@ -7,11 +7,8 @@
 //
 
 import UIKit
-import XCGLogger
 
 class RegisterController: ViewControllerBase {
-    
-    let logger = XCGLogger()
     
     var backGroundImage : UIImageView?
     
@@ -40,7 +37,6 @@ class RegisterController: ViewControllerBase {
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-        logger.info("testing......")
        
     }
     

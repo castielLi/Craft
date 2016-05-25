@@ -7,11 +7,9 @@
 //
 import Foundation
 import AFNetworking
-import XCGLogger
-import Alamofire
 
 private let _sharedService: RESTService = { RESTService() }()
-let _baseUrl = "http://120.25.127.229:8080/wow/api"
+let _baseUrl = "162.243.241.80:8080/wow/api"
 //let _baseUrl = "http://10.10.120.95:86/api"
 
 
@@ -21,8 +19,6 @@ class RESTService {
     }
     
     var access_token:String?
-    var alamofireManager : Alamofire.Manager?
-    let log = XCGLogger()
     var configuration:NSURLSessionConfiguration?
 
     init()
@@ -30,8 +26,6 @@ class RESTService {
         configuration = NSURLSessionConfiguration.defaultSessionConfiguration()
         configuration!.timeoutIntervalForResource = 15 // seconds
         
-        self.alamofireManager = Alamofire.Manager(configuration: configuration!)
-        self.alamofireManager!.request(.GET, "http://example.com/")
     }
     
 

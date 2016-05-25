@@ -35,7 +35,7 @@ extension SignUp : UIGestureRecognizerDelegate{
     func gestureRecognizer(gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWithGestureRecognizer otherGestureRecognizer: UIGestureRecognizer) -> Bool {
         if gestureRecognizer is UISwipeGestureRecognizer{
             
-            if self.view.frame.origin.x > 0 {
+            if self.view.frame.origin.x > 0 || self.activityMainView!.frame.origin.x > 0{
                return false
             }
             return true

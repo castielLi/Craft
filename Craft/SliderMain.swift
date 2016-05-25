@@ -10,20 +10,22 @@ import UIKit
 
 class SliderMain: ViewControllerBase , MainMenuProtocol , UIGestureRecognizerDelegate{
 
+    var soundPlay :PlaySound?
     var calendar : CalendarView?
-//    var reviewTable : UITableView?
+    var reviewTable : UITableView?
     var bloodBackGroundImage : UIImageView?
     var reviewTableSource : ReviewTableSource?
     var rightMenu : RightMenu?
     var menuIsOpen : Bool = false
-    
+    var calenderBackground : UIImageView?
     var detailCell : UIView?
     var originCellFrame : CGRect?
     
     var detailCellTap : UITapGestureRecognizer?
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
-        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)        
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+        soundPlay = PlaySound.sharedData()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -35,22 +37,26 @@ class SliderMain: ViewControllerBase , MainMenuProtocol , UIGestureRecognizerDel
         self.tabBarController!.tabBar.hidden = true
         
 
-        let menuButton = UIButton(frame: CGRect(x: 0, y: 0, width: UIAdapter.shared.transferWidth(40), height: UIAdapter.shared.transferHeight(20)) )
-        menuButton.setTitle("Menu", forState: UIControlState.Normal)
-        menuButton.titleLabel!.textColor = UIColor.whiteColor()
+        let menuButton = UIButton(frame: CGRect(x: 0, y: 0, width: UIAdapter.shared.transferWidth(30), height: UIAdapter.shared.transferHeight(12)) )
+        menuButton.setBackgroundImage(UIImage(named: "friend"), forState: UIControlState.Normal)
         menuButton.addTarget(self, action: "MenuClick:", forControlEvents: UIControlEvents.TouchUpInside)
         
         let rightBarButton = UIBarButtonItem(customView: menuButton)
         self.navigationItem.rightBarButtonItem = rightBarButton
         
-        let activityButton = UIButton(frame: CGRect(x: 0, y: 0, width: UIAdapter.shared.transferWidth(40), height: UIAdapter.shared.transferHeight(20)) )
-        activityButton.setTitle("activity", forState: UIControlState.Normal)
-        activityButton.titleLabel!.textColor = UIColor.whiteColor()
-        activityButton.addTarget(self, action: "activityClick:", forControlEvents: UIControlEvents.TouchUpInside)
+        let dailyButton = UIButton(frame: CGRect(x: 0, y: 0, width: UIAdapter.shared.transferWidth(30), height: UIAdapter.shared.transferHeight(12)) )
+        dailyButton.setBackgroundImage(UIImage(named: "daily"), forState: UIControlState.Normal)
+       
         
         
-        let leftBarButton = UIBarButtonItem(customView: activityButton)
+        let leftBarButton = UIBarButtonItem(customView: dailyButton)
         self.navigationItem.leftBarButtonItem = leftBarButton
+        
+        let activityButton = UIButton(frame: CGRect(x: 0, y: 0, width: UIAdapter.shared.transferWidth(30), height: UIAdapter.shared.transferHeight(18)) )
+        activityButton.setBackgroundImage(UIImage(named: "activity"), forState: UIControlState.Normal)
+        activityButton.addTarget(self, action: "activityClick:", forControlEvents: UIControlEvents.TouchUpInside)
+        self.navigationItem.titleView = activityButton
+
 
         
         let alphaAnimation = CABasicAnimation(keyPath: "opacity")
@@ -58,8 +64,9 @@ class SliderMain: ViewControllerBase , MainMenuProtocol , UIGestureRecognizerDel
         alphaAnimation.fromValue = 0.3
         alphaAnimation.toValue = 1
 
-//        self.reviewTable!.layer.addAnimation(alphaAnimation, forKey: nil)
+        self.reviewTable!.layer.addAnimation(alphaAnimation, forKey: nil)
         self.calendar!.layer.addAnimation(alphaAnimation, forKey: nil)
+        self.calenderBackground!.layer.addAnimation(alphaAnimation,forKey : nil)
         
         let xAnimation = CABasicAnimation(keyPath: "position.x")
         xAnimation.toValue = self.view!.frame.size.width * 2
@@ -72,10 +79,16 @@ class SliderMain: ViewControllerBase , MainMenuProtocol , UIGestureRecognizerDel
 
     
     func MenuClick(sender : UIButton){
+        let soundId = soundPlay!.sound.valueForKey(SoundResource.clickEventSound) as! String
+        let id = UInt32(soundId)
+        AudioServicesPlaySystemSound(id!);
        self.MenuClick()
     }
     
     func activityClick(sender : UIButton){
+        let soundId = soundPlay!.sound.valueForKey(SoundResource.clickEventSound) as! String
+        let id = UInt32(soundId)
+        AudioServicesPlaySystemSound(id!);
        self.tabBarController?.selectedIndex = 1
     }
     
@@ -101,10 +114,18 @@ class SliderMain: ViewControllerBase , MainMenuProtocol , UIGestureRecognizerDel
     
     override func initView() {
         setBackGroundImage()
-//        setCalenderActivitiesReview()
+        setCalenderBackground()
+        setCalenderActivitiesReview()
         setCalenderView()
         setDetailCellView()
         setRightMenu()
+    }
+    
+    func setCalenderBackground(){
+        calenderBackground = UIImageView(frame: CGRectMake(UIAdapter.shared.transferWidth(20) , UIAdapter.shared.transferHeight(100), self.view.frame.width - UIAdapter.shared.transferWidth(40), UIAdapter.shared.transferHeight(290)))
+        calenderBackground!.image = UIImage(named: "dailyBackground")
+        self.view.addSubview(self.calenderBackground!)
+        
     }
     
     func setDetailCellView(){
@@ -140,21 +161,20 @@ class SliderMain: ViewControllerBase , MainMenuProtocol , UIGestureRecognizerDel
     }
 
     
-//    func setCalenderActivitiesReview(){
-//        
-//        self.reviewTableSource = ReviewTableSource()
-//        
-//        self.reviewTable = UITableView(frame: CGRect(x: UIAdapter.shared.transferWidth(20) , y: UIAdapter.shared.transferHeight(30) + 64, width: self.view.frame.size.width - UIAdapter.shared.transferWidth(40) , height: UIAdapter.shared.transferHeight(100)))
-//        self.reviewTable!.dataSource = self.reviewTableSource!
-//        self.reviewTable!.delegate = self.reviewTableSource!
-//        self.reviewTable!.showsVerticalScrollIndicator = false
-//        self.reviewTable!.backgroundColor = UIColor.clearColor()
-//        self.reviewTable!.separatorStyle = UITableViewCellSeparatorStyle.None
-//        self.reviewTable!.pagingEnabled = true
-//        self.view!.addSubview(reviewTable!)
-////        self.reviewTable!.transform = CGAffineTransformScale(CGAffineTransformIdentity, 0.6 , 0.6)
-////        self.reviewTable!.alpha = 0
-//    }
+    func setCalenderActivitiesReview(){
+        
+        self.reviewTableSource = ReviewTableSource()
+        
+        self.reviewTable = UITableView(frame: CGRect(x: UIAdapter.shared.transferWidth(50) , y: 10, width: self.view.frame.size.width - UIAdapter.shared.transferWidth(100) , height: UIAdapter.shared.transferHeight(200)))
+        self.reviewTable!.dataSource = self.reviewTableSource!
+        self.reviewTable!.scrollEnabled = false
+        self.reviewTable!.delegate = self.reviewTableSource!
+        self.reviewTable!.showsVerticalScrollIndicator = false
+        self.reviewTable!.backgroundColor = UIColor.clearColor()
+        self.reviewTable!.separatorStyle = UITableViewCellSeparatorStyle.None
+        self.reviewTable!.pagingEnabled = true
+        self.view!.addSubview(reviewTable!)
+    }
     
     
     func setBackGroundImage(){
@@ -169,71 +189,8 @@ class SliderMain: ViewControllerBase , MainMenuProtocol , UIGestureRecognizerDel
     
     
     func setCalenderView(){
-         self.calendar = CalendarView(frame: CGRectMake(0, 64 + UIAdapter.shared.transferHeight(80)  , self.view.frame.size.width, self.view.frame.size.height - 64 - UIAdapter.shared.transferHeight(80) ))
+         self.calendar = CalendarView(frame: CGRectMake(0, UIAdapter.shared.transferHeight(100)  , self.view.frame.size.width, self.view.frame.size.height - 64 - UIAdapter.shared.transferHeight(80) ))
          self.view.addSubview(self.calendar!)
-        
-         self.calendar!.cellCancelSelectedBlock = self.cellCancelSelectedBlock
-         self.calendar!.cellSelectedBlock = self.cellSelectedBlock
-        
-
-         self.detailCellTap = UITapGestureRecognizer(target: self, action: "blankClick:")
-         self.detailCellTap?.numberOfTapsRequired = 1
-         self.detailCellTap!.delegate = self
-         self.view.addGestureRecognizer(self.detailCellTap!)
-    }
-    
-    func blankClick(sender : UITapGestureRecognizer){
-        
-        
-        UIView.animateWithDuration(0.3, delay: 0, options: UIViewAnimationOptions.CurveEaseIn, animations: { () -> Void in
-            
-            self.detailCell!.frame = self.originCellFrame!
-           
-            
-        }) { (success) -> Void in
-            if success {
-                 self.detailCell!.hidden = true
-            }
-        }
-
-    }
-    
-    func gestureRecognizer(gestureRecognizer: UIGestureRecognizer, shouldReceiveTouch touch: UITouch) -> Bool {
-        
-        if self.originCellFrame == nil || self.detailCell!.hidden == true{
-           return false
-        }
-        
-        let point = touch.locationInView(gestureRecognizer.view)
-        
-        if CGRectContainsPoint(self.detailCell!.frame, point){
-            return false
-        }
-        return true
-    }
-    
-    func cellSelectedBlock(frame : CGRect){
-        
-        self.detailCell!.frame = CGRect(x: UIAdapter.shared.transferWidth(15) + frame.origin.x , y: 64 + UIAdapter.shared.transferHeight(80) + frame.origin.y, width: frame.size.width, height: frame.size.height)
-        
-        self.originCellFrame = self.detailCell!.frame
-        
-        UIView.animateWithDuration(0.3, delay: 0, options: UIViewAnimationOptions.CurveEaseIn, animations: { () -> Void in
-        
-                    self.detailCell!.frame = CGRect(x: UIAdapter.shared.transferWidth(30) , y: 64 + UIAdapter.shared.transferHeight(90) , width:  self.view.frame.width - UIAdapter.shared.transferWidth(60)  , height:
-                        UIAdapter.shared.transferHeight(200))
-        
-                    self.detailCell!.hidden = false
-        
-                }) { (success) -> Void in
-                    if success {
-                       
-            }
-        }
-    }
-    
-    func cellCancelSelectedBlock(frame : CGRect){
-    
     }
     
     

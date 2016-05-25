@@ -37,13 +37,14 @@ class CustomLayout: UICollectionViewLayout {
         let attribute = UICollectionViewLayoutAttributes(forCellWithIndexPath: indexPath)
         
         //单元格外部空隙，简单起见，这些常量都在方法内部定义了，没有共享成员
-        let lineSpacing = 5
+        let lineSpacing = 2
         
         //单元格变长
-        let cellSide:CGFloat = (UIScreen.mainScreen().bounds.width - UIAdapter.shared.transferWidth(30) - 40)/7
+        let cellSide:CGFloat = (UIScreen.mainScreen().bounds.width - UIAdapter.shared.transferWidth(120))/7
+        
         
         //内部间隙，左右5
-        let insets = UIEdgeInsetsMake(2, 5, 2, 5)
+        let insets = UIEdgeInsetsMake(0, 0, 0, 0)
         
         //当前行数
         let line:Int = indexPath.item / 7

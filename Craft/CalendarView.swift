@@ -10,7 +10,7 @@ import UIKit
 
 class CalendarView: UIView , UICollectionViewDataSource , UICollectionViewDelegate{
     
-    
+    var soundPlay :PlaySound?
     let cellWidth = (UIScreen.mainScreen().bounds.width - UIAdapter.shared.transferWidth(30) - 40)/7
 
     var collectionView: UICollectionView?
@@ -25,8 +25,7 @@ class CalendarView: UIView , UICollectionViewDataSource , UICollectionViewDelega
     var firstDay = 5
     var isLeapYear:Bool = true
     
-    var nextMonthButton = UIButton()
-    var beforeMonthButton = UIButton()
+    var nextButton : UIButton?
     
 
     
@@ -36,11 +35,12 @@ class CalendarView: UIView , UICollectionViewDataSource , UICollectionViewDelega
     override init(frame: CGRect) {
         super.init(frame: frame)
 
+        soundPlay = PlaySound.sharedData()
         createCellData()
         
         let layout = CustomLayout()
         
-        self.collectionView = UICollectionView(frame: CGRectMake(UIAdapter.shared.transferWidth(15) , 0, self.frame.width - UIAdapter.shared.transferWidth(30), UIAdapter.shared.transferHeight(205) ), collectionViewLayout: layout)
+        self.collectionView = UICollectionView(frame: CGRectMake(UIAdapter.shared.transferWidth(60) , UIAdapter.shared.transferHeight(60) , self.frame.width - UIAdapter.shared.transferWidth(120), UIAdapter.shared.transferHeight(190) ), collectionViewLayout: layout)
         
         //注册CollectionViewCell
         collectionView!.registerClass(CalendearCell.self, forCellWithReuseIdentifier: "ViewCell")
@@ -54,42 +54,26 @@ class CalendarView: UIView , UICollectionViewDataSource , UICollectionViewDelega
         
         self.addSubview(self.collectionView!)
         
-        nextMonthButton.layer.cornerRadius = UIAdapter.shared.transferWidth(2)
-        nextMonthButton.layer.masksToBounds = true
-        nextMonthButton.layer.borderWidth = 1
-        nextMonthButton.layer.borderColor = UIColor(red: 112/255, green: 87/255, blue: 62/255, alpha: 1).CGColor
-        nextMonthButton.addTarget(self, action: Selector("calculateNextFirstDay"), forControlEvents: .TouchUpInside)
-        self.addSubview(nextMonthButton)
+        setNextButton()
+    }
+    
+    func setNextButton(){
+        self.nextButton = UIButton()
+        self.nextButton!.setImage(UIImage(named: "nextpage"), forState: UIControlState.Normal)
+        self.nextButton!.addTarget(self, action: "calculateNextFirstDay", forControlEvents: UIControlEvents.TouchUpInside)
+        self.addSubview(self.nextButton!)
         
-        self.nextMonthButton.mas_makeConstraints{ make in
-           make.bottom.equalTo()(self.collectionView!.mas_bottom).with().offset()(UIAdapter.shared.transferHeight(20))
-           make.top.equalTo()(self.collectionView!.mas_bottom).with().offset()(UIAdapter.shared.transferHeight(12))
-           make.left.equalTo()(self.collectionView!.mas_right).with().offset()(UIAdapter.shared.transferWidth(-20))
-           make.right.equalTo()(self.collectionView!)
+        self.nextButton!.mas_makeConstraints{ make in
+           make.top.equalTo()(self.collectionView!.mas_bottom).with().offset()(UIAdapter.shared.transferHeight(7))
+           make.width.equalTo()(UIAdapter.shared.transferWidth(100))
+           make.height.equalTo()(UIAdapter.shared.transferHeight(27))
+           make.centerX.equalTo()(self.collectionView!)
         }
-        
-        beforeMonthButton.layer.cornerRadius = UIAdapter.shared.transferWidth(2)
-        beforeMonthButton.layer.masksToBounds = true
-        beforeMonthButton.layer.borderWidth = 1
-        beforeMonthButton.layer.borderColor = UIColor(red: 112/255, green: 87/255, blue: 62/255, alpha: 1).CGColor
-        beforeMonthButton.addTarget(self, action: Selector("calculateBeforeFirstDay"), forControlEvents: .TouchUpInside)
-        self.addSubview(beforeMonthButton)
-        
-        self.beforeMonthButton.mas_makeConstraints{ make in
-            make.top.equalTo()(self.collectionView!.mas_top).with().offset()(UIAdapter.shared.transferHeight(-18))
-            make.bottom.equalTo()(self.collectionView!.mas_top).with().offset()(UIAdapter.shared.transferHeight(-10))
-            make.left.equalTo()(self.collectionView!.mas_right).with().offset()(UIAdapter.shared.transferWidth(-20))
-            make.right.equalTo()(self.collectionView!)
-        }
-        
-        
-       
     }
     
     func scrollViewDidScroll(scrollView: UIScrollView) {
         let y = scrollView.contentOffset.y
         
-        print("\(y)")
         if y > 20{
             dispatch(2.0, scrollMenu: 1)
         }else if y < -20{
@@ -122,6 +106,11 @@ class CalendarView: UIView , UICollectionViewDataSource , UICollectionViewDelega
      计算下个月的一号信息
      */
     func calculateNextFirstDay(){
+        
+        let soundId = soundPlay!.sound.valueForKey(SoundResource.clickEventSound) as! String
+        let id = UInt32(soundId)
+        AudioServicesPlaySystemSound(id!);
+        
         var nextMonth:Int!
         var currentMonth:Int!
         var currentMotnDays:Int!
@@ -270,23 +259,15 @@ class CalendarView: UIView , UICollectionViewDataSource , UICollectionViewDelega
              cell = CalendearCell(frame: CGRect(x: 0, y: 0, width: cellWidth, height: cellWidth))
         }
         
-        cell!.contentLabel!.text = cellData[indexPath.item]
-        cell!.contentLabel!.tag = indexPath.item + 1
         cell!.normalLabel!.text = cellData[indexPath.item]
         cell!.normalLabel!.tag = indexPath.item + 1
         
-        if indexPath.row % 4 == 0 {
-           cell!.normalLabel!.hidden = true
-           cell!.contentLabel!.hidden = false
-           cell!.iconImage!.hidden = false
+        if cellData[indexPath.item] == "3" || cellData[indexPath.item] == "4"{
+            cell!.iconImage!.hidden = false
         }else{
-            cell!.normalLabel!.hidden = false
-            cell!.contentLabel!.hidden = true
-            cell!.iconImage!.hidden = true
-
-           
+           cell!.iconImage!.hidden = true
         }
-        
+
         cell!.backgroundColor = UIColor.clearColor()
         
         return cell!
@@ -295,17 +276,13 @@ class CalendarView: UIView , UICollectionViewDataSource , UICollectionViewDelega
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         let cell = collectionView.cellForItemAtIndexPath(indexPath)
         
-        cell!.backgroundColor = Resources.Color.goldenEdge
-        self.cellSelectedBlock!(frame: cell!.frame)
+
 
     }
     
     func collectionView(collectionView: UICollectionView, didDeselectItemAtIndexPath indexPath: NSIndexPath) {
         let cell = collectionView.cellForItemAtIndexPath(indexPath)
         
-        cell!.backgroundColor = UIColor.clearColor()
-        
-        self.cellCancelSelectedBlock!(frame: cell!.frame)
     }
 
     
