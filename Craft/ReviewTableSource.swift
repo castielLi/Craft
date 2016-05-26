@@ -12,6 +12,7 @@ class ReviewTableSource : NSObject , UITableViewDataSource , UITableViewDelegate
     
     var cellHeight : CGFloat?
     var name : String?
+    var _selectedCell :(()->Void)?
     override init() {
         super.init()
     }
@@ -37,6 +38,10 @@ class ReviewTableSource : NSObject , UITableViewDataSource , UITableViewDelegate
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1
+    }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        self._selectedCell!()
     }
     
     

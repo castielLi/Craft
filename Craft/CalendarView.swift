@@ -15,8 +15,8 @@ class CalendarView: UIView , UICollectionViewDataSource , UICollectionViewDelega
 
     var collectionView: UICollectionView?
     
-    var cellSelectedBlock : ((frame : CGRect)->Void)?
-    var cellCancelSelectedBlock : ((frame : CGRect)->Void)?
+    var cellSelectedBlock : ((activities : NSArray)->Void)?
+    var cellCancelSelectedBlock : ((activities : NSArray)->Void)?
     
     var cellData: [String] = ["日", "一", "二", "三", "四", "五", "六"]
     
@@ -276,12 +276,13 @@ class CalendarView: UIView , UICollectionViewDataSource , UICollectionViewDelega
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         let cell = collectionView.cellForItemAtIndexPath(indexPath)
         
-
-
+        self.cellSelectedBlock!(activities: NSArray())
+        
     }
     
     func collectionView(collectionView: UICollectionView, didDeselectItemAtIndexPath indexPath: NSIndexPath) {
         let cell = collectionView.cellForItemAtIndexPath(indexPath)
+        
         
     }
 

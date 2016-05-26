@@ -13,5 +13,6 @@ struct Resources {
         static let goldenEdge =  UIColor(red: 112/255, green: 87/255, blue: 62/255, alpha: 1)
         static let dailyColor =  UIColor(red: 185/255, green: 171/255, blue: 146/255, alpha: 1)
         static let accountColor =  UIColor(red: 101/255, green: 184/255, blue: 225/255, alpha: 1)
+        static let bloodBackgournd = UIColor(red: 78/255, green: 8/255, blue: 8/255, alpha: 1)
     }
 }

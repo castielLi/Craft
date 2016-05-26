@@ -18,8 +18,9 @@ class SliderMain: ViewControllerBase , MainMenuProtocol , UIGestureRecognizerDel
     var rightMenu : RightMenu?
     var menuIsOpen : Bool = false
     var calenderBackground : UIImageView?
-    var detailCell : UIView?
+    var dailyBackground : UIImageView?
     var originCellFrame : CGRect?
+    var dailyDetail : DailyDetail?
     
     var detailCellTap : UITapGestureRecognizer?
     
@@ -117,27 +118,23 @@ class SliderMain: ViewControllerBase , MainMenuProtocol , UIGestureRecognizerDel
         setCalenderBackground()
         setCalenderActivitiesReview()
         setCalenderView()
-        setDetailCellView()
         setRightMenu()
+        setDailyDetail()
+    }
+    
+    func setDailyDetail(){
+        self.dailyDetail = DailyDetail(frame: CGRectMake(UIAdapter.shared.transferWidth(30) , UIAdapter.shared.transferHeight(100), self.view.frame.width - UIAdapter.shared.transferWidth(60), UIAdapter.shared.transferHeight(290)))
+        self.view.addSubview(self.dailyDetail!)
+        self.dailyDetail!.alpha = 0
+        self.dailyDetail!.hidden = true
     }
     
     func setCalenderBackground(){
-        calenderBackground = UIImageView(frame: CGRectMake(UIAdapter.shared.transferWidth(20) , UIAdapter.shared.transferHeight(100), self.view.frame.width - UIAdapter.shared.transferWidth(40), UIAdapter.shared.transferHeight(290)))
+        calenderBackground = UIImageView(frame: CGRectMake(UIAdapter.shared.transferWidth(30) , UIAdapter.shared.transferHeight(100), self.view.frame.width - UIAdapter.shared.transferWidth(60), UIAdapter.shared.transferHeight(290)))
         calenderBackground!.image = UIImage(named: "dailyBackground")
         self.view.addSubview(self.calenderBackground!)
-        
     }
     
-    func setDetailCellView(){
-        detailCell = UIView()
-        detailCell!.backgroundColor = Resources.Color.goldenEdge
-        detailCell!.layer.cornerRadius = 5
-        detailCell!.layer.borderWidth = 2
-        detailCell!.layer.borderColor = Resources.Color.goldenEdge.CGColor
-        detailCell!.layer.masksToBounds = true
-        detailCell!.hidden = true
-        self.view!.addSubview(detailCell!)
-    }
     
     
     func setRightMenu(){
@@ -164,6 +161,7 @@ class SliderMain: ViewControllerBase , MainMenuProtocol , UIGestureRecognizerDel
     func setCalenderActivitiesReview(){
         
         self.reviewTableSource = ReviewTableSource()
+        self.reviewTableSource!._selectedCell = self.goUserSetting
         
         self.reviewTable = UITableView(frame: CGRect(x: UIAdapter.shared.transferWidth(50) , y: 10, width: self.view.frame.size.width - UIAdapter.shared.transferWidth(100) , height: UIAdapter.shared.transferHeight(200)))
         self.reviewTable!.dataSource = self.reviewTableSource!
@@ -191,6 +189,7 @@ class SliderMain: ViewControllerBase , MainMenuProtocol , UIGestureRecognizerDel
     func setCalenderView(){
          self.calendar = CalendarView(frame: CGRectMake(0, UIAdapter.shared.transferHeight(100)  , self.view.frame.size.width, self.view.frame.size.height - 64 - UIAdapter.shared.transferHeight(80) ))
          self.view.addSubview(self.calendar!)
+        self.calendar!.cellSelectedBlock = self.dailySelected
     }
     
     
@@ -225,6 +224,44 @@ class SliderMain: ViewControllerBase , MainMenuProtocol , UIGestureRecognizerDel
         self.menuIsOpen = !self.menuIsOpen
     }
 
+    
+    func dailySelected( activities : NSArray){
+        
+        UIView.animateWithDuration(0.5, animations: {
+            self.calenderBackground!.frame = CGRectMake(UIAdapter.shared.transferWidth(40), UIAdapter.shared.transferHeight(100), self.view.frame.width - UIAdapter.shared.transferWidth(80), UIAdapter.shared.transferHeight(200))
+                self.dailyDetail!.hidden = false
+                self.calendar!.hidden = true
+            }) { (success) in
+               
+                UIView.animateWithDuration(0.7, animations: {
+                    
+                    self.dailyDetail!.alpha = 1
+                })
+        }
+        
+    }
+    
+    func dailyDeSelected( activities : NSArray){
+        
+        UIView.animateWithDuration(0.5, animations: {
+            self.calenderBackground = UIImageView(frame: CGRectMake(UIAdapter.shared.transferWidth(30) , UIAdapter.shared.transferHeight(100), self.view.frame.width - UIAdapter.shared.transferWidth(60), UIAdapter.shared.transferHeight(290)))
+            self.dailyDetail!.hidden = true
+            self.calendar!.hidden = false
+        }) { (success) in
+            
+            UIView.animateWithDuration(0.7, animations: {
+               
+                self.dailyDetail!.alpha = 0
+            })
+           
+        }
+
+    }
+    
+    func goUserSetting(){
+        let userSetting = UserSetting(nibName: nil, bundle: nil)
+        self.navigationController?.pushViewController(userSetting, animated: false)
+    }
 
 
     /*

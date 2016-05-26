@@ -66,6 +66,8 @@
 		18AF8CBA1BEDCCCB00539C0E /* CraftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18AF8CB91BEDCCCB00539C0E /* CraftTests.swift */; };
 		18AF8CC51BEDCCCB00539C0E /* CraftUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18AF8CC41BEDCCCB00539C0E /* CraftUITests.swift */; };
 		18AFE5D11CBE6FF1000DAD84 /* AddNewActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18AFE5D01CBE6FF1000DAD84 /* AddNewActivity.swift */; };
+		18CE64341CF7354500834C2B /* DailyDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CE64331CF7354500834C2B /* DailyDetail.swift */; };
+		18CE64381CF74E2300834C2B /* dailyDutyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CE64371CF74E2300834C2B /* dailyDutyView.swift */; };
 		18E259CB1CCA5F6000743FCA /* DropDownSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E259CA1CCA5F6000743FCA /* DropDownSelection.swift */; };
 		18E43FBA1CE0D1F000F9A382 /* PlaySound.m in Sources */ = {isa = PBXBuildFile; fileRef = 18E43FB91CE0D1F000F9A382 /* PlaySound.m */; };
 		18E43FBD1CE0E2E300F9A382 /* SoundResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E43FBC1CE0E2E300F9A382 /* SoundResource.swift */; };
@@ -162,6 +164,8 @@
 		18AF8CC41BEDCCCB00539C0E /* CraftUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CraftUITests.swift; sourceTree = "<group>"; };
 		18AF8CC61BEDCCCB00539C0E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		18AFE5D01CBE6FF1000DAD84 /* AddNewActivity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AddNewActivity.swift; path = SignUp/AddNewActivity.swift; sourceTree = "<group>"; };
+		18CE64331CF7354500834C2B /* DailyDetail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DailyDetail.swift; path = SliderMain/DailyDetail.swift; sourceTree = "<group>"; };
+		18CE64371CF74E2300834C2B /* dailyDutyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = dailyDutyView.swift; path = Common/dailyDutyView.swift; sourceTree = "<group>"; };
 		18E259CA1CCA5F6000743FCA /* DropDownSelection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DropDownSelection.swift; sourceTree = "<group>"; };
 		18E43FB91CE0D1F000F9A382 /* PlaySound.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlaySound.m; sourceTree = "<group>"; };
 		18E43FBB1CE0D20500F9A382 /* PlaySound.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PlaySound.h; sourceTree = "<group>"; };
@@ -280,6 +284,7 @@
 				1817585A1C4B8CB5008913DB /* CalendarView.swift */,
 				1817585C1C4B8D45008913DB /* CustomLayout.swift */,
 				181C3E9E1C57ABB600A822D0 /* CalendearCell.swift */,
+				18CE64331CF7354500834C2B /* DailyDetail.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -355,6 +360,7 @@
 			children = (
 				1892E8D01CDE3BED002AAEBF /* dutyView.swift */,
 				1892E8D21CDE46D9002AAEBF /* Time.swift */,
+				18CE64371CF74E2300834C2B /* dailyDutyView.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -978,6 +984,7 @@
 				18F7E4671C97B2EF007E3459 /* ReviewTableSource.swift in Sources */,
 				184867821BF8506F00016A4E /* SliderMain.swift in Sources */,
 				1892E8D31CDE46D9002AAEBF /* Time.swift in Sources */,
+				18CE64341CF7354500834C2B /* DailyDetail.swift in Sources */,
 				18E43FBA1CE0D1F000F9A382 /* PlaySound.m in Sources */,
 				18E259CB1CCA5F6000743FCA /* DropDownSelection.swift in Sources */,
 				1893E2E01C7C604C00F74A2B /* MyActivities.swift in Sources */,
@@ -985,6 +992,7 @@
 				18A593DC1C099D4100458308 /* CellType.swift in Sources */,
 				18A593D81C099C5300458308 /* TableViewBaseCell.swift in Sources */,
 				18AFE5D11CBE6FF1000DAD84 /* AddNewActivity.swift in Sources */,
+				18CE64381CF74E2300834C2B /* dailyDutyView.swift in Sources */,
 				180E194B1C63204900987CE6 /* MainMenuProtocol.swift in Sources */,
 				18A824821BEE2FCA00084589 /* SignUp.swift in Sources */,
 				18A824581BEDED8900084589 /* ChooseSide.swift in Sources */,
