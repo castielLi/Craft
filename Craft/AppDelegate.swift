@@ -43,8 +43,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
         
-        
-        
         RCIM.sharedRCIM().initWithAppKey("pkfcgjstfdgr8")
         
         UMessage.startWithAppkey("572b270d67e58eabeb0030be", launchOptions: launchOptions)
@@ -59,14 +57,29 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         UIApplication.sharedApplication().setStatusBarStyle(UIStatusBarStyle.LightContent, animated: true)
         self.window!.makeKeyAndVisible()
-
         
+        let customQueue = dispatch_queue_create("initSystemSound", nil)
+        dispatch_async(customQueue, {
+            PlaySound.sharedData()
+        })
+        
+        let loginView = LoginController(nibName: nil, bundle: nil)
+        let loginNav = UINavigationController(rootViewController: loginView)
+        self.window!.rootViewController!.presentViewController(loginNav, animated: false, completion: nil)
+        
+
+        self.registerNotification()
+        return true
+    }
+    
+    
+    func registerNotification(){
         let completeAction = UIMutableUserNotificationAction()
         completeAction.identifier = "OK" // the unique identifier for this action
         completeAction.title = "接受" // title for the action button
         completeAction.activationMode = .Background // UIUserNotificationActivationMode.Background - don't bring app to foreground
         completeAction.authenticationRequired = false // don't require unlocking before performing action
-//        completeAction.destructive = true // display action in red
+        //        completeAction.destructive = true // display action in red
         
         let refuseAction = UIMutableUserNotificationAction()
         refuseAction.identifier = "Refuse"
@@ -117,18 +130,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let settings = UIUserNotificationSettings(forTypes: [.Alert, .Badge , .Sound], categories: NSSet(array: [todoCategory,cancelCategory]) as? Set<UIUserNotificationCategory>)
         
         UMessage.registerRemoteNotificationAndUserNotificationSettings(settings)
-
-//        UIApplication.sharedApplication().registerUserNotificationSettings(settings)
+        
+        //        UIApplication.sharedApplication().registerUserNotificationSettings(settings)
         
         UMessage.setLogEnabled(true)
-        
-        let customQueue = dispatch_queue_create("initSystemSound", nil)
-        dispatch_async(customQueue, {
-            PlaySound.sharedData()
-        })
-
-        return true
     }
+    
 
     func applicationWillResignActive(application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

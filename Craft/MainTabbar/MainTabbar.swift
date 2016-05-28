@@ -24,7 +24,7 @@ class MainTabbar: UITabBarController {
         signNav.navigationBar.barTintColor = UIColor.whiteColor()
         
         
-        let controllers = [sliderMainNav,signNav]
+        let controllers = [signNav]
         
         self.tabBar.barTintColor = UIColor.whiteColor()
         self.setViewControllers(controllers, animated: true)

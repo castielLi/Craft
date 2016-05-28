@@ -22,7 +22,14 @@ class SliderMain: ViewControllerBase , MainMenuProtocol , UIGestureRecognizerDel
     var originCellFrame : CGRect?
     var dailyDetail : DailyDetail?
     
-    var detailCellTap : UITapGestureRecognizer?
+    var showTimerSwipe : UISwipeGestureRecognizer?
+    var showActivitySwipe : UISwipeGestureRecognizer?
+    var showChatSwipe : UISwipeGestureRecognizer?
+    
+
+    weak var sign : SignUp?
+    
+    
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
@@ -35,7 +42,6 @@ class SliderMain: ViewControllerBase , MainMenuProtocol , UIGestureRecognizerDel
 
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        self.tabBarController!.tabBar.hidden = true
         
 
         let menuButton = UIButton(frame: CGRect(x: 0, y: 0, width: UIAdapter.shared.transferWidth(30), height: UIAdapter.shared.transferHeight(12)) )
@@ -58,7 +64,7 @@ class SliderMain: ViewControllerBase , MainMenuProtocol , UIGestureRecognizerDel
         activityButton.addTarget(self, action: "activityClick:", forControlEvents: UIControlEvents.TouchUpInside)
         self.navigationItem.titleView = activityButton
 
-
+        self.registerViewsGesture()
         
         let alphaAnimation = CABasicAnimation(keyPath: "opacity")
         alphaAnimation.duration = 0.8
@@ -68,14 +74,6 @@ class SliderMain: ViewControllerBase , MainMenuProtocol , UIGestureRecognizerDel
         self.reviewTable!.layer.addAnimation(alphaAnimation, forKey: nil)
         self.calendar!.layer.addAnimation(alphaAnimation, forKey: nil)
         self.calenderBackground!.layer.addAnimation(alphaAnimation,forKey : nil)
-        
-        let xAnimation = CABasicAnimation(keyPath: "position.x")
-        xAnimation.toValue = self.view!.frame.size.width * 2
-        xAnimation.fromValue = -self.view!.frame.size.width / 2
-        xAnimation.duration = 20
-        xAnimation.repeatCount = Float.infinity
-        bloodBackGroundImage!.layer.addAnimation(xAnimation, forKey: "position.x")
-        
     }
 
     
@@ -87,10 +85,7 @@ class SliderMain: ViewControllerBase , MainMenuProtocol , UIGestureRecognizerDel
     }
     
     func activityClick(sender : UIButton){
-        let soundId = soundPlay!.sound.valueForKey(SoundResource.clickEventSound) as! String
-        let id = UInt32(soundId)
-        AudioServicesPlaySystemSound(id!);
-       self.tabBarController?.selectedIndex = 1
+        self.disappearDaily(self.sign!.showTimer)
     }
     
 
@@ -109,12 +104,11 @@ class SliderMain: ViewControllerBase , MainMenuProtocol , UIGestureRecognizerDel
         self.navigationItem.backBarButtonItem = backButton
         self.navigationItem.backBarButtonItem!.title = ""
         
-        self.view.backgroundColor = UIColor.whiteColor()
+        self.view.backgroundColor = UIColor.clearColor()
         
     }
     
     override func initView() {
-        setBackGroundImage()
         setCalenderBackground()
         setCalenderActivitiesReview()
         setCalenderView()
@@ -173,18 +167,6 @@ class SliderMain: ViewControllerBase , MainMenuProtocol , UIGestureRecognizerDel
         self.reviewTable!.pagingEnabled = true
         self.view!.addSubview(reviewTable!)
     }
-    
-    
-    func setBackGroundImage(){
-        self.backGroundImage = UIImageView(frame: CGRectMake(0, 0, self.view.frame.width, self.view.frame.height))
-        self.backGroundImage!.image = UIImage(named: "MainBackGround")
-        self.view.addSubview(backGroundImage!)
-        
-        self.bloodBackGroundImage = UIImageView(frame: CGRectMake(0, 0, self.view.frame.width, self.view.frame.height))
-        self.bloodBackGroundImage!.image = UIImage(named: "blood")
-        self.view.addSubview(self.bloodBackGroundImage!)
-    }
-    
     
     func setCalenderView(){
          self.calendar = CalendarView(frame: CGRectMake(0, UIAdapter.shared.transferHeight(100)  , self.view.frame.size.width, self.view.frame.size.height - 64 - UIAdapter.shared.transferHeight(80) ))

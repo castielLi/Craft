@@ -9,7 +9,7 @@
 import UIKit
 import AVFoundation
 
-class SignUp: ViewControllerBase , UITableViewDelegate , UITableViewDataSource {
+class SignUp: ViewControllerBase {
 
     var soundPlay :PlaySound?
     var firstTime : Bool = true
@@ -20,20 +20,21 @@ class SignUp: ViewControllerBase , UITableViewDelegate , UITableViewDataSource {
     var verifyRequestCount : Int = 5
     var timeView : TimerView?
     var activityMainView : ActivityMainView?
-    var panGesture : UIPanGestureRecognizer?
-
     var menuIsOpen : Bool = false
-    var TimerLimit : UIButton?
-    var collectionOfStone : UIButton?
     var mainMenuProtocal : MainMenuProtocol?
     var ovalShapeLayer: CAShapeLayer?
+    var rightMenu : RightMenu?
     
-    var disappearTimerSwipe : UISwipeGestureRecognizer?
-    var disappearActivitySwipe : UISwipeGestureRecognizer?
+    //display views
+    var showTimerSwipe : UISwipeGestureRecognizer?
+    var showActivitySwipe : UISwipeGestureRecognizer?
+    var showDailySwipe : UISwipeGestureRecognizer?
+    var showChatSwipe : UISwipeGestureRecognizer?
     var timerVisible : Bool = false
     var activityVisible : Bool = false
+    var chatVisible : Bool = false
+    var dailyVisible : Bool = false
     
-    var rightMenu : RightMenu?
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
@@ -78,10 +79,8 @@ class SignUp: ViewControllerBase , UITableViewDelegate , UITableViewDataSource {
         activityButton.setBackgroundImage(UIImage(named: "activity"), forState: UIControlState.Normal)
         
         self.navigationItem.titleView = activityButton
-
         
-        self.addTimerSwipe()
-        self.addActivitySwipe()
+        self.registerGesture()
         
         
         let animation = CASpringAnimation(keyPath: "position.x")
@@ -96,13 +95,6 @@ class SignUp: ViewControllerBase , UITableViewDelegate , UITableViewDataSource {
         
         self.timeView!.layer.addAnimation(animation, forKey: nil)
         self.activityMainView!.layer.addAnimation(animation, forKey: nil)
-        
-        let xAnimation = CABasicAnimation(keyPath: "position.x")
-        xAnimation.toValue = self.view!.frame.size.width * 2
-        xAnimation.fromValue = -self.view!.frame.size.width / 2
-        xAnimation.duration = 20
-        xAnimation.repeatCount = Float.infinity
-        bloodBackGroundImage!.layer.addAnimation(xAnimation, forKey: "position.x")
         
     }
     
@@ -128,7 +120,7 @@ class SignUp: ViewControllerBase , UITableViewDelegate , UITableViewDataSource {
         let soundId = soundPlay!.sound.valueForKey(SoundResource.clickEventSound) as! String
         let id = UInt32(soundId)
         AudioServicesPlaySystemSound(id!);
-        self.tabBarController?.selectedIndex = 0
+        self.showDaily()
     }
     
     func MenuClick(sender : UIButton){
@@ -146,13 +138,13 @@ class SignUp: ViewControllerBase , UITableViewDelegate , UITableViewDataSource {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.alpha = 0
-        let loginView = LoginController(nibName: nil, bundle: nil)
-        let loginNav = UINavigationController(rootViewController: loginView)
-        self.tabBarController?.presentViewController(loginNav, animated: false, completion: nil)
+       
         
         self.navigationController!.navigationBar.barStyle = UIBarStyle.BlackTranslucent
         self.navigationController!.navigationBar.setBackgroundImage(UIImage(named: "navigationBackGround"), forBarMetrics: UIBarMetrics.Default)
         
+        
+        self.timerVisible = true
         
         // Do any additional setup after loading the view.
         
@@ -168,8 +160,6 @@ class SignUp: ViewControllerBase , UITableViewDelegate , UITableViewDataSource {
         setRightMenu()
         setTimerView()
         setActivityMainView()
-        setTimerLimit()
-        setStone()
     }
     
     func setRightMenu(){
@@ -193,38 +183,6 @@ class SignUp: ViewControllerBase , UITableViewDelegate , UITableViewDataSource {
         self.navigationController?.pushViewController(chat, animated: true)
     }
     
-    
-    func setTimerLimit(){
-        TimerLimit = UIButton()
-        TimerLimit!.bounds.size = CGSize(width: UIAdapter.shared.transferWidth(15), height: UIAdapter.shared.transferWidth(15))
-        TimerLimit!.layer.cornerRadius = UIAdapter.shared.transferWidth(15/2)
-        TimerLimit!.layer.masksToBounds = true
-        TimerLimit!.setBackgroundImage(UIImage(named: "Chat"), forState: UIControlState.Normal)
-        TimerLimit!.addTarget(self, action: "TimerLimitClick:", forControlEvents: UIControlEvents.TouchUpInside)
-        self.view.addSubview(self.TimerLimit!)
-        
-        self.TimerLimit!.mas_makeConstraints{ make in
-           make.left.equalTo()(self.view).with().offset()(UIAdapter.shared.transferWidth(15))
-           make.top.equalTo()(self.view!.mas_bottom).with().offset()(-44 - UIAdapter.shared.transferWidth(15))
-        }
-    }
-    
-    func setStone(){
-        collectionOfStone = UIButton()
-        collectionOfStone!.bounds.size = CGSize(width: UIAdapter.shared.transferWidth(15), height: UIAdapter.shared.transferWidth(15))
-        collectionOfStone!.layer.cornerRadius = UIAdapter.shared.transferWidth(15/2)
-        collectionOfStone!.layer.masksToBounds = true
-        collectionOfStone!.setBackgroundImage(UIImage(named: "Chat"), forState: UIControlState.Normal)
-        collectionOfStone!.addTarget(self, action: "StoneClick:", forControlEvents: UIControlEvents.TouchUpInside)
-        self.view.addSubview(self.collectionOfStone!)
-        
-        self.collectionOfStone!.mas_makeConstraints{ make in
-            make.right.equalTo()(self.view!.mas_right).with().offset()(UIAdapter.shared.transferWidth(-15))
-            make.top.equalTo()(self.view!.mas_bottom).with().offset()(-44 - UIAdapter.shared.transferWidth(15))
-        }
-    }
-
-    
     func setBackGround(){
         self.backGroundImage = UIImageView(frame: CGRectMake(0, 0, self.view.frame.width, self.view.frame.height))
         self.backGroundImage!.image = UIImage(named: "MainBackGround")
@@ -235,15 +193,6 @@ class SignUp: ViewControllerBase , UITableViewDelegate , UITableViewDataSource {
         self.bloodBackGroundImage = UIImageView(frame: CGRectMake(0, 0, self.view.frame.width, self.view.frame.height))
         self.bloodBackGroundImage!.image = UIImage(named: "blood")
         self.view.addSubview(self.bloodBackGroundImage!)
-        
-        
-        
-        //变幻背景图片
-        
-//        self.verifyRequestCount = 5
-//        self.timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: "updateTimer:", userInfo: nil, repeats: true)
-        
-       
     }
     
     func setTimerView(){
@@ -256,7 +205,7 @@ class SignUp: ViewControllerBase , UITableViewDelegate , UITableViewDataSource {
     
     
     func setActivityMainView(){
-       self.activityMainView = ActivityMainView(frame: CGRect(x: -UIAdapter.shared.transferWidth(240), y:  UIAdapter.shared.transferHeight(15), width: UIAdapter.shared.transferWidth(290), height: UIAdapter.shared.transferHeight(370)))
+       self.activityMainView = ActivityMainView(frame: CGRect(x: -UIAdapter.shared.transferWidth(290), y:  UIAdapter.shared.transferHeight(15), width: UIAdapter.shared.transferWidth(290), height: UIAdapter.shared.transferHeight(370)))
         
        self.view.addSubview(self.activityMainView!)
        self.activityMainView!.hidden = true
@@ -391,20 +340,6 @@ class SignUp: ViewControllerBase , UITableViewDelegate , UITableViewDataSource {
          self.verifyRequestCount -= 1
     }
     
-    
-    func TimerLimitClick(sender : UIButton){
-        
-        let soundId = soundPlay!.sound.valueForKey(SoundResource.clickEventSound) as! String
-        let id = UInt32(soundId)
-        AudioServicesPlaySystemSound(id!);
-        
-        if self.view.frame.origin.x > 0 {
-            return
-        }
-        
-        self.displayActivity()
-    }
-    
     func MenuClick(){
         
         let soundId = soundPlay!.sound.valueForKey(SoundResource.clickEventSound) as! String
@@ -430,67 +365,6 @@ class SignUp: ViewControllerBase , UITableViewDelegate , UITableViewDataSource {
         }
         self.menuIsOpen = !self.menuIsOpen
     }
-    
-    func StoneClick(sender : UIButton){
-//        self.mainMenuProtocal!.ChooseTab(1)
-        let soundId = soundPlay!.sound.valueForKey(SoundResource.clickEventSound) as! String
-        let id = UInt32(soundId)
-        AudioServicesPlaySystemSound(id!);
-        
-        self.displayTimer()
-    }
-    
-    
-    func displayTimer(){
-        if self.activityMainView!.frame.origin.x < 0{
-        let soundId = soundPlay!.sound.valueForKey(SoundResource.swishout) as! String
-        let id = UInt32(soundId)
-        AudioServicesPlaySystemSound(id!);
-        }
-        
-        UIView.animateWithDuration(0.5, delay: 0, options: UIViewAnimationOptions.CurveEaseInOut, animations: { () -> Void in
-            self.timeView!.frame.origin.y = -(self.view.frame.height - UIAdapter.shared.transferWidth(200) - 88 )
-            
-            }) { (success) -> Void in
-                if success {
-                    
-                    UIView.animateWithDuration(1, delay: 0, usingSpringWithDamping: 100, initialSpringVelocity: 5, options: UIViewAnimationOptions.CurveEaseOut, animations: { () -> Void in
-                        
-                        self.activityMainView!.hidden = false
-                        self.activityMainView!.frame.origin.x = 0
-                        
-                        }, completion: nil)
-                    
-                }
-        }   
-
-    }
-    
-    
-    func displayActivity(){
-        
-        let soundId = soundPlay!.sound.valueForKey(SoundResource.swishout) as! String
-        let id = UInt32(soundId)
-        AudioServicesPlaySystemSound(id!);
-        
-        UIView.animateWithDuration(0.3, delay: 0, options: UIViewAnimationOptions.CurveEaseIn, animations: { () -> Void in
-            self.activityMainView!.frame.origin.x = -UIAdapter.shared.transferWidth(240)
-            
-            }) { (success) -> Void in
-                if success {
- 
-                    UIView.animateWithDuration(0.8, delay: 0, usingSpringWithDamping: 100, initialSpringVelocity: 18, options: UIViewAnimationOptions.CurveEaseOut, animations: { () -> Void in
-                        
-                        self.timeView!.frame.origin.y = self.view.frame.height - UIAdapter.shared.transferWidth(200) - 88
-                        self.activityMainView!.hidden = true
-                        
-                        }, completion: nil)
-                    
-                }
-         }
-    
-    }
-    
     
         func joinButtonClick(sender : UIButton){
             
@@ -547,95 +421,6 @@ class SignUp: ViewControllerBase , UITableViewDelegate , UITableViewDataSource {
             
             }, completion: nil)
     }
-
-    
-    
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
-    }
-    
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        var cell = tableView.dequeueReusableCellWithIdentifier("activityItemCell") as? ActivityItemCell
-        
-        if cell == nil{
-            cell = ActivityItemCell(style: UITableViewCellStyle.Value1, reuseIdentifier: "activityItemCell", cellHeight: UIAdapter.shared.transferHeight(65),cellWidth: self.activityMainView!.activityTabel!.bounds.width )
-        }
-        
-        cell!.backgroundImage!.image = UIImage(named: "activityItem")
-        cell!.iconImage!.image = UIImage(named: "challenge")
-        cell!.raidName!.text = "纳克萨玛斯"
-        cell!.dutyPart!.damageLabel!.text = "13"
-        cell!.dutyPart!.tankLabel!.text = "3"
-        cell!.dutyPart!.healLabel!.text = "4"
-        cell!.contentLabel!.text = "老1-老4,来熟练工，不墨迹 老1-老4,来熟练工，不墨迹 老1-老4,来熟练工，不墨迹"
-        cell!.leadName!.text = "伊莎贝拉殿下"
-        
-        if indexPath.row % 3 == 0 {
-//           cell!.timePart!.firstPart!.text = "27"
-//           cell!.timePart!.midPart!.font = UIFont(name: "DINAlternate-Bold", size: UIAdapter.shared.transferHeight(20))
-//           cell!.timePart!.midPart!.text = "days"
-            cell!.timePart!.firstPart?.text = "165"
-            cell!.timePart!.midPart!.text = ":"
-            cell!.timePart!.midPart!.font = UIFont(name: "DB LCD Temp", size: UIAdapter.shared.transferHeight(20))
-            cell!.timePart!.secondPart!.text = "43"
-        }else{
-        cell!.timePart!.firstPart?.text = "07"
-        cell!.timePart!.midPart!.text = ":"
-        cell!.timePart!.midPart!.font = UIFont(name: "DB LCD Temp", size: UIAdapter.shared.transferHeight(20))
-        cell!.timePart!.secondPart!.text = "43"
-        }
-        
-//        cell!.textLabel?.text = "hello world"
-        
-        cell!.selectionStyle = UITableViewCellSelectionStyle.None
-        return cell!
-    }
-    
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return UIAdapter.shared.transferHeight(65)
-    }
-    
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let cell = tableView.cellForRowAtIndexPath(indexPath) as! ActivityItemCell
-        cell.backgroundImage!.image = UIImage(named: "activityItem_click")
-        
-        let soundId = soundPlay!.sound.valueForKey(SoundResource.clickEventSound) as! String
-        let id = UInt32(soundId)
-        AudioServicesPlaySystemSound(id!);
-        
-        displayActivityDetail()
-    }
-    
-    func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
-        let cell = tableView.cellForRowAtIndexPath(indexPath) as! ActivityItemCell
-        cell.backgroundImage!.image = UIImage(named: "activityItem")
-    }
-    
-    //table animation
-//    func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
-//        
-//        var rotation = CATransform3DMakeRotation( CGFloat(0.3 * M_PI) , 0.0, 0.5, 0.0);
-//        rotation.m34 = 1.0 / -600;
-//        
-//        
-//        //2. Define the initial state (Before the animation)
-//        //        cell.layer.shadowColor = UIColor.blackColor().CGColor
-//        //        cell.layer.shadowOffset = CGSizeMake(10, 10);
-//        
-//        cell.layer.transform = rotation;
-//        cell.layer.anchorPoint = CGPointMake(0.5, 0.5);
-//        
-//        
-//        UIView.beginAnimations("rotation", context: nil)
-//        UIView.setAnimationDuration(0.8)
-//        //3. Define the final state (After the animation) and commit the animation
-//        cell.layer.transform = CATransform3DIdentity;
-//        cell.alpha = 1;
-//        cell.layer.shadowOffset = CGSizeMake(0, 0);
-//        UIView.commitAnimations()
-//    }
-
-    
     
     func displayActivityDetail(){
         

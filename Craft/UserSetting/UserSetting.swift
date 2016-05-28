@@ -29,9 +29,7 @@ class UserSetting: ViewControllerBase,UITableViewDelegate,UITableViewDataSource 
     }
     
     override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-        self.tabBarController!.tabBar.hidden = true
-        
+        super.viewWillAppear(animated)        
         
         let menuButton = UIButton(frame: CGRect(x: 0, y: 0, width: UIAdapter.shared.transferWidth(30), height: UIAdapter.shared.transferHeight(12)) )
         menuButton.setBackgroundImage(UIImage(named: "friend"), forState: UIControlState.Normal)

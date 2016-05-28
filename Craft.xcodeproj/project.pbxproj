@@ -34,6 +34,9 @@
 		18610C4E1C12D48600B864F2 /* RestService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18610C4D1C12D48600B864F2 /* RestService.swift */; };
 		18610C511C12DCC500B864F2 /* LoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18610C501C12DCC500B864F2 /* LoginService.swift */; };
 		18610C531C12E15600B864F2 /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18610C521C12E15600B864F2 /* StringExtensions.swift */; };
+		186D80CC1CF9CAF6001A3EFE /* SliderMainExtensionForGesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186D80CB1CF9CAF6001A3EFE /* SliderMainExtensionForGesture.swift */; };
+		186D80CE1CF9D5EE001A3EFE /* ExtensionForActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186D80CD1CF9D5EE001A3EFE /* ExtensionForActivity.swift */; };
+		186D80D01CF9E322001A3EFE /* ExtensionForAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186D80CF1CF9E322001A3EFE /* ExtensionForAnimation.swift */; };
 		187464951C3F9FAC009E4041 /* LocalNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187464941C3F9FAC009E4041 /* LocalNotification.swift */; };
 		187464971C3FA3DD009E4041 /* SendNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187464961C3FA3DD009E4041 /* SendNotification.swift */; };
 		187F97A01CA962A3009CC7A9 /* RightMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187F979F1CA962A3009CC7A9 /* RightMenu.swift */; };
@@ -125,6 +128,9 @@
 		18610C4D1C12D48600B864F2 /* RestService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestService.swift; sourceTree = "<group>"; };
 		18610C501C12DCC500B864F2 /* LoginService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginService.swift; sourceTree = "<group>"; };
 		18610C521C12E15600B864F2 /* StringExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
+		186D80CB1CF9CAF6001A3EFE /* SliderMainExtensionForGesture.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SliderMainExtensionForGesture.swift; sourceTree = "<group>"; };
+		186D80CD1CF9D5EE001A3EFE /* ExtensionForActivity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtensionForActivity.swift; sourceTree = "<group>"; };
+		186D80CF1CF9E322001A3EFE /* ExtensionForAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtensionForAnimation.swift; sourceTree = "<group>"; };
 		187464941C3F9FAC009E4041 /* LocalNotification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalNotification.swift; sourceTree = "<group>"; };
 		187464961C3FA3DD009E4041 /* SendNotification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SendNotification.swift; sourceTree = "<group>"; };
 		187F979F1CA962A3009CC7A9 /* RightMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RightMenu.swift; sourceTree = "<group>"; };
@@ -295,6 +301,7 @@
 				184867811BF8506F00016A4E /* SliderMain.swift */,
 				18F7E4661C97B2EF007E3459 /* ReviewTableSource.swift */,
 				18F7E46A1C97EE69007E3459 /* reviewTableCell.swift */,
+				186D80CB1CF9CAF6001A3EFE /* SliderMainExtensionForGesture.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -617,6 +624,8 @@
 				18A824811BEE2FCA00084589 /* SignUp.swift */,
 				189052FF1CA6733C006EFE69 /* ExtensionForGesture.swift */,
 				18AFE5D01CBE6FF1000DAD84 /* AddNewActivity.swift */,
+				186D80CD1CF9D5EE001A3EFE /* ExtensionForActivity.swift */,
+				186D80CF1CF9E322001A3EFE /* ExtensionForAnimation.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -960,6 +969,7 @@
 				18F7E46B1C97EE69007E3459 /* reviewTableCell.swift in Sources */,
 				189053001CA6733C006EFE69 /* ExtensionForGesture.swift in Sources */,
 				18A93DB51CE83E2D005EF64F /* AnimatedMaskLabel.swift in Sources */,
+				186D80CE1CF9D5EE001A3EFE /* ExtensionForActivity.swift in Sources */,
 				18E6046E1C0EC50800620499 /* ApiResult.swift in Sources */,
 				18A593DA1C099C5A00458308 /* BaseTextfiledDeletgate.swift in Sources */,
 				18A8245A1BEDF5CC00084589 /* ChooseSideCollectionCell.swift in Sources */,
@@ -968,6 +978,7 @@
 				184867841BF851AE00016A4E /* Common.swift in Sources */,
 				181758591C4B7D98008913DB /* CustomTabBarController.swift in Sources */,
 				180141051C53525800BE13B1 /* ImageOperation.swift in Sources */,
+				186D80D01CF9E322001A3EFE /* ExtensionForAnimation.swift in Sources */,
 				18A8247C1BEE2B5D00084589 /* MainTabbar.swift in Sources */,
 				181518431C95907500AA4F33 /* ActivityTableCell.swift in Sources */,
 				18AF8CA51BEDCCCB00539C0E /* AppDelegate.swift in Sources */,
@@ -997,6 +1008,7 @@
 				18A824821BEE2FCA00084589 /* SignUp.swift in Sources */,
 				18A824581BEDED8900084589 /* ChooseSide.swift in Sources */,
 				189052FA1CA66310006EFE69 /* TimerView.swift in Sources */,
+				186D80CC1CF9CAF6001A3EFE /* SliderMainExtensionForGesture.swift in Sources */,
 				18A593CE1C0996DB00458308 /* ActivityMain.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
