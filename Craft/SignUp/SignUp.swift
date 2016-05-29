@@ -20,10 +20,8 @@ class SignUp: ViewControllerBase {
     var verifyRequestCount : Int = 5
     var timeView : TimerView?
     var activityMainView : ActivityMainView?
-    var menuIsOpen : Bool = false
     var mainMenuProtocal : MainMenuProtocol?
     var ovalShapeLayer: CAShapeLayer?
-    var rightMenu : RightMenu?
     
     //display views
     var showTimerSwipe : UISwipeGestureRecognizer?
@@ -48,6 +46,9 @@ class SignUp: ViewControllerBase {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
          self.tabBarController!.tabBar.hidden = true
+        
+        
+        
         let nc = NSNotificationCenter.defaultCenter()
         nc.addObserver(self, selector: "showCurrentView:", name: "loginDisappear", object: nil)
         
@@ -57,11 +58,11 @@ class SignUp: ViewControllerBase {
         selector: "activitiesDialogDisappear:", name: "dismissAcitivtiesDialog", object: nil)
         self._hasNotification = true
         
-        let menuButton = UIButton(frame: CGRect(x: 0, y: 0, width: UIAdapter.shared.transferWidth(30), height: UIAdapter.shared.transferHeight(12)) )
-        menuButton.setBackgroundImage(UIImage(named: "friend"), forState: UIControlState.Normal)
-        menuButton.addTarget(self, action: "MenuClick:", forControlEvents: UIControlEvents.TouchUpInside)
+        let chatButton = UIButton(frame: CGRect(x: 0, y: 0, width: UIAdapter.shared.transferWidth(30), height: UIAdapter.shared.transferHeight(12)) )
+        chatButton.setBackgroundImage(UIImage(named: "friend"), forState: UIControlState.Normal)
+        chatButton.addTarget(self, action: "ChatClick:", forControlEvents: UIControlEvents.TouchUpInside)
         
-        let rightBarButton = UIBarButtonItem(customView: menuButton)
+        let rightBarButton = UIBarButtonItem(customView: chatButton)
         self.navigationItem.rightBarButtonItem = rightBarButton
         
         
@@ -116,20 +117,7 @@ class SignUp: ViewControllerBase {
         self.firstTime = false
     }
 
-    func calenderClick(sender : UIButton){
-        let soundId = soundPlay!.sound.valueForKey(SoundResource.clickEventSound) as! String
-        let id = UInt32(soundId)
-        AudioServicesPlaySystemSound(id!);
-        self.showDaily()
-    }
-    
-    func MenuClick(sender : UIButton){
-        let soundId = soundPlay!.sound.valueForKey(SoundResource.clickEventSound) as! String
-        let id = UInt32(soundId)
-        AudioServicesPlaySystemSound(id!);
-        self.MenuClick()
-    }
-    
+
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
     }
@@ -157,30 +145,8 @@ class SignUp: ViewControllerBase {
     
     override func initView() {
         setBackGround()
-        setRightMenu()
         setTimerView()
         setActivityMainView()
-    }
-    
-    func setRightMenu(){
-        self.rightMenu = RightMenu(frame: CGRect(x: UIScreen.mainScreen().bounds.width + UIAdapter.shared.transferWidth(50) , y: (UIScreen.mainScreen().bounds.height - UIAdapter.shared.transferHeight(70)) / 2, width: UIAdapter.shared.transferWidth(50), height: UIAdapter.shared.transferHeight(70)))
-        self.view.addSubview(self.rightMenu!)
-        
-  
-        self.rightMenu!.chatRoom?.addTarget(self, action: "chatRoomClick:", forControlEvents: UIControlEvents.TouchUpInside)
-        
-        self.rightMenu!.setting!.addTarget(self, action: "settingClick:", forControlEvents: UIControlEvents.TouchUpInside)
-        
-    }
-    
-    func chatRoomClick(sender :UIButton){
-        let chat = ChatContactList()
-        self.navigationController?.pushViewController(chat, animated: true)
-    }
-    
-    func settingClick(sender :UIButton){
-        let chat = ChatContactList()
-        self.navigationController?.pushViewController(chat, animated: true)
     }
     
     func setBackGround(){
@@ -339,32 +305,7 @@ class SignUp: ViewControllerBase {
           }
          self.verifyRequestCount -= 1
     }
-    
-    func MenuClick(){
-        
-        let soundId = soundPlay!.sound.valueForKey(SoundResource.clickEventSound) as! String
-        let id = UInt32(soundId)
-        AudioServicesPlaySystemSound(id!);
-        
-        if !self.menuIsOpen {
 
-//            self.rightMenu!.hidden = false
-            
-            UIView.animateWithDuration(0.3, animations: { () -> Void in
-                self.rightMenu!.frame.origin.x = UIScreen.mainScreen().bounds.width - UIAdapter.shared.transferWidth(50) - 5
-            })
-            
-        }else{
-//
-//           self.rightMenu?.hidden = true
-            
-            UIView.animateWithDuration(0.3, animations: { () -> Void in
-                self.rightMenu!.frame.origin.x = UIScreen.mainScreen().bounds.width + UIAdapter.shared.transferWidth(50)
-            })
-        
-        }
-        self.menuIsOpen = !self.menuIsOpen
-    }
     
         func joinButtonClick(sender : UIButton){
             

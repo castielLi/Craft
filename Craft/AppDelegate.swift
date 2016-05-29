@@ -33,6 +33,7 @@
 
 
 import UIKit
+import IQKeyboardManagerSwift
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -47,6 +48,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         UMessage.startWithAppkey("572b270d67e58eabeb0030be", launchOptions: launchOptions)
         
+        IQKeyboardManager.sharedManager().enable = true
         
         UIAdapter.shared.config(UIScreen.mainScreen().bounds)
         self.window = UIWindow(frame: UIScreen.mainScreen().bounds)

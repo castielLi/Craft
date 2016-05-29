@@ -93,7 +93,7 @@ extension SignUp{
             self.disappearActivity(completion)
         }
         if self.chatVisible{
-            self.disappearChat(completion)
+            completion()
         }
         if self.dailyVisible{
             completion()
@@ -125,7 +125,7 @@ extension SignUp{
             self.disappearTimer(completion)
         }
         if self.chatVisible{
-            self.disappearChat(completion)
+            completion()
         }
         if self.dailyVisible{
            completion()
@@ -163,12 +163,34 @@ extension SignUp{
            self.disappearActivity(completion)
         }
         if self.chatVisible{
-           self.disappearChat(completion)
+            completion()
         }
     }
     
     func showChat(){
-    
+        let soundId = soundPlay!.sound.valueForKey(SoundResource.swishout) as! String
+        let id = UInt32(soundId)
+        AudioServicesPlaySystemSound(id!);
+        
+        let completion = {
+            let chat = ChatRoom(nibName: nil, bundle: nil)
+            chat.sign = self
+            let chatNav = UINavigationController(rootViewController: chat)
+            chatNav.modalPresentationStyle = UIModalPresentationStyle.OverFullScreen
+            self.presentViewController(chatNav, animated: false, completion: nil)
+            
+            self.setAllInvisable()
+            self.chatVisible = true
+        }
+        if self.timerVisible{
+            self.disappearTimer(completion)
+        }
+        if self.activityVisible{
+            self.disappearActivity(completion)
+        }
+        if self.dailyVisible{
+           completion()
+        }
     }
     
     func disappearTimer(completion : (()->Void)?){
@@ -192,10 +214,6 @@ extension SignUp{
                 completion!()
             }
         }
-    }
-    
-    func disappearChat(completion: (()->Void)?){
-        completion!()
     }
     
     func setAllInvisable(){

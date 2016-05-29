@@ -15,8 +15,6 @@ class SliderMain: ViewControllerBase , MainMenuProtocol , UIGestureRecognizerDel
     var reviewTable : UITableView?
     var bloodBackGroundImage : UIImageView?
     var reviewTableSource : ReviewTableSource?
-    var rightMenu : RightMenu?
-    var menuIsOpen : Bool = false
     var calenderBackground : UIImageView?
     var dailyBackground : UIImageView?
     var originCellFrame : CGRect?
@@ -44,11 +42,11 @@ class SliderMain: ViewControllerBase , MainMenuProtocol , UIGestureRecognizerDel
         super.viewWillAppear(animated)
         
 
-        let menuButton = UIButton(frame: CGRect(x: 0, y: 0, width: UIAdapter.shared.transferWidth(30), height: UIAdapter.shared.transferHeight(12)) )
-        menuButton.setBackgroundImage(UIImage(named: "friend"), forState: UIControlState.Normal)
-        menuButton.addTarget(self, action: "MenuClick:", forControlEvents: UIControlEvents.TouchUpInside)
+        let chatButton = UIButton(frame: CGRect(x: 0, y: 0, width: UIAdapter.shared.transferWidth(30), height: UIAdapter.shared.transferHeight(12)) )
+        chatButton.setBackgroundImage(UIImage(named: "friend"), forState: UIControlState.Normal)
+        chatButton.addTarget(self, action: "ChatClick:", forControlEvents: UIControlEvents.TouchUpInside)
         
-        let rightBarButton = UIBarButtonItem(customView: menuButton)
+        let rightBarButton = UIBarButtonItem(customView: chatButton)
         self.navigationItem.rightBarButtonItem = rightBarButton
         
         let dailyButton = UIButton(frame: CGRect(x: 0, y: 0, width: UIAdapter.shared.transferWidth(30), height: UIAdapter.shared.transferHeight(12)) )
@@ -76,19 +74,6 @@ class SliderMain: ViewControllerBase , MainMenuProtocol , UIGestureRecognizerDel
         self.calenderBackground!.layer.addAnimation(alphaAnimation,forKey : nil)
     }
 
-    
-    func MenuClick(sender : UIButton){
-        let soundId = soundPlay!.sound.valueForKey(SoundResource.clickEventSound) as! String
-        let id = UInt32(soundId)
-        AudioServicesPlaySystemSound(id!);
-       self.MenuClick()
-    }
-    
-    func activityClick(sender : UIButton){
-        self.disappearDaily(self.sign!.showTimer)
-    }
-    
-
     var backGroundImage : UIImageView?
     
     override func viewDidLoad() {
@@ -99,11 +84,6 @@ class SliderMain: ViewControllerBase , MainMenuProtocol , UIGestureRecognizerDel
         self.navigationController!.navigationBar.barStyle = UIBarStyle.BlackTranslucent
         self.navigationController!.navigationBar.setBackgroundImage(UIImage(named: "navigationBackGround"), forBarMetrics: UIBarMetrics.Default)
         
-        
-        let backButton = UIBarButtonItem()
-        self.navigationItem.backBarButtonItem = backButton
-        self.navigationItem.backBarButtonItem!.title = ""
-        
         self.view.backgroundColor = UIColor.clearColor()
         
     }
@@ -112,7 +92,6 @@ class SliderMain: ViewControllerBase , MainMenuProtocol , UIGestureRecognizerDel
         setCalenderBackground()
         setCalenderActivitiesReview()
         setCalenderView()
-        setRightMenu()
         setDailyDetail()
     }
     
@@ -128,29 +107,6 @@ class SliderMain: ViewControllerBase , MainMenuProtocol , UIGestureRecognizerDel
         calenderBackground!.image = UIImage(named: "dailyBackground")
         self.view.addSubview(self.calenderBackground!)
     }
-    
-    
-    
-    func setRightMenu(){
-        self.rightMenu = RightMenu(frame: CGRect(x: UIScreen.mainScreen().bounds.width + UIAdapter.shared.transferWidth(50) , y: (UIScreen.mainScreen().bounds.height - UIAdapter.shared.transferHeight(70)) / 2, width: UIAdapter.shared.transferWidth(50), height: UIAdapter.shared.transferHeight(70)))
-        self.view.addSubview(self.rightMenu!)
-        
-        self.rightMenu!.chatRoom?.addTarget(self, action: "chatRoomClick:", forControlEvents: UIControlEvents.TouchUpInside)
-        
-        self.rightMenu!.setting!.addTarget(self, action: "settingClick:", forControlEvents: UIControlEvents.TouchUpInside)
-        
-    }
-    
-    func chatRoomClick(sender :UIButton){
-        let chat = ChatContactList()
-        self.navigationController?.pushViewController(chat, animated: true)
-    }
-    
-    func settingClick(sender :UIButton){
-        let chat = ChatContactList()
-        self.navigationController?.pushViewController(chat, animated: true)
-    }
-
     
     func setCalenderActivitiesReview(){
         
@@ -187,23 +143,6 @@ class SliderMain: ViewControllerBase , MainMenuProtocol , UIGestureRecognizerDel
     
     func ChooseTab(selectIndex : Int){
        self.tabBarController!.selectedIndex =  selectIndex
-    }
-    
-    func MenuClick(){
-        if !self.menuIsOpen {
-
-            UIView.animateWithDuration(0.3, animations: { () -> Void in
-                self.rightMenu!.frame.origin.x = UIScreen.mainScreen().bounds.width - UIAdapter.shared.transferWidth(50) - 5
-            })
-            
-        }else{
-
-            UIView.animateWithDuration(0.3, animations: { () -> Void in
-                self.rightMenu!.frame.origin.x = UIScreen.mainScreen().bounds.width + UIAdapter.shared.transferWidth(50)
-            })
-            
-        }
-        self.menuIsOpen = !self.menuIsOpen
     }
 
     

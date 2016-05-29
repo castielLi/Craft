@@ -12,7 +12,6 @@
 		180E193F1C62E39D00987CE6 /* ChatRoom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180E193E1C62E39D00987CE6 /* ChatRoom.swift */; };
 		180E19441C62EE7C00987CE6 /* libstdc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 180E19431C62EE7C00987CE6 /* libstdc++.tbd */; };
 		180E194B1C63204900987CE6 /* MainMenuProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180E194A1C63204900987CE6 /* MainMenuProtocol.swift */; };
-		180E194F1C6326C700987CE6 /* ChatContactList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180E194E1C6326C700987CE6 /* ChatContactList.swift */; };
 		1815183F1C958ACF00AA4F33 /* SearchActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1815183E1C958ACF00AA4F33 /* SearchActivityView.swift */; };
 		181518411C958C4000AA4F33 /* MyAcitivitiesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181518401C958C4000AA4F33 /* MyAcitivitiesView.swift */; };
 		181518431C95907500AA4F33 /* ActivityTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181518421C95907500AA4F33 /* ActivityTableCell.swift */; };
@@ -22,6 +21,12 @@
 		181C3E9F1C57ABB600A822D0 /* CalendearCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181C3E9E1C57ABB600A822D0 /* CalendearCell.swift */; };
 		182647781C2E689C0078D4C2 /* ForgetPassword.swift in Sources */ = {isa = PBXBuildFile; fileRef = 182647761C2E689C0078D4C2 /* ForgetPassword.swift */; };
 		182647791C2E689C0078D4C2 /* RegisterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 182647771C2E689C0078D4C2 /* RegisterController.swift */; };
+		1837D2361CFAE2B700FFE3FD /* ExtensionForChatRoom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1837D2351CFAE2B700FFE3FD /* ExtensionForChatRoom.swift */; };
+		1837D23E1CFAE3FB00FFE3FD /* ChatListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1837D23D1CFAE3FB00FFE3FD /* ChatListCell.swift */; };
+		1837D2401CFAEB3300FFE3FD /* ExtensionForChatGesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1837D23F1CFAEB3300FFE3FD /* ExtensionForChatGesture.swift */; };
+		1837D2421CFAF2C800FFE3FD /* navigationClickEvents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1837D2411CFAF2C800FFE3FD /* navigationClickEvents.swift */; };
+		1837D2441CFAF2FE00FFE3FD /* SliderNavEvents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1837D2431CFAF2FE00FFE3FD /* SliderNavEvents.swift */; };
+		1837D2461CFAF32D00FFE3FD /* signupNavEvents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1837D2451CFAF32D00FFE3FD /* signupNavEvents.swift */; };
 		183E8EF41CC666F600F1F291 /* UserSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183E8EF31CC666F600F1F291 /* UserSetting.swift */; };
 		184867821BF8506F00016A4E /* SliderMain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184867811BF8506F00016A4E /* SliderMain.swift */; };
 		184867841BF851AE00016A4E /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184867831BF851AE00016A4E /* Common.swift */; };
@@ -106,7 +111,6 @@
 		180E193E1C62E39D00987CE6 /* ChatRoom.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChatRoom.swift; path = ChatRoom/ChatRoom.swift; sourceTree = "<group>"; };
 		180E19431C62EE7C00987CE6 /* libstdc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.tbd"; path = "usr/lib/libstdc++.tbd"; sourceTree = SDKROOT; };
 		180E194A1C63204900987CE6 /* MainMenuProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainMenuProtocol.swift; sourceTree = "<group>"; };
-		180E194E1C6326C700987CE6 /* ChatContactList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChatContactList.swift; path = ChatRoom/ChatContactList.swift; sourceTree = "<group>"; };
 		1815183E1C958ACF00AA4F33 /* SearchActivityView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SearchActivityView.swift; path = ActivityMain/SearchActivityView.swift; sourceTree = "<group>"; };
 		181518401C958C4000AA4F33 /* MyAcitivitiesView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MyAcitivitiesView.swift; path = ActivityMain/MyAcitivitiesView.swift; sourceTree = "<group>"; };
 		181518421C95907500AA4F33 /* ActivityTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ActivityTableCell.swift; path = ActivityMain/ActivityTableCell.swift; sourceTree = "<group>"; };
@@ -116,6 +120,12 @@
 		181C3E9E1C57ABB600A822D0 /* CalendearCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendearCell.swift; sourceTree = "<group>"; };
 		182647761C2E689C0078D4C2 /* ForgetPassword.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ForgetPassword.swift; path = Modules/Login/ForgetPassword.swift; sourceTree = "<group>"; };
 		182647771C2E689C0078D4C2 /* RegisterController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RegisterController.swift; path = Modules/Login/RegisterController.swift; sourceTree = "<group>"; };
+		1837D2351CFAE2B700FFE3FD /* ExtensionForChatRoom.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtensionForChatRoom.swift; sourceTree = "<group>"; };
+		1837D23D1CFAE3FB00FFE3FD /* ChatListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChatListCell.swift; path = ChatRoom/ChatListCell.swift; sourceTree = "<group>"; };
+		1837D23F1CFAEB3300FFE3FD /* ExtensionForChatGesture.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtensionForChatGesture.swift; sourceTree = "<group>"; };
+		1837D2411CFAF2C800FFE3FD /* navigationClickEvents.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = navigationClickEvents.swift; sourceTree = "<group>"; };
+		1837D2431CFAF2FE00FFE3FD /* SliderNavEvents.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SliderNavEvents.swift; sourceTree = "<group>"; };
+		1837D2451CFAF32D00FFE3FD /* signupNavEvents.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = signupNavEvents.swift; sourceTree = "<group>"; };
 		183E8EF31CC666F600F1F291 /* UserSetting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserSetting.swift; path = UserSetting/UserSetting.swift; sourceTree = "<group>"; };
 		184867811BF8506F00016A4E /* SliderMain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SliderMain.swift; sourceTree = "<group>"; };
 		184867831BF851AE00016A4E /* Common.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Common.swift; sourceTree = "<group>"; };
@@ -238,7 +248,9 @@
 			isa = PBXGroup;
 			children = (
 				180E193E1C62E39D00987CE6 /* ChatRoom.swift */,
-				180E194E1C6326C700987CE6 /* ChatContactList.swift */,
+				1837D2351CFAE2B700FFE3FD /* ExtensionForChatRoom.swift */,
+				1837D23F1CFAEB3300FFE3FD /* ExtensionForChatGesture.swift */,
+				1837D2411CFAF2C800FFE3FD /* navigationClickEvents.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -246,6 +258,7 @@
 		180E193D1C62E28300987CE6 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				1837D23D1CFAE3FB00FFE3FD /* ChatListCell.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -302,6 +315,7 @@
 				18F7E4661C97B2EF007E3459 /* ReviewTableSource.swift */,
 				18F7E46A1C97EE69007E3459 /* reviewTableCell.swift */,
 				186D80CB1CF9CAF6001A3EFE /* SliderMainExtensionForGesture.swift */,
+				1837D2431CFAF2FE00FFE3FD /* SliderNavEvents.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -626,6 +640,7 @@
 				18AFE5D01CBE6FF1000DAD84 /* AddNewActivity.swift */,
 				186D80CD1CF9D5EE001A3EFE /* ExtensionForActivity.swift */,
 				186D80CF1CF9E322001A3EFE /* ExtensionForAnimation.swift */,
+				1837D2451CFAF32D00FFE3FD /* signupNavEvents.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -952,6 +967,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1817585D1C4B8D45008913DB /* CustomLayout.swift in Sources */,
+				1837D2421CFAF2C800FFE3FD /* navigationClickEvents.swift in Sources */,
 				181518411C958C4000AA4F33 /* MyAcitivitiesView.swift in Sources */,
 				1892E8CE1CDDAA2C002AAEBF /* ActivityItemCell.swift in Sources */,
 				18E43FBD1CE0E2E300F9A382 /* SoundResource.swift in Sources */,
@@ -977,13 +993,16 @@
 				187464971C3FA3DD009E4041 /* SendNotification.swift in Sources */,
 				184867841BF851AE00016A4E /* Common.swift in Sources */,
 				181758591C4B7D98008913DB /* CustomTabBarController.swift in Sources */,
+				1837D2361CFAE2B700FFE3FD /* ExtensionForChatRoom.swift in Sources */,
 				180141051C53525800BE13B1 /* ImageOperation.swift in Sources */,
 				186D80D01CF9E322001A3EFE /* ExtensionForAnimation.swift in Sources */,
 				18A8247C1BEE2B5D00084589 /* MainTabbar.swift in Sources */,
 				181518431C95907500AA4F33 /* ActivityTableCell.swift in Sources */,
+				1837D2461CFAF32D00FFE3FD /* signupNavEvents.swift in Sources */,
 				18AF8CA51BEDCCCB00539C0E /* AppDelegate.swift in Sources */,
 				180E193F1C62E39D00987CE6 /* ChatRoom.swift in Sources */,
 				187F97A01CA962A3009CC7A9 /* RightMenu.swift in Sources */,
+				1837D2441CFAF2FE00FFE3FD /* SliderNavEvents.swift in Sources */,
 				182647781C2E689C0078D4C2 /* ForgetPassword.swift in Sources */,
 				1892E8D11CDE3BED002AAEBF /* dutyView.swift in Sources */,
 				18A824461BEDCDF200084589 /* LoginController.swift in Sources */,
@@ -991,11 +1010,12 @@
 				18610C531C12E15600B864F2 /* StringExtensions.swift in Sources */,
 				181C3E9F1C57ABB600A822D0 /* CalendearCell.swift in Sources */,
 				18610C4E1C12D48600B864F2 /* RestService.swift in Sources */,
-				180E194F1C6326C700987CE6 /* ChatContactList.swift in Sources */,
 				18F7E4671C97B2EF007E3459 /* ReviewTableSource.swift in Sources */,
+				1837D2401CFAEB3300FFE3FD /* ExtensionForChatGesture.swift in Sources */,
 				184867821BF8506F00016A4E /* SliderMain.swift in Sources */,
 				1892E8D31CDE46D9002AAEBF /* Time.swift in Sources */,
 				18CE64341CF7354500834C2B /* DailyDetail.swift in Sources */,
+				1837D23E1CFAE3FB00FFE3FD /* ChatListCell.swift in Sources */,
 				18E43FBA1CE0D1F000F9A382 /* PlaySound.m in Sources */,
 				18E259CB1CCA5F6000743FCA /* DropDownSelection.swift in Sources */,
 				1893E2E01C7C604C00F74A2B /* MyActivities.swift in Sources */,

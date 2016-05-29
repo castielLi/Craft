@@ -24,6 +24,7 @@ PODS:
     - FMDB/standard (= 2.6.2)
   - FMDB/standard (2.6.2)
   - iOS-UMengMessage (1.2.5)
+  - IQKeyboardManagerSwift (4.0.3)
   - Masonry (0.6.4)
   - MJExtension (3.0.10)
   - RongCloudIMKit (2.4.7)
@@ -34,6 +35,7 @@ DEPENDENCIES:
   - AFNetworking (~> 2.0)
   - FMDB (~> 2.6)
   - iOS-UMengMessage (~> 1.2)
+  - IQKeyboardManagerSwift (~> 4.0)
   - Masonry (~> 0.6.1)
   - MJExtension (~> 3.0)
   - RongCloudIMKit (= 2.4.7)
@@ -44,6 +46,7 @@ SPEC CHECKSUMS:
   AFNetworking: cb8d14a848e831097108418f5d49217339d4eb60
   FMDB: 854a0341b4726e53276f2a8996f06f1b80f9259a
   iOS-UMengMessage: 36c8ec095cbfdcf76392531b850108a797857fb6
+  IQKeyboardManagerSwift: b6883b720b0e76473692fdc80828442566e1075f
   Masonry: 281802d04d787ea2973179ee8bcb50500579ede2
   MJExtension: d86aacb740c87519d20e3cca55b6fa4be6cc7548
   RongCloudIMKit: d24685a8f2ea63e79aa2653a3275d7c64ea611ac
