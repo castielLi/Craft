@@ -33,7 +33,8 @@ class ActivityMainView: UIView {
         super.init(frame: frame)
         self.activityMainView = UIImageView(frame: CGRect(x: 0, y: 0, width: self.frame.width, height: self.frame.height))
         self.activityMainView!.userInteractionEnabled = true
-        self.activityMainView!.image = UIImage(named: "MyActivity")
+        let path = NSBundle.mainBundle().pathForResource("MyActivity", ofType: "png")
+        self.activityMainView!.image = UIImage(contentsOfFile: path!)
         self.addSubview(self.activityMainView!)
         
         setSearchTextField()

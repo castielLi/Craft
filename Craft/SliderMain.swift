@@ -41,10 +41,12 @@ class SliderMain: ViewControllerBase , MainMenuProtocol , UIGestureRecognizerDel
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
+        let unreadCount = RCIMClient.sharedRCIMClient().getTotalUnreadCount()
 
-        let chatButton = UIButton(frame: CGRect(x: 0, y: 0, width: UIAdapter.shared.transferWidth(30), height: UIAdapter.shared.transferHeight(12)) )
-        chatButton.setBackgroundImage(UIImage(named: "friend"), forState: UIControlState.Normal)
-        chatButton.addTarget(self, action: "ChatClick:", forControlEvents: UIControlEvents.TouchUpInside)
+       let chatButton = ChatNavigationView(frame: CGRect(x: 0, y: 0, width: UIAdapter.shared.transferWidth(30) + 5, height: UIAdapter.shared.transferHeight(12) + 20) )
+        chatButton.chat!.setBackgroundImage(UIImage(named: "friend"), forState: UIControlState.Normal)
+        chatButton.count!.text = "\(unreadCount)"
+        chatButton.chat!.addTarget(self, action: "ChatClick:", forControlEvents: UIControlEvents.TouchUpInside)
         
         let rightBarButton = UIBarButtonItem(customView: chatButton)
         self.navigationItem.rightBarButtonItem = rightBarButton
@@ -104,7 +106,8 @@ class SliderMain: ViewControllerBase , MainMenuProtocol , UIGestureRecognizerDel
     
     func setCalenderBackground(){
         calenderBackground = UIImageView(frame: CGRectMake(UIAdapter.shared.transferWidth(30) , UIAdapter.shared.transferHeight(100), self.view.frame.width - UIAdapter.shared.transferWidth(60), UIAdapter.shared.transferHeight(290)))
-        calenderBackground!.image = UIImage(named: "dailyBackground")
+        let path = NSBundle.mainBundle().pathForResource("dailyBackground", ofType: "png")
+        calenderBackground!.image = UIImage(contentsOfFile: path!)
         self.view.addSubview(self.calenderBackground!)
     }
     
@@ -184,6 +187,16 @@ class SliderMain: ViewControllerBase , MainMenuProtocol , UIGestureRecognizerDel
         self.navigationController?.pushViewController(userSetting, animated: false)
     }
 
+    
+    override func viewDidDisappear(animated: Bool) {
+        super.viewDidDisappear(animated)
+        self.reviewTable = nil
+        self.calendar!.collectionView = nil
+        self.reviewTableSource = nil
+        self.calendar = nil
+        self.sign = nil
+        self.calenderBackground!.removeFromSuperview()
+    }
 
     /*
     // MARK: - Navigation

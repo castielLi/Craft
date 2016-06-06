@@ -78,7 +78,8 @@ class ForgetPassword: ViewControllerBase {
     
     func setBackGroundImage(){
         self.backGroundImage = UIImageView(frame: CGRectMake(0, 0, self.view.frame.width, self.view.frame.height))
-        self.backGroundImage!.image = UIImage(named: "LoginBackGround")
+        let path = NSBundle.mainBundle().pathForResource("LoginBackGround", ofType: "png")
+        self.backGroundImage!.image = UIImage(contentsOfFile: path!)
         self.view.addSubview(self.backGroundImage!)
     }
 

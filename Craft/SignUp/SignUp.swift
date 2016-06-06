@@ -47,7 +47,7 @@ class SignUp: ViewControllerBase {
         super.viewWillAppear(animated)
          self.tabBarController!.tabBar.hidden = true
         
-        
+        let unreadCount = RCIMClient.sharedRCIMClient().getTotalUnreadCount()
         
         let nc = NSNotificationCenter.defaultCenter()
         nc.addObserver(self, selector: "showCurrentView:", name: "loginDisappear", object: nil)
@@ -58,9 +58,11 @@ class SignUp: ViewControllerBase {
         selector: "activitiesDialogDisappear:", name: "dismissAcitivtiesDialog", object: nil)
         self._hasNotification = true
         
-        let chatButton = UIButton(frame: CGRect(x: 0, y: 0, width: UIAdapter.shared.transferWidth(30), height: UIAdapter.shared.transferHeight(12)) )
-        chatButton.setBackgroundImage(UIImage(named: "friend"), forState: UIControlState.Normal)
-        chatButton.addTarget(self, action: "ChatClick:", forControlEvents: UIControlEvents.TouchUpInside)
+        let chatButton = ChatNavigationView(frame: CGRect(x: 0, y: 0, width: UIAdapter.shared.transferWidth(30) + 5, height: UIAdapter.shared.transferHeight(12) + 20) )
+        chatButton.chat!.setBackgroundImage(UIImage(named: "friend"), forState: UIControlState.Normal)
+        chatButton.count!.text = "\(unreadCount)"
+        chatButton.chat!.addTarget(self, action: "ChatClick:", forControlEvents: UIControlEvents.TouchUpInside)
+
         
         let rightBarButton = UIBarButtonItem(customView: chatButton)
         self.navigationItem.rightBarButtonItem = rightBarButton
@@ -151,13 +153,15 @@ class SignUp: ViewControllerBase {
     
     func setBackGround(){
         self.backGroundImage = UIImageView(frame: CGRectMake(0, 0, self.view.frame.width, self.view.frame.height))
-        self.backGroundImage!.image = UIImage(named: "MainBackGround")
+        let path = NSBundle.mainBundle().pathForResource("MainBackGround", ofType: "png")
+        self.backGroundImage!.image = UIImage(contentsOfFile: path!)
         self.backGroundImageNumber += 1
         self.view.addSubview(self.backGroundImage!)
         
         
         self.bloodBackGroundImage = UIImageView(frame: CGRectMake(0, 0, self.view.frame.width, self.view.frame.height))
-        self.bloodBackGroundImage!.image = UIImage(named: "blood")
+        let bloodPath = NSBundle.mainBundle().pathForResource("blood", ofType: "png")
+        self.bloodBackGroundImage!.image = UIImage(contentsOfFile: bloodPath!)
         self.view.addSubview(self.bloodBackGroundImage!)
     }
     

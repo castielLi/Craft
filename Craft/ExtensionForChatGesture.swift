@@ -41,6 +41,7 @@ extension ChatRoom : UIGestureRecognizerDelegate{
     func addTimerSwipe(){
         self.showTimerSwipe = UISwipeGestureRecognizer(target: self, action: "showTimer:")
         self.showTimerSwipe!.direction = UISwipeGestureRecognizerDirection.Down
+        self.showTimerSwipe!.delegate = self
         self.view.addGestureRecognizer(self.showTimerSwipe!)
     }
     
@@ -54,6 +55,7 @@ extension ChatRoom : UIGestureRecognizerDelegate{
     func addDailySwipe(){
         self.showDailySwipe = UISwipeGestureRecognizer(target: self, action: "showDaily:")
         self.showDailySwipe!.direction = UISwipeGestureRecognizerDirection.Up
+        self.showDailySwipe!.delegate = self
         self.view.addGestureRecognizer(self.showDailySwipe!)
     }
     
@@ -97,6 +99,7 @@ extension ChatRoom : UIGestureRecognizerDelegate{
         UIView.animateWithDuration(0.4, animations: {
             self.chatDetailView!.frame.origin.x = -UIAdapter.shared.transferWidth(235)
             self.enterText!.frame.origin.x = -UIAdapter.shared.transferWidth(200)
+            self.detailTable!.frame.origin.x = -UIAdapter.shared.transferWidth(210)
         })
       }
     

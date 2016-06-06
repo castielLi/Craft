@@ -9,3 +9,4 @@
 #import "sqlite3.h"
 #import <iOS-UMengMessage/UMessage.h>
 #import "PlaySound.h"
+#import "RCIMHelper.h"

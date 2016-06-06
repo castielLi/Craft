@@ -136,9 +136,9 @@ class LoginController: ViewControllerBase {
             let mainBundle = NSBundle.mainBundle()
                         let filePath = mainBundle.pathForResource("wow_main_theme", ofType:"mp3")
                         let url = NSURL(fileURLWithPath: filePath!)
-                        let fileData = NSData(contentsOfURL: url)
+                        let fileData = try! NSData(contentsOfURL: url, options: NSDataReadingOptions.MappedRead)
                         do{
-                        self.player = try AVAudioPlayer(data: fileData!)
+                        self.player = try AVAudioPlayer(data: fileData)
                         }catch{
                 
                         }
@@ -154,7 +154,8 @@ class LoginController: ViewControllerBase {
     
     func setBackGroundImage(){
         self.backGroundImage = UIImageView(frame: CGRectMake(0, 0, self.view.frame.width, self.view.frame.height))
-        self.backGroundImage!.image = UIImage(named: "LoginBackGround")
+        let path = NSBundle.mainBundle().pathForResource("LoginBackGround", ofType: "png")
+        self.backGroundImage!.image = UIImage(contentsOfFile: path!)
         self.view.addSubview(self.backGroundImage!)
     }
     
@@ -314,7 +315,11 @@ class LoginController: ViewControllerBase {
         // Dispose of any resources that can be recreated.
     }
     
-    
+    override func viewDidDisappear(animated: Bool) {
+        super.viewDidDisappear(animated)
+        
+        self.player = nil
+    }
 
     
 
