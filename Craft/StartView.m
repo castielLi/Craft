@@ -52,12 +52,12 @@ static const float TITLE_FONT_SIZE = 72.0f;
     [super viewDidLoad];
     self.status = freeStatus;
     
-    _playerView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
-    [[self view]addSubview:_playerView];
+//    _playerView = [[UIView alloc]initWithFrame:CGRectMake(0, -2, self.view.frame.size.width, self.view.frame.size.height + 2)];
+//    [[self view]addSubview:_playerView];
     
     tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(click:)];
     tap.numberOfTapsRequired = 1;
-    [_playerView addGestureRecognizer:tap];
+    [self.view addGestureRecognizer:tap];
     
     [self createVideoPlayer];
     [self createTitleLabel];
@@ -66,9 +66,11 @@ static const float TITLE_FONT_SIZE = 72.0f;
 -(void)click:(UITapGestureRecognizer*)sender{
     [playerLayer removeFromSuperlayer];
     [playerItem removeObserver:self forKeyPath:@"status"];
-    [self dismissViewControllerAnimated:true completion:^{
-        [[NSNotificationCenter defaultCenter]postNotificationName:@"loginDisappear" object:self];
-    }];
+//    [self dismissViewControllerAnimated:true completion:^{
+//        [[NSNotificationCenter defaultCenter]postNotificationName:@"loginDisappear" object:self];
+//    }];
+    LoginController * login = [[LoginController alloc]initWithNibName:nil bundle:nil];
+    [self.navigationController pushViewController:login animated:true];
 }
 
 - (void)createShowAnim {
@@ -92,9 +94,9 @@ static const float TITLE_FONT_SIZE = 72.0f;
 //    player.volume = PLAYER_VOLUME;
 
     playerLayer = [AVPlayerLayer playerLayerWithPlayer:player];
-    playerLayer.videoGravity = UIViewContentModeScaleToFill;
-    playerLayer.frame = self.playerView.layer.bounds;
-    [self.playerView.layer addSublayer:playerLayer];
+    playerLayer.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
+    playerLayer.videoGravity = AVLayerVideoGravityResizeAspectFill;
+    [self.view.layer addSublayer:playerLayer];
 
     [player play];
     
@@ -123,10 +125,15 @@ static const float TITLE_FONT_SIZE = 72.0f;
 // 视频循环播放
 - (void)moviePlayDidEnd:(NSNotification*)notification{
     [playerLayer removeFromSuperlayer];
-    [playerItem removeObserver:self forKeyPath:@"status"];
-    [self dismissViewControllerAnimated:true completion:^{
-        [[NSNotificationCenter defaultCenter]postNotificationName:@"loginDisappear" object:self];
-    }];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+//    [playerItem removeObserver:self forKeyPath:@"status"];
+//    [self dismissViewControllerAnimated:true completion:^{
+//        [[NSNotificationCenter defaultCenter]postNotificationName:@"loginDisappear" object:self];
+//    }];
+    if(self.navigationController.viewControllers.count == 1){
+    LoginController * login = [[LoginController alloc]initWithNibName:nil bundle:nil];
+    [self.navigationController pushViewController:login animated:true];
+    }
 }
 
 #pragma mark - CardView Animation
