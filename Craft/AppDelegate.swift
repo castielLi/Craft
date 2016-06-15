@@ -39,6 +39,8 @@ import IQKeyboardManagerSwift
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    
+    var startTime : NSDate?
 
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
@@ -65,10 +67,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             PlaySound.sharedData()
         })
         
-        let loginView = LoginController(nibName: nil, bundle: nil)
-        let loginNav = UINavigationController(rootViewController: loginView)
-        self.window!.rootViewController!.presentViewController(loginNav, animated: false, completion: nil)
+//        let loginView = LoginController(nibName: nil, bundle: nil)
+//        let loginNav = UINavigationController(rootViewController: loginView)
+//        self.window!.rootViewController!.presentViewController(loginNav, animated: false, completion: nil)
         
+        
+        let startview = StartView(nibName: nil, bundle: nil)
+        let startviewNav = UINavigationController(rootViewController: startview)
+        self.window!.rootViewController!.presentViewController(startviewNav, animated: false, completion: nil)
 
         self.registerNotification()
         return true
@@ -148,6 +154,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
         
+//        startTime = NSDate()
     }
 
     func applicationWillEnterForeground(application: UIApplication) {
@@ -158,6 +165,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationDidBecomeActive(application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+        
+//        let now = NSDate()
+//        let timeInterval = now.timeIntervalSinceDate(self.startTime!)
+//        
+//        print(timeInterval)
     }
 
     func applicationWillTerminate(application: UIApplication) {

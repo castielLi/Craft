@@ -83,10 +83,6 @@ class LoginController: ViewControllerBase {
         let backButton = UIBarButtonItem()
         self.navigationItem.backBarButtonItem = backButton
         self.navigationItem.backBarButtonItem?.title = ""
-        
-        
-
-        // Do any additional setup after loading the view.
     }
     
     override func onLoad() {

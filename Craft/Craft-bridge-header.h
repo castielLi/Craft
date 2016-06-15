@@ -10,3 +10,4 @@
 #import <iOS-UMengMessage/UMessage.h>
 #import "PlaySound.h"
 #import "RCIMHelper.h"
+#import "StartView.h"
