@@ -107,6 +107,7 @@
 		18F7E46F1C97F454007E3459 /* DutyDisplayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F7E46E1C97F454007E3459 /* DutyDisplayView.swift */; };
 		18F7E4711C97FCC2007E3459 /* Resource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F7E4701C97FCC2007E3459 /* Resource.swift */; };
 		26FDEB84629869B329580E24 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FFF7E3FA5773E8C0E92800CE /* Pods.framework */; };
+		CDDB47A61D14320400F723F1 /* RTFuncs.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDDB47A51D14320400F723F1 /* RTFuncs.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -238,6 +239,7 @@
 		18F7E4701C97FCC2007E3459 /* Resource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Resource.swift; sourceTree = "<group>"; };
 		35FFEC4388D0F109F79B4A61 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		A816835E20B22F39AE004838 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		CDDB47A51D14320400F723F1 /* RTFuncs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RTFuncs.swift; sourceTree = "<group>"; };
 		FFF7E3FA5773E8C0E92800CE /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -569,6 +571,7 @@
 		18A824471BEDCEBB00084589 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				CDDB47A41D1431FC00F723F1 /* RTKit */,
 				18A824491BEDCF0E00084589 /* UIAdapter.swift */,
 				184867831BF851AE00016A4E /* Common.swift */,
 			);
@@ -869,6 +872,14 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		CDDB47A41D1431FC00F723F1 /* RTKit */ = {
+			isa = PBXGroup;
+			children = (
+				CDDB47A51D14320400F723F1 /* RTFuncs.swift */,
+			);
+			name = RTKit;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1113,6 +1124,7 @@
 				1826B31A1D02D4F400E34D9A /* ChatDetailCell.swift in Sources */,
 				1837D2441CFAF2FE00FFE3FD /* SliderNavEvents.swift in Sources */,
 				182647781C2E689C0078D4C2 /* ForgetPassword.swift in Sources */,
+				CDDB47A61D14320400F723F1 /* RTFuncs.swift in Sources */,
 				1892E8D11CDE3BED002AAEBF /* dutyView.swift in Sources */,
 				18A824461BEDCDF200084589 /* LoginController.swift in Sources */,
 				18C44C4E1D1197560087EBF6 /* StartView.m in Sources */,

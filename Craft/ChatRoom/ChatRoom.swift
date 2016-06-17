@@ -45,7 +45,12 @@ class ChatRoom: ViewControllerBase , UITextViewDelegate ,RCIMClientReceiveMessag
     var conversationList : NSArray?
     var selectedIndex : Int?
     
-    
+    // RT Start
+    // UITextView for chat.
+    var textViewInitialHeight: CGFloat = 0
+    /// Message list for chat.
+    var chatContentsList: [String] = [String]()
+    // RT end
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
@@ -225,6 +230,12 @@ class ChatRoom: ViewControllerBase , UITextViewDelegate ,RCIMClientReceiveMessag
         enterText!.backgroundColor = UIColor.clearColor()
         enterText!.returnKeyType = UIReturnKeyType.Send
         enterText!.delegate = self
+        
+        
+        // RT start
+        self.textViewInitialHeight = enterText!.frame.height
+        // RT end
+        
         self.view!.addSubview(enterText!)
         
         self.enterText!.mas_makeConstraints{ make in
@@ -251,7 +262,7 @@ class ChatRoom: ViewControllerBase , UITextViewDelegate ,RCIMClientReceiveMessag
         if (text == "\n"){
             
             let message = RCTextMessage(content: textView.text)
-            RCIMClient.sharedRCIMClient().sendMessage(RCConversationType.ConversationType_PRIVATE, targetId: "1", content: message, pushContent: nil, success: { (messageId) in
+            RCIMClient.sharedRCIMClient().sendMessage(RCConversationType.ConversationType_PRIVATE, targetId: "2", content: message, pushContent: nil, success: { (messageId) in
                   print("发送成功")
                 }, error: { (error, messageId) in
                     print("发送失败")
@@ -284,6 +295,38 @@ class ChatRoom: ViewControllerBase , UITextViewDelegate ,RCIMClientReceiveMessag
         self.data.append(message7)
     }
 
+    
+    // RT Start
+    
+    private func tableScrollToBottom() {
+        if self.chatContentsList.count > 0 {
+            self.chatListView?.scrollToRowAtIndexPath(NSIndexPath(forRow: self.chatContentsList.count - 1, inSection: 0), atScrollPosition: .Bottom, animated: true)
+        }
+    }
+    
+    func textViewDidChange(textView: UITextView) {
+        // Caculate the size which best fits the specified size.
+        // This height is just the height of textView which best fits its content.
+        var height = textView.sizeThatFits(CGSizeMake(enterText!.frame.width, CGFloat(MAXFLOAT))).height
+        // Compare with the original height, if bigger than original value, use current height, otherwise, use original value.
+        height = height > self.textViewInitialHeight ? height : self.textViewInitialHeight
+        // Here i set the max height for textView is 80.
+        if height <= uiah(64) {
+            // Get how much the textView grows at height dimission
+            let heightDiff = height - enterText!.frame.height
+            UIView.animateWithDuration(0.05, animations: {
+                self.chatListView?.frame = CGRectMake(self.chatListView!.frame.origin.x, self.chatListView!.frame.origin.y, self.chatListView!.frame.width, self.chatListView!.frame.height - heightDiff)
+                self.enterText?.frame = CGRectMake(self.enterText!.frame.origin.x, self.enterText!.frame.origin.y - heightDiff, self.enterText!.frame.width, height)
+                }, completion: {
+                    finished in
+                    dispatch_async(dispatch_get_main_queue(), {
+                        self.tableScrollToBottom()
+                    })
+            })
+        }
+    }
+    
+    // RT End
     
 
     /*
