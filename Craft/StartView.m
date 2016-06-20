@@ -31,9 +31,11 @@ static const float TITLE_FONT_SIZE = 72.0f;
     AVPlayerLayer * playerLayer;
 }
 @property (nonatomic) UILabel *titleLabel;
+@property (nonatomic) UILabel *logoLabel;
 
 
 @property (nonatomic) currentStatus status;
+@property (nonatomic,weak) AVAudioPlayer * musicPlayer;
 
 @property (strong, nonatomic) UIView *playerView;
 
@@ -59,6 +61,8 @@ static const float TITLE_FONT_SIZE = 72.0f;
     tap.numberOfTapsRequired = 1;
     [self.view addGestureRecognizer:tap];
     
+    self.view.backgroundColor = [UIColor blackColor];
+    
     [self createVideoPlayer];
     [self createTitleLabel];
 }
@@ -76,10 +80,23 @@ static const float TITLE_FONT_SIZE = 72.0f;
 - (void)createShowAnim {
 
     CAKeyframeAnimation *keyAnim = [CAKeyframeAnimation animationWithKeyPath:@"opacity"];
-    keyAnim.duration = 5;
-    keyAnim.values = @[@0.0, @1.0, @0.0];
-    keyAnim.keyTimes = @[@0.0, @0.5, @1.0];
+    keyAnim.duration = 10;
+    keyAnim.values = @[@0.0, @1.0,@0.0];
+    keyAnim.keyTimes = @[@0.0, @0.7, @1.0];
+//    keyAnim.removedOnCompletion = false;
+//    keyAnim.fillMode = kCAFillModeForwards;
     [self.titleLabel.layer addAnimation:keyAnim forKey:@"opacity"];
+    
+    
+    
+    CABasicAnimation * anim = [CABasicAnimation animationWithKeyPath:@"opacity"];
+    anim.fromValue = @0;
+    anim.toValue = @1.0;
+    anim.beginTime = CACurrentMediaTime() + 35;
+    anim.duration = 2.5;
+    anim.removedOnCompletion = false;
+    anim.fillMode = kCAFillModeForwards;
+    [self.logoLabel.layer addAnimation:anim forKey:@"opacity"];
 }
 
 - (void)createVideoPlayer {
@@ -95,13 +112,13 @@ static const float TITLE_FONT_SIZE = 72.0f;
 
     playerLayer = [AVPlayerLayer playerLayerWithPlayer:player];
     playerLayer.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
-    playerLayer.videoGravity = AVLayerVideoGravityResizeAspectFill;
-    [self.view.layer addSublayer:playerLayer];
-
-    [player play];
+//    playerLayer.videoGravity = AVLayerVideoGravityResizeAspectFill;
     
-//    [player.currentItem addObserver:self forKeyPath:AVPlayerItemDidPlayToEndTimeNotification options:NSKeyValueObservingOptionNew context:nil];
+    [self.view.layer addSublayer:playerLayer];
+    [player play];
+
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(moviePlayDidEnd:) name:AVPlayerItemDidPlayToEndTimeNotification object:playerItem];
+    
 }
 
 - (void)createTitleLabel {
@@ -111,9 +128,20 @@ static const float TITLE_FONT_SIZE = 72.0f;
     self.titleLabel.backgroundColor = [UIColor clearColor];
     self.titleLabel.text = @"CRAFT";
     self.titleLabel.textAlignment = NSTextAlignmentCenter;
-    self.titleLabel.textColor = [UIColor colorWithWhite:1.0 alpha:0.2];
+    self.titleLabel.textColor = [UIColor colorWithWhite:1.0 alpha:1];
     self.titleLabel.font = [UIFont systemFontOfSize:TITLE_FONT_SIZE];
     [self.view addSubview:self.titleLabel];
+    
+    
+    self.logoLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width - 80, 80)];
+    self.logoLabel.alpha = 0.0f;
+    self.logoLabel.center = self.view.center;
+    self.logoLabel.backgroundColor = [UIColor clearColor];
+    self.logoLabel.text = @"Logo";
+    self.logoLabel.textAlignment = NSTextAlignmentCenter;
+    self.logoLabel.textColor = [UIColor colorWithWhite:1.0 alpha:1];
+    self.logoLabel.font = [UIFont systemFontOfSize:TITLE_FONT_SIZE];
+    [self.view addSubview:self.logoLabel];
 }
 
 
