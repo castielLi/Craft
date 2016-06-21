@@ -24,19 +24,19 @@ extension ChatRoom : UITableViewDelegate,UITableViewDataSource{
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         if tableView.tag == 1{
-        var cell = tableView.dequeueReusableCellWithIdentifier("chatListCell") as? ChatListCell
-        if(cell == nil) {
+            var cell = tableView.dequeueReusableCellWithIdentifier("chatListCell") as? ChatListCell
+            if(cell == nil) {
+                
+                cell = ChatListCell(style: UITableViewCellStyle.Default, reuseIdentifier: "chatListCell", cellHeight: UIAdapter.shared.transferHeight(50),cellWidth: self.chatListView!.frame.width )
+                
+                cell!.setTopLineHide()
+                cell!.setBottomLineHide()
+                
+            }
             
-            cell = ChatListCell(style: UITableViewCellStyle.Default, reuseIdentifier: "chatListCell", cellHeight: UIAdapter.shared.transferHeight(50),cellWidth: self.chatListView!.frame.width )
             
-            cell!.setTopLineHide()
-            cell!.setBottomLineHide()
-            
-        }
-        
-        
-        cell!.selectionStyle = UITableViewCellSelectionStyle.None
-        return cell!
+            cell!.selectionStyle = UITableViewCellSelectionStyle.None
+            return cell!
         }else{
         
             let message = self.data[indexPath.row]
@@ -48,6 +48,29 @@ extension ChatRoom : UITableViewDelegate,UITableViewDataSource{
             } else {
                 // voice
                 (cell as! ChatVoiceCell).setMessage(message)
+                (cell as! ChatVoiceCell).closureVoice = {
+                    print("play")
+                    if (message as! ChatVoiceMessage).voiceData != nil {
+                        // Launch image animation.
+                        // animationImages of a UIImageView do not conflict with its image property.
+                        var imageArray: [UIImage]? = [UIImage(named: "message_voice_sender_playing_1")!, UIImage(named: "message_voice_sender_playing_2")!, UIImage(named: "message_voice_sender_playing_3")!]
+                        if (cell as! ChatVoiceCell).message?.ownerType == .Other {
+                            imageArray = [UIImage(named: "message_voice_receiver_playing_1")!, UIImage(named: "message_voice_receiver_playing_2")!, UIImage(named: "message_voice_receiver_playing_3")!]
+                        }
+                        (cell as! ChatVoiceCell).imageViewWave?.animationImages = imageArray
+                        (cell as! ChatVoiceCell).imageViewWave?.animationDuration = 3 * 0.5
+                        (cell as! ChatVoiceCell).imageViewWave?.animationRepeatCount = 0
+                        (cell as! ChatVoiceCell).imageViewWave?.startAnimating()
+                        (cell as! ChatVoiceCell).imageViewMessageBackground?.userInteractionEnabled = false
+                        
+                        self.rtAudio.completionHandler = {
+                            (cell as! ChatVoiceCell).imageViewMessageBackground?.userInteractionEnabled = true
+                            (cell as! ChatVoiceCell).imageViewWave?.stopAnimating()
+                        }
+                        
+                        self.rtAudio.playExisted((message as! ChatVoiceMessage).voiceData!)
+                    }
+                }
                 return cell as! ChatVoiceCell
             }
         }

@@ -50,6 +50,8 @@ class ChatRoom: ViewControllerBase , UITextViewDelegate ,RCIMClientReceiveMessag
     var textViewInitialHeight: CGFloat = 0
     /// Message list for chat.
     var chatContentsList: [String] = [String]()
+    var buttonVoice: UIButton?
+    var rtAudio = RTAudio.sharedInstance()
     // RT end
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
@@ -124,6 +126,7 @@ class ChatRoom: ViewControllerBase , UITextViewDelegate ,RCIMClientReceiveMessag
         setChatTabButtons()
         setChatlistView()
         setChatDetailView()
+        self.attachVoiceButton()
     }
     
     func setDialog(){
@@ -298,9 +301,9 @@ class ChatRoom: ViewControllerBase , UITextViewDelegate ,RCIMClientReceiveMessag
     
     // RT Start
     
-    private func tableScrollToBottom() {
-        if self.chatContentsList.count > 0 {
-            self.chatListView?.scrollToRowAtIndexPath(NSIndexPath(forRow: self.chatContentsList.count - 1, inSection: 0), atScrollPosition: .Bottom, animated: true)
+    func tableScrollToBottom() {
+        if self.data.count > 0 {
+            self.detailTable?.scrollToRowAtIndexPath(NSIndexPath(forRow: self.data.count - 1, inSection: 0), atScrollPosition: .Bottom, animated: true)
         }
     }
     
@@ -323,6 +326,46 @@ class ChatRoom: ViewControllerBase , UITextViewDelegate ,RCIMClientReceiveMessag
                         self.tableScrollToBottom()
                     })
             })
+        }
+    }
+    
+    private func attachVoiceButton() {
+        self.buttonVoice = UIButton()
+        self.buttonVoice?.setTitle("voice", forState: .Normal)
+        self.buttonVoice?.sizeToFit()
+        self.view.addSubview(self.buttonVoice!)
+        self.buttonVoice!.mas_makeConstraints{ make in
+            make.bottom.equalTo()(self.chatDetailView!.mas_bottom).with().offset()(uiat(0))
+            make.right.equalTo()(self.chatDetailView!.mas_right).with().offset()(uiat(10))
+            make.width.equalTo()(uiat(60))
+            make.height.equalTo()(uiat(20))
+        }
+        
+        let longGesture = UILongPressGestureRecognizer(target: self, action: #selector(ChatRoom.recordVoice(_:)))
+        self.buttonVoice?.addGestureRecognizer(longGesture)
+    }
+    
+    func recordVoice(recognizer: UILongPressGestureRecognizer) {
+        switch recognizer.state {
+        case .Began:
+            print("recording...")
+            self.rtAudio.startRecording("tmp.wav")
+            break
+        case .Changed:
+            break
+        case .Ended:
+            print("recorded.")
+            self.rtAudio.stopRecording()
+            let message = RCVoiceMessage(audio: self.rtAudio.soundData, duration: self.rtAudio.recordedDuration!)
+            RCIMClient.sharedRCIMClient().sendMessage(.ConversationType_PRIVATE, targetId: "2", content: message, pushContent: nil, success: {
+                mesageId in
+                print("sent successfully")
+                }, error: {
+                    (error, messageId) in
+                    print("sent failed")
+            })
+            break
+        default: break
         }
     }
     

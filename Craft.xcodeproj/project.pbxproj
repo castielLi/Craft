@@ -107,6 +107,11 @@
 		18F7E46F1C97F454007E3459 /* DutyDisplayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F7E46E1C97F454007E3459 /* DutyDisplayView.swift */; };
 		18F7E4711C97FCC2007E3459 /* Resource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F7E4701C97FCC2007E3459 /* Resource.swift */; };
 		26FDEB84629869B329580E24 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FFF7E3FA5773E8C0E92800CE /* Pods.framework */; };
+		CD5EB3921D195EF300802FC4 /* RTAudioItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD5EB38E1D195EF300802FC4 /* RTAudioItem.swift */; };
+		CD5EB3931D195EF300802FC4 /* RTAudioManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD5EB38F1D195EF300802FC4 /* RTAudioManager.swift */; };
+		CD5EB3941D195EF300802FC4 /* RTAudioPlayback.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD5EB3901D195EF300802FC4 /* RTAudioPlayback.swift */; };
+		CD5EB3951D195EF300802FC4 /* RTAudio.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD5EB3911D195EF300802FC4 /* RTAudio.swift */; };
+		CD5EB3971D19610600802FC4 /* RTTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD5EB3961D19610600802FC4 /* RTTimer.swift */; };
 		CDDB47A61D14320400F723F1 /* RTFuncs.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDDB47A51D14320400F723F1 /* RTFuncs.swift */; };
 /* End PBXBuildFile section */
 
@@ -239,6 +244,11 @@
 		18F7E4701C97FCC2007E3459 /* Resource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Resource.swift; sourceTree = "<group>"; };
 		35FFEC4388D0F109F79B4A61 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		A816835E20B22F39AE004838 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		CD5EB38E1D195EF300802FC4 /* RTAudioItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RTAudioItem.swift; sourceTree = "<group>"; };
+		CD5EB38F1D195EF300802FC4 /* RTAudioManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RTAudioManager.swift; sourceTree = "<group>"; };
+		CD5EB3901D195EF300802FC4 /* RTAudioPlayback.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RTAudioPlayback.swift; sourceTree = "<group>"; };
+		CD5EB3911D195EF300802FC4 /* RTAudio.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RTAudio.swift; sourceTree = "<group>"; };
+		CD5EB3961D19610600802FC4 /* RTTimer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RTTimer.swift; sourceTree = "<group>"; };
 		CDDB47A51D14320400F723F1 /* RTFuncs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RTFuncs.swift; sourceTree = "<group>"; };
 		FFF7E3FA5773E8C0E92800CE /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -872,9 +882,22 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		CD5EB38D1D195EDE00802FC4 /* Audio */ = {
+			isa = PBXGroup;
+			children = (
+				CD5EB38E1D195EF300802FC4 /* RTAudioItem.swift */,
+				CD5EB38F1D195EF300802FC4 /* RTAudioManager.swift */,
+				CD5EB3901D195EF300802FC4 /* RTAudioPlayback.swift */,
+				CD5EB3911D195EF300802FC4 /* RTAudio.swift */,
+			);
+			name = Audio;
+			sourceTree = "<group>";
+		};
 		CDDB47A41D1431FC00F723F1 /* RTKit */ = {
 			isa = PBXGroup;
 			children = (
+				CD5EB3961D19610600802FC4 /* RTTimer.swift */,
+				CD5EB38D1D195EDE00802FC4 /* Audio */,
 				CDDB47A51D14320400F723F1 /* RTFuncs.swift */,
 			);
 			name = RTKit;
@@ -1107,6 +1130,7 @@
 				1882E8821D05C567006F5803 /* ChatTextMessage.swift in Sources */,
 				18A8244F1BEDCF9400084589 /* BaseViewController.swift in Sources */,
 				187464971C3FA3DD009E4041 /* SendNotification.swift in Sources */,
+				CD5EB3951D195EF300802FC4 /* RTAudio.swift in Sources */,
 				184867841BF851AE00016A4E /* Common.swift in Sources */,
 				181758591C4B7D98008913DB /* CustomTabBarController.swift in Sources */,
 				1882E8851D05C567006F5803 /* ChatTextCell.swift in Sources */,
@@ -1118,6 +1142,7 @@
 				181518431C95907500AA4F33 /* ActivityTableCell.swift in Sources */,
 				1837D2461CFAF32D00FFE3FD /* signupNavEvents.swift in Sources */,
 				18AF8CA51BEDCCCB00539C0E /* AppDelegate.swift in Sources */,
+				CD5EB3931D195EF300802FC4 /* RTAudioManager.swift in Sources */,
 				180E193F1C62E39D00987CE6 /* ChatRoom.swift in Sources */,
 				1882E8841D05C567006F5803 /* ChatCell.swift in Sources */,
 				187F97A01CA962A3009CC7A9 /* RightMenu.swift in Sources */,
@@ -1134,16 +1159,19 @@
 				18610C4E1C12D48600B864F2 /* RestService.swift in Sources */,
 				18F7E4671C97B2EF007E3459 /* ReviewTableSource.swift in Sources */,
 				18568B121D02A7E600D9446E /* ChatNavigationView.swift in Sources */,
+				CD5EB3971D19610600802FC4 /* RTTimer.swift in Sources */,
 				1837D2401CFAEB3300FFE3FD /* ExtensionForChatGesture.swift in Sources */,
 				184867821BF8506F00016A4E /* SliderMain.swift in Sources */,
 				1892E8D31CDE46D9002AAEBF /* Time.swift in Sources */,
 				18CE64341CF7354500834C2B /* DailyDetail.swift in Sources */,
 				1837D23E1CFAE3FB00FFE3FD /* ChatListCell.swift in Sources */,
+				CD5EB3941D195EF300802FC4 /* RTAudioPlayback.swift in Sources */,
 				18E43FBA1CE0D1F000F9A382 /* PlaySound.m in Sources */,
 				18E259CB1CCA5F6000743FCA /* DropDownSelection.swift in Sources */,
 				1893E2E01C7C604C00F74A2B /* MyActivities.swift in Sources */,
 				18F7E4711C97FCC2007E3459 /* Resource.swift in Sources */,
 				18A593DC1C099D4100458308 /* CellType.swift in Sources */,
+				CD5EB3921D195EF300802FC4 /* RTAudioItem.swift in Sources */,
 				18A593D81C099C5300458308 /* TableViewBaseCell.swift in Sources */,
 				18AFE5D11CBE6FF1000DAD84 /* AddNewActivity.swift in Sources */,
 				18CE64381CF74E2300834C2B /* dailyDutyView.swift in Sources */,

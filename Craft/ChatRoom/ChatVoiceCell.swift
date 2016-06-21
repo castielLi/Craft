@@ -10,13 +10,20 @@ import Foundation
 
 class ChatVoiceCell: ChatCell {
     /// Store a wave image.
-    private var imageViewWave: UIImageView?
+    var imageViewWave: UIImageView?
     let newHeight: CGFloat = 60
+    /// The closure which will be executed when playing voice.
+    var closureVoice: (() -> Void)?
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.createSoundWave()
         self.backgroundColor = UIColor.clearColor()
+        
+        // tap to play voice.
+        self.imageViewMessageBackground?.userInteractionEnabled = true
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(ChatVoiceCell.tapToPlay(_:)))
+        self.imageViewMessageBackground?.addGestureRecognizer(tapGesture)
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -70,5 +77,10 @@ class ChatVoiceCell: ChatCell {
             extraLength = UIScreen.mainScreen().bounds.width * 0.58 - widthAlreadyUsed
         }
         return extraLength
+    }
+    
+    
+    func tapToPlay(recognizer: UITapGestureRecognizer) {
+        self.closureVoice?()
     }
 }
