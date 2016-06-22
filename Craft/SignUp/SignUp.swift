@@ -9,7 +9,7 @@
 import UIKit
 import AVFoundation
 
-class SignUp: ViewControllerBase {
+class SignUp: ViewControllerBase ,RCIMClientReceiveMessageDelegate{
 
     var soundPlay :PlaySound?
     var firstTime : Bool = true
@@ -37,6 +37,7 @@ class SignUp: ViewControllerBase {
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
         soundPlay = PlaySound.sharedData()
+        RCIMClient.sharedRCIMClient().setReceiveMessageDelegate(self, object: nil)
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -99,6 +100,9 @@ class SignUp: ViewControllerBase {
         self.timeView!.layer.addAnimation(animation, forKey: nil)
         self.activityMainView!.layer.addAnimation(animation, forKey: nil)
         
+        
+        
+        self.joinCurrentChatRoom()
     }
     
     func showCurrentView(sender : NSNotification){
@@ -167,7 +171,7 @@ class SignUp: ViewControllerBase {
     
     func setTimerView(){
         self.timeView = TimerView(frame: CGRectMake( (self.view.frame.width - UIAdapter.shared.transferWidth(200)) / 2 ,
-            (self.view.frame.height - UIAdapter.shared.transferWidth(200)) - 88 - 64 ,UIAdapter.shared.transferWidth(200), UIAdapter.shared.transferWidth(200)))
+            UIAdapter.shared.transferHeight(80) ,UIAdapter.shared.transferWidth(200), UIAdapter.shared.transferWidth(200)))
         self.view.addSubview(self.timeView!)
         self.timeView!.joinButton!.addTarget(self, action: "joinButtonClick:", forControlEvents: UIControlEvents.TouchUpInside)
         self.timeView!.alpha = 0

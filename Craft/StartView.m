@@ -68,6 +68,8 @@ static const float TITLE_FONT_SIZE = 72.0f;
 }
 
 -(void)click:(UITapGestureRecognizer*)sender{
+    [playerLayer.player pause];
+    playerLayer.player = nil;
     [playerLayer removeFromSuperlayer];
     [playerItem removeObserver:self forKeyPath:@"status"];
 //    [self dismissViewControllerAnimated:true completion:^{
@@ -152,6 +154,7 @@ static const float TITLE_FONT_SIZE = 72.0f;
 
 // 视频循环播放
 - (void)moviePlayDidEnd:(NSNotification*)notification{
+    playerLayer.player = nil;
     [playerLayer removeFromSuperlayer];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 //    [playerItem removeObserver:self forKeyPath:@"status"];

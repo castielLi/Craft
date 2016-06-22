@@ -23,6 +23,7 @@
 		182647791C2E689C0078D4C2 /* RegisterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 182647771C2E689C0078D4C2 /* RegisterController.swift */; };
 		1826B3181D02D25700E34D9A /* TableViewForChat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1826B3171D02D25700E34D9A /* TableViewForChat.swift */; };
 		1826B31A1D02D4F400E34D9A /* ChatDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1826B3191D02D4F400E34D9A /* ChatDetailCell.swift */; };
+		1832D26B1D198A37000803FF /* WorldChat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1832D26A1D198A37000803FF /* WorldChat.swift */; };
 		1837D2361CFAE2B700FFE3FD /* ExtensionTableForChatRoom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1837D2351CFAE2B700FFE3FD /* ExtensionTableForChatRoom.swift */; };
 		1837D23E1CFAE3FB00FFE3FD /* ChatListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1837D23D1CFAE3FB00FFE3FD /* ChatListCell.swift */; };
 		1837D2401CFAEB3300FFE3FD /* ExtensionForChatGesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1837D23F1CFAEB3300FFE3FD /* ExtensionForChatGesture.swift */; };
@@ -86,6 +87,7 @@
 		18AF8CBA1BEDCCCB00539C0E /* CraftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18AF8CB91BEDCCCB00539C0E /* CraftTests.swift */; };
 		18AF8CC51BEDCCCB00539C0E /* CraftUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18AF8CC41BEDCCCB00539C0E /* CraftUITests.swift */; };
 		18AFE5D11CBE6FF1000DAD84 /* AddNewActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18AFE5D01CBE6FF1000DAD84 /* AddNewActivity.swift */; };
+		18BD4A311D1AC2A800585D1D /* RCIMdelegateForSignUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18BD4A301D1AC2A800585D1D /* RCIMdelegateForSignUp.swift */; };
 		18C44C4E1D1197560087EBF6 /* StartView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C44C4C1D1197560087EBF6 /* StartView.m */; };
 		18CE64341CF7354500834C2B /* DailyDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CE64331CF7354500834C2B /* DailyDetail.swift */; };
 		18CE64381CF74E2300834C2B /* dailyDutyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CE64371CF74E2300834C2B /* dailyDutyView.swift */; };
@@ -143,6 +145,7 @@
 		182647771C2E689C0078D4C2 /* RegisterController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RegisterController.swift; path = Modules/Login/RegisterController.swift; sourceTree = "<group>"; };
 		1826B3171D02D25700E34D9A /* TableViewForChat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TableViewForChat.swift; path = ChatRoom/TableViewForChat.swift; sourceTree = "<group>"; };
 		1826B3191D02D4F400E34D9A /* ChatDetailCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChatDetailCell.swift; path = ChatRoom/ChatDetailCell.swift; sourceTree = "<group>"; };
+		1832D26A1D198A37000803FF /* WorldChat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WorldChat.swift; path = SignUp/WorldChat.swift; sourceTree = "<group>"; };
 		1837D2351CFAE2B700FFE3FD /* ExtensionTableForChatRoom.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtensionTableForChatRoom.swift; sourceTree = "<group>"; };
 		1837D23D1CFAE3FB00FFE3FD /* ChatListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChatListCell.swift; path = ChatRoom/ChatListCell.swift; sourceTree = "<group>"; };
 		1837D23F1CFAEB3300FFE3FD /* ExtensionForChatGesture.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtensionForChatGesture.swift; sourceTree = "<group>"; };
@@ -214,6 +217,7 @@
 		18AF8CC41BEDCCCB00539C0E /* CraftUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CraftUITests.swift; sourceTree = "<group>"; };
 		18AF8CC61BEDCCCB00539C0E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		18AFE5D01CBE6FF1000DAD84 /* AddNewActivity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AddNewActivity.swift; path = SignUp/AddNewActivity.swift; sourceTree = "<group>"; };
+		18BD4A301D1AC2A800585D1D /* RCIMdelegateForSignUp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RCIMdelegateForSignUp.swift; sourceTree = "<group>"; };
 		18C44C4B1D1197560087EBF6 /* StartView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StartView.h; sourceTree = "<group>"; };
 		18C44C4C1D1197560087EBF6 /* StartView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StartView.m; sourceTree = "<group>"; };
 		18CE64331CF7354500834C2B /* DailyDetail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DailyDetail.swift; path = SliderMain/DailyDetail.swift; sourceTree = "<group>"; };
@@ -323,6 +327,14 @@
 				180E194A1C63204900987CE6 /* MainMenuProtocol.swift */,
 			);
 			name = Protocol;
+			sourceTree = "<group>";
+		};
+		1832D2691D198A11000803FF /* worldChat */ = {
+			isa = PBXGroup;
+			children = (
+				1832D26A1D198A37000803FF /* WorldChat.swift */,
+			);
+			name = worldChat;
 			sourceTree = "<group>";
 		};
 		183E8EEF1CC663D100F1F291 /* UserSetting */ = {
@@ -452,6 +464,7 @@
 		1899D6EB1C6484880094B65C /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				18BD4A321D1AC83400585D1D /* RCIMmodel */,
 				1892E8CF1CDE3BCD002AAEBF /* View */,
 			);
 			name = Common;
@@ -683,6 +696,7 @@
 		18A8247E1BEE2F9500084589 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				1832D2691D198A11000803FF /* worldChat */,
 				189052F81CA65842006EFE69 /* Activity */,
 			);
 			name = View;
@@ -705,6 +719,7 @@
 				186D80CD1CF9D5EE001A3EFE /* ExtensionForActivity.swift */,
 				186D80CF1CF9E322001A3EFE /* ExtensionForAnimation.swift */,
 				1837D2451CFAF32D00FFE3FD /* signupNavEvents.swift */,
+				18BD4A301D1AC2A800585D1D /* RCIMdelegateForSignUp.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -776,6 +791,13 @@
 				18AF8CC61BEDCCCB00539C0E /* Info.plist */,
 			);
 			path = CraftUITests;
+			sourceTree = "<group>";
+		};
+		18BD4A321D1AC83400585D1D /* RCIMmodel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = RCIMmodel;
 			sourceTree = "<group>";
 		};
 		18C44C481D11974B0087EBF6 /* start */ = {
@@ -1113,6 +1135,7 @@
 				1826B31A1D02D4F400E34D9A /* ChatDetailCell.swift in Sources */,
 				1837D2441CFAF2FE00FFE3FD /* SliderNavEvents.swift in Sources */,
 				182647781C2E689C0078D4C2 /* ForgetPassword.swift in Sources */,
+				1832D26B1D198A37000803FF /* WorldChat.swift in Sources */,
 				1892E8D11CDE3BED002AAEBF /* dutyView.swift in Sources */,
 				18A824461BEDCDF200084589 /* LoginController.swift in Sources */,
 				18C44C4E1D1197560087EBF6 /* StartView.m in Sources */,
@@ -1132,6 +1155,7 @@
 				1893E2E01C7C604C00F74A2B /* MyActivities.swift in Sources */,
 				18F7E4711C97FCC2007E3459 /* Resource.swift in Sources */,
 				18A593DC1C099D4100458308 /* CellType.swift in Sources */,
+				18BD4A311D1AC2A800585D1D /* RCIMdelegateForSignUp.swift in Sources */,
 				18A593D81C099C5300458308 /* TableViewBaseCell.swift in Sources */,
 				18AFE5D11CBE6FF1000DAD84 /* AddNewActivity.swift in Sources */,
 				18CE64381CF74E2300834C2B /* dailyDutyView.swift in Sources */,
