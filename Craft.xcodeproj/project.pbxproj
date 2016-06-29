@@ -114,6 +114,7 @@
 		CD5EB3941D195EF300802FC4 /* RTAudioPlayback.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD5EB3901D195EF300802FC4 /* RTAudioPlayback.swift */; };
 		CD5EB3951D195EF300802FC4 /* RTAudio.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD5EB3911D195EF300802FC4 /* RTAudio.swift */; };
 		CD5EB3971D19610600802FC4 /* RTTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD5EB3961D19610600802FC4 /* RTTimer.swift */; };
+		CDDA536E1D22C96F00C45479 /* ChatChannelCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDDA536D1D22C96F00C45479 /* ChatChannelCell.swift */; };
 		CDDB47A61D14320400F723F1 /* RTFuncs.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDDB47A51D14320400F723F1 /* RTFuncs.swift */; };
 /* End PBXBuildFile section */
 
@@ -253,6 +254,7 @@
 		CD5EB3901D195EF300802FC4 /* RTAudioPlayback.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RTAudioPlayback.swift; sourceTree = "<group>"; };
 		CD5EB3911D195EF300802FC4 /* RTAudio.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RTAudio.swift; sourceTree = "<group>"; };
 		CD5EB3961D19610600802FC4 /* RTTimer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RTTimer.swift; sourceTree = "<group>"; };
+		CDDA536D1D22C96F00C45479 /* ChatChannelCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatChannelCell.swift; sourceTree = "<group>"; };
 		CDDB47A51D14320400F723F1 /* RTFuncs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RTFuncs.swift; sourceTree = "<group>"; };
 		FFF7E3FA5773E8C0E92800CE /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -329,6 +331,7 @@
 				1837D23D1CFAE3FB00FFE3FD /* ChatListCell.swift */,
 				1826B3171D02D25700E34D9A /* TableViewForChat.swift */,
 				1826B3191D02D4F400E34D9A /* ChatDetailCell.swift */,
+				CDDA536D1D22C96F00C45479 /* ChatChannelCell.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -1180,6 +1183,7 @@
 				18610C531C12E15600B864F2 /* StringExtensions.swift in Sources */,
 				181C3E9F1C57ABB600A822D0 /* CalendearCell.swift in Sources */,
 				18610C4E1C12D48600B864F2 /* RestService.swift in Sources */,
+				CDDA536E1D22C96F00C45479 /* ChatChannelCell.swift in Sources */,
 				18F7E4671C97B2EF007E3459 /* ReviewTableSource.swift in Sources */,
 				18568B121D02A7E600D9446E /* ChatNavigationView.swift in Sources */,
 				CD5EB3971D19610600802FC4 /* RTTimer.swift in Sources */,

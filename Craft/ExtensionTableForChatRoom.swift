@@ -13,11 +13,13 @@ extension ChatRoom : UITableViewDelegate,UITableViewDataSource{
     // table
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if tableView.tag == 1{
-        if self.selectedIndex == 1{
-           return conversationList!.count
-        }
+            if self.selectedIndex == 1{
+               return conversationList!.count
+            }
             return 10
-        }else{
+        } else if tableView.tag == 3 {
+            return self.dataChannels.count
+        } else{
            return self.data.count
         }
     }
@@ -37,7 +39,18 @@ extension ChatRoom : UITableViewDelegate,UITableViewDataSource{
             
             cell!.selectionStyle = UITableViewCellSelectionStyle.None
             return cell!
-        }else{
+        }else if tableView.tag == 3 {
+            var cell = tableView.dequeueReusableCellWithIdentifier("channelCell") as? ChatChannelCell
+            if cell == nil {
+                let dict: Dictionary<String, AnyObject> = self.dataChannels[indexPath.row]
+                cell = ChatChannelCell(style: .Default, reuseIdentifier: "channelCell", cellHeight: uiah(50), cellWidth: self.tableChannel!.frame.width)
+                cell?.setMessage(dict["title"] as! String, numberInThisChannel: dict["numberOfPlayers"] as! String, backgroundImage: dict["backgroundImage"] as! UIImage)
+                cell?.setTopLineHide()
+                cell?.setBottomLineHide()
+            }
+            cell?.selectionStyle = .None
+            return cell!
+        } else {
         
             let message = self.data[indexPath.row]
             
@@ -79,7 +92,9 @@ extension ChatRoom : UITableViewDelegate,UITableViewDataSource{
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         if tableView.tag == 1{
         return UIAdapter.shared.transferHeight(50)
-        }else{
+        }else if tableView.tag == 3 {
+            return uiah(50)
+        }else {
             var height: CGFloat = 60
             let message = self.data[indexPath.row]
             if message.messageType == .Text {

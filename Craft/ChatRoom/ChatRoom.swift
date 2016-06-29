@@ -52,6 +52,19 @@ class ChatRoom: ViewControllerBase , UITextViewDelegate ,RCIMClientReceiveMessag
     var chatContentsList: [String] = [String]()
     var buttonVoice: UIButton?
     var rtAudio = RTAudio.sharedInstance()
+    var dataChannels: [Dictionary<String, AnyObject>] = [
+        ["title": "世界频道", "numberOfPlayers": "2864", "backgroundImage": UIImage(named: "channel_world")!],
+        ["title": "联盟频道", "numberOfPlayers": "1432", "backgroundImage": UIImage(named: "channel_alliance")!],
+        ["title": "部落频道", "numberOfPlayers": "1432", "backgroundImage": UIImage(named: "channel_horde")!],
+        ["title": "副本频道", "numberOfPlayers": "1033", "backgroundImage": UIImage(named: "channel_raid")!],
+        ["title": "战场、竞技场频道", "numberOfPlayers": "4555", "backgroundImage": UIImage(named: "channel_competition")!],
+        ["title": "休闲频道", "numberOfPlayers": "264", "backgroundImage": UIImage(named: "channel_others_1")!],
+        ["title": "其他频道", "numberOfPlayers": "335", "backgroundImage": UIImage(named: "channel_others_2")!],
+        ["title": "战友团频道", "numberOfPlayers": "120", "backgroundImage": UIImage(named: "channel_teammates")!],
+        ["title": "团队频道", "numberOfPlayers": "24", "backgroundImage": UIImage(named: "channel_night")!],
+    ]
+    
+    var tableChannel: UITableView?
     // RT end
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
@@ -252,7 +265,22 @@ class ChatRoom: ViewControllerBase , UITextViewDelegate ,RCIMClientReceiveMessag
     
     func chatTabButtonClick(sender : UIButton){
         self.selectedIndex = sender.tag
-        self.chatListView?.reloadData()
+        if sender.tag == 2 {
+            if self.tableChannel == nil {
+                self.chatListView?.removeFromSuperview()
+                self.tableChannel = UITableView(frame: self.chatListView!.frame)
+                self.tableChannel?.delegate = self
+                self.tableChannel?.dataSource = self
+                self.tableChannel?.tag = 3
+                self.tableChannel?.showsVerticalScrollIndicator = false
+                self.tableChannel?.showsHorizontalScrollIndicator = false
+                self.tableChannel?.backgroundColor = nil
+                self.tableChannel?.separatorStyle = .None
+                self.selectDialog?.addSubview(self.tableChannel!)
+            }
+        } else {
+            self.chatListView?.reloadData()
+        }
     }
     
 
