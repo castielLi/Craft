@@ -15,17 +15,19 @@ extension ChatRoom : UITableViewDelegate,UITableViewDataSource{
         if tableView.tag == 1{
             if self.selectedIndex == 1{
                return conversationList!.count
+            }else if selectedIndex == 2{
+               return 10
             }
-            return 10
-        } else if tableView.tag == 3 {
             return self.dataChannels.count
-        } else{
+        }else{
            return self.data.count
         }
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         if tableView.tag == 1{
+            
+            if selectedIndex == 1 || selectedIndex == 2{
             var cell = tableView.dequeueReusableCellWithIdentifier("chatListCell") as? ChatListCell
             if(cell == nil) {
                 
@@ -39,18 +41,26 @@ extension ChatRoom : UITableViewDelegate,UITableViewDataSource{
             
             cell!.selectionStyle = UITableViewCellSelectionStyle.None
             return cell!
-        }else if tableView.tag == 3 {
-            var cell = tableView.dequeueReusableCellWithIdentifier("channelCell") as? ChatChannelCell
-            if cell == nil {
+            
+            }else{
+                var cell = tableView.dequeueReusableCellWithIdentifier("channelCell") as? ChatChannelCell
+                if cell == nil {
+                    
+                    cell = ChatChannelCell(style: .Default, reuseIdentifier: "channelCell", cellHeight: uiah(50), cellWidth: self.selectDialog!.frame.width)
+                    
+                    
+                }
+                
                 let dict: Dictionary<String, AnyObject> = self.dataChannels[indexPath.row]
-                cell = ChatChannelCell(style: .Default, reuseIdentifier: "channelCell", cellHeight: uiah(50), cellWidth: self.tableChannel!.frame.width)
-                cell?.setMessage(dict["title"] as! String, numberInThisChannel: dict["numberOfPlayers"] as! String, backgroundImage: dict["backgroundImage"] as! UIImage)
-                cell?.setTopLineHide()
-                cell?.setBottomLineHide()
+                cell!.setMessage(dict["title"] as! String, numberInThisChannel: dict["numberOfPlayers"] as! String, backgroundImage: dict["backgroundImage"] as! UIImage)
+                
+                cell!.selectionStyle = .None
+                cell!.setTopLineHide()
+                cell!.setBottomLineHide()
+                return cell!
             }
-            cell?.selectionStyle = .None
-            return cell!
-        } else {
+            
+        }else {
         
             let message = self.data[indexPath.row]
             
@@ -92,8 +102,6 @@ extension ChatRoom : UITableViewDelegate,UITableViewDataSource{
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         if tableView.tag == 1{
         return UIAdapter.shared.transferHeight(50)
-        }else if tableView.tag == 3 {
-            return uiah(50)
         }else {
             var height: CGFloat = 60
             let message = self.data[indexPath.row]
@@ -118,6 +126,7 @@ extension ChatRoom : UITableViewDelegate,UITableViewDataSource{
                 UIView.animateWithDuration(0.4, animations: {
                     self.chatDetailView!.frame.origin.x = 0
                     self.enterText!.frame.origin.x = 0
+                    self.buttonSend!.frame.origin.x = UIAdapter.shared.transferWidth(225)
                     self.detailTable!.frame.origin.x = UIAdapter.shared.transferWidth(10)
                     self.selectDialog!.frame.origin.x += UIAdapter.shared.transferWidth(220)
                 })

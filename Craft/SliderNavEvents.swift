@@ -14,6 +14,7 @@ extension SliderMain{
         let soundId = soundPlay!.sound.valueForKey(SoundResource.clickEventSound) as! String
         let id = UInt32(soundId)
         AudioServicesPlaySystemSound(id!);
+        self.disappearDaily(self.sign!.showChat)
     }
     
     func activityClick(sender : UIButton){

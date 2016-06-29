@@ -51,7 +51,10 @@ class ChatRoom: ViewControllerBase , UITextViewDelegate ,RCIMClientReceiveMessag
     /// Message list for chat.
     var chatContentsList: [String] = [String]()
     var buttonVoice: UIButton?
+    var buttonSend:UIButton?
     var rtAudio = RTAudio.sharedInstance()
+    
+    
     var dataChannels: [Dictionary<String, AnyObject>] = [
         ["title": "世界频道", "numberOfPlayers": "2864", "backgroundImage": UIImage(named: "channel_world")!],
         ["title": "联盟频道", "numberOfPlayers": "1432", "backgroundImage": UIImage(named: "channel_alliance")!],
@@ -64,7 +67,6 @@ class ChatRoom: ViewControllerBase , UITextViewDelegate ,RCIMClientReceiveMessag
         ["title": "团队频道", "numberOfPlayers": "24", "backgroundImage": UIImage(named: "channel_night")!],
     ]
     
-    var tableChannel: UITableView?
     // RT end
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
@@ -134,7 +136,6 @@ class ChatRoom: ViewControllerBase , UITextViewDelegate ,RCIMClientReceiveMessag
     }
     
     override func initView() {
-        insertTestData()
         setDialog()
         setChatTabButtons()
         setChatlistView()
@@ -178,6 +179,7 @@ class ChatRoom: ViewControllerBase , UITextViewDelegate ,RCIMClientReceiveMessag
         }
         
         union = UIButton()
+        union!.tag = 3
         union!.addTarget(self, action: "chatTabButtonClick:", forControlEvents: UIControlEvents.TouchUpInside)
         union!.setBackgroundImage(UIImage(named: "union"), forState: UIControlState.Normal)
         self.selectDialog!.addSubview(union!)
@@ -241,9 +243,9 @@ class ChatRoom: ViewControllerBase , UITextViewDelegate ,RCIMClientReceiveMessag
         self.view!.addSubview(self.detailTable!)
         
         enterText = UITextView()
+        enterText?.backgroundColor = UIColor.blackColor()
         enterText!.textColor = UIColor.whiteColor()
-        enterText!.font = UIFont.systemFontOfSize(15)
-        enterText!.backgroundColor = UIColor.clearColor()
+        enterText!.font = UIFont.systemFontOfSize(14)
         enterText!.returnKeyType = UIReturnKeyType.Send
         enterText!.delegate = self
         
@@ -255,9 +257,9 @@ class ChatRoom: ViewControllerBase , UITextViewDelegate ,RCIMClientReceiveMessag
         self.view!.addSubview(enterText!)
         
         self.enterText!.mas_makeConstraints{ make in
-           make.bottom.equalTo()(self.chatDetailView!.mas_bottom).with().offset()(UIAdapter.shared.transferHeight(-10))
+           make.bottom.equalTo()(self.chatDetailView!.mas_bottom).with().offset()(UIAdapter.shared.transferHeight(-8))
            make.left.equalTo()(self.chatDetailView!.mas_left).with().offset()(UIAdapter.shared.transferWidth(13))
-           make.right.equalTo()(self.chatDetailView!.mas_left).with().offset()(UIAdapter.shared.transferWidth(175))
+           make.right.equalTo()(self.chatDetailView!.mas_left).with().offset()(UIAdapter.shared.transferWidth(177))
            make.height.equalTo()(UIAdapter.shared.transferHeight(15))
         }
     }
@@ -265,22 +267,7 @@ class ChatRoom: ViewControllerBase , UITextViewDelegate ,RCIMClientReceiveMessag
     
     func chatTabButtonClick(sender : UIButton){
         self.selectedIndex = sender.tag
-        if sender.tag == 2 {
-            if self.tableChannel == nil {
-                self.chatListView?.removeFromSuperview()
-                self.tableChannel = UITableView(frame: self.chatListView!.frame)
-                self.tableChannel?.delegate = self
-                self.tableChannel?.dataSource = self
-                self.tableChannel?.tag = 3
-                self.tableChannel?.showsVerticalScrollIndicator = false
-                self.tableChannel?.showsHorizontalScrollIndicator = false
-                self.tableChannel?.backgroundColor = nil
-                self.tableChannel?.separatorStyle = .None
-                self.selectDialog?.addSubview(self.tableChannel!)
-            }
-        } else {
-            self.chatListView?.reloadData()
-        }
+        self.chatListView?.reloadData()
     }
     
 
@@ -305,28 +292,6 @@ class ChatRoom: ViewControllerBase , UITextViewDelegate ,RCIMClientReceiveMessag
         }
         return true
     }
-    
-    private func insertTestData() {
-        let message1 = ChatTextMessage(ownerType: .Mine, messageType: .Text, portrait: UIImage(contentsOfFile: NSBundle.mainBundle().pathForResource("10", ofType: "jpeg")!)!)
-        message1.text = "This is a long text for testing attributedText, here i will insert some emojis : 🙂😎😚😶😝. Is this will be correct?"
-        let message2 = ChatTextMessage(ownerType: .Other, messageType: .Text, portrait: UIImage(contentsOfFile: NSBundle.mainBundle().pathForResource("10", ofType: "jpeg")!)!)
-        message2.text = "This is another long text for testing attributedText, here i will insert some emojis : 🙂😎😚😶😝. Is this will be correct?"
-        let message3 = ChatVoiceMessage(ownerType: .Mine, messageType: .Voice, portrait: UIImage(contentsOfFile: NSBundle.mainBundle().pathForResource("10", ofType: "jpeg")!)!, voiceSecs: 5)
-        let message4 = ChatVoiceMessage(ownerType: .Other, messageType: .Voice, portrait: UIImage(contentsOfFile: NSBundle.mainBundle().pathForResource("10", ofType: "jpeg")!)!, voiceSecs: 45)
-        let message5 = ChatVoiceMessage(ownerType: .Mine, messageType: .Voice, portrait: UIImage(contentsOfFile: NSBundle.mainBundle().pathForResource("10", ofType: "jpeg")!)!, voiceSecs: 100)
-        let message6 = ChatVoiceMessage(ownerType: .Other, messageType: .Voice, portrait: UIImage(contentsOfFile: NSBundle.mainBundle().pathForResource("10", ofType: "jpeg")!)!, voiceSecs: 60)
-        let message7 = ChatVoiceMessage(ownerType: .Other, messageType: .Voice, portrait: UIImage(contentsOfFile: NSBundle.mainBundle().pathForResource("10", ofType: "jpeg")!)!, voiceSecs: 0)
-        self.data.append(message1)
-        self.data.append(message2)
-        self.data.append(message3)
-        self.data.append(message4)
-        self.data.append(message5)
-        self.data.append(message6)
-        self.data.append(message1)
-        self.data.append(message2)
-        self.data.append(message7)
-    }
-
     
     // RT Start
     
@@ -359,19 +324,21 @@ class ChatRoom: ViewControllerBase , UITextViewDelegate ,RCIMClientReceiveMessag
     }
     
     private func attachVoiceButton() {
-        self.buttonVoice = UIButton()
-        self.buttonVoice?.setTitle("voice", forState: .Normal)
-        self.buttonVoice?.sizeToFit()
-        self.view.addSubview(self.buttonVoice!)
-        self.buttonVoice!.mas_makeConstraints{ make in
-            make.bottom.equalTo()(self.chatDetailView!.mas_bottom).with().offset()(uiat(0))
-            make.right.equalTo()(self.chatDetailView!.mas_right).with().offset()(uiat(10))
-            make.width.equalTo()(uiat(60))
-            make.height.equalTo()(uiat(20))
+        self.buttonSend = UIButton()
+        self.buttonSend!.setTitle("发送", forState: .Normal)
+        self.buttonSend!.backgroundColor = UIColor.blackColor()
+        self.buttonSend!.setTitleColor(Resources.Color.dailyColor, forState: .Normal)
+        self.buttonSend!.titleLabel!.font = UIAdapter.shared.transferFont(8)
+        self.view.addSubview(self.buttonSend!)
+        self.buttonSend!.mas_makeConstraints{ make in
+            make.bottom.equalTo()(self.enterText!.mas_bottom)
+            make.left.equalTo()(self.enterText!.mas_right).with().offset()(uiat(5))
+            make.width.equalTo()(uiat(38))
+            make.height.equalTo()(uiah(17))
         }
         
         let longGesture = UILongPressGestureRecognizer(target: self, action: #selector(ChatRoom.recordVoice(_:)))
-        self.buttonVoice?.addGestureRecognizer(longGesture)
+        self.buttonSend?.addGestureRecognizer(longGesture)
     }
     
     func recordVoice(recognizer: UILongPressGestureRecognizer) {
