@@ -85,23 +85,7 @@ class SignUp: ViewControllerBase ,RCIMClientReceiveMessageDelegate{
         self.navigationItem.titleView = activityButton
         
         self.registerGesture()
-        
-        
-        let animation = CASpringAnimation(keyPath: "position.x")
-        animation.damping = 12
-        animation.stiffness = 100
-        animation.mass = 1
-        animation.initialVelocity = 0
-        animation.duration = animation.settlingDuration
-        animation.removedOnCompletion = false
-        animation.timingFunction = CAMediaTimingFunction( name: kCAMediaTimingFunctionEaseOut)
-        animation.fromValue = -UIAdapter.shared.transferWidth(150)
-        
-        self.timeView!.layer.addAnimation(animation, forKey: nil)
-        self.activityMainView!.layer.addAnimation(animation, forKey: nil)
-        
-        
-        
+
         self.joinCurrentChatRoom()
     }
     
@@ -346,8 +330,7 @@ class SignUp: ViewControllerBase ,RCIMClientReceiveMessageDelegate{
         AudioServicesPlaySystemSound(swishinid!);
         
         UIView.animateWithDuration(0.4, delay: 0, options: UIViewAnimationOptions.CurveEaseInOut, animations: { () -> Void in
-            self.activityMainView!.frame.origin.x = -UIAdapter.shared.transferWidth(240)
-            
+            self.activityMainView!.frame.origin.x = -UIAdapter.shared.transferWidth(300)
             }) { (success) -> Void in
                 if success {
                     let activitiesView = AddNewActivityController(nibName: nil, bundle: nil)

@@ -57,7 +57,7 @@ extension SignUp: UITableViewDelegate , UITableViewDataSource {
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let cell = tableView.cellForRowAtIndexPath(indexPath) as! ActivityItemCell
-        cell.backgroundImage!.image = UIImage(named: "activityItem_click")
+//        cell.backgroundImage!.image = UIImage(named: "activityItem_click")
         
         let soundId = soundPlay!.sound.valueForKey(SoundResource.clickEventSound) as! String
         let id = UInt32(soundId)
@@ -70,28 +70,4 @@ extension SignUp: UITableViewDelegate , UITableViewDataSource {
         let cell = tableView.cellForRowAtIndexPath(indexPath) as! ActivityItemCell
         cell.backgroundImage!.image = UIImage(named: "activityItem")
     }
-
-    //table animation
-    //    func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
-    //
-    //        var rotation = CATransform3DMakeRotation( CGFloat(0.3 * M_PI) , 0.0, 0.5, 0.0);
-    //        rotation.m34 = 1.0 / -600;
-    //
-    //
-    //        //2. Define the initial state (Before the animation)
-    //        //        cell.layer.shadowColor = UIColor.blackColor().CGColor
-    //        //        cell.layer.shadowOffset = CGSizeMake(10, 10);
-    //
-    //        cell.layer.transform = rotation;
-    //        cell.layer.anchorPoint = CGPointMake(0.5, 0.5);
-    //
-    //
-    //        UIView.beginAnimations("rotation", context: nil)
-    //        UIView.setAnimationDuration(0.8)
-    //        //3. Define the final state (After the animation) and commit the animation
-    //        cell.layer.transform = CATransform3DIdentity;
-    //        cell.alpha = 1;
-    //        cell.layer.shadowOffset = CGSizeMake(0, 0);
-    //        UIView.commitAnimations()
-    //    }
 }

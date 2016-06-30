@@ -19,6 +19,8 @@
 		1817585B1C4B8CB5008913DB /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1817585A1C4B8CB5008913DB /* CalendarView.swift */; };
 		1817585D1C4B8D45008913DB /* CustomLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1817585C1C4B8D45008913DB /* CustomLayout.swift */; };
 		181C3E9F1C57ABB600A822D0 /* CalendearCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181C3E9E1C57ABB600A822D0 /* CalendearCell.swift */; };
+		1824C61C1D255045009078B4 /* OneRollSelection.m in Sources */ = {isa = PBXBuildFile; fileRef = 1824C61A1D255045009078B4 /* OneRollSelection.m */; };
+		1824C61E1D2556AF009078B4 /* create_activity_main.png in Resources */ = {isa = PBXBuildFile; fileRef = 1824C61D1D2556AF009078B4 /* create_activity_main.png */; };
 		182647781C2E689C0078D4C2 /* ForgetPassword.swift in Sources */ = {isa = PBXBuildFile; fileRef = 182647761C2E689C0078D4C2 /* ForgetPassword.swift */; };
 		182647791C2E689C0078D4C2 /* RegisterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 182647771C2E689C0078D4C2 /* RegisterController.swift */; };
 		1826B3181D02D25700E34D9A /* TableViewForChat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1826B3171D02D25700E34D9A /* TableViewForChat.swift */; };
@@ -46,7 +48,7 @@
 		18610C511C12DCC500B864F2 /* LoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18610C501C12DCC500B864F2 /* LoginService.swift */; };
 		18610C531C12E15600B864F2 /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18610C521C12E15600B864F2 /* StringExtensions.swift */; };
 		186D80CC1CF9CAF6001A3EFE /* SliderMainExtensionForGesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186D80CB1CF9CAF6001A3EFE /* SliderMainExtensionForGesture.swift */; };
-		186D80CE1CF9D5EE001A3EFE /* ExtensionForActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186D80CD1CF9D5EE001A3EFE /* ExtensionForActivity.swift */; };
+		186D80CE1CF9D5EE001A3EFE /* ExtensionTableForActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186D80CD1CF9D5EE001A3EFE /* ExtensionTableForActivity.swift */; };
 		186D80D01CF9E322001A3EFE /* ExtensionForAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186D80CF1CF9E322001A3EFE /* ExtensionForAnimation.swift */; };
 		187464951C3F9FAC009E4041 /* LocalNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187464941C3F9FAC009E4041 /* LocalNotification.swift */; };
 		187464971C3FA3DD009E4041 /* SendNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187464961C3FA3DD009E4041 /* SendNotification.swift */; };
@@ -148,6 +150,9 @@
 		1817585A1C4B8CB5008913DB /* CalendarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
 		1817585C1C4B8D45008913DB /* CustomLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomLayout.swift; sourceTree = "<group>"; };
 		181C3E9E1C57ABB600A822D0 /* CalendearCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendearCell.swift; sourceTree = "<group>"; };
+		1824C61A1D255045009078B4 /* OneRollSelection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OneRollSelection.m; sourceTree = "<group>"; };
+		1824C61B1D255045009078B4 /* OneRollSelection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OneRollSelection.h; sourceTree = "<group>"; };
+		1824C61D1D2556AF009078B4 /* create_activity_main.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = create_activity_main.png; sourceTree = "<group>"; };
 		182647761C2E689C0078D4C2 /* ForgetPassword.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ForgetPassword.swift; path = Modules/Login/ForgetPassword.swift; sourceTree = "<group>"; };
 		182647771C2E689C0078D4C2 /* RegisterController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RegisterController.swift; path = Modules/Login/RegisterController.swift; sourceTree = "<group>"; };
 		1826B3171D02D25700E34D9A /* TableViewForChat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TableViewForChat.swift; path = ChatRoom/TableViewForChat.swift; sourceTree = "<group>"; };
@@ -176,7 +181,7 @@
 		18610C501C12DCC500B864F2 /* LoginService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginService.swift; sourceTree = "<group>"; };
 		18610C521C12E15600B864F2 /* StringExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
 		186D80CB1CF9CAF6001A3EFE /* SliderMainExtensionForGesture.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SliderMainExtensionForGesture.swift; sourceTree = "<group>"; };
-		186D80CD1CF9D5EE001A3EFE /* ExtensionForActivity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtensionForActivity.swift; sourceTree = "<group>"; };
+		186D80CD1CF9D5EE001A3EFE /* ExtensionTableForActivity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtensionTableForActivity.swift; sourceTree = "<group>"; };
 		186D80CF1CF9E322001A3EFE /* ExtensionForAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtensionForAnimation.swift; sourceTree = "<group>"; };
 		187464941C3F9FAC009E4041 /* LocalNotification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalNotification.swift; sourceTree = "<group>"; };
 		187464961C3FA3DD009E4041 /* SendNotification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SendNotification.swift; sourceTree = "<group>"; };
@@ -732,7 +737,7 @@
 				18A824811BEE2FCA00084589 /* SignUp.swift */,
 				189052FF1CA6733C006EFE69 /* ExtensionForGesture.swift */,
 				18AFE5D01CBE6FF1000DAD84 /* AddNewActivity.swift */,
-				186D80CD1CF9D5EE001A3EFE /* ExtensionForActivity.swift */,
+				186D80CD1CF9D5EE001A3EFE /* ExtensionTableForActivity.swift */,
 				186D80CF1CF9E322001A3EFE /* ExtensionForAnimation.swift */,
 				1837D2451CFAF32D00FFE3FD /* signupNavEvents.swift */,
 				18BD4A301D1AC2A800585D1D /* RCIMdelegateForSignUp.swift */,
@@ -828,6 +833,7 @@
 		18E136231CFC73B10046A6B8 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				1824C61D1D2556AF009078B4 /* create_activity_main.png */,
 				18E1C8141D17E3150080EBC1 /* welcome_video.mp4 */,
 				1882E8881D05C8AB006F5803 /* 10.jpeg */,
 				18E136301CFC752E0046A6B8 /* dailyBackground.png */,
@@ -844,6 +850,8 @@
 		18E259C61CCA5EF400743FCA /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				1824C61A1D255045009078B4 /* OneRollSelection.m */,
+				1824C61B1D255045009078B4 /* OneRollSelection.h */,
 				18E259CA1CCA5F6000743FCA /* DropDownSelection.swift */,
 			);
 			name = Controller;
@@ -1037,6 +1045,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				18E136291CFC74380046A6B8 /* LoginBackGround.png in Resources */,
+				1824C61E1D2556AF009078B4 /* create_activity_main.png in Resources */,
 				18E1362D1CFC74AE0046A6B8 /* chatDetailBackground.png in Resources */,
 				18AF8CAF1BEDCCCB00539C0E /* LaunchScreen.storyboard in Resources */,
 				18E136311CFC752E0046A6B8 /* dailyBackground.png in Resources */,
@@ -1125,6 +1134,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1824C61C1D255045009078B4 /* OneRollSelection.m in Sources */,
 				1882E8871D05C567006F5803 /* ChatVoiceMessage.swift in Sources */,
 				1817585D1C4B8D45008913DB /* CustomLayout.swift in Sources */,
 				1837D2421CFAF2C800FFE3FD /* navigationClickEvents.swift in Sources */,
@@ -1146,7 +1156,7 @@
 				18F7E46B1C97EE69007E3459 /* reviewTableCell.swift in Sources */,
 				189053001CA6733C006EFE69 /* ExtensionForGesture.swift in Sources */,
 				18A93DB51CE83E2D005EF64F /* AnimatedMaskLabel.swift in Sources */,
-				186D80CE1CF9D5EE001A3EFE /* ExtensionForActivity.swift in Sources */,
+				186D80CE1CF9D5EE001A3EFE /* ExtensionTableForActivity.swift in Sources */,
 				1882E8831D05C567006F5803 /* ChatVoiceCell.swift in Sources */,
 				18E6046E1C0EC50800620499 /* ApiResult.swift in Sources */,
 				18A593DA1C099C5A00458308 /* BaseTextfiledDeletgate.swift in Sources */,
