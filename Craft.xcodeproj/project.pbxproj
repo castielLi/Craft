@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		180141051C53525800BE13B1 /* ImageOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180141041C53525800BE13B1 /* ImageOperation.swift */; };
 		180141071C53534700BE13B1 /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 180141061C53534700BE13B1 /* CoreImage.framework */; };
+		1801FC491D28D5EB0083A37D /* EnterForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1801FC481D28D5EB0083A37D /* EnterForm.swift */; };
 		180E193F1C62E39D00987CE6 /* ChatRoom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180E193E1C62E39D00987CE6 /* ChatRoom.swift */; };
 		180E19441C62EE7C00987CE6 /* libstdc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 180E19431C62EE7C00987CE6 /* libstdc++.tbd */; };
 		180E194B1C63204900987CE6 /* MainMenuProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180E194A1C63204900987CE6 /* MainMenuProtocol.swift */; };
@@ -140,6 +141,7 @@
 /* Begin PBXFileReference section */
 		180141041C53525800BE13B1 /* ImageOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageOperation.swift; sourceTree = "<group>"; };
 		180141061C53534700BE13B1 /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = System/Library/Frameworks/CoreImage.framework; sourceTree = SDKROOT; };
+		1801FC481D28D5EB0083A37D /* EnterForm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EnterForm.swift; path = ChatRoom/EnterForm.swift; sourceTree = "<group>"; };
 		180E193E1C62E39D00987CE6 /* ChatRoom.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChatRoom.swift; path = ChatRoom/ChatRoom.swift; sourceTree = "<group>"; };
 		180E19431C62EE7C00987CE6 /* libstdc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.tbd"; path = "usr/lib/libstdc++.tbd"; sourceTree = SDKROOT; };
 		180E194A1C63204900987CE6 /* MainMenuProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainMenuProtocol.swift; sourceTree = "<group>"; };
@@ -294,6 +296,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1801FC4A1D28EBA40083A37D /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Extension;
+			sourceTree = "<group>";
+		};
 		180E193A1C62E26C00987CE6 /* Chat */ = {
 			isa = PBXGroup;
 			children = (
@@ -337,6 +346,7 @@
 				1826B3171D02D25700E34D9A /* TableViewForChat.swift */,
 				1826B3191D02D4F400E34D9A /* ChatDetailCell.swift */,
 				CDDA536D1D22C96F00C45479 /* ChatChannelCell.swift */,
+				1801FC481D28D5EB0083A37D /* EnterForm.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -778,6 +788,7 @@
 		18AF8CA31BEDCCCB00539C0E /* Craft */ = {
 			isa = PBXGroup;
 			children = (
+				1801FC4A1D28EBA40083A37D /* Extension */,
 				18E136231CFC73B10046A6B8 /* Images */,
 				180E19471C631FFD00987CE6 /* Protocol */,
 				18610C4A1C12C6FA00B864F2 /* Resource */,
@@ -1214,6 +1225,7 @@
 				18AFE5D11CBE6FF1000DAD84 /* AddNewActivity.swift in Sources */,
 				18CE64381CF74E2300834C2B /* dailyDutyView.swift in Sources */,
 				18568B0D1D02A00A00D9446E /* RCIMdelegateForChat.swift in Sources */,
+				1801FC491D28D5EB0083A37D /* EnterForm.swift in Sources */,
 				180E194B1C63204900987CE6 /* MainMenuProtocol.swift in Sources */,
 				18A824821BEE2FCA00084589 /* SignUp.swift in Sources */,
 				18A824581BEDED8900084589 /* ChooseSide.swift in Sources */,

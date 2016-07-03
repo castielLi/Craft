@@ -125,8 +125,8 @@ extension ChatRoom : UITableViewDelegate,UITableViewDataSource{
         if self.chatDetailView!.frame.origin.x < 0{
                 UIView.animateWithDuration(0.4, animations: {
                     self.chatDetailView!.frame.origin.x = 0
-                    self.enterText!.frame.origin.x = 0
-                    self.buttonSend!.frame.origin.x = UIAdapter.shared.transferWidth(225)
+                    self.enterForm!.frame.origin.x = UIAdapter.shared.transferWidth(10)
+//                    self.buttonSend!.frame.origin.x = UIAdapter.shared.transferWidth(225)
                     self.detailTable!.frame.origin.x = UIAdapter.shared.transferWidth(10)
                     self.selectDialog!.frame.origin.x += UIAdapter.shared.transferWidth(220)
                 })

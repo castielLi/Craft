@@ -99,13 +99,13 @@ extension ChatRoom : UIGestureRecognizerDelegate{
         
         UIView.animateWithDuration(0.4, animations: {
             self.chatDetailView!.frame.origin.x = -UIAdapter.shared.transferWidth(235)
-            self.enterText!.frame.origin.x = -UIAdapter.shared.transferWidth(200)
-            self.buttonSend!.frame.origin.x = -UIAdapter.shared.transferWidth(50)
+            self.enterForm!.frame.origin.x = -UIAdapter.shared.transferWidth(235)
+//            self.buttonSend!.frame.origin.x = -UIAdapter.shared.transferWidth(50)
             self.detailTable!.frame.origin.x = -UIAdapter.shared.transferWidth(210)
         })
       }
     
-       self.enterText!.resignFirstResponder()
+       self.enterForm!.enterTextView!.resignFirstResponder()
 //       self.searchText!.resignFirstResponder()
 
     }
@@ -113,7 +113,7 @@ extension ChatRoom : UIGestureRecognizerDelegate{
     func gestureRecognizer(gestureRecognizer: UIGestureRecognizer, shouldReceiveTouch touch: UITouch) -> Bool {
         let point = touch.locationInView(gestureRecognizer.view)
         if (CGRectContainsPoint(self.chatDetailView!.frame, point) || CGRectContainsPoint(self.selectDialog!.frame, point) ){
-            self.enterText!.resignFirstResponder()
+            self.enterForm!.enterTextView!.resignFirstResponder()
             return false;
         }
         
