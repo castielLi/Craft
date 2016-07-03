@@ -87,9 +87,10 @@ class LoginController: ViewControllerBase {
     
     override func onLoad() {
         service = LoginService()
-        service!.login("jack", pwd: "123") { (result) -> Void in
-            
-        }
+//        service!.login("jack", password: "123") { (result) -> Void in
+//            
+//        }
+        service!.login("jack", password: "123")
     }
     
     override func initView() {

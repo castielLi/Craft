@@ -1,6 +1,6 @@
 
 
-#import <AFNetWorking/AFNetWorking.h>
+//#import <AFNetWorking/AFNetWorking.h>
 #import <Masonry/Masonry.h>
 #import <CommonCrypto/CommonCrypto.h>
 #import <stdlib.h>
@@ -17,3 +17,16 @@
 #import "RCIMHelper.h"
 #import "StartView.h"
 #import "OneRollSelection.h"
+
+//oc framework
+#import "RegexHelper.h"
+#import "MsgBoxHelper.h"
+#import "UIColorHelper.h"
+#import "FMDBHelper.h"
+#import "ApiResult.h"
+#import "RestService.h"
+#import "DBcontract.h"
+
+
+//service
+#import "LoginService.h"

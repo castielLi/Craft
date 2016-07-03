@@ -41,10 +41,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     
     var startTime : NSDate?
-
+    
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
+
+        RestService.configBaseUrl("http://162.243.241.80:8080/wow/api")
+        RestService.setNeedAuthentication(false)
+        
+//        NSArray * initTableArray = [[NSArray alloc]initWithObjects:createAccountTable,createProfileTable,createIconTable, nil];
+//        [FMDBHelper configDatabaseWithName:@"MaoTai" tableQueries:initTableArray];
+//        instance = [FMDBHelper sharedData];
+        
+//        let initTableArray<NSString> = [notificationTable,createAccountTable,createProfileTable,createIconTable]
+        FMDBHelper.configDatabaseWithName("craft", tableQueries: nil)
+        
         
         RCIM.sharedRCIM().initWithAppKey("pkfcgjstfdgr8")
         
