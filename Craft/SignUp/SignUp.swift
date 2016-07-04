@@ -28,10 +28,18 @@ class SignUp: ViewControllerBase ,RCIMClientReceiveMessageDelegate{
     var showActivitySwipe : UISwipeGestureRecognizer?
     var showDailySwipe : UISwipeGestureRecognizer?
     var showChatSwipe : UISwipeGestureRecognizer?
+    
+    var displayWorldChat : UITapGestureRecognizer?
+    
     var timerVisible : Bool = false
     var activityVisible : Bool = false
     var chatVisible : Bool = false
     var dailyVisible : Bool = false
+    
+    
+    //chat 
+    var worldChat : WorldChat?
+    
     
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
@@ -136,7 +144,13 @@ class SignUp: ViewControllerBase ,RCIMClientReceiveMessageDelegate{
     override func initView() {
         setBackGround()
         setTimerView()
+        setWorldChat()
         setActivityMainView()
+    }
+    
+    func setWorldChat(){
+       self.worldChat = WorldChat(frame: CGRect(x: UIAdapter.shared.transferWidth(15), y: UIAdapter.shared.transferHeight(100) + UIAdapter.shared.transferWidth(200), width: self.view.frame.width - UIAdapter.shared.transferWidth(30), height: self.view.frame.height - (UIAdapter.shared.transferHeight(110) + UIAdapter.shared.transferWidth(200) + 64)))
+       self.view.addSubview(self.worldChat!)
     }
     
     func setBackGround(){

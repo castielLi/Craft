@@ -15,6 +15,14 @@ extension SignUp{
        self.addDailySwipe()
        self.addTimerSwipe()
        self.addActivitySwipe()
+       self.showDetailWorldChat()
+    }
+    
+    
+    func showDetailWorldChat(){
+       self.displayWorldChat = UITapGestureRecognizer(target: self, action: "showDetailWorldChat:")
+       self.displayWorldChat!.numberOfTapsRequired = 2
+       self.worldChat!.addGestureRecognizer(self.displayWorldChat!)
     }
     
     func addTimerSwipe(){
@@ -44,6 +52,10 @@ extension SignUp{
     }
     
     
+    func showDetailWorldChat(sender : UITapGestureRecognizer){
+        self.showDetailOfWorldChat()
+    }
+    
     func showTimer(sender : UISwipeGestureRecognizer){
         self.showTimer()
     }
@@ -58,6 +70,10 @@ extension SignUp{
     
     func showChat(sender : UISwipeGestureRecognizer){
        self.showChat()
+    }
+    
+    func showDetailOfWorldChat(){
+       self.worldChat!.changeWorldChatState(CGRect(x: UIAdapter.shared.transferWidth(15), y: UIAdapter.shared.transferHeight(120), width: self.view.frame.width - UIAdapter.shared.transferWidth(30), height: self.view.frame.height - (UIAdapter.shared.transferHeight(120))))
     }
     
     func showTimer(){
@@ -100,7 +116,6 @@ extension SignUp{
         }
         
     }
-    
     
     func showActivity(){
         

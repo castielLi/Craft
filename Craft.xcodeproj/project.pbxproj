@@ -99,6 +99,7 @@
 		18C44C4E1D1197560087EBF6 /* StartView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C44C4C1D1197560087EBF6 /* StartView.m */; };
 		18CE64341CF7354500834C2B /* DailyDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CE64331CF7354500834C2B /* DailyDetail.swift */; };
 		18CE64381CF74E2300834C2B /* dailyDutyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CE64371CF74E2300834C2B /* dailyDutyView.swift */; };
+		18D6CF651D2ABBED004DCF8A /* worldChatCompleteState.png in Resources */ = {isa = PBXBuildFile; fileRef = 18D6CF641D2ABBED004DCF8A /* worldChatCompleteState.png */; };
 		18E136251CFC73EE0046A6B8 /* MainBackGround.png in Resources */ = {isa = PBXBuildFile; fileRef = 18E136241CFC73EE0046A6B8 /* MainBackGround.png */; };
 		18E136271CFC74190046A6B8 /* blood.png in Resources */ = {isa = PBXBuildFile; fileRef = 18E136261CFC74190046A6B8 /* blood.png */; };
 		18E136291CFC74380046A6B8 /* LoginBackGround.png in Resources */ = {isa = PBXBuildFile; fileRef = 18E136281CFC74380046A6B8 /* LoginBackGround.png */; };
@@ -266,6 +267,7 @@
 		18C44C4C1D1197560087EBF6 /* StartView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StartView.m; sourceTree = "<group>"; };
 		18CE64331CF7354500834C2B /* DailyDetail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DailyDetail.swift; path = SliderMain/DailyDetail.swift; sourceTree = "<group>"; };
 		18CE64371CF74E2300834C2B /* dailyDutyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = dailyDutyView.swift; path = Common/dailyDutyView.swift; sourceTree = "<group>"; };
+		18D6CF641D2ABBED004DCF8A /* worldChatCompleteState.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = worldChatCompleteState.png; sourceTree = "<group>"; };
 		18E136241CFC73EE0046A6B8 /* MainBackGround.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = MainBackGround.png; path = Assets.xcassets/BackGround/Main/MainBackGround.imageset/MainBackGround.png; sourceTree = "<group>"; };
 		18E136261CFC74190046A6B8 /* blood.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = blood.png; path = Assets.xcassets/BackGround/blood.imageset/blood.png; sourceTree = "<group>"; };
 		18E136281CFC74380046A6B8 /* LoginBackGround.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = LoginBackGround.png; path = Assets.xcassets/BackGround/LoginBackGround.imageset/LoginBackGround.png; sourceTree = "<group>"; };
@@ -884,6 +886,7 @@
 		18E136231CFC73B10046A6B8 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				18D6CF641D2ABBED004DCF8A /* worldChatCompleteState.png */,
 				1824C61D1D2556AF009078B4 /* create_activity_main.png */,
 				18E1C8141D17E3150080EBC1 /* welcome_video.mp4 */,
 				1882E8881D05C8AB006F5803 /* 10.jpeg */,
@@ -1114,6 +1117,7 @@
 				1882E8891D05C8AB006F5803 /* 10.jpeg in Resources */,
 				18E136271CFC74190046A6B8 /* blood.png in Resources */,
 				18610C4C1C12C88300B864F2 /* wow_main_theme.mp3 in Resources */,
+				18D6CF651D2ABBED004DCF8A /* worldChatCompleteState.png in Resources */,
 				18605E321CE09147007D8114 /* clickevent.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
