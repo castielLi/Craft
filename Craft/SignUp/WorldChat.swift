@@ -40,25 +40,39 @@ class WorldChat: UIView {
         let path = NSBundle.mainBundle().pathForResource("worldChatCompleteState", ofType: "png")
         self.background!.image = UIImage(contentsOfFile: path!)
         self.background!.hidden = true
+        self.background!.alpha = 0.5
         self.addSubview(self.background!)
     }
     
     func changeWorldChatState(completeFrame : CGRect?){
         if !completeState {
-//           self.smallBackground?.removeFromSuperview()
-           self.frame = completeFrame!
-            self.smallBackground!.hidden = true;
-            self.background!.hidden = false;
-            self.background!.frame =  CGRect(x: 0, y: 0, width: completeFrame!.width , height: completeFrame!.height)
 
-           
-           
+            self.background!.hidden = false;
+            
+            self.background!.frame =  CGRect(x: 0, y: UIAdapter.shared.transferWidth(-60), width: completeFrame!.width , height: completeFrame!.height)
+            UIView.animateWithDuration(0.5, animations: {
+                    self.frame = completeFrame!
+                    self.smallBackground!.alpha = 0.5
+                    self.background!.alpha = 1
+                
+                } ,completion: { (success) in
+                    self.smallBackground!.hidden = true;
+                })
+
+            
         }else{
-//           self.background?.removeFromSuperview()
-           self.frame = initSize!
+
             self.smallBackground!.hidden = false;
-            self.background!.hidden = true;
-            self.smallBackground!.frame = CGRect(x: 0, y: 0, width: initSize!.width , height: initSize!.height)
+            
+            self.smallBackground!.frame = CGRect(x: 0, y: 0 , width: self.initSize!.width , height: self.initSize!.height)
+            UIView.animateWithDuration(0.5, animations: {
+                     self.frame = self.initSize!
+                     self.background!.alpha = 0.5
+                     self.smallBackground!.alpha = 1
+                },completion: { (success) in
+                     self.background!.hidden = true;
+                })
+           
 
             
         }

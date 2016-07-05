@@ -19,6 +19,8 @@ class SignUp: ViewControllerBase ,RCIMClientReceiveMessageDelegate{
     var timer:NSTimer?
     var verifyRequestCount : Int = 5
     var timeView : TimerView?
+    var shapeLayer : CAShapeLayer?
+    
     var activityMainView : ActivityMainView?
     var mainMenuProtocal : MainMenuProtocol?
     var ovalShapeLayer: CAShapeLayer?
@@ -39,6 +41,7 @@ class SignUp: ViewControllerBase ,RCIMClientReceiveMessageDelegate{
     
     //chat 
     var worldChat : WorldChat?
+    var completeState : Bool = false
     
     
     
@@ -230,17 +233,17 @@ class SignUp: ViewControllerBase ,RCIMClientReceiveMessageDelegate{
         let circlePath = UIBezierPath(arcCenter: CGPoint(x: refreshRadius , y: refreshRadius ), radius: refreshRadius - CGFloat(10), startAngle: CGFloat(-M_PI*1/2), endAngle: CGFloat(M_PI*3/2), clockwise: true)
 
         
-        let shapeLayer = CAShapeLayer()
-        shapeLayer.path = circlePath.CGPath
+        shapeLayer = CAShapeLayer()
+        shapeLayer!.path = circlePath.CGPath
         
         //change the fill color
-        shapeLayer.fillColor = UIColor.clearColor().CGColor
+        shapeLayer!.fillColor = UIColor.clearColor().CGColor
         //you can change the stroke color
-        shapeLayer.strokeColor = UIColor(red: 58/255, green: 54/255, blue: 55/255, alpha: 0.5).CGColor
+        shapeLayer!.strokeColor = UIColor(red: 58/255, green: 54/255, blue: 55/255, alpha: 0.5).CGColor
         //you can change the line width
-        shapeLayer.lineWidth = 8.0
+        shapeLayer!.lineWidth = 8.0
         
-        self.timeView!.joinButton!.layer.addSublayer(shapeLayer)
+        self.timeView!.joinButton!.layer.addSublayer(shapeLayer!)
     
     }
     
