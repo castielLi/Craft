@@ -131,7 +131,8 @@ extension SignUp{
         let completion = {
             UIView.animateWithDuration(0.8, delay: 0, usingSpringWithDamping: 100, initialSpringVelocity: 18, options: UIViewAnimationOptions.CurveEaseOut, animations: { () -> Void in
                 
-                self.timeView!.frame.origin.y = self.view.frame.height - UIAdapter.shared.transferWidth(200) - 88
+                self.timeView!.frame.origin.y = UIAdapter.shared.transferHeight(80)
+                self.worldChat!.frame.origin.y -= self.view.frame.height
                 self.activityMainView!.hidden = true
                 
                 }, completion: nil)
@@ -246,7 +247,7 @@ extension SignUp{
     func disappearTimer(completion : (()->Void)?){
         UIView.animateWithDuration(0.5, delay: 0, options: UIViewAnimationOptions.CurveEaseInOut, animations: { () -> Void in
             self.timeView!.frame.origin.y = -(self.view.frame.height - UIAdapter.shared.transferWidth(200) - 88 )
-            
+            self.worldChat!.frame.origin.y += self.view.frame.height
         }) { (success) -> Void in
             if success {
                 completion!()

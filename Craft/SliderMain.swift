@@ -41,6 +41,7 @@ class SliderMain: ViewControllerBase , MainMenuProtocol , UIGestureRecognizerDel
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
+        self.navigationController!.navigationItem.setHidesBackButton(true, animated: false)
         let unreadCount = RCIMClient.sharedRCIMClient().getTotalUnreadCount()
 
        let chatButton = ChatNavigationView(frame: CGRect(x: 0, y: 0, width: UIAdapter.shared.transferWidth(30) + 5, height: UIAdapter.shared.transferHeight(12) + 20) )
@@ -188,15 +189,15 @@ class SliderMain: ViewControllerBase , MainMenuProtocol , UIGestureRecognizerDel
     }
 
     
-    override func viewDidDisappear(animated: Bool) {
-        super.viewDidDisappear(animated)
-        self.reviewTable = nil
-        self.calendar!.collectionView = nil
-        self.reviewTableSource = nil
-        self.calendar = nil
-        self.sign = nil
-        self.calenderBackground!.removeFromSuperview()
-    }
+//    override func viewDidDisappear(animated: Bool) {
+//        super.viewDidDisappear(animated)
+//        self.reviewTable = nil
+//        self.calendar!.collectionView = nil
+//        self.reviewTableSource = nil
+//        self.calendar = nil
+//        self.sign = nil
+//        self.calenderBackground!.removeFromSuperview()
+//    }
 
     /*
     // MARK: - Navigation
