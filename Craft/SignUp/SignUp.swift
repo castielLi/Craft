@@ -9,7 +9,7 @@
 import UIKit
 import AVFoundation
 
-class SignUp: ViewControllerBase ,RCIMClientReceiveMessageDelegate{
+class SignUp: ViewControllerBase ,RCIMClientReceiveMessageDelegate,UITextViewDelegate{
 
     var soundPlay :PlaySound?
     var firstTime : Bool = true
@@ -19,6 +19,8 @@ class SignUp: ViewControllerBase ,RCIMClientReceiveMessageDelegate{
     var timer:NSTimer?
     var verifyRequestCount : Int = 5
     var timeView : TimerView?
+    var shapeLayer : CAShapeLayer?
+    
     var activityMainView : ActivityMainView?
     var mainMenuProtocal : MainMenuProtocol?
     var ovalShapeLayer: CAShapeLayer?
@@ -28,10 +30,22 @@ class SignUp: ViewControllerBase ,RCIMClientReceiveMessageDelegate{
     var showActivitySwipe : UISwipeGestureRecognizer?
     var showDailySwipe : UISwipeGestureRecognizer?
     var showChatSwipe : UISwipeGestureRecognizer?
+    
+    var displayWorldChat : UITapGestureRecognizer?
+    
     var timerVisible : Bool = false
     var activityVisible : Bool = false
     var chatVisible : Bool = false
     var dailyVisible : Bool = false
+    
+    
+    //chat 
+    var worldChat : WorldChat?
+    var completeState : Bool = false
+    var dHeight : CGFloat?
+    var firstTimeEnter : Bool = true;
+    var textViewInitialHeight: CGFloat = 0
+    
     
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
@@ -85,23 +99,7 @@ class SignUp: ViewControllerBase ,RCIMClientReceiveMessageDelegate{
         self.navigationItem.titleView = activityButton
         
         self.registerGesture()
-        
-        
-        let animation = CASpringAnimation(keyPath: "position.x")
-        animation.damping = 12
-        animation.stiffness = 100
-        animation.mass = 1
-        animation.initialVelocity = 0
-        animation.duration = animation.settlingDuration
-        animation.removedOnCompletion = false
-        animation.timingFunction = CAMediaTimingFunction( name: kCAMediaTimingFunctionEaseOut)
-        animation.fromValue = -UIAdapter.shared.transferWidth(150)
-        
-        self.timeView!.layer.addAnimation(animation, forKey: nil)
-        self.activityMainView!.layer.addAnimation(animation, forKey: nil)
-        
-        
-        
+
         self.joinCurrentChatRoom()
     }
     
@@ -152,7 +150,14 @@ class SignUp: ViewControllerBase ,RCIMClientReceiveMessageDelegate{
     override func initView() {
         setBackGround()
         setTimerView()
+        setWorldChat()
         setActivityMainView()
+    }
+    
+    func setWorldChat(){
+       self.worldChat = WorldChat(frame: CGRect(x: UIAdapter.shared.transferWidth(15), y: UIAdapter.shared.transferHeight(100) + UIAdapter.shared.transferWidth(200), width: self.view.frame.width - UIAdapter.shared.transferWidth(30), height: self.view.frame.height - (UIAdapter.shared.transferHeight(110) + UIAdapter.shared.transferWidth(200) + 64)))
+       self.worldChat!.enterText!.delegate = self
+       self.view.addSubview(self.worldChat!)
     }
     
     func setBackGround(){
@@ -232,17 +237,17 @@ class SignUp: ViewControllerBase ,RCIMClientReceiveMessageDelegate{
         let circlePath = UIBezierPath(arcCenter: CGPoint(x: refreshRadius , y: refreshRadius ), radius: refreshRadius - CGFloat(10), startAngle: CGFloat(-M_PI*1/2), endAngle: CGFloat(M_PI*3/2), clockwise: true)
 
         
-        let shapeLayer = CAShapeLayer()
-        shapeLayer.path = circlePath.CGPath
+        shapeLayer = CAShapeLayer()
+        shapeLayer!.path = circlePath.CGPath
         
         //change the fill color
-        shapeLayer.fillColor = UIColor.clearColor().CGColor
+        shapeLayer!.fillColor = UIColor.clearColor().CGColor
         //you can change the stroke color
-        shapeLayer.strokeColor = UIColor(red: 58/255, green: 54/255, blue: 55/255, alpha: 0.5).CGColor
+        shapeLayer!.strokeColor = UIColor(red: 58/255, green: 54/255, blue: 55/255, alpha: 0.5).CGColor
         //you can change the line width
-        shapeLayer.lineWidth = 8.0
+        shapeLayer!.lineWidth = 8.0
         
-        self.timeView!.joinButton!.layer.addSublayer(shapeLayer)
+        self.timeView!.joinButton!.layer.addSublayer(shapeLayer!)
     
     }
     
@@ -346,8 +351,7 @@ class SignUp: ViewControllerBase ,RCIMClientReceiveMessageDelegate{
         AudioServicesPlaySystemSound(swishinid!);
         
         UIView.animateWithDuration(0.4, delay: 0, options: UIViewAnimationOptions.CurveEaseInOut, animations: { () -> Void in
-            self.activityMainView!.frame.origin.x = -UIAdapter.shared.transferWidth(240)
-            
+            self.activityMainView!.frame.origin.x = -UIAdapter.shared.transferWidth(300)
             }) { (success) -> Void in
                 if success {
                     let activitiesView = AddNewActivityController(nibName: nil, bundle: nil)
@@ -393,6 +397,56 @@ class SignUp: ViewControllerBase ,RCIMClientReceiveMessageDelegate{
 
     }
 
+    
+    func tableScrollToBottom() {
+//        if self.data.count > 0 {
+//            self.detailTable?.scrollToRowAtIndexPath(NSIndexPath(forRow: self.data.count - 1, inSection: 0), atScrollPosition: .Bottom, animated: true)
+//        }
+    }
+    
+    func textViewDidChange(textView: UITextView) {
+        // Caculate the size which best fits the specified size.
+        // This height is just the height of textView which best fits its content.
+        var height = textView.sizeThatFits(CGSizeMake(self.worldChat!.enterText!.frame
+            .width, CGFloat(MAXFLOAT))).height
+        // Compare with the original height, if bigger than original value, use current height, otherwise, use original value.
+        height = height > self.textViewInitialHeight ? height : self.textViewInitialHeight
+        // Here i set the max height for textView is 80.
+        if height <= uiah(40) {
+            // Get how much the textView grows at height dimission
+            let heightDiff = height - self.worldChat!.enterText!.frame.height
+            var currentDHeight : CGFloat = 0
+            if (dHeight != nil){
+                currentDHeight = heightDiff - dHeight!
+            }
+            UIView.animateWithDuration(0.05, animations: {
+                
+                
+                if !self.firstTimeEnter && currentDHeight>0{
+                    
+                    self.worldChat!.enterForm!.frame = CGRectMake(self.worldChat!.enterForm!.frame.origin.x , self.worldChat!.enterForm!.frame.origin.y - heightDiff, self.worldChat!.enterForm!.frame.width, height + uiah(7))
+                    
+                    self.worldChat!.enterForm!.setNeedsLayout()
+                    
+//                    self.detailTable?.frame = CGRectMake(self.detailTable!.frame.origin.x, self.detailTable!.frame.origin.y, self.detailTable!.frame.width, self.detailTable!.frame.height - heightDiff)
+                    
+                    self.firstTimeEnter = true
+                }else{
+                    self.dHeight = heightDiff
+                    self.firstTimeEnter = false
+                }
+                }, completion: {
+                    finished in
+                    dispatch_async(dispatch_get_main_queue(), {
+                        self.tableScrollToBottom()
+                    })
+            })
+        }
+    }
+
+    
+    
+    
     /*
     // MARK: - Navigation
 

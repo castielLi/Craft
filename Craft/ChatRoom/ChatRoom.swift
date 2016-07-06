@@ -21,9 +21,9 @@ class ChatRoom: ViewControllerBase , UITextViewDelegate ,RCIMClientReceiveMessag
     
     // chat detail
     var chatDetailView : UIImageView?
-    var enterText : UITextView?
+//    var enterText : UITextView?
     var detailTable : UITableView?
-    
+    var enterForm : EnterForm?
     
     // chat list
     var chatListView : UITableView?
@@ -50,9 +50,12 @@ class ChatRoom: ViewControllerBase , UITextViewDelegate ,RCIMClientReceiveMessag
     var textViewInitialHeight: CGFloat = 0
     /// Message list for chat.
     var chatContentsList: [String] = [String]()
-    var buttonVoice: UIButton?
-    var buttonSend:UIButton?
+
     var rtAudio = RTAudio.sharedInstance()
+    
+    
+    var dHeight : CGFloat?
+    var firstTimeEnter : Bool = true;
     
     
     var dataChannels: [Dictionary<String, AnyObject>] = [
@@ -140,7 +143,8 @@ class ChatRoom: ViewControllerBase , UITextViewDelegate ,RCIMClientReceiveMessag
         setChatTabButtons()
         setChatlistView()
         setChatDetailView()
-        self.attachVoiceButton()
+        setEnterForm()
+//        attachVoiceButton()
     }
     
     func setDialog(){
@@ -242,28 +246,41 @@ class ChatRoom: ViewControllerBase , UITextViewDelegate ,RCIMClientReceiveMessag
         self.detailTable!.backgroundColor = UIColor.clearColor()
         self.view!.addSubview(self.detailTable!)
         
-        enterText = UITextView()
-        enterText?.backgroundColor = UIColor.blackColor()
-        enterText!.textColor = UIColor.whiteColor()
-        enterText!.font = UIFont.systemFontOfSize(14)
-        enterText!.returnKeyType = UIReturnKeyType.Send
-        enterText!.delegate = self
+           }
+    
+    func setEnterForm(){
         
+        enterForm = EnterForm(frame: CGRect(x: UIAdapter.shared.transferWidth(-215)  , y: UIAdapter.shared.transferHeight(25 + 290), width: UIAdapter.shared.transferWidth(212), height: UIAdapter.shared.transferHeight(23)))
         
-        // RT start
-        self.textViewInitialHeight = enterText!.frame.height
-        // RT end
+        self.view.addSubview(enterForm!)
         
-        self.view!.addSubview(enterText!)
+        self.enterForm!.enterTextView!.delegate = self
+        self.textViewInitialHeight = self.enterForm!.enterTextView!.frame.height
         
-        self.enterText!.mas_makeConstraints{ make in
-           make.bottom.equalTo()(self.chatDetailView!.mas_bottom).with().offset()(UIAdapter.shared.transferHeight(-8))
-           make.left.equalTo()(self.chatDetailView!.mas_left).with().offset()(UIAdapter.shared.transferWidth(13))
-           make.right.equalTo()(self.chatDetailView!.mas_left).with().offset()(UIAdapter.shared.transferWidth(177))
-           make.height.equalTo()(UIAdapter.shared.transferHeight(15))
-        }
+        self.enterForm!.switchButton!.addTarget(self, action: "switchClick:", forControlEvents: UIControlEvents.TouchUpInside)
+        
+        let longGesture = UILongPressGestureRecognizer(target: self, action: #selector(ChatRoom.recordVoice(_:)))
+        self.enterForm!.soundButton!.addGestureRecognizer(longGesture)
+
     }
     
+    func switchClick(sender : UIButton){
+        if self.enterForm!.showEnterTextfield{
+            self.enterForm!.switchButton?.setBackgroundImage(UIImage(named: "keyborad"), forState: UIControlState.Normal)
+            self.enterForm!.sendButton!.hidden = true
+            self.enterForm!.enterTextView!.hidden = true
+            self.enterForm!.soundButton!.hidden = false
+            self.enterForm!.enterTextView!.text = ""
+            changeEnterFormLayout()
+       
+        }else{
+            self.enterForm!.switchButton?.setBackgroundImage(UIImage(named: "switchSound"), forState: UIControlState.Normal)
+            self.enterForm!.sendButton!.hidden = false
+            self.enterForm!.enterTextView!.hidden = false
+            self.enterForm!.soundButton!.hidden = true
+        }
+        self.enterForm!.showEnterTextfield = !self.enterForm!.showEnterTextfield
+    }
     
     func chatTabButtonClick(sender : UIButton){
         self.selectedIndex = sender.tag
@@ -304,16 +321,34 @@ class ChatRoom: ViewControllerBase , UITextViewDelegate ,RCIMClientReceiveMessag
     func textViewDidChange(textView: UITextView) {
         // Caculate the size which best fits the specified size.
         // This height is just the height of textView which best fits its content.
-        var height = textView.sizeThatFits(CGSizeMake(enterText!.frame.width, CGFloat(MAXFLOAT))).height
+        var height = textView.sizeThatFits(CGSizeMake(self.enterForm!.enterTextView!.frame
+            .width, CGFloat(MAXFLOAT))).height
         // Compare with the original height, if bigger than original value, use current height, otherwise, use original value.
         height = height > self.textViewInitialHeight ? height : self.textViewInitialHeight
         // Here i set the max height for textView is 80.
-        if height <= uiah(64) {
+        if height <= uiah(40) {
             // Get how much the textView grows at height dimission
-            let heightDiff = height - enterText!.frame.height
+            let heightDiff = height - self.enterForm!.enterTextView!.frame.height
+            var currentDHeight : CGFloat = 0
+            if (dHeight != nil){
+             currentDHeight = heightDiff - dHeight!
+            }
             UIView.animateWithDuration(0.05, animations: {
-                self.chatListView?.frame = CGRectMake(self.chatListView!.frame.origin.x, self.chatListView!.frame.origin.y, self.chatListView!.frame.width, self.chatListView!.frame.height - heightDiff)
-                self.enterText?.frame = CGRectMake(self.enterText!.frame.origin.x, self.enterText!.frame.origin.y - heightDiff, self.enterText!.frame.width, height)
+                
+                
+                if !self.firstTimeEnter && currentDHeight>0{
+          
+                    self.enterForm!.frame = CGRectMake(self.enterForm!.frame.origin.x , self.enterForm!.frame.origin.y - heightDiff, self.enterForm!.frame.width, height + uiah(7))
+                    
+                    self.enterForm!.setNeedsLayout()
+
+                    self.detailTable?.frame = CGRectMake(self.detailTable!.frame.origin.x, self.detailTable!.frame.origin.y, self.detailTable!.frame.width, self.detailTable!.frame.height - heightDiff)
+                    
+                    self.firstTimeEnter = true
+                }else{
+                   self.dHeight = heightDiff
+                   self.firstTimeEnter = false
+                }
                 }, completion: {
                     finished in
                     dispatch_async(dispatch_get_main_queue(), {
@@ -323,23 +358,15 @@ class ChatRoom: ViewControllerBase , UITextViewDelegate ,RCIMClientReceiveMessag
         }
     }
     
-    private func attachVoiceButton() {
-        self.buttonSend = UIButton()
-        self.buttonSend!.setTitle("发送", forState: .Normal)
-        self.buttonSend!.backgroundColor = UIColor.blackColor()
-        self.buttonSend!.setTitleColor(Resources.Color.dailyColor, forState: .Normal)
-        self.buttonSend!.titleLabel!.font = UIAdapter.shared.transferFont(8)
-        self.view.addSubview(self.buttonSend!)
-        self.buttonSend!.mas_makeConstraints{ make in
-            make.bottom.equalTo()(self.enterText!.mas_bottom)
-            make.left.equalTo()(self.enterText!.mas_right).with().offset()(uiat(5))
-            make.width.equalTo()(uiat(38))
-            make.height.equalTo()(uiah(17))
-        }
+    private func changeEnterFormLayout(){
+        self.enterForm!.frame = (frame: CGRect(x: self.enterForm!.frame.origin.x  , y: UIAdapter.shared.transferHeight(25 + 290), width: UIAdapter.shared.transferWidth(212), height: UIAdapter.shared.transferHeight(23)))
         
-        let longGesture = UILongPressGestureRecognizer(target: self, action: #selector(ChatRoom.recordVoice(_:)))
-        self.buttonSend?.addGestureRecognizer(longGesture)
+//        self.enterForm!.setNeedsLayout()
+        
+        self.detailTable!.frame = CGRectMake( self.detailTable!.frame.origin.x , UIAdapter.shared.transferHeight(53)  , UIAdapter.shared.transferWidth(210), UIAdapter.shared.transferHeight(263))
     }
+    
+
     
     func recordVoice(recognizer: UILongPressGestureRecognizer) {
         switch recognizer.state {

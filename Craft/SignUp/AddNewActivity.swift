@@ -12,8 +12,10 @@ class AddNewActivityController: ViewControllerBase ,UIGestureRecognizerDelegate{
     
     var activitiesView : UIImageView?
     var blankTap : UITapGestureRecognizer?
+    var activityMain : UIScrollView?
     
-    var cancelView : UIImageView?
+    var createButton : UIButton?
+    var cancelButton : UIButton?
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
@@ -26,34 +28,23 @@ class AddNewActivityController: ViewControllerBase ,UIGestureRecognizerDelegate{
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
-        //        self.navigationController!.navigationBar.barStyle = UIBarStyle.BlackTranslucent
-        //        self.navigationController!.navigationBar.setBackgroundImage(UIImage(named: "navigationBackGround"), forBarMetrics: UIBarMetrics.Default)
-        
         self.navigationController!.setNavigationBarHidden(true, animated: false)
         
-        let animation = CASpringAnimation(keyPath: "position.x")
-        animation.damping = 12
-        animation.stiffness = 100
-        animation.mass = 1
-        animation.initialVelocity = 0
-        animation.duration = animation.settlingDuration
+        let animation = CABasicAnimation(keyPath: "position.x")
+//        animation.damping = 12
+//        animation.stiffness = 100
+//        animation.mass = 1
+//        animation.initialVelocity = 0
+//        animation.duration = animation.settlingDuration
         animation.removedOnCompletion = false
         animation.timingFunction = CAMediaTimingFunction( name: kCAMediaTimingFunctionEaseOut)
-        animation.fromValue = -UIAdapter.shared.transferWidth(150)
+        animation.fromValue = -UIAdapter.shared.transferWidth(300)
         
         self.activitiesView!.layer.addAnimation(animation, forKey: nil)
-        
-        let cancelAnimation = CASpringAnimation(keyPath: "position.x")
-        cancelAnimation.damping = 12
-        cancelAnimation.stiffness = 100
-        cancelAnimation.mass = 1
-        cancelAnimation.initialVelocity = 0
-        cancelAnimation.duration = animation.settlingDuration
-        cancelAnimation.removedOnCompletion = false
-        cancelAnimation.timingFunction = CAMediaTimingFunction( name: kCAMediaTimingFunctionEaseOut)
-        cancelAnimation.fromValue = UIAdapter.shared.transferWidth(150) + UIScreen.mainScreen().bounds.width
-        
-        self.cancelView!.layer.addAnimation(cancelAnimation, forKey: nil)
+        self.activityMain!.layer.addAnimation(animation, forKey: nil)
+        self.createButton!.layer.addAnimation(animation, forKey: nil)
+        self.cancelButton!.layer.addAnimation(animation, forKey: nil)
+
     }
 
     
@@ -67,8 +58,52 @@ class AddNewActivityController: ViewControllerBase ,UIGestureRecognizerDelegate{
     
     override func initView() {
         setActivitiesView()
-        setCancelView()
+        setActivityTabel()
+        setTabButton()
         setTapForBackgroundView()
+    }
+    
+    func setActivityTabel(){
+        self.activityMain = UIScrollView()
+        self.activityMain!.backgroundColor = UIColor.whiteColor()
+        self.view.addSubview(activityMain!)
+        
+        self.activityMain!.mas_makeConstraints{ make in
+            make.right.equalTo()(self.activitiesView!).with().offset()(-UIAdapter.shared.transferWidth(23))
+            make.left.equalTo()(self.activitiesView!).with().offset()(UIAdapter.shared.transferWidth(18))
+            make.top.equalTo()(self.activitiesView!.mas_top).with().offset()(UIAdapter.shared.transferHeight(27))
+            make.bottom.equalTo()(self.activitiesView!.mas_bottom).with().offset()(UIAdapter.shared.transferHeight(-50))
+        }
+    }
+
+    
+    func setTabButton(){
+        createButton = UIButton()
+        createButton!.setImage(UIImage(named: "myActivity_selected"), forState: UIControlState.Highlighted)
+        createButton!.setImage(UIImage(named: "myActivity_selected"), forState: UIControlState.Normal)
+        createButton!.backgroundColor = UIColor.blackColor()
+        self.view.addSubview(createButton!)
+        
+        createButton!.mas_makeConstraints{make in
+            make.top.equalTo()(self.activityMain!.mas_bottom).with().offset()(UIAdapter.shared.transferHeight(17))
+            
+            make.left.equalTo()(self.activityMain!)
+            make.bottom.equalTo()(self.activitiesView!).with().offset()(-UIAdapter.shared.transferHeight(8))
+            make.right.equalTo()(self.activitiesView!.mas_left).with().offset()(self.activitiesView!.frame.width / 2 - 10)
+        }
+        
+        cancelButton = UIButton()
+        cancelButton!.setImage(UIImage(named: "searchActivity"), forState: UIControlState.Normal)
+        cancelButton!.setImage(UIImage(named: "searchActivity_selected"), forState: UIControlState.Highlighted)
+        cancelButton!.backgroundColor = UIColor.blackColor()
+        self.view.addSubview(cancelButton!)
+        
+        cancelButton!.mas_makeConstraints{make in
+            make.top.equalTo()(self.activityMain!.mas_bottom).with().offset()(UIAdapter.shared.transferHeight(17))
+            make.right.equalTo()(self.activityMain!)
+            make.bottom.equalTo()(self.activitiesView!).with().offset()(-UIAdapter.shared.transferHeight(8))
+            make.left.equalTo()(self.activitiesView!.mas_right).with().offset()(-(self.activitiesView!.frame.width / 2 - 10))
+        }
     }
 
     func setTapForBackgroundView(){
@@ -82,7 +117,9 @@ class AddNewActivityController: ViewControllerBase ,UIGestureRecognizerDelegate{
         
         UIView.animateWithDuration(0.4, delay: 0, options: UIViewAnimationOptions.CurveEaseInOut, animations: { () -> Void in
             self.activitiesView!.frame.origin.x = -UIAdapter.shared.transferWidth(300)
-            self.cancelView!.frame.origin.x = UIAdapter.shared.transferWidth(280) + UIScreen.mainScreen().bounds.width
+            self.activityMain!.frame.origin.x = -UIAdapter.shared.transferWidth(270)
+            self.cancelButton!.frame.origin.x = -UIAdapter.shared.transferWidth(140)
+            self.createButton!.frame.origin.x = -UIAdapter.shared.transferWidth(250)
         }) { (success) -> Void in
             if success {
                 self.dismissViewControllerAnimated(false, completion: { () -> Void in
@@ -92,36 +129,15 @@ class AddNewActivityController: ViewControllerBase ,UIGestureRecognizerDelegate{
             }
         }
     }
-    
-    func setCancelView(){
-        self.cancelView = UIImageView(frame: CGRect(x: 0, y: 64 + UIAdapter.shared.transferHeight(15), width: UIAdapter.shared.transferWidth(300), height: UIAdapter.shared.transferHeight(400)))
-        self.cancelView!.userInteractionEnabled = true
-        self.cancelView!.backgroundColor = UIColor(red: 30/255, green: 69/255, blue: 102/255, alpha: 1)
-        self.cancelView!.layer.cornerRadius = 5
-        self.cancelView!.layer.borderWidth = 2
-        self.cancelView!.layer.borderColor = UIColor.grayColor().CGColor
-        self.cancelView!.layer.masksToBounds = true
-        self.view.addSubview(self.cancelView!)
-        
-        self.cancelView!.mas_makeConstraints{ make in
-            make.right.equalTo()(self.view)
-            make.left.equalTo()(self.view.mas_right).with().offset()(UIAdapter.shared.transferWidth(-100))
-            make.top.equalTo()(self.activitiesView!.mas_bottom).with().offset()(UIAdapter.shared.transferHeight(10))
-            make.bottom.equalTo()(self.activitiesView!.mas_bottom).with().offset()(UIAdapter.shared.transferHeight(35))
-        }
-        
-    }
 
     
     func setActivitiesView(){
-        self.activitiesView = UIImageView(frame: CGRect(x: 0, y: 64 + UIAdapter.shared.transferHeight(15), width: UIAdapter.shared.transferWidth(280), height: UIAdapter.shared.transferHeight(340)))
+        self.activitiesView = UIImageView(frame: CGRect(x: 0, y: 64 + UIAdapter.shared.transferHeight(15), width: UIAdapter.shared.transferWidth(290), height: UIAdapter.shared.transferHeight(370)))
         self.activitiesView!.userInteractionEnabled = true
-        self.activitiesView!.backgroundColor = UIColor(red: 30/255, green: 69/255, blue: 102/255, alpha: 1)
-        self.activitiesView!.alpha = 0.7
-        self.activitiesView!.layer.cornerRadius = 5
-        self.activitiesView!.layer.borderWidth = 2
-        self.activitiesView!.layer.borderColor = UIColor.grayColor().CGColor
-        self.activitiesView!.layer.masksToBounds = true
+
+        let path = NSBundle.mainBundle().pathForResource("create_activity_main", ofType: "png")
+        self.activitiesView!.image = UIImage(contentsOfFile: path!)
+        
         self.view.addSubview(self.activitiesView!)
         
     }

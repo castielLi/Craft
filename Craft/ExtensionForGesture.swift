@@ -15,6 +15,14 @@ extension SignUp{
        self.addDailySwipe()
        self.addTimerSwipe()
        self.addActivitySwipe()
+       self.showDetailWorldChat()
+    }
+    
+    
+    func showDetailWorldChat(){
+       self.displayWorldChat = UITapGestureRecognizer(target: self, action: "showDetailWorldChat:")
+       self.displayWorldChat!.numberOfTapsRequired = 2
+       self.worldChat!.addGestureRecognizer(self.displayWorldChat!)
     }
     
     func addTimerSwipe(){
@@ -44,6 +52,10 @@ extension SignUp{
     }
     
     
+    func showDetailWorldChat(sender : UITapGestureRecognizer){
+        self.showDetailOfWorldChat()
+    }
+    
     func showTimer(sender : UISwipeGestureRecognizer){
         self.showTimer()
     }
@@ -58,6 +70,45 @@ extension SignUp{
     
     func showChat(sender : UISwipeGestureRecognizer){
        self.showChat()
+    }
+    
+    func showDetailOfWorldChat(){
+       self.worldChat!.changeWorldChatState(CGRect(x: UIAdapter.shared.transferWidth(15), y: UIAdapter.shared.transferHeight(120), width: self.view.frame.width - UIAdapter.shared.transferWidth(30), height: self.view.frame.height - (UIAdapter.shared.transferHeight(80))))
+        
+        if !self.completeState{
+            
+            self.ovalShapeLayer!.hidden = true
+            self.shapeLayer!.hidden = true
+            
+            UIView.animateWithDuration(0.5, animations: {
+//      
+                 self.timeView!.joinButton!.frame.origin.y = -UIAdapter.shared.transferHeight(30)
+                 self.timeView!.joinButtonBackGround!.frame.origin.y = -UIAdapter.shared.transferHeight(30)
+                 self.timeView!.joinButton!.frame.origin.x =  (self.view.frame.width - UIAdapter.shared.transferWidth(80)) / 2 - ((self.view.frame.width - UIAdapter.shared.transferWidth(200)) / 2)
+                 self.timeView!.joinButtonBackGround!.frame.origin.x = (self.view.frame.width - UIAdapter.shared.transferWidth(80)) / 2 - ((self.view.frame.width - UIAdapter.shared.transferWidth(200)) / 2)
+                 self.timeView!.joinButton!.frame.size = CGSize(width: UIAdapter.shared.transferWidth(80) , height: UIAdapter.shared.transferWidth(80))
+                 self.timeView!.joinButtonBackGround!.frame.size = CGSize(width: UIAdapter.shared.transferWidth(80) , height: UIAdapter.shared.transferWidth(80))
+                 self.timeView!.joinButtonBackGround!.layer.cornerRadius = UIAdapter.shared.transferWidth(40)
+                 self.completeState = !self.completeState
+            })
+        }else{
+            UIView.animateWithDuration(0.5, animations: {
+                
+                   self.timeView!.joinButton?.frame.origin.y = 0
+                   self.timeView!.joinButtonBackGround!.frame.origin.y = 0
+                   self.timeView!.joinButtonBackGround!.frame.origin.x = 0
+                   self.timeView!.joinButton!.frame.origin.x = 0
+                   self.timeView!.joinButton!.frame.size = CGSize(width: UIAdapter.shared.transferWidth(200), height: UIAdapter.shared.transferWidth(200))
+                   self.timeView!.joinButtonBackGround!.frame.size = CGSize(width: UIAdapter.shared.transferWidth(200), height: UIAdapter.shared.transferWidth(200))
+                   self.timeView!.joinButtonBackGround!.layer.cornerRadius = UIAdapter.shared.transferWidth(100)
+                
+                }, completion: { (success) in
+                    self.ovalShapeLayer!.hidden = false
+                    self.shapeLayer!.hidden = false
+                    
+            })
+            self.completeState = !self.completeState
+        }
     }
     
     func showTimer(){
@@ -80,7 +131,8 @@ extension SignUp{
         let completion = {
             UIView.animateWithDuration(0.8, delay: 0, usingSpringWithDamping: 100, initialSpringVelocity: 18, options: UIViewAnimationOptions.CurveEaseOut, animations: { () -> Void in
                 
-                self.timeView!.frame.origin.y = self.view.frame.height - UIAdapter.shared.transferWidth(200) - 88
+                self.timeView!.frame.origin.y = UIAdapter.shared.transferHeight(80)
+                self.worldChat!.frame.origin.y -= self.view.frame.height
                 self.activityMainView!.hidden = true
                 
                 }, completion: nil)
@@ -100,7 +152,6 @@ extension SignUp{
         }
         
     }
-    
     
     func showActivity(){
         
@@ -196,7 +247,7 @@ extension SignUp{
     func disappearTimer(completion : (()->Void)?){
         UIView.animateWithDuration(0.5, delay: 0, options: UIViewAnimationOptions.CurveEaseInOut, animations: { () -> Void in
             self.timeView!.frame.origin.y = -(self.view.frame.height - UIAdapter.shared.transferWidth(200) - 88 )
-            
+            self.worldChat!.frame.origin.y += self.view.frame.height
         }) { (success) -> Void in
             if success {
                 completion!()

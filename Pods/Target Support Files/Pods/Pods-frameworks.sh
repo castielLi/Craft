@@ -88,16 +88,16 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "Pods/FMDB.framework"
   install_framework "Pods/IQKeyboardManagerSwift.framework"
   install_framework "Pods/MJExtension.framework"
+  install_framework "Pods/MJRefresh.framework"
   install_framework "Pods/Masonry.framework"
   install_framework "Pods/SVProgressHUD.framework"
-  install_framework "Pods/SwiftyJSON.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "Pods/AFNetworking.framework"
   install_framework "Pods/FMDB.framework"
   install_framework "Pods/IQKeyboardManagerSwift.framework"
   install_framework "Pods/MJExtension.framework"
+  install_framework "Pods/MJRefresh.framework"
   install_framework "Pods/Masonry.framework"
   install_framework "Pods/SVProgressHUD.framework"
-  install_framework "Pods/SwiftyJSON.framework"
 fi

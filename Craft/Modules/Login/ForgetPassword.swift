@@ -8,7 +8,6 @@
 
 import UIKit
 
-
 class ForgetPassword: ViewControllerBase {
    
     
@@ -27,7 +26,7 @@ class ForgetPassword: ViewControllerBase {
     var confirmButton : UIButton?
     var backButton : UIButton?
     
-    var service : LoginService?
+
     var timer:NSTimer?
     var verifyRequestCount:Int?
     
@@ -73,7 +72,7 @@ class ForgetPassword: ViewControllerBase {
     }
     
     override func onLoad() {
-        service = LoginService()
+//        service = LoginService()
     }
     
     func setBackGroundImage(){

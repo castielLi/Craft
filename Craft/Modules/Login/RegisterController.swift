@@ -29,7 +29,6 @@ class RegisterController: ViewControllerBase {
     var registerButton : UIButton?
     var backButton : UIButton?
 
-    var service : LoginService?
     var timer:NSTimer?
     var verifyRequestCount:Int?
     var isSelected : Bool?
@@ -72,7 +71,7 @@ class RegisterController: ViewControllerBase {
     }
     
     override func onLoad() {
-        service = LoginService()
+
         self.isSelected = true
     }
     

@@ -11,9 +11,7 @@ import UIKit
 class UserSetting: ViewControllerBase,UITableViewDelegate,UITableViewDataSource {
     
     var soundPlay :PlaySound?
-    var rightMenu : RightMenu?
     var backgroundImage : UIImageView?
-    var menuIsOpen : Bool = false
     var table : UITableView?
     var iconImage : UIImageView?
     var changeIcon : UIButton?
@@ -29,29 +27,14 @@ class UserSetting: ViewControllerBase,UITableViewDelegate,UITableViewDataSource 
     }
     
     override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)        
+        super.viewWillAppear(animated)
         
-        let menuButton = UIButton(frame: CGRect(x: 0, y: 0, width: UIAdapter.shared.transferWidth(30), height: UIAdapter.shared.transferHeight(12)) )
-        menuButton.setBackgroundImage(UIImage(named: "friend"), forState: UIControlState.Normal)
-        menuButton.addTarget(self, action: "MenuClick:", forControlEvents: UIControlEvents.TouchUpInside)
-        
-        let rightBarButton = UIBarButtonItem(customView: menuButton)
-        self.navigationItem.rightBarButtonItem = rightBarButton
-        
-        let dailyButton = UIButton(frame: CGRect(x: 0, y: 0, width: UIAdapter.shared.transferWidth(30), height: UIAdapter.shared.transferHeight(12)) )
-        dailyButton.setBackgroundImage(UIImage(named: "daily"), forState: UIControlState.Normal)
-        
-        
-        
-        let leftBarButton = UIBarButtonItem(customView: dailyButton)
-        self.navigationItem.leftBarButtonItem = leftBarButton
+        self.navigationItem.setHidesBackButton(true, animated: false)
         
         let activityButton = UIButton(frame: CGRect(x: 0, y: 0, width: UIAdapter.shared.transferWidth(30), height: UIAdapter.shared.transferHeight(18)) )
         activityButton.setBackgroundImage(UIImage(named: "activity"), forState: UIControlState.Normal)
-        activityButton.addTarget(self, action: "activityClick:", forControlEvents: UIControlEvents.TouchUpInside)
+//        activityButton.addTarget(self, action: "activityClick:", forControlEvents: UIControlEvents.TouchUpInside)
         self.navigationItem.titleView = activityButton
-        
-        
         
         let alphaAnimation = CABasicAnimation(keyPath: "opacity")
         alphaAnimation.duration = 0.8
@@ -63,24 +46,6 @@ class UserSetting: ViewControllerBase,UITableViewDelegate,UITableViewDataSource 
         
     }
     
-    func MenuClick(sender : UIButton){
-        let soundId = soundPlay!.sound.valueForKey(SoundResource.clickEventSound) as! String
-        let id = UInt32(soundId)
-        AudioServicesPlaySystemSound(id!);
-        self.MenuClick()
-    }
-    
-    func activityClick(sender : UIButton){
-        let soundId = soundPlay!.sound.valueForKey(SoundResource.clickEventSound) as! String
-        let id = UInt32(soundId)
-        AudioServicesPlaySystemSound(id!);
-        
-        self.tabBarController?.selectedIndex = 1
-        self.navigationController?.popViewControllerAnimated(false)
-    }
-
-
-
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -98,7 +63,6 @@ class UserSetting: ViewControllerBase,UITableViewDelegate,UITableViewDataSource 
     override func initView() {
         setBackground()
         initIcon()
-        setRightMenu()
         setTable()
         setBackButton()
     }
@@ -166,35 +130,6 @@ class UserSetting: ViewControllerBase,UITableViewDelegate,UITableViewDataSource 
            make.centerX.equalTo()(self.view)
            make.width.equalTo()(UIAdapter.shared.transferWidth(100))
         }
-    }
-    
-    func setRightMenu(){
-        self.rightMenu = RightMenu(frame: CGRect(x: UIScreen.mainScreen().bounds.width + UIAdapter.shared.transferWidth(50) , y: (UIScreen.mainScreen().bounds.height - UIAdapter.shared.transferHeight(70)) / 2, width: UIAdapter.shared.transferWidth(50), height: UIAdapter.shared.transferHeight(70)))
-        self.view.addSubview(self.rightMenu!)
-        
-        self.rightMenu!.chatRoom?.addTarget(self, action: "chatRoomClick:", forControlEvents: UIControlEvents.TouchUpInside)
-        
-        self.rightMenu!.setting!.addTarget(self, action: "settingClick:", forControlEvents: UIControlEvents.TouchUpInside)
-        
-    }
-
-   
-    
-    func MenuClick(){
-        if !self.menuIsOpen {
-            
-            UIView.animateWithDuration(0.3, animations: { () -> Void in
-                self.rightMenu!.frame.origin.x = UIScreen.mainScreen().bounds.width - UIAdapter.shared.transferWidth(50) - 5
-            })
-            
-        }else{
-            
-            UIView.animateWithDuration(0.3, animations: { () -> Void in
-                self.rightMenu!.frame.origin.x = UIScreen.mainScreen().bounds.width + UIAdapter.shared.transferWidth(50)
-            })
-            
-        }
-        self.menuIsOpen = !self.menuIsOpen
     }
 
     
