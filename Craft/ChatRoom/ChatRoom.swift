@@ -258,6 +258,7 @@ class ChatRoom: ViewControllerBase , UITextViewDelegate ,RCIMClientReceiveMessag
         self.textViewInitialHeight = self.enterForm!.enterTextView!.frame.height
         
         self.enterForm!.switchButton!.addTarget(self, action: "switchClick:", forControlEvents: UIControlEvents.TouchUpInside)
+        self.enterForm!.sendButton?.addTarget(self, action: #selector(ChatRoom.tapSend(_:)), forControlEvents: .TouchUpInside)
         
         let longGesture = UILongPressGestureRecognizer(target: self, action: #selector(ChatRoom.recordVoice(_:)))
         self.enterForm!.soundButton!.addGestureRecognizer(longGesture)
@@ -282,6 +283,10 @@ class ChatRoom: ViewControllerBase , UITextViewDelegate ,RCIMClientReceiveMessag
         self.enterForm!.showEnterTextfield = !self.enterForm!.showEnterTextfield
     }
     
+    func tapSend(sender: UIButton) {
+        self.sendText()
+    }
+    
     func chatTabButtonClick(sender : UIButton){
         self.selectedIndex = sender.tag
         self.chatListView?.reloadData()
@@ -293,19 +298,23 @@ class ChatRoom: ViewControllerBase , UITextViewDelegate ,RCIMClientReceiveMessag
         // Dispose of any resources that can be recreated.
     }
     
+    
+    private func sendText() {
+        let message = RCTextMessage(content: self.enterForm!.enterTextView!.text)
+        message.extra = "{\"hello\":\"helloworld\"}"
+        RCIMClient.sharedRCIMClient().sendMessage(RCConversationType.ConversationType_PRIVATE, targetId: "1", content: message, pushContent: nil, success: { (messageId) in
+            print("发送成功")
+            }, error: { (error, messageId) in
+                print("发送失败")
+        })
+        
+        self.enterForm!.enterTextView!.resignFirstResponder()
+        self.enterForm!.enterTextView!.text = ""
+    }
+    
     func textView(textView: UITextView, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool {
         if (text == "\n"){
-            
-            let message = RCTextMessage(content: textView.text)
-            message.extra = "{\"hello\":\"helloworld\"}"
-            RCIMClient.sharedRCIMClient().sendMessage(RCConversationType.ConversationType_PRIVATE, targetId: "1", content: message, pushContent: nil, success: { (messageId) in
-                  print("发送成功")
-                }, error: { (error, messageId) in
-                    print("发送失败")
-            })
-            
-            textView.resignFirstResponder()
-            textView.text = ""
+            self.sendText()
         }
         return true
     }
