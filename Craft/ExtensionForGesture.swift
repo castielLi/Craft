@@ -73,6 +73,11 @@ extension SignUp{
     }
     
     func showDetailOfWorldChat(){
+        
+        let soundId = soundPlay!.sound.valueForKey(SoundResource.swishinSound) as! String
+        let id = UInt32(soundId)
+        AudioServicesPlaySystemSound(id!);
+        
        self.worldChat!.changeWorldChatState(CGRect(x: UIAdapter.shared.transferWidth(15), y: UIAdapter.shared.transferHeight(120), width: self.view.frame.width - UIAdapter.shared.transferWidth(30), height: self.view.frame.height - (UIAdapter.shared.transferHeight(80))))
         
         if !self.completeState{
@@ -277,6 +282,18 @@ extension SignUp{
     func getBloodAnimation() ->CAAnimation?{
         let animation = self.bloodBackGroundImage!.layer.animationForKey("blood")
         return animation
+    }
+    
+    
+    
+    
+    func gestureRecognizer(gestureRecognizer: UIGestureRecognizer, shouldReceiveTouch touch: UITouch) -> Bool {
+        let point = touch.locationInView(gestureRecognizer.view)
+        if (CGRectContainsPoint(self.worldChat!.frame, point) || CGRectContainsPoint(self.worldChat!.frame, point) ){
+            return false;
+        }
+        
+        return true;
     }
 
 }
