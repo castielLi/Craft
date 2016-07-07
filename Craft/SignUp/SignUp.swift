@@ -47,6 +47,8 @@ class SignUp: ViewControllerBase ,RCIMClientReceiveMessageDelegate,UITextViewDel
     var textViewInitialHeight: CGFloat = 0
     
     
+    let chatDetail = ["麦迪文说:卡德加你这个坑爹的学徒，老子正虚弱着的时候给我来了一套爆发，也不留心给老子祛除下debuff","卡德加说：.......就是不想","安度因罗萨说:好样的小伙子,我看好你！","杜隆坦说:我来拯救我的人民！我的世界正在消亡,我们必须联手打败古尔丹,他那黑暗魔法迟早会给我的人民带来灭亡","黑手说:你尽然背叛自己的同类,你以后别想模装备了"]
+    
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
@@ -158,6 +160,10 @@ class SignUp: ViewControllerBase ,RCIMClientReceiveMessageDelegate,UITextViewDel
        self.worldChat = WorldChat(frame: CGRect(x: UIAdapter.shared.transferWidth(15), y: UIAdapter.shared.transferHeight(100) + UIAdapter.shared.transferWidth(200), width: self.view.frame.width - UIAdapter.shared.transferWidth(30), height: self.view.frame.height - (UIAdapter.shared.transferHeight(110) + UIAdapter.shared.transferWidth(200) + 64)))
        self.worldChat!.enterText!.delegate = self
        self.view.addSubview(self.worldChat!)
+        
+       self.worldChat!.worldChatDetail!.tag = 1
+       self.worldChat!.worldChatDetail!.delegate = self
+       self.worldChat!.worldChatDetail!.dataSource = self
     }
     
     func setBackGround(){
@@ -188,6 +194,7 @@ class SignUp: ViewControllerBase ,RCIMClientReceiveMessageDelegate,UITextViewDel
         
        self.view.addSubview(self.activityMainView!)
        self.activityMainView!.hidden = true
+       self.activityMainView!.activityMainView!.tag = 2
        self.activityMainView!.activityTabel!.delegate = self
        self.activityMainView!.activityTabel!.dataSource = self
        self.activityMainView!.activityTabel!.separatorStyle = UITableViewCellSeparatorStyle.None

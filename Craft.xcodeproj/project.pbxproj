@@ -96,6 +96,8 @@
 		18AF8CC51BEDCCCB00539C0E /* CraftUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18AF8CC41BEDCCCB00539C0E /* CraftUITests.swift */; };
 		18AFE5D11CBE6FF1000DAD84 /* AddNewActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18AFE5D01CBE6FF1000DAD84 /* AddNewActivity.swift */; };
 		18BD4A311D1AC2A800585D1D /* RCIMdelegateForSignUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18BD4A301D1AC2A800585D1D /* RCIMdelegateForSignUp.swift */; };
+		18BDB0451D2E8BA1000CC61D /* worldChatCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18BDB0441D2E8BA1000CC61D /* worldChatCell.swift */; };
+		18BDB0481D2E8E7B000CC61D /* UILabel+Nova_UILabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 18BDB0461D2E8E7B000CC61D /* UILabel+Nova_UILabel.m */; };
 		18C44C4E1D1197560087EBF6 /* StartView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C44C4C1D1197560087EBF6 /* StartView.m */; };
 		18CE64341CF7354500834C2B /* DailyDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CE64331CF7354500834C2B /* DailyDetail.swift */; };
 		18CE64381CF74E2300834C2B /* dailyDutyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CE64371CF74E2300834C2B /* dailyDutyView.swift */; };
@@ -263,6 +265,9 @@
 		18AF8CC61BEDCCCB00539C0E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		18AFE5D01CBE6FF1000DAD84 /* AddNewActivity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AddNewActivity.swift; path = SignUp/AddNewActivity.swift; sourceTree = "<group>"; };
 		18BD4A301D1AC2A800585D1D /* RCIMdelegateForSignUp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RCIMdelegateForSignUp.swift; sourceTree = "<group>"; };
+		18BDB0441D2E8BA1000CC61D /* worldChatCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = worldChatCell.swift; path = SignUp/worldChatCell.swift; sourceTree = "<group>"; };
+		18BDB0461D2E8E7B000CC61D /* UILabel+Nova_UILabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+Nova_UILabel.m"; sourceTree = "<group>"; };
+		18BDB0471D2E8E7B000CC61D /* UILabel+Nova_UILabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILabel+Nova_UILabel.h"; sourceTree = "<group>"; };
 		18C44C4B1D1197560087EBF6 /* StartView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StartView.h; sourceTree = "<group>"; };
 		18C44C4C1D1197560087EBF6 /* StartView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StartView.m; sourceTree = "<group>"; };
 		18CE64331CF7354500834C2B /* DailyDetail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DailyDetail.swift; path = SliderMain/DailyDetail.swift; sourceTree = "<group>"; };
@@ -330,6 +335,8 @@
 		1801FC4A1D28EBA40083A37D /* Extension */ = {
 			isa = PBXGroup;
 			children = (
+				18BDB0461D2E8E7B000CC61D /* UILabel+Nova_UILabel.m */,
+				18BDB0471D2E8E7B000CC61D /* UILabel+Nova_UILabel.h */,
 			);
 			name = Extension;
 			sourceTree = "<group>";
@@ -413,6 +420,7 @@
 			isa = PBXGroup;
 			children = (
 				1832D26A1D198A37000803FF /* WorldChat.swift */,
+				18BDB0441D2E8BA1000CC61D /* worldChatCell.swift */,
 			);
 			name = worldChat;
 			sourceTree = "<group>";
@@ -1195,6 +1203,7 @@
 				1882E8871D05C567006F5803 /* ChatVoiceMessage.swift in Sources */,
 				1817585D1C4B8D45008913DB /* CustomLayout.swift in Sources */,
 				1837D2421CFAF2C800FFE3FD /* navigationClickEvents.swift in Sources */,
+				18BDB0481D2E8E7B000CC61D /* UILabel+Nova_UILabel.m in Sources */,
 				181518411C958C4000AA4F33 /* MyAcitivitiesView.swift in Sources */,
 				1801FC6D1D29241B0083A37D /* MsgBoxHelper.m in Sources */,
 				1882E8861D05C567006F5803 /* ChatMessage.swift in Sources */,
@@ -1241,6 +1250,7 @@
 				1882E8841D05C567006F5803 /* ChatCell.swift in Sources */,
 				187F97A01CA962A3009CC7A9 /* RightMenu.swift in Sources */,
 				1826B31A1D02D4F400E34D9A /* ChatDetailCell.swift in Sources */,
+				18BDB0451D2E8BA1000CC61D /* worldChatCell.swift in Sources */,
 				1837D2441CFAF2FE00FFE3FD /* SliderNavEvents.swift in Sources */,
 				182647781C2E689C0078D4C2 /* ForgetPassword.swift in Sources */,
 				CDDB47A61D14320400F723F1 /* RTFuncs.swift in Sources */,

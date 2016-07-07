@@ -11,10 +11,17 @@ import Foundation
 extension SignUp: UITableViewDelegate , UITableViewDataSource {
 
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if tableView.tag == 2{
         return 10
+        }else{
+           return chatDetail.count
+        }
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        
+        if tableView.tag == 2{
+        
         var cell = tableView.dequeueReusableCellWithIdentifier("activityItemCell") as? ActivityItemCell
         
         if cell == nil{
@@ -31,9 +38,6 @@ extension SignUp: UITableViewDelegate , UITableViewDataSource {
         cell!.leadName!.text = "伊莎贝拉殿下"
         
         if indexPath.row % 3 == 0 {
-            //           cell!.timePart!.firstPart!.text = "27"
-            //           cell!.timePart!.midPart!.font = UIFont(name: "DINAlternate-Bold", size: UIAdapter.shared.transferHeight(20))
-            //           cell!.timePart!.midPart!.text = "days"
             cell!.timePart!.firstPart?.text = "165"
             cell!.timePart!.midPart!.text = ":"
             cell!.timePart!.midPart!.font = UIFont(name: "DB LCD Temp", size: UIAdapter.shared.transferHeight(20))
@@ -45,17 +49,38 @@ extension SignUp: UITableViewDelegate , UITableViewDataSource {
             cell!.timePart!.secondPart!.text = "43"
         }
         
-        //        cell!.textLabel?.text = "hello world"
-        
         cell!.selectionStyle = UITableViewCellSelectionStyle.None
         return cell!
+        }else{
+            var cell = tableView.dequeueReusableCellWithIdentifier("activityItemCell") as? worldChatCell
+            
+            if cell == nil{
+                cell = worldChatCell(style: UITableViewCellStyle.Value1, reuseIdentifier: "activityItemCell", cellWidth: self.view.frame.width - UIAdapter.shared.transferWidth(36) )
+            }
+            
+            cell!.content!.text = chatDetail[indexPath.row]
+            
+            let size = UILabel.contentSize(self.view.frame.width - UIAdapter.shared.transferWidth(42), font: UIAdapter.shared.transferFont(10), text: chatDetail[indexPath.row])
+            
+            cell!.content!.frame.size = size
+            cell!.selectionStyle = UITableViewCellSelectionStyle.None
+            return cell!
+        }
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        if tableView.tag == 2{
         return UIAdapter.shared.transferHeight(65)
+        }
+        else{
+            let content = UILabel.contentSize(self.view.frame.width - UIAdapter.shared.transferWidth(42), font: UIAdapter.shared.transferFont(10), text: chatDetail[indexPath.row])
+            
+            return UIAdapter.shared.transferHeight(4) + content.height
+        }
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        if tableView.tag == 2{
         let cell = tableView.cellForRowAtIndexPath(indexPath) as! ActivityItemCell
 //        cell.backgroundImage!.image = UIImage(named: "activityItem_click")
         
@@ -64,10 +89,13 @@ extension SignUp: UITableViewDelegate , UITableViewDataSource {
         AudioServicesPlaySystemSound(id!);
         
         displayActivityDetail()
+        }
     }
     
     func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
+        if tableView.tag == 2{
         let cell = tableView.cellForRowAtIndexPath(indexPath) as! ActivityItemCell
         cell.backgroundImage!.image = UIImage(named: "activityItem")
+        }
     }
 }

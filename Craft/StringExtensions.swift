@@ -44,24 +44,24 @@ extension String {
     
 }
 
-//extension NSString {
-//    func textSizeWithFont(font: UIFont, constrainedToSize size:CGSize) -> CGSize {
-//        var textSize:CGSize!
-//        if CGSizeEqualToSize(size, CGSizeZero) {
-//            let attributes = NSDictionary(object: font, forKey: NSFontAttributeName)
-//            textSize = self.sizeWithAttributes(attributes as [NSObject : AnyObject] as [NSObject : AnyObject])
-//        } else {
-//            let option = NSStringDrawingOptions.UsesLineFragmentOrigin | NSStringDrawingOptions.UsesFontLeading
-//            let attributes = NSDictionary(object: font, forKey: NSFontAttributeName)
-//            let stringRect = self.boundingRectWithSize(size, options: option, attributes: attributes as [NSObject : AnyObject], context: nil)
-//            textSize = stringRect.size
-//        }
-//        return textSize
-//    }
-//    
-//    
-//    func hexToByte()->[UInt8]
-//    {
-//        return []
-//    }
-//}
+extension NSString {
+    func textSizeWithFont(font: UIFont, constrainedToSize size:CGSize) -> CGSize {
+        var textSize:CGSize!
+        if CGSizeEqualToSize(size, CGSizeZero) {
+            let attributes = NSDictionary(object: font, forKey: NSFontAttributeName)
+            textSize = self.sizeWithAttributes(attributes as? [String : AnyObject])
+        } else {
+
+            let attributes = NSDictionary(object: font, forKey: NSFontAttributeName)
+            let stringRect = self.boundingRectWithSize(size, options: [NSStringDrawingOptions.UsesLineFragmentOrigin , NSStringDrawingOptions.UsesFontLeading], attributes: attributes as? [String : AnyObject], context: nil)
+            textSize = stringRect.size
+        }
+        return textSize
+    }
+    
+    
+    func hexToByte()->[UInt8]
+    {
+        return []
+    }
+}

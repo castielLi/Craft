@@ -26,6 +26,8 @@ class WorldChat: UIView {
     var smallBackground : UIView?
     var initSize : CGRect?
     
+    var worldChatDetail : UITableView?
+    
     
     var tribeButton : UIButton?
     var allianceButton : UIButton?
@@ -48,6 +50,14 @@ class WorldChat: UIView {
         self.background!.hidden = true
         self.background!.alpha = 0.5
         self.addSubview(self.background!)
+        
+        
+        
+        self.worldChatDetail = UITableView(frame: CGRect(x: UIAdapter.shared.transferWidth(3), y: UIAdapter.shared.transferHeight(3), width: self.frame.width - UIAdapter.shared.transferWidth(6), height: self.frame.height - UIAdapter.shared.transferHeight(18 + 28)))
+        self.worldChatDetail?.backgroundColor = UIColor.clearColor()
+        self.worldChatDetail!.separatorStyle = UITableViewCellSeparatorStyle.None
+        self.addSubview(worldChatDetail!)
+        
         
         
         self.enterForm = UIView(frame: CGRect(x: UIAdapter.shared.transferWidth(3), y: self.frame.height - UIAdapter.shared.transferHeight(25), width: self.frame.width - UIAdapter.shared.transferWidth(6), height: UIAdapter.shared.transferHeight(25)))
@@ -135,6 +145,8 @@ class WorldChat: UIView {
                 - self.enterForm!.frame.height + UIAdapter.shared.transferHeight(3)
                     self.sendButton!.frame.origin.y = completeFrame!.size.height - UIAdapter.shared.transferHeight(60)
                 -self.enterForm!.frame.height + UIAdapter.shared.transferHeight(3)
+                
+                    self.worldChatDetail!.frame = CGRect(x: UIAdapter.shared.transferWidth(5), y: UIAdapter.shared.transferHeight(5), width: completeFrame!.size.width - UIAdapter.shared.transferWidth(10), height: completeFrame!.size.height - UIAdapter.shared.transferHeight(52 + 18 + 35))
                 } ,completion: { (success) in
                     self.smallBackground!.hidden = true;
                 })
@@ -153,6 +165,8 @@ class WorldChat: UIView {
                 self.enterForm!.frame.origin.y = self.initSize!.size.height - self.enterForm!.frame.height
                 self.enterText!.frame.origin.y = self.initSize!.size.height - self.enterForm!.frame.height + UIAdapter.shared.transferHeight(3)
                 self.sendButton!.frame.origin.y = self.initSize!.size.height - self.enterForm!.frame.height + UIAdapter.shared.transferHeight(3)
+                
+                self.worldChatDetail!.frame = (frame: CGRect(x: UIAdapter.shared.transferWidth(3), y: UIAdapter.shared.transferHeight(3), width: self.frame.width - UIAdapter.shared.transferWidth(6), height: self.frame.height - UIAdapter.shared.transferHeight(18 + 28)))
                 },completion: { (success) in
                      self.background!.hidden = true;
                 })
