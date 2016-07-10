@@ -117,6 +117,7 @@ extension SignUp{
     }
     
     func showTimer(){
+        self.worldChat!.worldChatDetail!.reloadData()
         if timeView!.frame.origin.y < 0{
             
             let yAnimation = CABasicAnimation(keyPath: "position.y")
@@ -159,6 +160,8 @@ extension SignUp{
     }
     
     func showActivity(){
+        
+        self.activityMainView!.activityTabel?.reloadData()
         
         if self.activityMainView!.frame.origin.x < 0{
             let soundId = soundPlay!.sound.valueForKey(SoundResource.swishout) as! String
