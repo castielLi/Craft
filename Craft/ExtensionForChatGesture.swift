@@ -84,6 +84,7 @@ extension ChatRoom : UIGestureRecognizerDelegate{
             self.selectDialog!.frame.origin.x = self.view.frame.width
             self.chatDetailView!.frame.origin.x = -UIAdapter.shared.transferWidth(235)
             self.detailTable!.frame.origin.x = -UIAdapter.shared.transferWidth(210)
+            self.enterForm!.frame.origin.x = -UIAdapter.shared.transferWidth(235)
         }) { (success) in
             self.dismissViewControllerAnimated(false, completion: nil)
             completion!()

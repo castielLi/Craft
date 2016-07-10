@@ -403,7 +403,9 @@ class SignUp: ViewControllerBase ,RCIMClientReceiveMessageDelegate,UITextViewDel
         }
 
     }
-
+    
+    
+   
     
     func tableScrollToBottom() {
 //        if self.data.count > 0 {

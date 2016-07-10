@@ -10,6 +10,7 @@ import UIKit
 
 class AddNewActivityController: ViewControllerBase ,UIGestureRecognizerDelegate{
     
+    var soundPlay :PlaySound?
     var activitiesView : UIImageView?
     var blankTap : UITapGestureRecognizer?
     var activityMain : UIScrollView?
@@ -33,6 +34,7 @@ class AddNewActivityController: ViewControllerBase ,UIGestureRecognizerDelegate{
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+        soundPlay = PlaySound.sharedData()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -153,8 +155,13 @@ class AddNewActivityController: ViewControllerBase ,UIGestureRecognizerDelegate{
            make.centerX.equalTo()(self.inviteTable!)
         }
        
+        self.inviteButton!.addTarget(self, action: "inviteFriendClick:", forControlEvents: UIControlEvents.TouchUpInside)
     }
 
+    func inviteFriendClick(sender : UIButton){
+       self.displayInviteFriendList()
+        
+    }
     
     func setTabButton(){
         createButton = UIButton()
@@ -232,6 +239,28 @@ class AddNewActivityController: ViewControllerBase ,UIGestureRecognizerDelegate{
     }
 
 
+    func displayInviteFriendList(){
+        
+        UIView.animateWithDuration(0.4, delay: 0, options: UIViewAnimationOptions.CurveEaseInOut, animations: { () -> Void in
+            self.activitiesView!.frame.origin.x = -UIAdapter.shared.transferWidth(290)
+            
+        }) { (success) -> Void in
+            if success {
+                
+                let swishinId = self.soundPlay!.sound.valueForKey(SoundResource.swishinSound) as! String
+                let swishinid = UInt32(swishinId)
+                AudioServicesPlaySystemSound(swishinid!);
+                
+                
+                let invite = inviteMain(nibName: nil, bundle: nil)
+                let inviteNav = UINavigationController(rootViewController: invite)
+                inviteNav.modalPresentationStyle = UIModalPresentationStyle.OverFullScreen
+                self.presentViewController(inviteNav, animated: false, completion: nil)
+            }
+        }
+    }
+
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

@@ -59,6 +59,7 @@
 		187464951C3F9FAC009E4041 /* LocalNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187464941C3F9FAC009E4041 /* LocalNotification.swift */; };
 		187464971C3FA3DD009E4041 /* SendNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187464961C3FA3DD009E4041 /* SendNotification.swift */; };
 		187F97A01CA962A3009CC7A9 /* RightMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187F979F1CA962A3009CC7A9 /* RightMenu.swift */; };
+		188138D81D3286E1004953EC /* invite_friend.png in Resources */ = {isa = PBXBuildFile; fileRef = 188138D71D3286E1004953EC /* invite_friend.png */; };
 		1882E8821D05C567006F5803 /* ChatTextMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1882E87C1D05C567006F5803 /* ChatTextMessage.swift */; };
 		1882E8831D05C567006F5803 /* ChatVoiceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1882E87D1D05C567006F5803 /* ChatVoiceCell.swift */; };
 		1882E8841D05C567006F5803 /* ChatCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1882E87E1D05C567006F5803 /* ChatCell.swift */; };
@@ -79,6 +80,7 @@
 		1895CEF91D3238970047C8F0 /* currentDutyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1895CEF81D3238970047C8F0 /* currentDutyView.swift */; };
 		1895CEFB1D3249CE0047C8F0 /* ExtensionTableForCreateActivitiy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1895CEFA1D3249CE0047C8F0 /* ExtensionTableForCreateActivitiy.swift */; };
 		1895CEFD1D324A830047C8F0 /* InviteTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1895CEFC1D324A830047C8F0 /* InviteTableCell.swift */; };
+		1895CEFF1D32761C0047C8F0 /* inviteMain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1895CEFE1D32761C0047C8F0 /* inviteMain.swift */; };
 		18A593CE1C0996DB00458308 /* ActivityMain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A593CD1C0996DB00458308 /* ActivityMain.swift */; };
 		18A593D51C099BBB00458308 /* ActivityUserTableSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A593D41C099BBB00458308 /* ActivityUserTableSource.swift */; };
 		18A593D81C099C5300458308 /* TableViewBaseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A593D71C099C5300458308 /* TableViewBaseCell.swift */; };
@@ -227,6 +229,7 @@
 		187464941C3F9FAC009E4041 /* LocalNotification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalNotification.swift; sourceTree = "<group>"; };
 		187464961C3FA3DD009E4041 /* SendNotification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SendNotification.swift; sourceTree = "<group>"; };
 		187F979F1CA962A3009CC7A9 /* RightMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RightMenu.swift; sourceTree = "<group>"; };
+		188138D71D3286E1004953EC /* invite_friend.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = invite_friend.png; sourceTree = "<group>"; };
 		1882E87C1D05C567006F5803 /* ChatTextMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChatTextMessage.swift; path = ChatRoom/ChatTextMessage.swift; sourceTree = "<group>"; };
 		1882E87D1D05C567006F5803 /* ChatVoiceCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChatVoiceCell.swift; path = ChatRoom/ChatVoiceCell.swift; sourceTree = "<group>"; };
 		1882E87E1D05C567006F5803 /* ChatCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChatCell.swift; path = ChatRoom/ChatCell.swift; sourceTree = "<group>"; };
@@ -247,6 +250,7 @@
 		1895CEF81D3238970047C8F0 /* currentDutyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = currentDutyView.swift; path = SignUp/currentDutyView.swift; sourceTree = "<group>"; };
 		1895CEFA1D3249CE0047C8F0 /* ExtensionTableForCreateActivitiy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ExtensionTableForCreateActivitiy.swift; path = SignUp/ExtensionTableForCreateActivitiy.swift; sourceTree = "<group>"; };
 		1895CEFC1D324A830047C8F0 /* InviteTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InviteTableCell.swift; path = SignUp/InviteTableCell.swift; sourceTree = "<group>"; };
+		1895CEFE1D32761C0047C8F0 /* inviteMain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = inviteMain.swift; path = SignUp/inviteMain.swift; sourceTree = "<group>"; };
 		18A593CD1C0996DB00458308 /* ActivityMain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ActivityMain.swift; path = ActivityMain/ActivityMain.swift; sourceTree = "<group>"; };
 		18A593D41C099BBB00458308 /* ActivityUserTableSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityUserTableSource.swift; sourceTree = "<group>"; };
 		18A593D71C099C5300458308 /* TableViewBaseCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewBaseCell.swift; sourceTree = "<group>"; };
@@ -818,15 +822,16 @@
 		18A824801BEE2F9F00084589 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				1893E2DF1C7C604C00F74A2B /* MyActivities.swift */,
-				18A824811BEE2FCA00084589 /* SignUp.swift */,
-				189052FF1CA6733C006EFE69 /* ExtensionForGesture.swift */,
 				18AFE5D01CBE6FF1000DAD84 /* AddNewActivity.swift */,
-				186D80CD1CF9D5EE001A3EFE /* ExtensionTableForActivity.swift */,
 				186D80CF1CF9E322001A3EFE /* ExtensionForAnimation.swift */,
-				1837D2451CFAF32D00FFE3FD /* signupNavEvents.swift */,
-				18BD4A301D1AC2A800585D1D /* RCIMdelegateForSignUp.swift */,
+				189052FF1CA6733C006EFE69 /* ExtensionForGesture.swift */,
+				186D80CD1CF9D5EE001A3EFE /* ExtensionTableForActivity.swift */,
 				1895CEFA1D3249CE0047C8F0 /* ExtensionTableForCreateActivitiy.swift */,
+				1893E2DF1C7C604C00F74A2B /* MyActivities.swift */,
+				18BD4A301D1AC2A800585D1D /* RCIMdelegateForSignUp.swift */,
+				18A824811BEE2FCA00084589 /* SignUp.swift */,
+				1837D2451CFAF32D00FFE3FD /* signupNavEvents.swift */,
+				1895CEFE1D32761C0047C8F0 /* inviteMain.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -920,6 +925,7 @@
 		18E136231CFC73B10046A6B8 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				188138D71D3286E1004953EC /* invite_friend.png */,
 				18D6CF641D2ABBED004DCF8A /* worldChatCompleteState.png */,
 				1824C61D1D2556AF009078B4 /* create_activity_main.png */,
 				18E1C8141D17E3150080EBC1 /* welcome_video.mp4 */,
@@ -1152,6 +1158,7 @@
 				18E136271CFC74190046A6B8 /* blood.png in Resources */,
 				18610C4C1C12C88300B864F2 /* wow_main_theme.mp3 in Resources */,
 				18D6CF651D2ABBED004DCF8A /* worldChatCompleteState.png in Resources */,
+				188138D81D3286E1004953EC /* invite_friend.png in Resources */,
 				18605E321CE09147007D8114 /* clickevent.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1308,6 +1315,7 @@
 				18E43FBA1CE0D1F000F9A382 /* PlaySound.m in Sources */,
 				18E259CB1CCA5F6000743FCA /* DropDownSelection.swift in Sources */,
 				1893E2E01C7C604C00F74A2B /* MyActivities.swift in Sources */,
+				1895CEFF1D32761C0047C8F0 /* inviteMain.swift in Sources */,
 				18F7E4711C97FCC2007E3459 /* Resource.swift in Sources */,
 				18A593DC1C099D4100458308 /* CellType.swift in Sources */,
 				CD5EB3921D195EF300802FC4 /* RTAudioItem.swift in Sources */,
