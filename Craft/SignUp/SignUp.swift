@@ -194,7 +194,7 @@ class SignUp: ViewControllerBase ,RCIMClientReceiveMessageDelegate,UITextViewDel
         
        self.view.addSubview(self.activityMainView!)
        self.activityMainView!.hidden = true
-       self.activityMainView!.activityMainView!.tag = 2
+       self.activityMainView!.activityTabel!.tag = 2
        self.activityMainView!.activityTabel!.delegate = self
        self.activityMainView!.activityTabel!.dataSource = self
        self.activityMainView!.activityTabel!.separatorStyle = UITableViewCellSeparatorStyle.None

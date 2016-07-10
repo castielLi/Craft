@@ -17,6 +17,20 @@ class AddNewActivityController: ViewControllerBase ,UIGestureRecognizerDelegate{
     var createButton : UIButton?
     var cancelButton : UIButton?
     
+    
+    var typeSelected : DropDownSelectView?
+    var activitySelected : DropDownSelectView?
+    var detailSelected : DropDownSelectView?
+    
+    
+    var timeView : CreateActivityTime?
+    var contentView : UITextView?
+    
+    var dutyView : currentDutyView?
+    var inviteButton : UIButton?
+    var inviteTable: UITableView?
+    
+    
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     }
@@ -61,11 +75,19 @@ class AddNewActivityController: ViewControllerBase ,UIGestureRecognizerDelegate{
         setActivityTabel()
         setTabButton()
         setTapForBackgroundView()
+        
+        setDropDown()
+        setTime()
+        setContent()
+        setDutyView()
+        setInviteTable()
+        setInviteButton()
     }
     
     func setActivityTabel(){
         self.activityMain = UIScrollView()
-        self.activityMain!.backgroundColor = UIColor.whiteColor()
+        self.activityMain!.backgroundColor = UIColor.clearColor()
+        self.activityMain!.contentSize = CGSize(width: self.activityMain!.frame.width, height: UIAdapter.shared.transferHeight(420))
         self.view.addSubview(activityMain!)
         
         self.activityMain!.mas_makeConstraints{ make in
@@ -75,12 +97,69 @@ class AddNewActivityController: ViewControllerBase ,UIGestureRecognizerDelegate{
             make.bottom.equalTo()(self.activitiesView!.mas_bottom).with().offset()(UIAdapter.shared.transferHeight(-50))
         }
     }
+    
+    func setDropDown(){
+        typeSelected = DropDownSelectView(frame: CGRect(x: UIAdapter.shared.transferWidth(1), y: UIAdapter.shared.transferHeight(2), width: (UIAdapter.shared.transferWidth(250) * 0.3 - UIAdapter.shared.transferWidth(1)) , height: UIAdapter.shared.transferHeight(20)))
+        self.activityMain!.addSubview(typeSelected!)
+        
+        activitySelected = DropDownSelectView(frame: CGRect(x: UIAdapter.shared.transferWidth(76), y: UIAdapter.shared.transferHeight(2), width: (UIAdapter.shared.transferWidth(250) * 0.4 - UIAdapter.shared.transferWidth(1) ), height: UIAdapter.shared.transferHeight(20)))
+        self.activityMain!.addSubview(activitySelected!)
+        
+        detailSelected = DropDownSelectView(frame: CGRect(x: UIAdapter.shared.transferWidth(250) * 0.7 + UIAdapter.shared.transferWidth(1), y: UIAdapter.shared.transferHeight(2), width: UIAdapter.shared.transferWidth(250) * 0.3, height: UIAdapter.shared.transferHeight(20)))
+        self.activityMain!.addSubview(detailSelected!)
+    
+    }
+    
+    func setTime(){
+         self.timeView = CreateActivityTime(frame: CGRect(x: UIAdapter.shared.transferWidth(1), y: UIAdapter.shared.transferHeight(24), width: UIAdapter.shared.transferWidth(250) - UIAdapter.shared.transferWidth(2) , height: UIAdapter.shared.transferHeight(52)))
+        
+         self.activityMain!.addSubview(self.timeView!)
+    }
+    
+    func setContent(){
+        self.contentView = UITextView(frame: CGRect(x: UIAdapter.shared.transferWidth(2), y: UIAdapter.shared.transferHeight(24 + 54), width: UIAdapter.shared.transferWidth(250) - UIAdapter.shared.transferWidth(4), height: UIAdapter.shared.transferHeight(70)))
+        self.contentView!.backgroundColor = UIColor(red: 13/255, green: 10/255, blue: 9/255, alpha: 1)
+        self.contentView!.textColor = UIColor.whiteColor()
+        self.contentView!.font = UIAdapter.shared.transferFont(13)
+        self.activityMain!.addSubview(self.contentView!)
+    }
+    
+    func setDutyView(){
+     
+        self.dutyView = currentDutyView(frame: CGRect(x: UIAdapter.shared.transferWidth(50), y: UIAdapter.shared.transferHeight(24 + 54 + 74), width: UIAdapter.shared.transferWidth(150), height: UIAdapter.shared.transferHeight(50)))
+        self.activityMain!.addSubview(self.dutyView!)
+        self.dutyView!.tankLabel?.text = "0"
+        self.dutyView!.damageLabel?.text = "1"
+        self.dutyView!.healLabel?.text = "0"
+    }
+    
+    func setInviteTable(){
+        self.inviteTable = UITableView(frame: CGRect(x: UIAdapter.shared.transferWidth(2), y: UIAdapter.shared.transferHeight(24 + 54 + 74 + 50 + 10), width: UIAdapter.shared.transferWidth(246), height: 44 * 5))
+        self.inviteTable!.delegate = self
+        self.inviteTable!.dataSource = self
+        self.inviteTable!.separatorStyle = UITableViewCellSeparatorStyle.None
+        self.inviteTable!.tableFooterView = UIView()
+        self.activityMain!.addSubview(self.inviteTable!)
+    }
+    
+    func setInviteButton(){
+       self.inviteButton = UIButton()
+       self.inviteButton!.setImage(UIImage(named: "inviteButton"), forState: UIControlState.Normal)
+       self.activityMain!.addSubview(self.inviteButton!)
+        self.inviteButton!.mas_makeConstraints{make in
+           make.top.equalTo()(self.inviteTable!.mas_bottom).with().offset()(15)
+           make.height.equalTo()(UIAdapter.shared.transferHeight(22))
+           make.width.equalTo()(UIAdapter.shared.transferWidth(120))
+           make.centerX.equalTo()(self.inviteTable!)
+        }
+       
+    }
 
     
     func setTabButton(){
         createButton = UIButton()
-        createButton!.setImage(UIImage(named: "myActivity_selected"), forState: UIControlState.Highlighted)
-        createButton!.setImage(UIImage(named: "myActivity_selected"), forState: UIControlState.Normal)
+        createButton!.setImage(UIImage(named: "createActivity"), forState: UIControlState.Highlighted)
+        createButton!.setImage(UIImage(named: "createActivity"), forState: UIControlState.Normal)
         createButton!.backgroundColor = UIColor.blackColor()
         self.view.addSubview(createButton!)
         
@@ -93,8 +172,8 @@ class AddNewActivityController: ViewControllerBase ,UIGestureRecognizerDelegate{
         }
         
         cancelButton = UIButton()
-        cancelButton!.setImage(UIImage(named: "searchActivity"), forState: UIControlState.Normal)
-        cancelButton!.setImage(UIImage(named: "searchActivity_selected"), forState: UIControlState.Highlighted)
+        cancelButton!.setImage(UIImage(named: "cancelCreate"), forState: UIControlState.Normal)
+        cancelButton!.setImage(UIImage(named: "cancelCreate"), forState: UIControlState.Highlighted)
         cancelButton!.backgroundColor = UIColor.blackColor()
         self.view.addSubview(cancelButton!)
         
