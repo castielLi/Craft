@@ -17,6 +17,7 @@ class inviteMain: ViewControllerBase {
     
     var searchTextField : UITextField?
     var searchButton : UIButton?
+    var blankTap : UITapGestureRecognizer?
     
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
@@ -50,6 +51,7 @@ class inviteMain: ViewControllerBase {
         setbackgroundImage()
         setSearchTextField()
         setSearchButton()
+        setTapForBackgroundView()
     }
     
     func setbackgroundImage(){
@@ -79,6 +81,8 @@ class inviteMain: ViewControllerBase {
         self.inviteMainView!.addSubview(searchButton!)
 
     }
+
+
 
     
     
@@ -112,6 +116,31 @@ class inviteMain: ViewControllerBase {
 //    }
 
 
+    
+    func setTapForBackgroundView(){
+        self.blankTap = UITapGestureRecognizer(target: self, action: "BlankSpaceTap:")
+        self.blankTap!.numberOfTapsRequired = 1
+        //        self.blankTap!.delegate = self
+        self.view.addGestureRecognizer(self.blankTap!)
+    }
+    
+    func BlankSpaceTap(sender : UITapGestureRecognizer){
+        
+        UIView.animateWithDuration(0.4, delay: 0, options: UIViewAnimationOptions.CurveEaseInOut, animations: { () -> Void in
+            self.inviteMainView!.frame.origin.y = -UIAdapter.shared.transferHeight(370)
+//            self.cancelButton!.frame.origin.x = -UIAdapter.shared.transferWidth(140)
+//            self.createButton!.frame.origin.x = -UIAdapter.shared.transferWidth(250)
+        }) { (success) -> Void in
+            if success {
+                self.dismissViewControllerAnimated(false, completion: { () -> Void in
+                    NSNotificationCenter.defaultCenter().postNotificationName("dismissAcitivtiesDialog", object: self)
+                })
+                
+            }
+        }
+    }
+    
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
