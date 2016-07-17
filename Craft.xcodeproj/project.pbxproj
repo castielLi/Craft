@@ -20,6 +20,9 @@
 		180E193F1C62E39D00987CE6 /* ChatRoom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180E193E1C62E39D00987CE6 /* ChatRoom.swift */; };
 		180E19441C62EE7C00987CE6 /* libstdc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 180E19431C62EE7C00987CE6 /* libstdc++.tbd */; };
 		180E194B1C63204900987CE6 /* MainMenuProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180E194A1C63204900987CE6 /* MainMenuProtocol.swift */; };
+		181000A61D3B546C00A9E468 /* SignUpService.m in Sources */ = {isa = PBXBuildFile; fileRef = 181000A51D3B546C00A9E468 /* SignUpService.m */; };
+		181000A91D3B5AFF00A9E468 /* DBContract.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181000A81D3B5AFF00A9E468 /* DBContract.swift */; };
+		181000AD1D3B6D7400A9E468 /* ProfileModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 181000AC1D3B6D7400A9E468 /* ProfileModel.m */; };
 		1815183F1C958ACF00AA4F33 /* SearchActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1815183E1C958ACF00AA4F33 /* SearchActivityView.swift */; };
 		181518411C958C4000AA4F33 /* MyAcitivitiesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181518401C958C4000AA4F33 /* MyAcitivitiesView.swift */; };
 		181518431C95907500AA4F33 /* ActivityTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181518421C95907500AA4F33 /* ActivityTableCell.swift */; };
@@ -103,6 +106,8 @@
 		18AF8CBA1BEDCCCB00539C0E /* CraftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18AF8CB91BEDCCCB00539C0E /* CraftTests.swift */; };
 		18AF8CC51BEDCCCB00539C0E /* CraftUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18AF8CC41BEDCCCB00539C0E /* CraftUITests.swift */; };
 		18AFE5D11CBE6FF1000DAD84 /* AddNewActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18AFE5D01CBE6FF1000DAD84 /* AddNewActivity.swift */; };
+		18B322671D33D08A00FB93B6 /* InviteFriendCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18B322661D33D08900FB93B6 /* InviteFriendCell.swift */; };
+		18B322691D33D17700FB93B6 /* ExtensionTableForInviteMain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18B322681D33D17700FB93B6 /* ExtensionTableForInviteMain.swift */; };
 		18BD4A311D1AC2A800585D1D /* RCIMdelegateForSignUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18BD4A301D1AC2A800585D1D /* RCIMdelegateForSignUp.swift */; };
 		18BDB0451D2E8BA1000CC61D /* worldChatCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18BDB0441D2E8BA1000CC61D /* worldChatCell.swift */; };
 		18BDB0481D2E8E7B000CC61D /* UILabel+Nova_UILabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 18BDB0461D2E8E7B000CC61D /* UILabel+Nova_UILabel.m */; };
@@ -121,7 +126,6 @@
 		18E259CB1CCA5F6000743FCA /* DropDownSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E259CA1CCA5F6000743FCA /* DropDownSelection.swift */; };
 		18E43FBA1CE0D1F000F9A382 /* PlaySound.m in Sources */ = {isa = PBXBuildFile; fileRef = 18E43FB91CE0D1F000F9A382 /* PlaySound.m */; };
 		18E43FBD1CE0E2E300F9A382 /* SoundResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E43FBC1CE0E2E300F9A382 /* SoundResource.swift */; };
-		18E8F4BB1CC8F78C001EDD14 /* DBHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E8F4BA1CC8F78C001EDD14 /* DBHelper.swift */; };
 		18F7E4671C97B2EF007E3459 /* ReviewTableSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F7E4661C97B2EF007E3459 /* ReviewTableSource.swift */; };
 		18F7E46B1C97EE69007E3459 /* reviewTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F7E46A1C97EE69007E3459 /* reviewTableCell.swift */; };
 		18F7E46F1C97F454007E3459 /* DutyDisplayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F7E46E1C97F454007E3459 /* DutyDisplayView.swift */; };
@@ -172,7 +176,6 @@
 		1801FC481D28D5EB0083A37D /* EnterForm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EnterForm.swift; path = ChatRoom/EnterForm.swift; sourceTree = "<group>"; };
 		1801FC501D2918450083A37D /* LoginService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginService.m; sourceTree = "<group>"; };
 		1801FC511D2918450083A37D /* LoginService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginService.h; sourceTree = "<group>"; };
-		1801FC531D2919F40083A37D /* DBcontract.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBcontract.h; sourceTree = "<group>"; };
 		1801FC591D29241B0083A37D /* RestService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RestService.m; sourceTree = "<group>"; };
 		1801FC5A1D29241B0083A37D /* RestService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RestService.h; sourceTree = "<group>"; };
 		1801FC5B1D29241B0083A37D /* FMDBHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDBHelper.m; sourceTree = "<group>"; };
@@ -188,6 +191,12 @@
 		180E193E1C62E39D00987CE6 /* ChatRoom.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChatRoom.swift; path = ChatRoom/ChatRoom.swift; sourceTree = "<group>"; };
 		180E19431C62EE7C00987CE6 /* libstdc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.tbd"; path = "usr/lib/libstdc++.tbd"; sourceTree = SDKROOT; };
 		180E194A1C63204900987CE6 /* MainMenuProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainMenuProtocol.swift; sourceTree = "<group>"; };
+		181000A41D3B546C00A9E468 /* SignUpService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SignUpService.h; path = SignUp/SignUpService.h; sourceTree = "<group>"; };
+		181000A51D3B546C00A9E468 /* SignUpService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SignUpService.m; path = SignUp/SignUpService.m; sourceTree = "<group>"; };
+		181000A71D3B54EF00A9E468 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
+		181000A81D3B5AFF00A9E468 /* DBContract.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DBContract.swift; sourceTree = "<group>"; };
+		181000AB1D3B6D7400A9E468 /* ProfileModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileModel.h; sourceTree = "<group>"; };
+		181000AC1D3B6D7400A9E468 /* ProfileModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileModel.m; sourceTree = "<group>"; };
 		1815183E1C958ACF00AA4F33 /* SearchActivityView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SearchActivityView.swift; path = ActivityMain/SearchActivityView.swift; sourceTree = "<group>"; };
 		181518401C958C4000AA4F33 /* MyAcitivitiesView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MyAcitivitiesView.swift; path = ActivityMain/MyAcitivitiesView.swift; sourceTree = "<group>"; };
 		181518421C95907500AA4F33 /* ActivityTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ActivityTableCell.swift; path = ActivityMain/ActivityTableCell.swift; sourceTree = "<group>"; };
@@ -280,6 +289,8 @@
 		18AF8CC41BEDCCCB00539C0E /* CraftUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CraftUITests.swift; sourceTree = "<group>"; };
 		18AF8CC61BEDCCCB00539C0E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		18AFE5D01CBE6FF1000DAD84 /* AddNewActivity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AddNewActivity.swift; path = SignUp/AddNewActivity.swift; sourceTree = "<group>"; };
+		18B322661D33D08900FB93B6 /* InviteFriendCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InviteFriendCell.swift; path = SignUp/InviteFriendCell.swift; sourceTree = "<group>"; };
+		18B322681D33D17700FB93B6 /* ExtensionTableForInviteMain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtensionTableForInviteMain.swift; sourceTree = "<group>"; };
 		18BD4A301D1AC2A800585D1D /* RCIMdelegateForSignUp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RCIMdelegateForSignUp.swift; sourceTree = "<group>"; };
 		18BDB0441D2E8BA1000CC61D /* worldChatCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = worldChatCell.swift; path = SignUp/worldChatCell.swift; sourceTree = "<group>"; };
 		18BDB0461D2E8E7B000CC61D /* UILabel+Nova_UILabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+Nova_UILabel.m"; sourceTree = "<group>"; };
@@ -301,7 +312,6 @@
 		18E43FB91CE0D1F000F9A382 /* PlaySound.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlaySound.m; sourceTree = "<group>"; };
 		18E43FBB1CE0D20500F9A382 /* PlaySound.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PlaySound.h; sourceTree = "<group>"; };
 		18E43FBC1CE0E2E300F9A382 /* SoundResource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SoundResource.swift; sourceTree = "<group>"; };
-		18E8F4BA1CC8F78C001EDD14 /* DBHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DBHelper.swift; sourceTree = "<group>"; };
 		18F7E4661C97B2EF007E3459 /* ReviewTableSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReviewTableSource.swift; sourceTree = "<group>"; };
 		18F7E46A1C97EE69007E3459 /* reviewTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = reviewTableCell.swift; sourceTree = "<group>"; };
 		18F7E46E1C97F454007E3459 /* DutyDisplayView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DutyDisplayView.swift; sourceTree = "<group>"; };
@@ -372,6 +382,7 @@
 				1801FC591D29241B0083A37D /* RestService.m */,
 				1801FC651D29241B0083A37D /* UIColorHelper.h */,
 				1801FC641D29241B0083A37D /* UIColorHelper.m */,
+				181000A71D3B54EF00A9E468 /* PrefixHeader.pch */,
 			);
 			name = framworks;
 			sourceTree = "<group>";
@@ -430,6 +441,15 @@
 				180E194A1C63204900987CE6 /* MainMenuProtocol.swift */,
 			);
 			name = Protocol;
+			sourceTree = "<group>";
+		};
+		181000A31D3B544300A9E468 /* service */ = {
+			isa = PBXGroup;
+			children = (
+				181000A41D3B546C00A9E468 /* SignUpService.h */,
+				181000A51D3B546C00A9E468 /* SignUpService.m */,
+			);
+			name = service;
 			sourceTree = "<group>";
 		};
 		1832D2691D198A11000803FF /* worldChat */ = {
@@ -675,6 +695,8 @@
 		18A824421BEDCDA600084589 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				181000AB1D3B6D7400A9E468 /* ProfileModel.h */,
+				181000AC1D3B6D7400A9E468 /* ProfileModel.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -795,6 +817,7 @@
 		18A8247D1BEE2F7A00084589 /* SignUp */ = {
 			isa = PBXGroup;
 			children = (
+				181000A31D3B544300A9E468 /* service */,
 				18A824801BEE2F9F00084589 /* Controller */,
 				18A8247F1BEE2F9900084589 /* Model */,
 				18A8247E1BEE2F9500084589 /* View */,
@@ -805,6 +828,7 @@
 		18A8247E1BEE2F9500084589 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				18B322651D33D06D00FB93B6 /* Invite */,
 				1895CEF11D3220670047C8F0 /* createNew */,
 				1832D2691D198A11000803FF /* worldChat */,
 				189052F81CA65842006EFE69 /* Activity */,
@@ -832,6 +856,7 @@
 				18A824811BEE2FCA00084589 /* SignUp.swift */,
 				1837D2451CFAF32D00FFE3FD /* signupNavEvents.swift */,
 				1895CEFE1D32761C0047C8F0 /* inviteMain.swift */,
+				18B322681D33D17700FB93B6 /* ExtensionTableForInviteMain.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -906,6 +931,14 @@
 			path = CraftUITests;
 			sourceTree = "<group>";
 		};
+		18B322651D33D06D00FB93B6 /* Invite */ = {
+			isa = PBXGroup;
+			children = (
+				18B322661D33D08900FB93B6 /* InviteFriendCell.swift */,
+			);
+			name = Invite;
+			sourceTree = "<group>";
+		};
 		18BD4A321D1AC83400585D1D /* RCIMmodel */ = {
 			isa = PBXGroup;
 			children = (
@@ -964,8 +997,7 @@
 		18E8F4B91CC8F742001EDD14 /* Database */ = {
 			isa = PBXGroup;
 			children = (
-				1801FC531D2919F40083A37D /* DBcontract.h */,
-				18E8F4BA1CC8F78C001EDD14 /* DBHelper.swift */,
+				181000A81D3B5AFF00A9E468 /* DBContract.swift */,
 			);
 			name = Database;
 			sourceTree = "<group>";
@@ -1245,7 +1277,6 @@
 				18E43FBD1CE0E2E300F9A382 /* SoundResource.swift in Sources */,
 				1895CEFB1D3249CE0047C8F0 /* ExtensionTableForCreateActivitiy.swift in Sources */,
 				189052FC1CA66943006EFE69 /* ActivityMainView.swift in Sources */,
-				18E8F4BB1CC8F78C001EDD14 /* DBHelper.swift in Sources */,
 				187464951C3F9FAC009E4041 /* LocalNotification.swift in Sources */,
 				183E8EF41CC666F600F1F291 /* UserSetting.swift in Sources */,
 				18A593D51C099BBB00458308 /* ActivityUserTableSource.swift in Sources */,
@@ -1260,9 +1291,11 @@
 				18F7E46B1C97EE69007E3459 /* reviewTableCell.swift in Sources */,
 				189053001CA6733C006EFE69 /* ExtensionForGesture.swift in Sources */,
 				18A93DB51CE83E2D005EF64F /* AnimatedMaskLabel.swift in Sources */,
+				181000AD1D3B6D7400A9E468 /* ProfileModel.m in Sources */,
 				186D80CE1CF9D5EE001A3EFE /* ExtensionTableForActivity.swift in Sources */,
 				1882E8831D05C567006F5803 /* ChatVoiceCell.swift in Sources */,
 				18A593DA1C099C5A00458308 /* BaseTextfiledDeletgate.swift in Sources */,
+				181000A91D3B5AFF00A9E468 /* DBContract.swift in Sources */,
 				18A8245A1BEDF5CC00084589 /* ChooseSideCollectionCell.swift in Sources */,
 				1826B3181D02D25700E34D9A /* TableViewForChat.swift in Sources */,
 				1882E8821D05C567006F5803 /* ChatTextMessage.swift in Sources */,
@@ -1274,6 +1307,7 @@
 				1882E8851D05C567006F5803 /* ChatTextCell.swift in Sources */,
 				1837D2361CFAE2B700FFE3FD /* ExtensionTableForChatRoom.swift in Sources */,
 				180141051C53525800BE13B1 /* ImageOperation.swift in Sources */,
+				18B322691D33D17700FB93B6 /* ExtensionTableForInviteMain.swift in Sources */,
 				18568B0B1D02969000D9446E /* RCIMHelper.m in Sources */,
 				186D80D01CF9E322001A3EFE /* ExtensionForAnimation.swift in Sources */,
 				18A8247C1BEE2B5D00084589 /* MainTabbar.swift in Sources */,
@@ -1287,6 +1321,7 @@
 				187F97A01CA962A3009CC7A9 /* RightMenu.swift in Sources */,
 				1826B31A1D02D4F400E34D9A /* ChatDetailCell.swift in Sources */,
 				18BDB0451D2E8BA1000CC61D /* worldChatCell.swift in Sources */,
+				18B322671D33D08A00FB93B6 /* InviteFriendCell.swift in Sources */,
 				1837D2441CFAF2FE00FFE3FD /* SliderNavEvents.swift in Sources */,
 				182647781C2E689C0078D4C2 /* ForgetPassword.swift in Sources */,
 				CDDB47A61D14320400F723F1 /* RTFuncs.swift in Sources */,
@@ -1297,6 +1332,7 @@
 				18A824461BEDCDF200084589 /* LoginController.swift in Sources */,
 				18C44C4E1D1197560087EBF6 /* StartView.m in Sources */,
 				18F7E46F1C97F454007E3459 /* DutyDisplayView.swift in Sources */,
+				181000A61D3B546C00A9E468 /* SignUpService.m in Sources */,
 				18610C531C12E15600B864F2 /* StringExtensions.swift in Sources */,
 				181C3E9F1C57ABB600A822D0 /* CalendearCell.swift in Sources */,
 				CDDA536E1D22C96F00C45479 /* ChatChannelCell.swift in Sources */,
@@ -1471,6 +1507,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
+				GCC_PREFIX_HEADER = "$(SRCROOT)/Craft/PrefixHeader.pch";
 				INFOPLIST_FILE = Craft/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1494,6 +1531,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
+				GCC_PREFIX_HEADER = "$(SRCROOT)/Craft/PrefixHeader.pch";
 				INFOPLIST_FILE = Craft/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

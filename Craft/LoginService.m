@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "LoginService.h"
 #import <MJExtension/MJExtension.h>
+#import "ProfileModel.h"
 
 
 @interface LoginService ()
@@ -46,23 +47,22 @@
                   if(result.state){
                  if(_delegate != nil)
                  {
-                                         
-//                     NSString * userId = [NSString stringWithFormat:@"%i",profile.uid];
-//                     
-//                     [_dbHelper DatabaseExecuteWithQuery:@"delete from Profile" values:nil];
-//                     if ([_dbHelper DatabaseExecuteWithQuery:@"insert into Profile (userid,gender,displayname,avator,teachertype) values (?,?,?,?,?)" values:@[userId,profile.gender,profile.displayName,profile.avator,profile.teacherType]]){
-//                         NSLog(@"insert profile success");
-//                     }else{
-//                         NSLog(@"insert profile failed");
-//                     }
-//                     
-//                     
-//                     [_dbHelper DatabaseExecuteWithQuery:@"delete from User" values:nil];
-//                     if ([_dbHelper DatabaseExecuteWithQuery:@"insert into User (account,password) values (?,?)" values:@[username,password]]){
-//                         NSLog(@"insert user success");
-//                     }else{
-//                         NSLog(@"insert user failed");
-//                     }
+                     
+                     ProfileModel * profile = [ProfileModel mj_objectWithKeyValues:response];
+                     
+                     [_dbHelper DatabaseExecuteWithQuery:@"delete from Profile" values:nil];
+                     if ([_dbHelper DatabaseExecuteWithQuery:@"insert into Profile (userid,userName,battleAccount) values (?,?,?)" values:@[profile.userId,profile.userName,@""]]){
+                         NSLog(@"insert profile success");
+                     }else{
+                         NSLog(@"insert profile failed");
+                     }
+                
+                     [_dbHelper DatabaseExecuteWithQuery:@"delete from User" values:nil];
+                     if ([_dbHelper DatabaseExecuteWithQuery:@"insert into User (account,password) values (?,?)" values:@[username,password]]){
+                         NSLog(@"insert user success");
+                     }else{
+                         NSLog(@"insert user failed");
+                     }
 
                      
                      [_delegate loginDidFinish:result response:response];

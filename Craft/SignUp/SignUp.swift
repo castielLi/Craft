@@ -413,6 +413,13 @@ class SignUp: ViewControllerBase ,RCIMClientReceiveMessageDelegate,UITextViewDel
 //        }
     }
     
+    func textViewShouldBeginEditing(textView: UITextView) -> Bool {
+        if !self.completeState{
+        self.showDetailOfWorldChat()
+        }
+        return true
+    }
+    
     func textViewDidChange(textView: UITextView) {
         // Caculate the size which best fits the specified size.
         // This height is just the height of textView which best fits its content.

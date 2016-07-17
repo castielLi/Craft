@@ -25,7 +25,7 @@
 #import "FMDBHelper.h"
 #import "ApiResult.h"
 #import "RestService.h"
-#import "DBcontract.h"
+
 #import "UILabel+Nova_UILabel.h"
 
 

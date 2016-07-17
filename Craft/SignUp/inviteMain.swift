@@ -8,7 +8,7 @@
 
 import UIKit
 
-class inviteMain: ViewControllerBase {
+class inviteMain: ViewControllerBase , UIGestureRecognizerDelegate{
 
     var inviteMainView : UIImageView?
     var inviteList : UITableView?
@@ -52,6 +52,20 @@ class inviteMain: ViewControllerBase {
         setSearchTextField()
         setSearchButton()
         setTapForBackgroundView()
+        setTable()
+        setTabButton()
+    }
+    
+    func setTable(){
+        self.inviteList = UITableView(frame: CGRect(x: UIAdapter.shared.transferWidth(20), y: UIAdapter.shared.transferHeight(32 + 19), width: UIAdapter.shared.transferWidth(250), height: UIAdapter.shared.transferHeight(370 - 50 - 32 - 19)))
+        self.inviteList!.delegate = self
+        self.inviteList!.dataSource = self
+        self.inviteList!.separatorStyle = UITableViewCellSeparatorStyle.None
+        self.inviteList!.tableFooterView = UIView()
+        self.inviteList!.backgroundColor = UIColor.clearColor()
+        self.inviteList!.showsVerticalScrollIndicator = false
+        self.inviteList!.showsHorizontalScrollIndicator = false
+        self.inviteMainView!.addSubview(inviteList!)
     }
     
     func setbackgroundImage(){
@@ -86,41 +100,33 @@ class inviteMain: ViewControllerBase {
 
     
     
-//    func setTabButton(){
-//        inviteButton = UIButton()
-//        inviteButton!.setImage(UIImage(named: "createActivity"), forState: UIControlState.Highlighted)
-//        inviteButton!.setImage(UIImage(named: "createActivity"), forState: UIControlState.Normal)
-//        inviteButton!.backgroundColor = UIColor.blackColor()
-//        self.view.addSubview(inviteButton!)
-//        
-//        inviteButton!.mas_makeConstraints{make in
-//            make.top.equalTo()(self.activityMain!.mas_bottom).with().offset()(UIAdapter.shared.transferHeight(17))
-//            
-//            make.left.equalTo()(self.activityMain!)
-//            make.bottom.equalTo()(self.activitiesView!).with().offset()(-UIAdapter.shared.transferHeight(8))
-//            make.right.equalTo()(self.activitiesView!.mas_left).with().offset()(self.activitiesView!.frame.width / 2 - 10)
+    func setTabButton(){
+        inviteButton = UIButton(frame : CGRect(x:UIAdapter.shared.transferWidth(20), y: UIAdapter.shared.transferHeight(370 - 50 + 17), width: UIAdapter.shared.transferWidth(125) - 10, height: UIAdapter.shared.transferHeight(25)))
+        inviteButton!.setImage(UIImage(named: "createActivity"), forState: UIControlState.Highlighted)
+        inviteButton!.setImage(UIImage(named: "createActivity"), forState: UIControlState.Normal)
+        inviteButton!.backgroundColor = UIColor.blackColor()
+        self.inviteMainView!.addSubview(inviteButton!)
+        
+        
+        cancelButton = UIButton(frame : CGRect(x: UIAdapter.shared.transferWidth(145) + 10, y: UIAdapter.shared.transferHeight(370 - 50 + 17), width: self.inviteButton!.frame.width, height: self.inviteButton!.frame.height))
+        cancelButton!.setImage(UIImage(named: "cancelCreate"), forState: UIControlState.Normal)
+        cancelButton!.setImage(UIImage(named: "cancelCreate"), forState: UIControlState.Highlighted)
+        cancelButton!.backgroundColor = UIColor.blackColor()
+        self.inviteMainView!.addSubview(cancelButton!)
+        
+//            cancelButton!.mas_makeConstraints{make in
+//                make.top.equalTo()(self.activityMain!.mas_bottom).with().offset()(UIAdapter.shared.transferHeight(17))
+//                make.right.equalTo()(self.activityMain!)
+//                make.bottom.equalTo()(self.activitiesView!).with().offset()(-UIAdapter.shared.transferHeight(8))
+//                make.left.equalTo()(self.activitiesView!.mas_right).with().offset()(-(self.activitiesView!.frame.width / 2 - 10))
 //        }
-//        
-//        cancelButton = UIButton()
-//        cancelButton!.setImage(UIImage(named: "cancelCreate"), forState: UIControlState.Normal)
-//        cancelButton!.setImage(UIImage(named: "cancelCreate"), forState: UIControlState.Highlighted)
-//        cancelButton!.backgroundColor = UIColor.blackColor()
-//        self.view.addSubview(cancelButton!)
-//        
-//        cancelButton!.mas_makeConstraints{make in
-//            make.top.equalTo()(self.activityMain!.mas_bottom).with().offset()(UIAdapter.shared.transferHeight(17))
-//            make.right.equalTo()(self.activityMain!)
-//            make.bottom.equalTo()(self.activitiesView!).with().offset()(-UIAdapter.shared.transferHeight(8))
-//            make.left.equalTo()(self.activitiesView!.mas_right).with().offset()(-(self.activitiesView!.frame.width / 2 - 10))
-//        }
-//    }
-
-
+    
+    }
     
     func setTapForBackgroundView(){
         self.blankTap = UITapGestureRecognizer(target: self, action: "BlankSpaceTap:")
         self.blankTap!.numberOfTapsRequired = 1
-        //        self.blankTap!.delegate = self
+        self.blankTap!.delegate = self
         self.view.addGestureRecognizer(self.blankTap!)
     }
     
@@ -138,6 +144,15 @@ class inviteMain: ViewControllerBase {
                 
             }
         }
+    }
+    
+    func gestureRecognizer(gestureRecognizer: UIGestureRecognizer, shouldReceiveTouch touch: UITouch) -> Bool {
+        let point = touch.locationInView(gestureRecognizer.view)
+        if (CGRectContainsPoint(self.inviteMainView!.frame, point)){
+            return false;
+        }
+        
+        return true;
     }
     
     
