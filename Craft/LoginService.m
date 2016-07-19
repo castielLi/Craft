@@ -42,14 +42,14 @@
 {
     NSDictionary * parameter = @{@"userName":username,@"password":password};
     
-    [_restService post:@"/common/login" parameters:parameter
+    [_restService post:@"/api/common/login" parameters:parameter
               callback:^ (ApiResult *result, id response){
                   if(result.state){
                  if(_delegate != nil)
                  {
                      
                      ProfileModel * profile = [ProfileModel mj_objectWithKeyValues:response];
-                     
+                     profile.battleAccount = @"853757935@qq.com";
                      [_dbHelper DatabaseExecuteWithQuery:@"delete from Profile" values:nil];
                      if ([_dbHelper DatabaseExecuteWithQuery:@"insert into Profile (userid,userName,battleAccount) values (?,?,?)" values:@[profile.userId,profile.userName,@""]]){
                          NSLog(@"insert profile success");
@@ -73,5 +73,56 @@
                 }];
 
 }
+
+-(void)GetMyFriends
+{
+    NSString * userId;
+    NSDictionary * values = [_dbHelper DatabaseQueryWithParameters:@[@"userid"] query:@"select userid from Profile" values:nil];
+    if (values != nil){
+        userId = [values valueForKey:@"userid"];
+    }
+    
+    NSString * url = [NSString stringWithFormat:@"/user/chat/get_friends?userId=%@",userId];
+    
+    [_restService get:url parameters:nil
+             callback:^ (ApiResult *result, id response){
+                 if(result.state){
+                     
+                         //                         NSMutableArray * array = [[NSMutableArray alloc]init];
+                         //                         for(int i= 0; i<((NSArray *)response).count; i++){
+                         //                             [array addObject:((NSArray *)response)[i]];
+                         //                         }
+                         //
+                         //                         result.data = array;
+                     
+                 }
+             }];
+    
+}
+
+-(void)GetMyGroups{
+    NSString * userId;
+    NSDictionary * values = [_dbHelper DatabaseQueryWithParameters:@[@"userid"] query:@"select userid from Profile" values:nil];
+    if (values != nil){
+        userId = [values valueForKey:@"userid"];
+    }
+    
+    NSString * url = [NSString stringWithFormat:@"/user/chat/get_user_group?userId=%@",userId];
+    
+    [_restService get:url parameters:nil
+             callback:^ (ApiResult *result, id response){
+                 if(result.state){
+                     
+                     //                         NSMutableArray * array = [[NSMutableArray alloc]init];
+                     //                         for(int i= 0; i<((NSArray *)response).count; i++){
+                     //                             [array addObject:((NSArray *)response)[i]];
+                     //                         }
+                     //
+                     //                         result.data = array;
+                     
+                 }
+             }];
+}
+
 
 @end

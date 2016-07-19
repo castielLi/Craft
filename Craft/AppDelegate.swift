@@ -48,7 +48,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
 
-        RestService.configBaseUrl("http://162.243.241.80:8080/wow/api")
+        RestService.configBaseUrl("http://162.243.241.80:8080/wow")
         RestService.setNeedAuthentication(false)
 
         FMDBHelper.configDatabaseWithName("craft", tableQueries: [DBContract.notificationTable,DBContract.createAccountTable,DBContract.createIconTable,DBContract.ProfileTable])

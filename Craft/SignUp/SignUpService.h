@@ -11,6 +11,7 @@
 @protocol SignUpServiceDelegate <NSObject>
 
 
+
 @end
 
 @interface SignUpService: NSObject
@@ -18,5 +19,7 @@
 @property (nonatomic, weak) id<SignUpServiceDelegate> delegate;
 
 -(instancetype)init;
+
+
 
 @end

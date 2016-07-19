@@ -8,6 +8,27 @@
 
 #import "SignUpService.h"
 
+@interface SignUpService ()
+{
+    RestService * _restService;
+    
+    FMDBHelper * _dbHelper;
+}
+@end
+
 @implementation SignUpService
+
+@synthesize delegate = _delegate;
+
+-(instancetype) init{
+    
+    self = [super init];
+    _restService = [[RestService alloc]init];
+    
+    _dbHelper = [FMDBHelper sharedData];
+    
+    return self;
+}
+
 
 @end
