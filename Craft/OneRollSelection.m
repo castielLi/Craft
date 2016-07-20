@@ -9,7 +9,7 @@
 #import "OneRollSelection.h"
 
 @interface OneRollSelection (){
-    UIView * mainView;
+    UIImageView * mainView;
     UIPickerView * picker;
     UIButton * confirm;
     UIButton * cancel;
@@ -21,26 +21,29 @@
 
 @implementation OneRollSelection
 
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+     [self.navigationController setNavigationBarHidden:true];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-
-    self.view.opaque = YES;
     self.isNotify = false;
+    self.view.backgroundColor = [UIColor clearColor];
+    [self initView];
+    [self registerEvent];
     // Do any additional setup after loading the view.
 }
 
 -(void)initView{
 
     
-    UIBlurEffect * beffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
-    
-    
-    mainView = [[UIView alloc]initWithFrame:CGRectMake((self.view.frame.size.width - 300) / 2, (self.view.frame.size.height - 330)/2, 300, 330)];
+    mainView = [[UIImageView alloc]initWithFrame:CGRectMake((self.view.frame.size.width - 300) / 2, (self.view.frame.size.height - 330)/2, 300, 330)];
+    NSString * path = [[NSBundle mainBundle] pathForResource:@"create_activity_main" ofType:@"png"];
+    mainView.image = [UIImage imageWithContentsOfFile:path];
     mainView.alpha = 1;
-    mainView = [[UIVisualEffectView alloc]initWithEffect:beffect];
-//    mainView.backgroundColor = [UIColorHelper getColor:@"a3bee4"];
-    mainView.layer.borderWidth = 1;
-    mainView.layer.borderColor = [UIColor lightGrayColor].CGColor;
+
+    mainView.backgroundColor = [UIColor clearColor];
     mainView.layer.cornerRadius = 10;
     mainView.layer.masksToBounds = true;
     [[self view]addSubview:mainView];
@@ -50,6 +53,7 @@
     [[self view]addSubview:picker];
     picker.delegate = self;
     picker.dataSource = self;
+    picker.showsSelectionIndicator = NO;
     
     
     splitLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 280, 300, 1)];
@@ -128,41 +132,54 @@
 }
 
 -(NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component{
-    return self.dataArray.count;
+//    return self.dataArray.count;
+    return 10;
 }
 
 
 -(NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component{
-    if (![self.valueKey isEqualToString:@""]){
-    return [self.dataArray[row] valueForKey:self.displayKey];
-    }else{
-        return self.dataArray[row];
-    }
+//    if (![self.valueKey isEqualToString:@""]){
+//    return [self.dataArray[row] valueForKey:self.displayKey];
+//    }else{
+//        return self.dataArray[row];
+//    }
+    return @"";
 };
 
-- (UIView *)pickerView:(UIPickerView *)pickerView viewForRow:(NSInteger)row forComponent:(NSInteger)component reusingView:(UIView *)view{
-    UILabel* tView = (UILabel*)view;
-    if (!tView){
-        tView = [[UILabel alloc] init];
-        tView.textColor = [UIColor blueColor];
-        if (self.isNotify){
-        tView.font = [UIFont systemFontOfSize:14];
-        }else{
-           tView.font = [UIFont systemFontOfSize:20];
-        }
-        tView.textAlignment = NSTextAlignmentCenter;
-        if (![self.valueKey isEqualToString:@""]){
-            tView.text = [self.dataArray[row] valueForKey:self.displayKey];
-        }else{
-           tView.text =  self.dataArray[row];
-        }
-        
-    }
-    // Fill the label text here
+-(UIView *)pickerView:(UIPickerView *)pickerView viewForRow:(NSInteger)row forComponent:(NSInteger)component reusingView:(UIView *)view{
+   
+    UIImageView * backgroundImage = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 300, 50)];
+    backgroundImage.image = [UIImage imageNamed:@"activityItem"];
+    return backgroundImage;
     
-    return tView;
 }
 
+//- (UIView *)pickerView:(UIPickerView *)pickerView viewForRow:(NSInteger)row forComponent:(NSInteger)component reusingView:(UIView *)view{
+//    UILabel* tView = (UILabel*)view;
+//    if (!tView){
+//        tView = [[UILabel alloc] init];
+//        tView.textColor = [UIColor blueColor];
+//        if (self.isNotify){
+//        tView.font = [UIFont systemFontOfSize:14];
+//        }else{
+//           tView.font = [UIFont systemFontOfSize:20];
+//        }
+//        tView.textAlignment = NSTextAlignmentCenter;
+//        if (![self.valueKey isEqualToString:@""]){
+//            tView.text = [self.dataArray[row] valueForKey:self.displayKey];
+//        }else{
+//           tView.text =  self.dataArray[row];
+//        }
+//        
+//    }
+//    // Fill the label text here
+//    
+//    return tView;
+//}
+
+-(CGFloat)pickerView:(UIPickerView *)pickerView rowHeightForComponent:(NSInteger)component{
+    return 50;
+}
 
 -(void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component{
     if (![self.valueKey isEqualToString:@""]){

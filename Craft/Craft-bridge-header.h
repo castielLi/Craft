@@ -27,6 +27,7 @@
 #import "RestService.h"
 
 #import "UILabel+Nova_UILabel.h"
+#import "ChatMessageModel.h"
 
 
 //service

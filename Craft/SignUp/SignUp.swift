@@ -459,6 +459,32 @@ class SignUp: ViewControllerBase ,RCIMClientReceiveMessageDelegate,UITextViewDel
             })
         }
     }
+    
+    func textView(textView: UITextView, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool {
+        if (text == "\n"){
+            
+            let model = ChatMessageModel()
+            model.type = "chatroom"
+            model.userName = "hello world"
+            model.userId = "1"
+            
+            let para = model.currentModelToJsonString()
+            print(para)
+            
+            let message = RCTextMessage(content: textView.text)
+            message.extra = "{\"hello\":\"helloworld\"}"
+            RCIMClient.sharedRCIMClient().sendMessage(RCConversationType.ConversationType_PRIVATE, targetId: "1", content: message, pushContent: nil, success: { (messageId) in
+                print("发送成功")
+                }, error: { (error, messageId) in
+                    print("发送失败")
+            })
+            
+            textView.resignFirstResponder()
+            textView.text = ""
+        }
+        return true
+    }
+
 
     
     

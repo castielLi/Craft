@@ -18,7 +18,7 @@ extension SignUp{
        self.showDetailWorldChat()
     }
     
-    
+
     func showDetailWorldChat(){
        self.displayWorldChat = UITapGestureRecognizer(target: self, action: "showDetailWorldChat:")
        self.displayWorldChat!.numberOfTapsRequired = 2
