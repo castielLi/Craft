@@ -37,7 +37,7 @@ static NSString* tableName;
 
     NSString * documentsFolder = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, true)[0];
     
-    NSString * path = [documentsFolder stringByAppendingString: [@"/" stringByAppendingString:tableName]];
+    NSString * path = [documentsFolder stringByAppendingString: [@"/" stringByAppendingString:[NSString stringWithFormat:@"%@.sqlite",tableName]]];
     self.instance = [[FMDatabase alloc]initWithPath:path];
     
     if (![self.instance open]){

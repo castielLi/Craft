@@ -10,7 +10,7 @@ import UIKit
 import AVFoundation
 
 
-class LoginController: ViewControllerBase {
+class LoginController: ViewControllerBase,LoginServiceDelegate {
     
     var backGroundImage : UIImageView?
     var acccountTextfield : UITextField?
@@ -29,7 +29,8 @@ class LoginController: ViewControllerBase {
 
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-
+        self.service = LoginService()
+        self.service!.delegate = self
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -86,11 +87,8 @@ class LoginController: ViewControllerBase {
     }
     
     override func onLoad() {
-        service = LoginService()
-//        service!.login("jack", password: "123") { (result) -> Void in
-//            
-//        }
-        service!.login("jack", password: "123")
+        self.acccountTextfield!.text = "jack"
+        self.passwordTextfield!.text = "123"
     }
     
     override func initView() {
@@ -222,6 +220,7 @@ class LoginController: ViewControllerBase {
         self.passwordTextfield!.layer.cornerRadius = 5
         self.passwordTextfield!.layer.masksToBounds = true
         self.passwordTextfield!.layer.borderWidth = 1
+        self.passwordTextfield!.secureTextEntry = true
         self.passwordTextfield!.layer.borderColor = UIColor(red: 123/255, green: 95/255, blue: 75/255, alpha: 1).CGColor
         self.view!.addSubview(self.passwordTextfield!)
         
@@ -270,6 +269,8 @@ class LoginController: ViewControllerBase {
 
     }
     
+    
+    
     func registerButtonClick(sender : UIButton){
         let registerView = RegisterController(nibName: nil, bundle: nil)
         self.navigationController!.pushViewController(registerView, animated: true)
@@ -277,6 +278,11 @@ class LoginController: ViewControllerBase {
     
     
     func loginButtonClick(sender : UIButton){
+        self.showProgress()
+        self.service!.login(self.acccountTextfield!.text, password: self.passwordTextfield!.text)
+    }
+    
+    func didLogin(){
         self.acccountTextfield!.hidden = true
         self.passwordTextfield!.hidden = true
         self.loginButton!.hidden = true
@@ -285,11 +291,15 @@ class LoginController: ViewControllerBase {
         
         self.definesPresentationContext = true
         
+        //获取用户好友列表
+        service!.GetMyFriends()
+        //获取用户群组列表
+        service!.GetMyGroups()
         
-        //融云登录        
+        //融云登录
         RCIM.sharedRCIM().connectWithToken("WR2i0I07FA3sS6yv3j5G8slRWzGSVmtCYmURsUlF14+e5Rr9BT+O3cQMFJ+FPDFeOIACenxFpzL7O3U2PAtoUA==",
-            success: { (userId) -> Void in
-                print("登陆成功。当前登录的用户ID：\(userId)")
+                                           success: { (userId) -> Void in
+                                            print("登陆成功。当前登录的用户ID：\(userId)")
             }, error: { (status) -> Void in
                 print("登陆的错误码为:\(status.rawValue)")
             }, tokenIncorrect: {
@@ -318,7 +328,14 @@ class LoginController: ViewControllerBase {
         self.player = nil
     }
 
-    
+    func loginDidFinish(result: ApiResult!, response: AnyObject!) {
+        self.closeProgress()
+        if(result.state){
+            self.didLogin()
+        }else{
+            MsgBoxHelper.show("错误", message: result.message)
+        }
+    }
 
     /*
     // MARK: - Navigation

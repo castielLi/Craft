@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "LoginService.h"
 #import <MJExtension/MJExtension.h>
+#import "ProfileModel.h"
 
 
 @interface LoginService ()
@@ -41,28 +42,27 @@
 {
     NSDictionary * parameter = @{@"userName":username,@"password":password};
     
-    [_restService post:@"/common/login" parameters:parameter
+    [_restService post:@"/api/common/login" parameters:parameter
               callback:^ (ApiResult *result, id response){
                   if(result.state){
                  if(_delegate != nil)
                  {
-                                         
-//                     NSString * userId = [NSString stringWithFormat:@"%i",profile.uid];
-//                     
-//                     [_dbHelper DatabaseExecuteWithQuery:@"delete from Profile" values:nil];
-//                     if ([_dbHelper DatabaseExecuteWithQuery:@"insert into Profile (userid,gender,displayname,avator,teachertype) values (?,?,?,?,?)" values:@[userId,profile.gender,profile.displayName,profile.avator,profile.teacherType]]){
-//                         NSLog(@"insert profile success");
-//                     }else{
-//                         NSLog(@"insert profile failed");
-//                     }
-//                     
-//                     
-//                     [_dbHelper DatabaseExecuteWithQuery:@"delete from User" values:nil];
-//                     if ([_dbHelper DatabaseExecuteWithQuery:@"insert into User (account,password) values (?,?)" values:@[username,password]]){
-//                         NSLog(@"insert user success");
-//                     }else{
-//                         NSLog(@"insert user failed");
-//                     }
+                     
+                     ProfileModel * profile = [ProfileModel mj_objectWithKeyValues:response];
+                     profile.battleAccount = @"853757935@qq.com";
+                     [_dbHelper DatabaseExecuteWithQuery:@"delete from Profile" values:nil];
+                     if ([_dbHelper DatabaseExecuteWithQuery:@"insert into Profile (userid,userName,battleAccount) values (?,?,?)" values:@[profile.userId,profile.userName,@""]]){
+                         NSLog(@"insert profile success");
+                     }else{
+                         NSLog(@"insert profile failed");
+                     }
+                
+                     [_dbHelper DatabaseExecuteWithQuery:@"delete from User" values:nil];
+                     if ([_dbHelper DatabaseExecuteWithQuery:@"insert into User (account,password) values (?,?)" values:@[username,password]]){
+                         NSLog(@"insert user success");
+                     }else{
+                         NSLog(@"insert user failed");
+                     }
 
                      
                      [_delegate loginDidFinish:result response:response];
@@ -73,5 +73,56 @@
                 }];
 
 }
+
+-(void)GetMyFriends
+{
+    NSString * userId;
+    NSDictionary * values = [_dbHelper DatabaseQueryWithParameters:@[@"userid"] query:@"select userid from Profile" values:nil];
+    if (values != nil){
+        userId = [values valueForKey:@"userid"];
+    }
+    
+    NSString * url = [NSString stringWithFormat:@"/user/chat/get_friends?userId=%@",userId];
+    
+    [_restService get:url parameters:nil
+             callback:^ (ApiResult *result, id response){
+                 if(result.state){
+                     
+                         //                         NSMutableArray * array = [[NSMutableArray alloc]init];
+                         //                         for(int i= 0; i<((NSArray *)response).count; i++){
+                         //                             [array addObject:((NSArray *)response)[i]];
+                         //                         }
+                         //
+                         //                         result.data = array;
+                     
+                 }
+             }];
+    
+}
+
+-(void)GetMyGroups{
+    NSString * userId;
+    NSDictionary * values = [_dbHelper DatabaseQueryWithParameters:@[@"userid"] query:@"select userid from Profile" values:nil];
+    if (values != nil){
+        userId = [values valueForKey:@"userid"];
+    }
+    
+    NSString * url = [NSString stringWithFormat:@"/user/chat/get_user_group?userId=%@",userId];
+    
+    [_restService get:url parameters:nil
+             callback:^ (ApiResult *result, id response){
+                 if(result.state){
+                     
+                     //                         NSMutableArray * array = [[NSMutableArray alloc]init];
+                     //                         for(int i= 0; i<((NSArray *)response).count; i++){
+                     //                             [array addObject:((NSArray *)response)[i]];
+                     //                         }
+                     //
+                     //                         result.data = array;
+                     
+                 }
+             }];
+}
+
 
 @end

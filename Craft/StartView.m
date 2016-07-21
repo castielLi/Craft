@@ -156,11 +156,8 @@ static const float TITLE_FONT_SIZE = 72.0f;
 - (void)moviePlayDidEnd:(NSNotification*)notification{
     playerLayer.player = nil;
     [playerLayer removeFromSuperlayer];
+    [playerItem removeObserver:self forKeyPath:@"status"];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-//    [playerItem removeObserver:self forKeyPath:@"status"];
-//    [self dismissViewControllerAnimated:true completion:^{
-//        [[NSNotificationCenter defaultCenter]postNotificationName:@"loginDisappear" object:self];
-//    }];
     if(self.navigationController.viewControllers.count == 1){
     LoginController * login = [[LoginController alloc]initWithNibName:nil bundle:nil];
     [self.navigationController pushViewController:login animated:true];

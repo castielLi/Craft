@@ -24,5 +24,10 @@
 @property (nonatomic, weak) id<LoginServiceDelegate> delegate;
 
 -(void)login:(NSString *)username password:(NSString *)password;
+
+-(void)GetMyFriends;
+
+-(void)GetMyGroups;
+
 @end
 
