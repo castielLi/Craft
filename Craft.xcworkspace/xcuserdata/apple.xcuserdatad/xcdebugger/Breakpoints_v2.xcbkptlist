@@ -9,13 +9,13 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Craft/OneRollSelection.m"
-            timestampString = "490714503.73897"
+            filePath = "Craft/RCIMdelegateForSignUp.swift"
+            timestampString = "490799925.615829"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "42"
-            endingLineNumber = "42"
-            landmarkName = "-initView"
+            startingLineNumber = "23"
+            endingLineNumber = "23"
+            landmarkName = "onReceived(_:left:object:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -25,13 +25,13 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Craft/SignUp/SignUp.swift"
-            timestampString = "490719432.184894"
+            filePath = "Craft/RCIMdelegateForSignUp.swift"
+            timestampString = "490800199.793001"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "471"
-            endingLineNumber = "471"
-            landmarkName = "textView(_:shouldChangeTextInRange:replacementText:)"
+            startingLineNumber = "25"
+            endingLineNumber = "25"
+            landmarkName = "onReceived(_:left:object:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -41,45 +41,13 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Craft/SignUp/SignUp.swift"
-            timestampString = "490719499.520589"
+            filePath = "Craft/ExtensionForGesture.swift"
+            timestampString = "490801285.149212"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "472"
-            endingLineNumber = "472"
-            landmarkName = "textView(_:shouldChangeTextInRange:replacementText:)"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Craft/ChatMessageModel.m"
-            timestampString = "490720934.318352"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "18"
-            endingLineNumber = "18"
-            landmarkName = "-currentModelToJsonString"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Craft/ChatMessageModel.m"
-            timestampString = "490720526.591522"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "16"
-            endingLineNumber = "16"
-            landmarkName = "-currentModelToJsonString"
+            startingLineNumber = "99"
+            endingLineNumber = "99"
+            landmarkName = "showDetailOfWorldChat()"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
