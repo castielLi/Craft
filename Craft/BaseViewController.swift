@@ -51,7 +51,8 @@ class ViewControllerBase:UIViewController
         self.view.userInteractionEnabled = false
         self.navigationController?.view.userInteractionEnabled = false
         self.tabBarController?.view.userInteractionEnabled = false
-        SVProgressHUD.setForegroundColor(UIColor.orangeColor())
+        SVProgressHUD.setForegroundColor(UIColor(red: 56/255, green: 41/255, blue: 20/255, alpha: 0.9))
+        SVProgressHUD.setRingThickness(10)
         SVProgressHUD.setBackgroundColor(UIColor.clearColor())
         SVProgressHUD.show()
     }

@@ -17,7 +17,7 @@ class DropDownSelectView: UIView {
         // Drawing code
     }
     */
-    
+    var typeName : String?
     var backgroundImage : UIImageView?
     var displayLabel : UILabel?
     

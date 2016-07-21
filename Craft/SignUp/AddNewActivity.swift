@@ -14,6 +14,9 @@ class AddNewActivityController: ViewControllerBase ,UIGestureRecognizerDelegate{
     var activitiesView : UIImageView?
     var blankTap : UITapGestureRecognizer?
     var activityMain : UIScrollView?
+    var typeDropDownTap : UITapGestureRecognizer?
+    var activityDropDownTap : UITapGestureRecognizer?
+    var detailDropDownTap : UITapGestureRecognizer?
     
     var createButton : UIButton?
     var cancelButton : UIButton?
@@ -47,11 +50,6 @@ class AddNewActivityController: ViewControllerBase ,UIGestureRecognizerDelegate{
         self.navigationController!.setNavigationBarHidden(true, animated: false)
         
         let animation = CABasicAnimation(keyPath: "position.x")
-//        animation.damping = 12
-//        animation.stiffness = 100
-//        animation.mass = 1
-//        animation.initialVelocity = 0
-//        animation.duration = animation.settlingDuration
         animation.removedOnCompletion = false
         animation.timingFunction = CAMediaTimingFunction( name: kCAMediaTimingFunctionEaseOut)
         animation.fromValue = -UIAdapter.shared.transferWidth(300)
@@ -60,6 +58,8 @@ class AddNewActivityController: ViewControllerBase ,UIGestureRecognizerDelegate{
         self.activityMain!.layer.addAnimation(animation, forKey: nil)
         self.createButton!.layer.addAnimation(animation, forKey: nil)
         self.cancelButton!.layer.addAnimation(animation, forKey: nil)
+        
+        self.addGestureForDropdowns()
 
     }
 

@@ -42,20 +42,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var startTime : NSDate?
     
+    var instance : FMDatabase?
+    
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
 
-        RestService.configBaseUrl("http://162.243.241.80:8080/wow/api")
+        RestService.configBaseUrl("http://162.243.241.80:8080/wow")
         RestService.setNeedAuthentication(false)
-        
-//        NSArray * initTableArray = [[NSArray alloc]initWithObjects:createAccountTable,createProfileTable,createIconTable, nil];
-//        [FMDBHelper configDatabaseWithName:@"MaoTai" tableQueries:initTableArray];
-//        instance = [FMDBHelper sharedData];
-        
-//        let initTableArray<NSString> = [notificationTable,createAccountTable,createProfileTable,createIconTable]
-        FMDBHelper.configDatabaseWithName("craft", tableQueries: nil)
-        
+
+        FMDBHelper.configDatabaseWithName("craft", tableQueries: [DBContract.notificationTable,DBContract.createAccountTable,DBContract.createIconTable,DBContract.ProfileTable])
+        instance = FMDBHelper.sharedData() as? FMDatabase
         
         RCIM.sharedRCIM().initWithAppKey("pkfcgjstfdgr8")
         
@@ -93,6 +90,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     
     func registerNotification(){
+        
+        //邀请响应actions
         let completeAction = UIMutableUserNotificationAction()
         completeAction.identifier = "OK" // the unique identifier for this action
         completeAction.title = "接受" // title for the action button
@@ -122,11 +121,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         todoCategory.setActions([refuseAction, completeAction], forContext: .Default) // UIUserNotificationActionContext.Default (4 actions max)
         
         
-        
+        //确认活动actions
+        let confirmAction = UIMutableUserNotificationAction()
+        confirmAction.identifier = "Confirm" // the unique identifier for this action
+        confirmAction.title = "确认" // title for the action button
+        confirmAction.activationMode = .Background // UIUserNotificationActivationMode.Background - don't bring app to foreground
+        confirmAction.authenticationRequired = false // don't require unlocking before performing action
+        //        completeAction.destructive = true // display action in red
         let cancelAction = UIMutableUserNotificationAction()
         cancelAction.identifier = "Cancel"
         if #available(iOS 9.0, *) {
-            cancelAction.parameters = [UIUserNotificationTextInputActionButtonTitleKey : "Send"]
+            cancelAction.parameters = [UIUserNotificationTextInputActionButtonTitleKey : "为什么水我？"]
         } else {
             // Fallback on earlier versions
         }
@@ -143,7 +148,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let cancelCategory = UIMutableUserNotificationCategory() // notification categories allow us to create groups of actions that we can associate with a notification
         cancelCategory.identifier = "Notification_Category"
-        cancelCategory.setActions([cancelAction], forContext: .Default) // UIUserNotificationActionContext.Default (4 actions max)
+        cancelCategory.setActions([cancelAction,confirmAction], forContext: .Default) // UIUserNotificationActionContext.Default (4 actions max)
         
         
         let settings = UIUserNotificationSettings(forTypes: [.Alert, .Badge , .Sound], categories: NSSet(array: [todoCategory,cancelCategory]) as? Set<UIUserNotificationCategory>)

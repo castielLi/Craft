@@ -13,14 +13,7 @@ class LocalNotification{
     var deadLine : NSDate?
     var UUID : String?
     var activityId : Int?
-    
-    var dbHelper : DBHelper?
-    
-    init(){
-        
-        dbHelper = DBHelper.sharedInstance()
-    }
-    
+
     convenience init(title : String , deadLine : NSDate , activityId : Int){
         self.init()
         self.title = title
