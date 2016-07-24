@@ -95,6 +95,7 @@ extension SignUp{
                  self.timeView!.joinButtonBackGround!.frame.size = CGSize(width: UIAdapter.shared.transferWidth(80) , height: UIAdapter.shared.transferWidth(80))
                  self.timeView!.joinButtonBackGround!.layer.cornerRadius = UIAdapter.shared.transferWidth(40)
                  self.completeState = !self.completeState
+                self.worldChat!.worldChatDetail!.scrollToRowAtIndexPath( NSIndexPath(forRow: self.chatDetail.count - 1  , inSection :0) , atScrollPosition: UITableViewScrollPosition.Bottom, animated: true)
             })
         }else{
             UIView.animateWithDuration(0.5, animations: {
@@ -113,6 +114,7 @@ extension SignUp{
                     
             })
             self.completeState = !self.completeState
+            self.worldChat!.worldChatDetail!.scrollToRowAtIndexPath( NSIndexPath(forRow: self.chatDetail.count - 1  , inSection :0) , atScrollPosition: UITableViewScrollPosition.Bottom, animated: true)
         }
     }
     

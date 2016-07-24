@@ -16,6 +16,6 @@
 
 -(NSString*)currentModelToJsonString;
 
--(ChatMessageModel*)getModelFromDictionary:(NSDictionary*)dict;
++(ChatMessageModel*)getModelFromDictionary:(NSDictionary*)dict;
 
 @end
