@@ -10,6 +10,11 @@
 
 @implementation ChatMessageModel
 
+//type字段
+//chatroom
+//personal
+//group
+
 -(NSString*)currentModelToJsonString{
     NSDictionary * chatDic = self.mj_keyValues;
     
@@ -18,7 +23,7 @@
      return [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
 }
 
--(ChatMessageModel*)getModelFromDictionary:(NSDictionary*)dict{
++(ChatMessageModel*)getModelFromDictionary:(NSDictionary*)dict{
     ChatMessageModel * model = [ChatMessageModel mj_objectWithKeyValues:dict];
     return model;
 }

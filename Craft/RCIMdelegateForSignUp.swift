@@ -13,7 +13,7 @@ extension SignUp{
     func onReceived(message: RCMessage!, left nLeft: Int32, object: AnyObject!) {
         if message.content.isMemberOfClass(RCTextMessage.classForCoder()){
             let content =  message.content as! RCTextMessage
-            
+            if(nLeft == 0 ){
             var paras : String = (message.content as! RCTextMessage).extra
             
             let data = paras.dataUsingEncoding(NSUTF8StringEncoding)
@@ -21,10 +21,20 @@ extension SignUp{
                 let dictionary = try NSJSONSerialization.JSONObjectWithData(data!, options: []) as? [String:AnyObject]
                 
                 print(dictionary)
+                
+                let model = ChatMessageModel.getModelFromDictionary(dictionary)
+                if(model.type == "chatroom"){
+                    self.chatDetail.addObject(content.content!)
+                    print(content.content)
+                    let count = chatDetail.count
+                    self.worldChat!.worldChatDetail!.reloadData()
+//                    self.worldChat!.worldChatDetail!.insertRowsAtIndexPaths([NSIndexPath(forRow: count - 1  , inSection :0)], withRowAnimation: UITableViewRowAnimation.Bottom)
+                    self.worldChat!.worldChatDetail!.scrollToRowAtIndexPath( NSIndexPath(forRow: count - 1  , inSection :0) , atScrollPosition: UITableViewScrollPosition.Bottom, animated: true)
+                }
             } catch let error as NSError {
                 print(error)
+             }
             }
-            
         }
     }
     

@@ -58,9 +58,9 @@ extension SignUp: UITableViewDelegate , UITableViewDataSource {
                 cell = worldChatCell(style: UITableViewCellStyle.Value1, reuseIdentifier: "activityItemCell", cellWidth: self.view.frame.width - UIAdapter.shared.transferWidth(36) )
             }
             
-            cell!.content!.text = chatDetail[indexPath.row]
+            cell!.content!.text = chatDetail[indexPath.row] as! String
             
-            let size = UILabel.contentSize(self.view.frame.width - UIAdapter.shared.transferWidth(42), font: UIAdapter.shared.transferFont(10), text: chatDetail[indexPath.row])
+            let size = UILabel.contentSize(self.view.frame.width - UIAdapter.shared.transferWidth(42), font: UIAdapter.shared.transferFont(10), text: chatDetail[indexPath.row] as! String)
             
             cell!.content!.frame.size = size
             cell!.selectionStyle = UITableViewCellSelectionStyle.None
@@ -73,7 +73,7 @@ extension SignUp: UITableViewDelegate , UITableViewDataSource {
         return UIAdapter.shared.transferHeight(65)
         }
         else{
-            let content = UILabel.contentSize(self.view.frame.width - UIAdapter.shared.transferWidth(42), font: UIAdapter.shared.transferFont(10), text: chatDetail[indexPath.row])
+            let content = UILabel.contentSize(self.view.frame.width - UIAdapter.shared.transferWidth(42), font: UIAdapter.shared.transferFont(10), text: chatDetail[indexPath.row] as! String)
             
             return UIAdapter.shared.transferHeight(4) + content.height
         }
