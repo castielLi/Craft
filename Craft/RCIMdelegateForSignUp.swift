@@ -12,6 +12,7 @@ extension SignUp{
     
     func onReceived(message: RCMessage!, left nLeft: Int32, object: AnyObject!) {
         if message.content.isMemberOfClass(RCTextMessage.classForCoder()){
+            if(nLeft > 1){
             let content =  message.content as! RCTextMessage
             if(nLeft == 0 ){
             var paras : String = (message.content as! RCTextMessage).extra
@@ -35,6 +36,10 @@ extension SignUp{
                 print(error)
              }
             }
+
+          }
+            
+
         }
     }
     

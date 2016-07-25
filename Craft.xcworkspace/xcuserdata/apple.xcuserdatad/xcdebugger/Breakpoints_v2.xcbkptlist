@@ -10,11 +10,19 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Craft/RCIMdelegateForSignUp.swift"
+<<<<<<< Updated upstream
             timestampString = "491071294.066792"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "34"
             endingLineNumber = "34"
+=======
+            timestampString = "491069821.535079"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "24"
+            endingLineNumber = "24"
+>>>>>>> Stashed changes
             landmarkName = "onReceived(_:left:object:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -26,11 +34,19 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Craft/RCIMdelegateForSignUp.swift"
+<<<<<<< Updated upstream
             timestampString = "491071294.066792"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "36"
             endingLineNumber = "36"
+=======
+            timestampString = "491069821.535079"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "26"
+            endingLineNumber = "26"
+>>>>>>> Stashed changes
             landmarkName = "onReceived(_:left:object:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -83,6 +99,7 @@
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
+<<<<<<< Updated upstream
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
@@ -99,5 +116,7 @@
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
+=======
+>>>>>>> Stashed changes
    </Breakpoints>
 </Bucket>

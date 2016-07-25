@@ -38,8 +38,8 @@
 -(void)initView{
 
     
-    mainView = [[UIImageView alloc]initWithFrame:CGRectMake((self.view.frame.size.width - 300) / 2, (self.view.frame.size.height - 330)/2, 300, 330)];
-    NSString * path = [[NSBundle mainBundle] pathForResource:@"create_activity_main" ofType:@"png"];
+    mainView = [[UIImageView alloc]initWithFrame:CGRectMake((self.view.frame.size.width - 240) / 2, (self.view.frame.size.height - 240)/2, 240, 240)];
+    NSString * path = [[NSBundle mainBundle] pathForResource:@"selectedBackground" ofType:@"png"];
     mainView.image = [UIImage imageWithContentsOfFile:path];
     mainView.alpha = 1;
 
@@ -49,43 +49,43 @@
     [[self view]addSubview:mainView];
     
     
-    picker = [[UIPickerView alloc]initWithFrame:CGRectMake((self.view.frame.size.width - 300) / 2, (self.view.frame.size.height - 330)/2, 300, 280)];
+    picker = [[UIPickerView alloc]initWithFrame:CGRectMake((self.view.frame.size.width - 240) / 2, (self.view.frame.size.height - 240)/2, 240, 240)];
     [[self view]addSubview:picker];
     picker.delegate = self;
     picker.dataSource = self;
     picker.showsSelectionIndicator = NO;
     
     
-    splitLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 280, 300, 1)];
-    splitLabel.layer.borderColor = [UIColor lightGrayColor].CGColor;
-    splitLabel.layer.borderWidth =1;
-    [mainView addSubview:splitLabel];
-
-    
-    confirm = [[UIButton alloc]initWithFrame:CGRectMake(0, 281, 150, 50)];
-    [confirm setTitle:@"Confirm" forState:UIControlStateNormal];
-    [confirm addTarget:self action:@selector(ConfirmClick:) forControlEvents:UIControlEventTouchUpInside];
-    [confirm setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
-    [mainView addSubview:confirm];
-    
-    confirm.titleLabel.font = [UIFont fontWithName:@"TimesNewRomanPS-BoldMT" size:20];
-    
-    
-    
-    buttonsplitLabel = [[UILabel alloc]initWithFrame:CGRectMake(150, 280, 1, 50)];
-    buttonsplitLabel.layer.borderColor = [UIColor lightGrayColor].CGColor;
-    buttonsplitLabel.layer.borderWidth =1;
-    [mainView addSubview:buttonsplitLabel];
-
-    
-    
-    cancel = [[UIButton alloc]initWithFrame:CGRectMake(151, 281, 149, 50)];
-    [cancel setTitle:@"Cancel" forState:UIControlStateNormal];
-    [cancel addTarget:self action:@selector(CancelClick:) forControlEvents:UIControlEventTouchUpInside];
-    [cancel setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
-    [mainView addSubview:cancel];
-    
-    cancel.titleLabel.font = [UIFont fontWithName:@"TimesNewRomanPS-BoldMT" size:20];
+//    splitLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 280, 300, 1)];
+//    splitLabel.layer.borderColor = [UIColor lightGrayColor].CGColor;
+//    splitLabel.layer.borderWidth =1;
+//    [mainView addSubview:splitLabel];
+//
+//    
+//    confirm = [[UIButton alloc]initWithFrame:CGRectMake(0, 281, 150, 50)];
+//    [confirm setTitle:@"Confirm" forState:UIControlStateNormal];
+//    [confirm addTarget:self action:@selector(ConfirmClick:) forControlEvents:UIControlEventTouchUpInside];
+//    [confirm setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
+//    [mainView addSubview:confirm];
+//    
+//    confirm.titleLabel.font = [UIFont fontWithName:@"TimesNewRomanPS-BoldMT" size:20];
+//    
+//    
+//    
+//    buttonsplitLabel = [[UILabel alloc]initWithFrame:CGRectMake(150, 280, 1, 50)];
+//    buttonsplitLabel.layer.borderColor = [UIColor lightGrayColor].CGColor;
+//    buttonsplitLabel.layer.borderWidth =1;
+//    [mainView addSubview:buttonsplitLabel];
+//
+//    
+//    
+//    cancel = [[UIButton alloc]initWithFrame:CGRectMake(151, 281, 149, 50)];
+//    [cancel setTitle:@"Cancel" forState:UIControlStateNormal];
+//    [cancel addTarget:self action:@selector(CancelClick:) forControlEvents:UIControlEventTouchUpInside];
+//    [cancel setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
+//    [mainView addSubview:cancel];
+//    
+//    cancel.titleLabel.font = [UIFont fontWithName:@"TimesNewRomanPS-BoldMT" size:20];
 
 
 
@@ -148,9 +148,16 @@
 
 -(UIView *)pickerView:(UIPickerView *)pickerView viewForRow:(NSInteger)row forComponent:(NSInteger)component reusingView:(UIView *)view{
    
-    UIImageView * backgroundImage = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 300, 50)];
-    backgroundImage.image = [UIImage imageNamed:@"activityItem"];
-    return backgroundImage;
+//    UIImageView * backgroundImage = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 300, 50)];
+//    backgroundImage.image = [UIImage imageNamed:@"activityItem"];
+//    return backgroundImage;
+    
+    UILabel * label = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 240, 30)];
+    label.textColor = [UIColor whiteColor];
+    label.text = @"纳克萨玛斯";
+    label.textAlignment = NSTextAlignmentCenter;
+    label.font = [UIFont systemFontOfSize:25];
+    return label;
     
 }
 
@@ -178,7 +185,7 @@
 //}
 
 -(CGFloat)pickerView:(UIPickerView *)pickerView rowHeightForComponent:(NSInteger)component{
-    return 50;
+    return 30;
 }
 
 -(void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component{

@@ -129,6 +129,7 @@
 		18E259CB1CCA5F6000743FCA /* DropDownSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E259CA1CCA5F6000743FCA /* DropDownSelection.swift */; };
 		18E43FBA1CE0D1F000F9A382 /* PlaySound.m in Sources */ = {isa = PBXBuildFile; fileRef = 18E43FB91CE0D1F000F9A382 /* PlaySound.m */; };
 		18E43FBD1CE0E2E300F9A382 /* SoundResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E43FBC1CE0E2E300F9A382 /* SoundResource.swift */; };
+		18EDF2601D451E920054C86B /* selectedBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = 18EDF25F1D451E920054C86B /* selectedBackground.png */; };
 		18F7E4671C97B2EF007E3459 /* ReviewTableSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F7E4661C97B2EF007E3459 /* ReviewTableSource.swift */; };
 		18F7E46B1C97EE69007E3459 /* reviewTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F7E46A1C97EE69007E3459 /* reviewTableCell.swift */; };
 		18F7E46F1C97F454007E3459 /* DutyDisplayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F7E46E1C97F454007E3459 /* DutyDisplayView.swift */; };
@@ -320,6 +321,7 @@
 		18E43FB91CE0D1F000F9A382 /* PlaySound.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlaySound.m; sourceTree = "<group>"; };
 		18E43FBB1CE0D20500F9A382 /* PlaySound.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PlaySound.h; sourceTree = "<group>"; };
 		18E43FBC1CE0E2E300F9A382 /* SoundResource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SoundResource.swift; sourceTree = "<group>"; };
+		18EDF25F1D451E920054C86B /* selectedBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = selectedBackground.png; sourceTree = "<group>"; };
 		18F7E4661C97B2EF007E3459 /* ReviewTableSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReviewTableSource.swift; sourceTree = "<group>"; };
 		18F7E46A1C97EE69007E3459 /* reviewTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = reviewTableCell.swift; sourceTree = "<group>"; };
 		18F7E46E1C97F454007E3459 /* DutyDisplayView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DutyDisplayView.swift; sourceTree = "<group>"; };
@@ -984,6 +986,7 @@
 		18E136231CFC73B10046A6B8 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				18EDF25F1D451E920054C86B /* selectedBackground.png */,
 				188138D71D3286E1004953EC /* invite_friend.png */,
 				18D6CF641D2ABBED004DCF8A /* worldChatCompleteState.png */,
 				1824C61D1D2556AF009078B4 /* create_activity_main.png */,
@@ -1206,6 +1209,7 @@
 				18E1362D1CFC74AE0046A6B8 /* chatDetailBackground.png in Resources */,
 				18AF8CAF1BEDCCCB00539C0E /* LaunchScreen.storyboard in Resources */,
 				18E136311CFC752E0046A6B8 /* dailyBackground.png in Resources */,
+				18EDF2601D451E920054C86B /* selectedBackground.png in Resources */,
 				18E1C8151D17E3150080EBC1 /* welcome_video.mp4 in Resources */,
 				18E136251CFC73EE0046A6B8 /* MainBackGround.png in Resources */,
 				18605E2E1CE0913E007D8114 /* ReadyForBattle.mp3 in Resources */,

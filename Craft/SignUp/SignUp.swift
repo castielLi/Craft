@@ -472,7 +472,7 @@ class SignUp: ViewControllerBase ,RCIMClientReceiveMessageDelegate,UITextViewDel
             print(para)
             
             let message = RCTextMessage(content: textView.text)
-            message.extra = "{\"hello\":\"helloworld\"}"
+            message.extra = para
             RCIMClient.sharedRCIMClient().sendMessage(RCConversationType.ConversationType_PRIVATE, targetId: "1", content: message, pushContent: nil, success: { (messageId) in
                 print("发送成功")
                 }, error: { (error, messageId) in
