@@ -18,15 +18,6 @@ extension ChatRoom{
             let text = content.content
             let extra = content.extra
             
-//            guard dataDict["type"] == "chatroom" else { return }
-//            
-//            let txtMsg = ChatTextMessage(ownerType: .Other, messageType: .Text, portrait: UIImage(contentsOfFile: NSBundle.mainBundle().pathForResource("10", ofType: "jpeg")!)!)
-//            txtMsg.text = text
-//            self.data.append(txtMsg)
-//            self.detailTable?.reloadData()
-//            self.tableScrollToBottom()
-            
-            
             let dataExtra = extra.dataUsingEncoding(NSUTF8StringEncoding)
             do {
                 let dataDict = try NSJSONSerialization.JSONObjectWithData(dataExtra!, options: []) as? [String: AnyObject]
