@@ -296,6 +296,8 @@ class LoginController: ViewControllerBase,LoginServiceDelegate {
         //获取用户群组列表
         service!.GetMyGroups()
         
+        service!.GetInitActivitiesData()
+        
         //融云登录
         RCIM.sharedRCIM().connectWithToken("WR2i0I07FA3sS6yv3j5G8slRWzGSVmtCYmURsUlF14+e5Rr9BT+O3cQMFJ+FPDFeOIACenxFpzL7O3U2PAtoUA==",
                                            success: { (userId) -> Void in

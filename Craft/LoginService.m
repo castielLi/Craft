@@ -10,6 +10,7 @@
 #import "LoginService.h"
 #import <MJExtension/MJExtension.h>
 #import "ProfileModel.h"
+#import "initActivityModel.h"
 
 
 @interface LoginService ()
@@ -122,6 +123,24 @@
                      
                  }
              }];
+}
+
+-(void)GetInitActivitiesData{
+    
+    NSDictionary * parameters = @{@"newToken":@"1111"};
+    
+    [_restService post:@"/api/activity/init_activity_create" parameters:parameters
+              callback:^ (ApiResult *result, id response){
+                  if(result.state){
+                      if(_delegate != nil)
+                      {
+                          
+                          initActivityModel * model = [initActivityModel mj_objectWithKeyValues:response];
+                          NSLog(@"hello");
+                      }
+                  }
+              }];
+
 }
 
 
