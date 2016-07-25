@@ -228,6 +228,7 @@ class ChatRoom: ViewControllerBase , UITextViewDelegate ,RCIMClientReceiveMessag
     
     // init chat detail
     func setChatDetailView(){
+        print("begin to build detail table")
        chatDetailView = UIImageView(frame: CGRect(x: UIAdapter.shared.transferWidth(-235)  , y: UIAdapter.shared.transferHeight(25), width: UIAdapter.shared.transferWidth(235), height: UIAdapter.shared.transferHeight(320)))
         chatDetailView!.layer.cornerRadius = 3
         chatDetailView!.layer.masksToBounds = true
@@ -301,8 +302,15 @@ class ChatRoom: ViewControllerBase , UITextViewDelegate ,RCIMClientReceiveMessag
     
     private func sendText() {
         let message = RCTextMessage(content: self.enterForm!.enterTextView!.text)
-        message.extra = "{\"hello\":\"helloworld\"}"
-        RCIMClient.sharedRCIMClient().sendMessage(RCConversationType.ConversationType_PRIVATE, targetId: "1", content: message, pushContent: nil, success: { (messageId) in
+        
+        let model = ChatMessageModel()
+        model.type = "chatroom"
+        model.userName = "test"
+        model.userId = "1"
+        
+        message.extra = model.currentModelToJsonString()
+        print(message.extra)
+        RCIMClient.sharedRCIMClient().sendMessage(RCConversationType.ConversationType_PRIVATE, targetId: "2", content: message, pushContent: nil, success: { (messageId) in
             print("发送成功")
             }, error: { (error, messageId) in
                 print("发送失败")
@@ -389,6 +397,13 @@ class ChatRoom: ViewControllerBase , UITextViewDelegate ,RCIMClientReceiveMessag
             print("recorded.")
             self.rtAudio.stopRecording()
             let message = RCVoiceMessage(audio: self.rtAudio.soundData, duration: self.rtAudio.recordedDuration!)
+            
+            let model = ChatMessageModel()
+            model.type = "chatroom"
+            model.userName = "test"
+            model.userId = "1"
+            
+            message.extra = model.currentModelToJsonString()
             RCIMClient.sharedRCIMClient().sendMessage(.ConversationType_PRIVATE, targetId: "2", content: message, pushContent: nil, success: {
                 mesageId in
                 print("sent successfully")

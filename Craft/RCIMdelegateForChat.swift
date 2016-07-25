@@ -7,20 +7,46 @@
 //
 
 import Foundation
+import SwiftyJSON
 
 extension ChatRoom{
   
     func onReceived(message: RCMessage!, left nLeft: Int32, object: AnyObject!) {
+        
         if message.content.isMemberOfClass(RCTextMessage.classForCoder()){
+            
             let content =  message.content as! RCTextMessage
             let text = content.content
             let extra = content.extra
+            print(extra)
+            let extraJson = JSON.parse(extra)
+            let dataDict = extraJson.dictionaryValue
+            
+            guard dataDict["type"] == "chatroom" else { return }
             
             let txtMsg = ChatTextMessage(ownerType: .Other, messageType: .Text, portrait: UIImage(contentsOfFile: NSBundle.mainBundle().pathForResource("10", ofType: "jpeg")!)!)
             txtMsg.text = text
             self.data.append(txtMsg)
             self.detailTable?.reloadData()
             self.tableScrollToBottom()
+            
+            
+//            let dataExtra = extra.dataUsingEncoding(NSUTF8StringEncoding)
+//            do {
+//                let dataDict = try NSJSONSerialization.JSONObjectWithData(dataExtra!, options: []) as? [String: AnyObject]
+//                let model = ChatMessageModel.getModelFromDictionary(dataDict)
+//                guard model.type == "chatroom" else { return }
+            
+//                let txtMsg = ChatTextMessage(ownerType: .Other, messageType: .Text, portrait: UIImage(contentsOfFile: NSBundle.mainBundle().pathForResource("10", ofType: "jpeg")!)!)
+//                txtMsg.text = text
+//                self.data.append(txtMsg)
+//                self.detailTable?.reloadData()
+//                self.tableScrollToBottom()
+            
+//            } catch let error as NSError {
+//                print(error)
+//                return
+//            }
         }
         
         if message.content .isMemberOfClass(RCVoiceMessage.classForCoder()) {
@@ -28,11 +54,18 @@ extension ChatRoom{
             let data = content.wavAudioData
             let duration = content.duration
             
+            let extra = content.extra
+            let extraJson = JSON.parse(extra)
+            let dataDict = extraJson.dictionaryValue
+            
+            guard dataDict["type"] == "chatroom" else { return }
+            
             let voiceMsg = ChatVoiceMessage(ownerType: .Other, messageType: .Voice, portrait: UIImage(contentsOfFile: NSBundle.mainBundle().pathForResource("10", ofType: "jpeg")!)!, voiceSecs: duration)
             voiceMsg.voiceData = data
             self.data.append(voiceMsg)
             self.detailTable?.reloadData()
             self.tableScrollToBottom()
+            
         }
     }
     
