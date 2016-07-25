@@ -11,7 +11,7 @@ import UIKit
 class ChatRoom: ViewControllerBase , UITextViewDelegate ,RCIMClientReceiveMessageDelegate{
 
     
-    var data: [ChatMessage] = [ChatMessage]()
+    var data: NSMutableArray?
     
     var soundPlay :PlaySound?
     
@@ -77,6 +77,12 @@ class ChatRoom: ViewControllerBase , UITextViewDelegate ,RCIMClientReceiveMessag
         soundPlay = PlaySound.sharedData()
         selectedIndex = 1
         RCIMClient.sharedRCIMClient().setReceiveMessageDelegate(self, object: nil)
+        self.data = NSMutableArray()
+        
+//        let message1 = ChatTextMessage(ownerType: .Mine, messageType: .Text, portrait: UIImage(contentsOfFile: NSBundle.mainBundle().pathForResource("10", ofType: "jpeg")!)!)
+//        message1.text = "This is a long text for testing attributedText, here i will insert some emojis : 🙂😎😚😶😝. Is this will be correct?"
+//        
+//        self.data!.addObject(message1)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -219,7 +225,7 @@ class ChatRoom: ViewControllerBase , UITextViewDelegate ,RCIMClientReceiveMessag
         chatListView!.backgroundColor = UIColor.clearColor()
         chatListView!.delegate = self
         chatListView!.dataSource = self
-        chatListView!.tag = 1
+        chatListView!.tag = 11
         chatListView!.showsVerticalScrollIndicator = false
         chatListView!.showsHorizontalScrollIndicator = false
         chatListView!.separatorStyle = UITableViewCellSeparatorStyle.None
@@ -236,18 +242,21 @@ class ChatRoom: ViewControllerBase , UITextViewDelegate ,RCIMClientReceiveMessag
         chatDetailView!.image = UIImage(contentsOfFile: path!)
         self.view.addSubview(chatDetailView!)
         
-        self.detailTable = UITableView(frame: CGRectMake( -UIAdapter.shared.transferWidth(210) , UIAdapter.shared.transferHeight(53)  , UIAdapter.shared.transferWidth(210), UIAdapter.shared.transferHeight(263)))
-        self.detailTable?.delegate = self
-        self.detailTable?.dataSource = self
-
-        self.detailTable?.registerClass(ChatTextCell.self, forCellReuseIdentifier: "textMessageCell")
-        self.detailTable?.registerClass(ChatVoiceCell.self, forCellReuseIdentifier: "voiceMessageCell")
-        self.detailTable?.separatorStyle = .None
-        self.detailTable!.tag = 2
+           }
+    
+    func setDetailTable(){
+        self.detailTable = UITableView(frame: CGRectMake( UIAdapter.shared.transferWidth(10) , UIAdapter.shared.transferHeight(53)  , UIAdapter.shared.transferWidth(210), UIAdapter.shared.transferHeight(263)))
+        
+        self.detailTable!.registerClass(ChatTextCell.self, forCellReuseIdentifier: "textMessageCell")
+        self.detailTable!.registerClass(ChatVoiceCell.self, forCellReuseIdentifier: "voiceMessageCell")
+        self.detailTable!.delegate = self
+        self.detailTable!.dataSource = self
+        self.detailTable!.separatorStyle = .None
+        self.detailTable!.tag = 12
         self.detailTable!.backgroundColor = UIColor.clearColor()
         self.view!.addSubview(self.detailTable!)
-        
-           }
+
+    }
     
     func setEnterForm(){
         
@@ -330,8 +339,8 @@ class ChatRoom: ViewControllerBase , UITextViewDelegate ,RCIMClientReceiveMessag
     // RT Start
     
     func tableScrollToBottom() {
-        if self.data.count > 0 {
-            self.detailTable?.scrollToRowAtIndexPath(NSIndexPath(forRow: self.data.count - 1, inSection: 0), atScrollPosition: .Bottom, animated: true)
+        if self.data!.count > 0 {
+            self.detailTable?.scrollToRowAtIndexPath(NSIndexPath(forRow: self.data!.count - 1, inSection: 0), atScrollPosition: .Bottom, animated: true)
         }
     }
     

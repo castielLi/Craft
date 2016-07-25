@@ -25,12 +25,17 @@ extension SignUp{
                 
                 let model = ChatMessageModel.getModelFromDictionary(dictionary)
                 if(model.type == "chatroom"){
-                    self.chatDetail.addObject(content.content!)
+                    
                     print(content.content)
-                    let count = chatDetail.count
-                    self.worldChat!.worldChatDetail!.reloadData()
-//                    self.worldChat!.worldChatDetail!.insertRowsAtIndexPaths([NSIndexPath(forRow: count - 1  , inSection :0)], withRowAnimation: UITableViewRowAnimation.Bottom)
-                    self.worldChat!.worldChatDetail!.scrollToRowAtIndexPath( NSIndexPath(forRow: count - 1  , inSection :0) , atScrollPosition: UITableViewScrollPosition.Bottom, animated: true)
+                    
+                    dispatch_async(dispatch_get_main_queue(), {
+                        self.chatDetail.addObject(content.content!)
+                        let count = self.chatDetail.count
+                        self.worldChat!.worldChatDetail!.reloadData()
+                        self.worldChat!.worldChatDetail!.scrollToRowAtIndexPath( NSIndexPath(forRow: count - 1  , inSection :0) , atScrollPosition: UITableViewScrollPosition.Bottom, animated: true)
+                    });
+                    
+                    
                 }
             } catch let error as NSError {
                 print(error)

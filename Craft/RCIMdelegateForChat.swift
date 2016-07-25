@@ -26,8 +26,14 @@ extension ChatRoom{
             
                 let txtMsg = ChatTextMessage(ownerType: .Other, messageType: .Text, portrait: UIImage(contentsOfFile: NSBundle.mainBundle().pathForResource("10", ofType: "jpeg")!)!)
                 txtMsg.text = text
-                self.data.append(txtMsg)
-                self.detailTable?.reloadData()
+                
+                
+                dispatch_async(dispatch_get_main_queue(), {
+                   self.data!.addObject(txtMsg)
+                   self.detailTable!.reloadData()
+                    });
+                
+                
                 self.tableScrollToBottom()
             
             } catch let error as NSError {
@@ -49,8 +55,10 @@ extension ChatRoom{
                 
                 let voiceMsg = ChatVoiceMessage(ownerType: .Other, messageType: .Voice, portrait: UIImage(contentsOfFile: NSBundle.mainBundle().pathForResource("10", ofType: "jpeg")!)!, voiceSecs: duration)
                 voiceMsg.voiceData = data
-                self.data.append(voiceMsg)
-                self.detailTable?.reloadData()
+                dispatch_async(dispatch_get_main_queue(), {
+                    self.data!.addObject(voiceMsg)
+                    self.detailTable!.reloadData()
+                });
                 self.tableScrollToBottom()
             } catch let error as NSError {
                 print(error)

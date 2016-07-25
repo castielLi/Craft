@@ -12,7 +12,7 @@ extension ChatRoom : UITableViewDelegate,UITableViewDataSource{
 
     // table
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if tableView.tag == 1{
+        if tableView.tag == 11{
             if self.selectedIndex == 1{
                return conversationList!.count
             }else if selectedIndex == 2{
@@ -20,12 +20,12 @@ extension ChatRoom : UITableViewDelegate,UITableViewDataSource{
             }
             return self.dataChannels.count
         }else{
-           return self.data.count
+           return self.data!.count
         }
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        if tableView.tag == 1{
+        if tableView.tag == 11{
             
             if selectedIndex == 1 || selectedIndex == 2{
             var cell = tableView.dequeueReusableCellWithIdentifier("chatListCell") as? ChatListCell
@@ -62,7 +62,7 @@ extension ChatRoom : UITableViewDelegate,UITableViewDataSource{
             
         }else {
         
-            let message = self.data[indexPath.row]
+            let message = self.data![indexPath.row] as! ChatMessage
             
             let cell = tableView.dequeueReusableCellWithIdentifier(message.cellIdentity) as! ChatCell
             if message.messageType == .Text {
@@ -100,11 +100,11 @@ extension ChatRoom : UITableViewDelegate,UITableViewDataSource{
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        if tableView.tag == 1{
+        if tableView.tag == 11{
         return UIAdapter.shared.transferHeight(50)
         }else {
             var height: CGFloat = 60
-            let message = self.data[indexPath.row]
+            let message = self.data![indexPath.row] as! ChatMessage
             if message.messageType == .Text {
 
                 let cell = ChatTextCell(style: UITableViewCellStyle.Default, reuseIdentifier: nil)
@@ -117,18 +117,20 @@ extension ChatRoom : UITableViewDelegate,UITableViewDataSource{
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        if tableView.tag == 1{
+        if tableView.tag == 11{
         let soundId = soundPlay!.sound.valueForKey(SoundResource.openBookSound) as! String
         let id = UInt32(soundId)
         AudioServicesPlaySystemSound(id!);
         
+       
+            
         if self.chatDetailView!.frame.origin.x < 0{
                 UIView.animateWithDuration(0.4, animations: {
                     self.chatDetailView!.frame.origin.x = 0
                     self.enterForm!.frame.origin.x = UIAdapter.shared.transferWidth(10)
-//                    self.buttonSend!.frame.origin.x = UIAdapter.shared.transferWidth(225)
-                    self.detailTable!.frame.origin.x = UIAdapter.shared.transferWidth(10)
                     self.selectDialog!.frame.origin.x += UIAdapter.shared.transferWidth(220)
+                    }, completion: { (success) in
+                         self.setDetailTable()
                 })
            }
         }
