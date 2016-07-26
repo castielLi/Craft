@@ -31,6 +31,9 @@ extension AddNewActivityController {
         AudioServicesPlaySystemSound(id!);
         
         let typeSelected = OneRollSelection()
+        typeSelected.dataArray = self.typeArray! as [AnyObject]
+        typeSelected.displayKey = "apName"
+        typeSelected.valueKey = "apCode"
         let Nav = UINavigationController(rootViewController: typeSelected)
         Nav.modalPresentationStyle = UIModalPresentationStyle.OverFullScreen
         self.presentViewController(Nav, animated: true, completion: nil)

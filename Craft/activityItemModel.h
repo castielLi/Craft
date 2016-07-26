@@ -13,5 +13,6 @@
 
 @property (nonatomic,strong) NSString * apName;
 @property (nonatomic,strong) NSMutableArray<raidDetailModel*> * details;
+@property (nonatomic,strong) NSString * apCode;
 
 @end

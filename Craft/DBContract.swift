@@ -17,4 +17,10 @@ struct DBContract{
     static let ProfileTable = "CREATE TABLE IF NOT EXISTS Profile(userId text, userName text , battleAccount , text)";
     
     static let createIconTable = "CREATE TABLE IF NOT EXISTS Icons(iconurl text,path text)";
+    
+    static let createRaidTypeName = "CREATE TABLE IF NOT EXISTS RaidType(apName text,apCode text)";
+    
+    static let createRaid = "CREATE TABLE IF NOT EXISTS Raid(apdName text,apdCode text,typeCode text)";
+    
+    static let createRaidLevel = "CREATE TABLE IF NOT EXISTS RaidLevel(aplName text,aplCode text,raidCode text)";
 }

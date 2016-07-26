@@ -11,7 +11,7 @@
 
 @interface initActivityModel : NSObject
 
-@property (nonatomic,strong) NSString * Token;
+@property (nonatomic,strong) NSString * newkey;
 @property (nonatomic,strong) NSMutableArray<activityItemModel*> * paltes;
 
 @end

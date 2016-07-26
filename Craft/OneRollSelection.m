@@ -132,71 +132,27 @@
 }
 
 -(NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component{
-//    return self.dataArray.count;
-    return 10;
+    return _dataArray.count;
 }
 
 
--(NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component{
-//    if (![self.valueKey isEqualToString:@""]){
-//    return [self.dataArray[row] valueForKey:self.displayKey];
-//    }else{
-//        return self.dataArray[row];
-//    }
-    return @"";
-};
-
 -(UIView *)pickerView:(UIPickerView *)pickerView viewForRow:(NSInteger)row forComponent:(NSInteger)component reusingView:(UIView *)view{
-   
-//    UIImageView * backgroundImage = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 300, 50)];
-//    backgroundImage.image = [UIImage imageNamed:@"activityItem"];
-//    return backgroundImage;
     
     UILabel * label = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 240, 30)];
     label.textColor = [UIColor whiteColor];
-    label.text = @"纳克萨玛斯";
+    label.text = [_dataArray[row] valueForKey:self.displayKey];
     label.textAlignment = NSTextAlignmentCenter;
     label.font = [UIFont systemFontOfSize:25];
     return label;
     
 }
 
-//- (UIView *)pickerView:(UIPickerView *)pickerView viewForRow:(NSInteger)row forComponent:(NSInteger)component reusingView:(UIView *)view{
-//    UILabel* tView = (UILabel*)view;
-//    if (!tView){
-//        tView = [[UILabel alloc] init];
-//        tView.textColor = [UIColor blueColor];
-//        if (self.isNotify){
-//        tView.font = [UIFont systemFontOfSize:14];
-//        }else{
-//           tView.font = [UIFont systemFontOfSize:20];
-//        }
-//        tView.textAlignment = NSTextAlignmentCenter;
-//        if (![self.valueKey isEqualToString:@""]){
-//            tView.text = [self.dataArray[row] valueForKey:self.displayKey];
-//        }else{
-//           tView.text =  self.dataArray[row];
-//        }
-//        
-//    }
-//    // Fill the label text here
-//    
-//    return tView;
-//}
 
 -(CGFloat)pickerView:(UIPickerView *)pickerView rowHeightForComponent:(NSInteger)component{
     return 30;
 }
 
--(void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component{
-    if (![self.valueKey isEqualToString:@""]){
-    self.value = [self.dataArray[row] valueForKey:self.valueKey];
-    self.key = [self.dataArray[row] valueForKey:self.displayKey];
-    }else{
-        self.key = self.dataArray[row];
-        self.value = [NSString stringWithFormat: @"%ld", (long)row];
-    }
-}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

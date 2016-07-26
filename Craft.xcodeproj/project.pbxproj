@@ -113,6 +113,7 @@
 		18BD4A311D1AC2A800585D1D /* RCIMdelegateForSignUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18BD4A301D1AC2A800585D1D /* RCIMdelegateForSignUp.swift */; };
 		18BDB0451D2E8BA1000CC61D /* worldChatCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18BDB0441D2E8BA1000CC61D /* worldChatCell.swift */; };
 		18BDB0481D2E8E7B000CC61D /* UILabel+Nova_UILabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 18BDB0461D2E8E7B000CC61D /* UILabel+Nova_UILabel.m */; };
+		18C0DCD51D47925F00777A9F /* time.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 18C0DCD41D47925F00777A9F /* time.ttf */; };
 		18C44C4E1D1197560087EBF6 /* StartView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C44C4C1D1197560087EBF6 /* StartView.m */; };
 		18C6ABAA1D3E748E00196CD2 /* TwoRollSelection.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C6ABA81D3E748E00196CD2 /* TwoRollSelection.m */; };
 		18CE64341CF7354500834C2B /* DailyDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CE64331CF7354500834C2B /* DailyDetail.swift */; };
@@ -306,6 +307,7 @@
 		18BDB0441D2E8BA1000CC61D /* worldChatCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = worldChatCell.swift; path = SignUp/worldChatCell.swift; sourceTree = "<group>"; };
 		18BDB0461D2E8E7B000CC61D /* UILabel+Nova_UILabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+Nova_UILabel.m"; sourceTree = "<group>"; };
 		18BDB0471D2E8E7B000CC61D /* UILabel+Nova_UILabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILabel+Nova_UILabel.h"; sourceTree = "<group>"; };
+		18C0DCD41D47925F00777A9F /* time.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = time.ttf; sourceTree = "<group>"; };
 		18C44C4B1D1197560087EBF6 /* StartView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StartView.h; sourceTree = "<group>"; };
 		18C44C4C1D1197560087EBF6 /* StartView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StartView.m; sourceTree = "<group>"; };
 		18C6ABA81D3E748E00196CD2 /* TwoRollSelection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TwoRollSelection.m; sourceTree = "<group>"; };
@@ -389,7 +391,7 @@
 			name = Extension;
 			sourceTree = "<group>";
 		};
-		1801FC581D2920EF0083A37D /* framworks */ = {
+		1801FC581D2920EF0083A37D /* frameworks */ = {
 			isa = PBXGroup;
 			children = (
 				1801FC5E1D29241B0083A37D /* ApiResult.h */,
@@ -406,7 +408,7 @@
 				1801FC641D29241B0083A37D /* UIColorHelper.m */,
 				181000A71D3B54EF00A9E468 /* PrefixHeader.pch */,
 			);
-			name = framworks;
+			name = frameworks;
 			sourceTree = "<group>";
 		};
 		180E193A1C62E26C00987CE6 /* Chat */ = {
@@ -623,8 +625,6 @@
 		1899D6EB1C6484880094B65C /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				18C6ABA71D3E742700196CD2 /* controller */,
-				18BD4A321D1AC83400585D1D /* RCIMmodel */,
 				1892E8CF1CDE3BCD002AAEBF /* View */,
 			);
 			name = Common;
@@ -919,7 +919,7 @@
 		18AF8CA31BEDCCCB00539C0E /* Craft */ = {
 			isa = PBXGroup;
 			children = (
-				1801FC581D2920EF0083A37D /* framworks */,
+				1801FC581D2920EF0083A37D /* frameworks */,
 				1801FC4A1D28EBA40083A37D /* Extension */,
 				18E136231CFC73B10046A6B8 /* Images */,
 				180E19471C631FFD00987CE6 /* Protocol */,
@@ -934,6 +934,7 @@
 				18AF8CAD1BEDCCCB00539C0E /* LaunchScreen.storyboard */,
 				18AF8CB01BEDCCCB00539C0E /* Info.plist */,
 				18A824521BEDD86500084589 /* Craft-bridge-header.h */,
+				18C0DCD41D47925F00777A9F /* time.ttf */,
 			);
 			path = Craft;
 			sourceTree = "<group>";
@@ -973,13 +974,6 @@
 			name = Invite;
 			sourceTree = "<group>";
 		};
-		18BD4A321D1AC83400585D1D /* RCIMmodel */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = RCIMmodel;
-			sourceTree = "<group>";
-		};
 		18C44C481D11974B0087EBF6 /* start */ = {
 			isa = PBXGroup;
 			children = (
@@ -987,13 +981,6 @@
 				18C44C4C1D1197560087EBF6 /* StartView.m */,
 			);
 			name = start;
-			sourceTree = "<group>";
-		};
-		18C6ABA71D3E742700196CD2 /* controller */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = controller;
 			sourceTree = "<group>";
 		};
 		18E136231CFC73B10046A6B8 /* Images */ = {
@@ -1251,6 +1238,7 @@
 				18E136271CFC74190046A6B8 /* blood.png in Resources */,
 				18610C4C1C12C88300B864F2 /* wow_main_theme.mp3 in Resources */,
 				18D6CF651D2ABBED004DCF8A /* worldChatCompleteState.png in Resources */,
+				18C0DCD51D47925F00777A9F /* time.ttf in Resources */,
 				188138D81D3286E1004953EC /* invite_friend.png in Resources */,
 				18605E321CE09147007D8114 /* clickevent.mp3 in Resources */,
 			);
