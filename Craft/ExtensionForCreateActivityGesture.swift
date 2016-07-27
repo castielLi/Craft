@@ -25,23 +25,40 @@ extension AddNewActivityController {
     }
     
     func typeSelected(sender : UITapGestureRecognizer){
+        
+        let soundId = soundPlay!.sound.valueForKey(SoundResource.swishinSound) as! String
+        let id = UInt32(soundId)
+        AudioServicesPlaySystemSound(id!);
+        
         let typeSelected = OneRollSelection()
+        typeSelected.dataArray = self.typeArray! as [AnyObject]
+        typeSelected.displayKey = "apName"
+        typeSelected.valueKey = "apCode"
         let Nav = UINavigationController(rootViewController: typeSelected)
         Nav.modalPresentationStyle = UIModalPresentationStyle.OverFullScreen
-        self.presentViewController(Nav, animated: false, completion: nil)
+        self.presentViewController(Nav, animated: true, completion: nil)
     }
     
     func activitySelected(sender : UITapGestureRecognizer){
+        
+        let soundId = soundPlay!.sound.valueForKey(SoundResource.swishinSound) as! String
+        let id = UInt32(soundId)
+        AudioServicesPlaySystemSound(id!);
+        
         let typeSelected = OneRollSelection()
         let Nav = UINavigationController(rootViewController: typeSelected)
         Nav.modalPresentationStyle = UIModalPresentationStyle.OverFullScreen
-        self.presentViewController(Nav, animated: false, completion: nil)
+        self.presentViewController(Nav, animated: true, completion: nil)
     }
     
     func detailSelected(sender: UITapGestureRecognizer){
+        let soundId = soundPlay!.sound.valueForKey(SoundResource.swishinSound) as! String
+        let id = UInt32(soundId)
+        AudioServicesPlaySystemSound(id!);
+        
         let typeSelected = OneRollSelection()
         let Nav = UINavigationController(rootViewController: typeSelected)
         Nav.modalPresentationStyle = UIModalPresentationStyle.OverFullScreen
-        self.presentViewController(Nav, animated: false, completion: nil)
+        self.presentViewController(Nav, animated: true, completion: nil)
     }
 }

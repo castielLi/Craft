@@ -98,11 +98,14 @@ extension ChatRoom : UIGestureRecognizerDelegate{
             self.selectDialog!.frame.origin.x -= UIAdapter.shared.transferWidth(220)
             }, completion: nil)
         
+        
         UIView.animateWithDuration(0.4, animations: {
             self.chatDetailView!.frame.origin.x = -UIAdapter.shared.transferWidth(235)
             self.enterForm!.frame.origin.x = -UIAdapter.shared.transferWidth(235)
-//            self.buttonSend!.frame.origin.x = -UIAdapter.shared.transferWidth(50)
+            //            self.buttonSend!.frame.origin.x = -UIAdapter.shared.transferWidth(50)
             self.detailTable!.frame.origin.x = -UIAdapter.shared.transferWidth(210)
+            }, completion: { (success) in
+                self.detailTable!.removeFromSuperview()
         })
       }
     

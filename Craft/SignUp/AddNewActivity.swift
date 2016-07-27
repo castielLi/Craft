@@ -10,6 +10,9 @@ import UIKit
 
 class AddNewActivityController: ViewControllerBase ,UIGestureRecognizerDelegate{
     
+    
+    let searchAllType = "SELECT apName,apCode FROM RaidType"
+    
     var soundPlay :PlaySound?
     var activitiesView : UIImageView?
     var blankTap : UITapGestureRecognizer?
@@ -34,10 +37,23 @@ class AddNewActivityController: ViewControllerBase ,UIGestureRecognizerDelegate{
     var inviteButton : UIButton?
     var inviteTable: UITableView?
     
+    var typeArray : NSMutableArray?
+    var activityArray: NSMutableArray?
+    var levelArray : NSMutableArray?
+    var instance : FMDBHelper?
+    
+    var typeCode : String?
+    var activityCode : String?
+    var levelCode : String?
+    
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
         soundPlay = PlaySound.sharedData()
+        typeArray = NSMutableArray()
+        activityArray = NSMutableArray()
+        levelArray = NSMutableArray()
+        instance = FMDBHelper.sharedData() as! FMDBHelper
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -60,10 +76,15 @@ class AddNewActivityController: ViewControllerBase ,UIGestureRecognizerDelegate{
         self.cancelButton!.layer.addAnimation(animation, forKey: nil)
         
         self.addGestureForDropdowns()
-
+        initArrayData()
     }
 
-    
+    func initArrayData(){
+       self.showProgress()
+       
+       typeArray = instance!.DatabaseSearchValuesWithParameters(["apName","apCode"], query: searchAllType, values: nil)
+       self.closeProgress()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -103,6 +124,9 @@ class AddNewActivityController: ViewControllerBase ,UIGestureRecognizerDelegate{
     func setDropDown(){
         typeSelected = DropDownSelectView(frame: CGRect(x: UIAdapter.shared.transferWidth(1), y: UIAdapter.shared.transferHeight(2), width: (UIAdapter.shared.transferWidth(250) * 0.3 - UIAdapter.shared.transferWidth(1)) , height: UIAdapter.shared.transferHeight(20)))
         self.activityMain!.addSubview(typeSelected!)
+        
+        
+        
         
         activitySelected = DropDownSelectView(frame: CGRect(x: UIAdapter.shared.transferWidth(76), y: UIAdapter.shared.transferHeight(2), width: (UIAdapter.shared.transferWidth(250) * 0.4 - UIAdapter.shared.transferWidth(1) ), height: UIAdapter.shared.transferHeight(20)))
         self.activityMain!.addSubview(activitySelected!)

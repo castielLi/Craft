@@ -68,6 +68,22 @@ static NSString* tableName;
     return dictionary;
 }
 
+-(NSMutableArray *)DatabaseSearchValuesWithParameters : (NSArray*) parameters query:(NSString*)query values:(NSArray *)values{
+    
+    FMResultSet* result = [self.instance executeQuery:query withArgumentsInArray:values];
+    
+    NSMutableArray * array = [[NSMutableArray alloc]init];
+    while ([result next]) {
+        NSMutableDictionary * dictionary = [[NSMutableDictionary alloc]init];
+        for(NSString* para in parameters){
+            [dictionary addEntriesFromDictionary: @{para : [result stringForColumn:para]}];
+        }
+        [array addObject:dictionary];
+    }
+    
+    return array;
+}
+
 
 -(BOOL)DatabaseExecuteWithQuery:(NSString*)query values:(NSArray*)values{
     return [self.instance executeUpdate:query withArgumentsInArray:values];

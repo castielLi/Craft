@@ -29,5 +29,7 @@
 
 -(void)GetMyGroups;
 
+-(void)GetInitActivitiesData;
+
 @end
 

@@ -22,6 +22,8 @@
 
 -(NSDictionary *)DatabaseQueryWithParameters : (NSArray*) parameters query:(NSString*)query values:(NSArray *)values;
 
+-(NSMutableArray *)DatabaseSearchValuesWithParameters : (NSArray*) parameters query:(NSString*)query values:(NSArray *)values;
+
 -(BOOL)DatabaseExecuteWithQuery:(NSString*)query values:(NSArray*)values;
 
 -(instancetype)init;

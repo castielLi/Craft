@@ -113,6 +113,7 @@
 		18BD4A311D1AC2A800585D1D /* RCIMdelegateForSignUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18BD4A301D1AC2A800585D1D /* RCIMdelegateForSignUp.swift */; };
 		18BDB0451D2E8BA1000CC61D /* worldChatCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18BDB0441D2E8BA1000CC61D /* worldChatCell.swift */; };
 		18BDB0481D2E8E7B000CC61D /* UILabel+Nova_UILabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 18BDB0461D2E8E7B000CC61D /* UILabel+Nova_UILabel.m */; };
+		18C0DCD51D47925F00777A9F /* time.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 18C0DCD41D47925F00777A9F /* time.ttf */; };
 		18C44C4E1D1197560087EBF6 /* StartView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C44C4C1D1197560087EBF6 /* StartView.m */; };
 		18C6ABAA1D3E748E00196CD2 /* TwoRollSelection.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C6ABA81D3E748E00196CD2 /* TwoRollSelection.m */; };
 		18CE64341CF7354500834C2B /* DailyDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CE64331CF7354500834C2B /* DailyDetail.swift */; };
@@ -129,10 +130,15 @@
 		18E259CB1CCA5F6000743FCA /* DropDownSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E259CA1CCA5F6000743FCA /* DropDownSelection.swift */; };
 		18E43FBA1CE0D1F000F9A382 /* PlaySound.m in Sources */ = {isa = PBXBuildFile; fileRef = 18E43FB91CE0D1F000F9A382 /* PlaySound.m */; };
 		18E43FBD1CE0E2E300F9A382 /* SoundResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E43FBC1CE0E2E300F9A382 /* SoundResource.swift */; };
+		18EDF2601D451E920054C86B /* selectedBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = 18EDF25F1D451E920054C86B /* selectedBackground.png */; };
 		18F7E4671C97B2EF007E3459 /* ReviewTableSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F7E4661C97B2EF007E3459 /* ReviewTableSource.swift */; };
 		18F7E46B1C97EE69007E3459 /* reviewTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F7E46A1C97EE69007E3459 /* reviewTableCell.swift */; };
 		18F7E46F1C97F454007E3459 /* DutyDisplayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F7E46E1C97F454007E3459 /* DutyDisplayView.swift */; };
 		18F7E4711C97FCC2007E3459 /* Resource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F7E4701C97FCC2007E3459 /* Resource.swift */; };
+		18FA0CB01D4655920046C4BC /* initActivityModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 18FA0CAF1D4655920046C4BC /* initActivityModel.m */; };
+		18FA0CB31D4657940046C4BC /* activityItemModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 18FA0CB21D4657940046C4BC /* activityItemModel.m */; };
+		18FA0CB61D4659480046C4BC /* raidDetailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 18FA0CB51D4659480046C4BC /* raidDetailModel.m */; };
+		18FA0CBA1D4659EB0046C4BC /* raidLevels.m in Sources */ = {isa = PBXBuildFile; fileRef = 18FA0CB91D4659EB0046C4BC /* raidLevels.m */; };
 		26FDEB84629869B329580E24 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FFF7E3FA5773E8C0E92800CE /* Pods.framework */; };
 		CD5EB3921D195EF300802FC4 /* RTAudioItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD5EB38E1D195EF300802FC4 /* RTAudioItem.swift */; };
 		CD5EB3931D195EF300802FC4 /* RTAudioManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD5EB38F1D195EF300802FC4 /* RTAudioManager.swift */; };
@@ -301,6 +307,7 @@
 		18BDB0441D2E8BA1000CC61D /* worldChatCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = worldChatCell.swift; path = SignUp/worldChatCell.swift; sourceTree = "<group>"; };
 		18BDB0461D2E8E7B000CC61D /* UILabel+Nova_UILabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+Nova_UILabel.m"; sourceTree = "<group>"; };
 		18BDB0471D2E8E7B000CC61D /* UILabel+Nova_UILabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILabel+Nova_UILabel.h"; sourceTree = "<group>"; };
+		18C0DCD41D47925F00777A9F /* time.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = time.ttf; sourceTree = "<group>"; };
 		18C44C4B1D1197560087EBF6 /* StartView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StartView.h; sourceTree = "<group>"; };
 		18C44C4C1D1197560087EBF6 /* StartView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StartView.m; sourceTree = "<group>"; };
 		18C6ABA81D3E748E00196CD2 /* TwoRollSelection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TwoRollSelection.m; sourceTree = "<group>"; };
@@ -320,10 +327,19 @@
 		18E43FB91CE0D1F000F9A382 /* PlaySound.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlaySound.m; sourceTree = "<group>"; };
 		18E43FBB1CE0D20500F9A382 /* PlaySound.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PlaySound.h; sourceTree = "<group>"; };
 		18E43FBC1CE0E2E300F9A382 /* SoundResource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SoundResource.swift; sourceTree = "<group>"; };
+		18EDF25F1D451E920054C86B /* selectedBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = selectedBackground.png; sourceTree = "<group>"; };
 		18F7E4661C97B2EF007E3459 /* ReviewTableSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReviewTableSource.swift; sourceTree = "<group>"; };
 		18F7E46A1C97EE69007E3459 /* reviewTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = reviewTableCell.swift; sourceTree = "<group>"; };
 		18F7E46E1C97F454007E3459 /* DutyDisplayView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DutyDisplayView.swift; sourceTree = "<group>"; };
 		18F7E4701C97FCC2007E3459 /* Resource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Resource.swift; sourceTree = "<group>"; };
+		18FA0CAE1D4655920046C4BC /* initActivityModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = initActivityModel.h; sourceTree = "<group>"; };
+		18FA0CAF1D4655920046C4BC /* initActivityModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = initActivityModel.m; sourceTree = "<group>"; };
+		18FA0CB11D4657940046C4BC /* activityItemModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = activityItemModel.h; sourceTree = "<group>"; };
+		18FA0CB21D4657940046C4BC /* activityItemModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = activityItemModel.m; sourceTree = "<group>"; };
+		18FA0CB41D4659480046C4BC /* raidDetailModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = raidDetailModel.h; sourceTree = "<group>"; };
+		18FA0CB51D4659480046C4BC /* raidDetailModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = raidDetailModel.m; sourceTree = "<group>"; };
+		18FA0CB81D4659EB0046C4BC /* raidLevels.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = raidLevels.h; sourceTree = "<group>"; };
+		18FA0CB91D4659EB0046C4BC /* raidLevels.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = raidLevels.m; sourceTree = "<group>"; };
 		35FFEC4388D0F109F79B4A61 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		A816835E20B22F39AE004838 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		CD5EB38E1D195EF300802FC4 /* RTAudioItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RTAudioItem.swift; sourceTree = "<group>"; };
@@ -375,7 +391,7 @@
 			name = Extension;
 			sourceTree = "<group>";
 		};
-		1801FC581D2920EF0083A37D /* framworks */ = {
+		1801FC581D2920EF0083A37D /* frameworks */ = {
 			isa = PBXGroup;
 			children = (
 				1801FC5E1D29241B0083A37D /* ApiResult.h */,
@@ -392,7 +408,7 @@
 				1801FC641D29241B0083A37D /* UIColorHelper.m */,
 				181000A71D3B54EF00A9E468 /* PrefixHeader.pch */,
 			);
-			name = framworks;
+			name = frameworks;
 			sourceTree = "<group>";
 		};
 		180E193A1C62E26C00987CE6 /* Chat */ = {
@@ -609,8 +625,6 @@
 		1899D6EB1C6484880094B65C /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				18C6ABA71D3E742700196CD2 /* controller */,
-				18BD4A321D1AC83400585D1D /* RCIMmodel */,
 				1892E8CF1CDE3BCD002AAEBF /* View */,
 			);
 			name = Common;
@@ -704,6 +718,7 @@
 		18A824421BEDCDA600084589 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				18FA0CBB1D465A420046C4BC /* initActivity */,
 				181000AB1D3B6D7400A9E468 /* ProfileModel.h */,
 				181000AC1D3B6D7400A9E468 /* ProfileModel.m */,
 			);
@@ -904,7 +919,7 @@
 		18AF8CA31BEDCCCB00539C0E /* Craft */ = {
 			isa = PBXGroup;
 			children = (
-				1801FC581D2920EF0083A37D /* framworks */,
+				1801FC581D2920EF0083A37D /* frameworks */,
 				1801FC4A1D28EBA40083A37D /* Extension */,
 				18E136231CFC73B10046A6B8 /* Images */,
 				180E19471C631FFD00987CE6 /* Protocol */,
@@ -919,6 +934,7 @@
 				18AF8CAD1BEDCCCB00539C0E /* LaunchScreen.storyboard */,
 				18AF8CB01BEDCCCB00539C0E /* Info.plist */,
 				18A824521BEDD86500084589 /* Craft-bridge-header.h */,
+				18C0DCD41D47925F00777A9F /* time.ttf */,
 			);
 			path = Craft;
 			sourceTree = "<group>";
@@ -958,13 +974,6 @@
 			name = Invite;
 			sourceTree = "<group>";
 		};
-		18BD4A321D1AC83400585D1D /* RCIMmodel */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = RCIMmodel;
-			sourceTree = "<group>";
-		};
 		18C44C481D11974B0087EBF6 /* start */ = {
 			isa = PBXGroup;
 			children = (
@@ -974,16 +983,10 @@
 			name = start;
 			sourceTree = "<group>";
 		};
-		18C6ABA71D3E742700196CD2 /* controller */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = controller;
-			sourceTree = "<group>";
-		};
 		18E136231CFC73B10046A6B8 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				18EDF25F1D451E920054C86B /* selectedBackground.png */,
 				188138D71D3286E1004953EC /* invite_friend.png */,
 				18D6CF641D2ABBED004DCF8A /* worldChatCompleteState.png */,
 				1824C61D1D2556AF009078B4 /* create_activity_main.png */,
@@ -1048,6 +1051,21 @@
 				18568B111D02A7E600D9446E /* ChatNavigationView.swift */,
 			);
 			name = View;
+			sourceTree = "<group>";
+		};
+		18FA0CBB1D465A420046C4BC /* initActivity */ = {
+			isa = PBXGroup;
+			children = (
+				18FA0CAE1D4655920046C4BC /* initActivityModel.h */,
+				18FA0CAF1D4655920046C4BC /* initActivityModel.m */,
+				18FA0CB11D4657940046C4BC /* activityItemModel.h */,
+				18FA0CB21D4657940046C4BC /* activityItemModel.m */,
+				18FA0CB41D4659480046C4BC /* raidDetailModel.h */,
+				18FA0CB51D4659480046C4BC /* raidDetailModel.m */,
+				18FA0CB81D4659EB0046C4BC /* raidLevels.h */,
+				18FA0CB91D4659EB0046C4BC /* raidLevels.m */,
+			);
+			name = initActivity;
 			sourceTree = "<group>";
 		};
 		583278BE556209F15C6BD56C /* Frameworks */ = {
@@ -1206,6 +1224,7 @@
 				18E1362D1CFC74AE0046A6B8 /* chatDetailBackground.png in Resources */,
 				18AF8CAF1BEDCCCB00539C0E /* LaunchScreen.storyboard in Resources */,
 				18E136311CFC752E0046A6B8 /* dailyBackground.png in Resources */,
+				18EDF2601D451E920054C86B /* selectedBackground.png in Resources */,
 				18E1C8151D17E3150080EBC1 /* welcome_video.mp4 in Resources */,
 				18E136251CFC73EE0046A6B8 /* MainBackGround.png in Resources */,
 				18605E2E1CE0913E007D8114 /* ReadyForBattle.mp3 in Resources */,
@@ -1219,6 +1238,7 @@
 				18E136271CFC74190046A6B8 /* blood.png in Resources */,
 				18610C4C1C12C88300B864F2 /* wow_main_theme.mp3 in Resources */,
 				18D6CF651D2ABBED004DCF8A /* worldChatCompleteState.png in Resources */,
+				18C0DCD51D47925F00777A9F /* time.ttf in Resources */,
 				188138D81D3286E1004953EC /* invite_friend.png in Resources */,
 				18605E321CE09147007D8114 /* clickevent.mp3 in Resources */,
 			);
@@ -1315,6 +1335,7 @@
 				18A8245C1BEDF62D00084589 /* ChooseSideCollectionSource.swift in Sources */,
 				1801FC6B1D29241B0083A37D /* RegexHelper.m in Sources */,
 				18A8244A1BEDCF0E00084589 /* UIAdapter.swift in Sources */,
+				18FA0CB61D4659480046C4BC /* raidDetailModel.m in Sources */,
 				1801FC521D2918450083A37D /* LoginService.m in Sources */,
 				1815183F1C958ACF00AA4F33 /* SearchActivityView.swift in Sources */,
 				1817585B1C4B8CB5008913DB /* CalendarView.swift in Sources */,
@@ -1333,6 +1354,7 @@
 				187464971C3FA3DD009E4041 /* SendNotification.swift in Sources */,
 				CD5EB3951D195EF300802FC4 /* RTAudio.swift in Sources */,
 				184867841BF851AE00016A4E /* Common.swift in Sources */,
+				18FA0CB01D4655920046C4BC /* initActivityModel.m in Sources */,
 				181758591C4B7D98008913DB /* CustomTabBarController.swift in Sources */,
 				18B16E7B1D3FBDA9006903D8 /* ChatMessageModel.m in Sources */,
 				1882E8851D05C567006F5803 /* ChatTextCell.swift in Sources */,
@@ -1341,6 +1363,7 @@
 				18B322691D33D17700FB93B6 /* ExtensionTableForInviteMain.swift in Sources */,
 				18568B0B1D02969000D9446E /* RCIMHelper.m in Sources */,
 				186D80D01CF9E322001A3EFE /* ExtensionForAnimation.swift in Sources */,
+				18FA0CB31D4657940046C4BC /* activityItemModel.m in Sources */,
 				18A8247C1BEE2B5D00084589 /* MainTabbar.swift in Sources */,
 				181518431C95907500AA4F33 /* ActivityTableCell.swift in Sources */,
 				1801FC6C1D29241B0083A37D /* UIColorHelper.m in Sources */,
@@ -1356,6 +1379,7 @@
 				1837D2441CFAF2FE00FFE3FD /* SliderNavEvents.swift in Sources */,
 				182647781C2E689C0078D4C2 /* ForgetPassword.swift in Sources */,
 				CDDB47A61D14320400F723F1 /* RTFuncs.swift in Sources */,
+				18FA0CBA1D4659EB0046C4BC /* raidLevels.m in Sources */,
 				1832D26B1D198A37000803FF /* WorldChat.swift in Sources */,
 				1892E8D11CDE3BED002AAEBF /* dutyView.swift in Sources */,
 				1801FC681D29241B0083A37D /* FMDBHelper.m in Sources */,
