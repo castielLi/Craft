@@ -280,13 +280,8 @@ class LoginController: ViewControllerBase,LoginServiceDelegate {
     
     
     func loginButtonClick(sender : UIButton){
-//        self.showProgress()
-//        self.service!.login(self.acccountTextfield!.text, password: self.passwordTextfield!.text)
-     
-        let chooseSideView = ChooseSide(nibName: nil, bundle: nil)
-        let dialogViewNav = UINavigationController(rootViewController: chooseSideView)
-        dialogViewNav.modalPresentationStyle = UIModalPresentationStyle.OverFullScreen
-        self.presentViewController(dialogViewNav, animated: true, completion: nil)
+        self.showProgress()
+        self.service!.login(self.acccountTextfield!.text, password: self.passwordTextfield!.text)
     }
     
     func didLogin(){

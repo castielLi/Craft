@@ -23,4 +23,6 @@ struct DBContract{
     static let createRaid = "CREATE TABLE IF NOT EXISTS Raid(apdName text,apdCode text,typeCode text)";
     
     static let createRaidLevel = "CREATE TABLE IF NOT EXISTS RaidLevel(aplName text,aplCode text,raidCode text)";
+    
+    static let createInitDataToken = "CREATE TABLE IF NOT EXISTS InitActivityToken(token text)";
 }

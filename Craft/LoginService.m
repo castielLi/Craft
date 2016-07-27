@@ -127,15 +127,30 @@
 
 -(void)GetInitActivitiesData{
     
-    NSDictionary * parameters = @{@"newToken":@"1111"};
+    NSString * token = @"";
+    NSDictionary * values = [_dbHelper DatabaseQueryWithParameters:@[@"token"] query:@"select token from InitActivityToken" values:nil];
+    if(values != nil && values.count > 0){
+        token = [values valueForKey:@"token"];
+    }
+    
+    NSDictionary * parameters = @{@"token":token};
     
     [_restService post:@"/api/activity/init_activity_create" parameters:parameters
               callback:^ (ApiResult *result, id response){
                   if(result.state){
                       if(_delegate != nil)
                       {
-                          
+                          if(result.data != nil){
                           initActivityModel * model = [initActivityModel mj_objectWithKeyValues:response];
+                          
+                          [_dbHelper DatabaseExecuteWithQuery:@"delete from InitActivityToken" values:nil];
+                          if ([_dbHelper DatabaseExecuteWithQuery:@"insert into InitActivityToken (token) values (?)" values:@[model.newkey]]){
+                              NSLog(@"insert InitActivityToken success");
+                          }else{
+                              NSLog(@"insert InitActivityToken failed");
+                          }
+                          
+                          
                           [_dbHelper DatabaseExecuteWithQuery:@"delete from RaidType" values:nil];
                           [_dbHelper DatabaseExecuteWithQuery:@"delete from createRaidLevel" values:nil];
                           [_dbHelper DatabaseExecuteWithQuery:@"delete from Raid" values:nil];
@@ -152,7 +167,7 @@
                                   if(raid.levels.count > 0){
                                       for(raidLevels* level in raid.levels){
                                       
-                                      if ([_dbHelper DatabaseExecuteWithQuery:@"insert into createRaidLevel (aplName,aplCode,raidCode) values (?,?,?)" values:@[level.aplName,level.aplCode,raid.apdCode]]){
+                                      if ([_dbHelper DatabaseExecuteWithQuery:@"insert into RaidLevel (aplName,aplCode,raidCode) values (?,?,?)" values:@[level.aplName,level.aplCode,raid.apdCode]]){
                                           NSLog(@"insert createRaidLevel success");
                                       }else{
                                           NSLog(@"insert createRaidLevel failed");
@@ -168,7 +183,8 @@
                                      NSLog(@"insert Raid failed");
                                  }
                               }
-                          }
+                           }
+                         }
                       }
                   }
               }];

@@ -12,6 +12,8 @@ class AddNewActivityController: ViewControllerBase ,UIGestureRecognizerDelegate{
     
     
     let searchAllType = "SELECT apName,apCode FROM RaidType"
+    let searchActivity = "SELECT apdName,apdCode FROM Raid where typeCode=?"
+    let searchLevel = "SELECT aplName,aplCode FROM RaidLevel where raidCode=?"
     
     var soundPlay :PlaySound?
     var activitiesView : UIImageView?
@@ -28,6 +30,10 @@ class AddNewActivityController: ViewControllerBase ,UIGestureRecognizerDelegate{
     var typeSelected : DropDownSelectView?
     var activitySelected : DropDownSelectView?
     var detailSelected : DropDownSelectView?
+    
+    var typeSelectedValue:String?
+    var activitySelectedValue : String?
+    var detailSelectedValue: String?
     
     
     var timeView : CreateActivityTime?
@@ -84,6 +90,18 @@ class AddNewActivityController: ViewControllerBase ,UIGestureRecognizerDelegate{
        
        typeArray = instance!.DatabaseSearchValuesWithParameters(["apName","apCode"], query: searchAllType, values: nil)
        self.closeProgress()
+    }
+    
+    func initActivityData(typeCode:String){
+        self.showProgress()
+        activityArray = instance!.DatabaseSearchValuesWithParameters(["apdName","apdCode"], query: searchActivity, values: [typeCode])
+        self.closeProgress()
+    }
+    
+    func initLevelData(raidCode:String){
+        self.showProgress()
+        levelArray = instance!.DatabaseSearchValuesWithParameters(["aplName","aplCode"], query: searchLevel, values: [raidCode])
+        self.closeProgress()
     }
     
     override func viewDidLoad() {
