@@ -49,7 +49,7 @@
     [_restService post:@"/api/activity/my_activity" parameters:parameters
              callback:^ (ApiResult *result, id response){
                  if(result.state){
-                     
+                     [self.delegate GetMyActivityDidFinish:result response:response];
                  }
              }];
 

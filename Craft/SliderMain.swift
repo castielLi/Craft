@@ -10,15 +10,20 @@ import UIKit
 
 class SliderMain: ViewControllerBase , MainMenuProtocol , UIGestureRecognizerDelegate{
 
+    var _zIndicator : Int = 1
+    
     var soundPlay :PlaySound?
     var calendar : CalendarView?
     var reviewTable : UITableView?
     var bloodBackGroundImage : UIImageView?
     var reviewTableSource : ReviewTableSource?
     var calenderBackground : UIImageView?
+    var moreDetailBackgournd : UIImageView?
     var dailyBackground : UIImageView?
     var originCellFrame : CGRect?
     var dailyDetail : DailyDetail?
+    var moreDailyDetai : DailyDetail?
+    var nextPage : UIButton?
     
     var showTimerSwipe : UISwipeGestureRecognizer?
     var showActivitySwipe : UISwipeGestureRecognizer?
@@ -103,13 +108,93 @@ class SliderMain: ViewControllerBase , MainMenuProtocol , UIGestureRecognizerDel
         self.view.addSubview(self.dailyDetail!)
         self.dailyDetail!.alpha = 0
         self.dailyDetail!.hidden = true
+        
+        self.moreDailyDetai = DailyDetail(frame: CGRectMake(UIAdapter.shared.transferWidth(30) , UIAdapter.shared.transferHeight(100), self.view.frame.width - UIAdapter.shared.transferWidth(60), UIAdapter.shared.transferHeight(290)))
+        self.view.addSubview(self.moreDailyDetai!)
+        self.moreDailyDetai!.alpha = 0
+        self.moreDailyDetai!.hidden = true
+        
+        self.nextPage = UIButton(frame: CGRectMake(UIAdapter.shared.transferWidth(90) , UIAdapter.shared.transferHeight(320), self.view.frame.width - UIAdapter.shared.transferWidth(180), UIAdapter.shared.transferHeight(27)))
+        self.nextPage!.setBackgroundImage(UIImage(named: "nextpage"), forState: UIControlState.Normal)
+        self.nextPage!.addTarget(self, action: "nextPageClick:", forControlEvents: UIControlEvents.TouchUpInside)
+        self.view.addSubview(self.nextPage!)
+        self.nextPage!.hidden = true
+
     }
+    
+    func nextPageClick(sender: UIButton){
+        _zIndicator = -_zIndicator;
+          var zPosition = CABasicAnimation()
+          zPosition.keyPath = "zPosition"
+          zPosition.fromValue = _zIndicator
+          zPosition.toValue = -_zIndicator
+          zPosition.duration = 0.8
+        
+        
+          var rotation = CAKeyframeAnimation()
+          rotation.keyPath = "transform.rotation"
+          rotation.values = [0,0.14,0]
+          rotation.duration = 0.8
+          rotation.timingFunctions = [ CAMediaTimingFunction(name:kCAMediaTimingFunctionEaseInEaseOut),CAMediaTimingFunction(name:kCAMediaTimingFunctionEaseInEaseOut) ]
+        
+          var position = CAKeyframeAnimation()
+          position.keyPath = "position"
+          position.values = [NSValue(CGPoint: CGPointZero),NSValue(CGPoint: CGPointMake(60, -20)),NSValue(CGPoint: CGPointZero)]
+          position.timingFunctions = [ CAMediaTimingFunction(name:kCAMediaTimingFunctionEaseInEaseOut),CAMediaTimingFunction(name:kCAMediaTimingFunctionEaseInEaseOut) ]
+          position.additive = true
+          position.duration = 0.8
+
+        var group = CAAnimationGroup()
+        group.animations = [zPosition,rotation,position]
+        group.duration = 0.8
+        
+        self.dailyDetail!.layer.zPosition = -CGFloat(_zIndicator)
+        self.dailyDetail!.layer.addAnimation(group, forKey: "shuffle")
+        self.calenderBackground!.layer.addAnimation(group, forKey: "shuffle")
+        
+        
+        //animation group for B
+        var zPosition1 = CABasicAnimation()
+        zPosition1.keyPath = "zPosition"
+        zPosition1.fromValue = -_zIndicator
+        zPosition1.toValue = _zIndicator
+        zPosition1.duration = 0.8
+      
+        
+        var rotation1 = CAKeyframeAnimation()
+        rotation1.keyPath = "transform.rotation"
+        rotation1.values = [0,-0.14,0]
+        rotation1.duration = 0.8
+        rotation1.timingFunctions = [ CAMediaTimingFunction(name:kCAMediaTimingFunctionEaseInEaseOut),CAMediaTimingFunction(name:kCAMediaTimingFunctionEaseInEaseOut) ]
+        
+        var position1 = CAKeyframeAnimation()
+        position1.keyPath = "position"
+        position1.values = [NSValue(CGPoint: CGPointZero),NSValue(CGPoint: CGPointMake(-60, -20)),NSValue(CGPoint: CGPointZero)]
+        position1.timingFunctions = [ CAMediaTimingFunction(name:kCAMediaTimingFunctionEaseInEaseOut),CAMediaTimingFunction(name:kCAMediaTimingFunctionEaseInEaseOut) ]
+        position1.additive = true
+        position1.duration = 0.8
+
+        
+        var group1 = CAAnimationGroup()
+        group1.animations = [zPosition1,rotation1,position1]
+        group1.duration = 0.8
+        
+        self.moreDailyDetai!.layer.zPosition = CGFloat(_zIndicator)
+        self.moreDailyDetai!.layer.addAnimation(group1, forKey: "shuffle")
+        self.moreDetailBackgournd!.layer.addAnimation(group1, forKey: "shuffle")
+    }
+    
     
     func setCalenderBackground(){
         calenderBackground = UIImageView(frame: CGRectMake(UIAdapter.shared.transferWidth(30) , UIAdapter.shared.transferHeight(100), self.view.frame.width - UIAdapter.shared.transferWidth(60), UIAdapter.shared.transferHeight(290)))
         let path = NSBundle.mainBundle().pathForResource("dailyBackground", ofType: "png")
         calenderBackground!.image = UIImage(contentsOfFile: path!)
         self.view.addSubview(self.calenderBackground!)
+        
+                moreDetailBackgournd = UIImageView(frame: CGRectMake(UIAdapter.shared.transferWidth(40), UIAdapter.shared.transferHeight(100), self.view.frame.width - UIAdapter.shared.transferWidth(80), UIAdapter.shared.transferHeight(200)))
+                moreDetailBackgournd!.image = UIImage(contentsOfFile: path!)
+                self.view.addSubview(self.moreDetailBackgournd!)
+                moreDetailBackgournd!.hidden = true
     }
     
     func setCalenderActivitiesReview(){
@@ -155,12 +240,16 @@ class SliderMain: ViewControllerBase , MainMenuProtocol , UIGestureRecognizerDel
         UIView.animateWithDuration(0.5, animations: {
             self.calenderBackground!.frame = CGRectMake(UIAdapter.shared.transferWidth(40), UIAdapter.shared.transferHeight(100), self.view.frame.width - UIAdapter.shared.transferWidth(80), UIAdapter.shared.transferHeight(200))
                 self.dailyDetail!.hidden = false
+                self.moreDailyDetai!.hidden = false
+                self.moreDetailBackgournd!.hidden = false
+                self.nextPage!.hidden = false
                 self.calendar!.hidden = true
             }) { (success) in
                
                 UIView.animateWithDuration(0.7, animations: {
                     
                     self.dailyDetail!.alpha = 1
+                    self.moreDailyDetai!.alpha = 1
                 })
         }
         
@@ -171,12 +260,16 @@ class SliderMain: ViewControllerBase , MainMenuProtocol , UIGestureRecognizerDel
         UIView.animateWithDuration(0.5, animations: {
             self.calenderBackground = UIImageView(frame: CGRectMake(UIAdapter.shared.transferWidth(30) , UIAdapter.shared.transferHeight(100), self.view.frame.width - UIAdapter.shared.transferWidth(60), UIAdapter.shared.transferHeight(290)))
             self.dailyDetail!.hidden = true
+            self.moreDailyDetai!.hidden = true
+            self.moreDetailBackgournd!.hidden = true
+            self.nextPage!.hidden = true
             self.calendar!.hidden = false
         }) { (success) in
             
             UIView.animateWithDuration(0.7, animations: {
                
                 self.dailyDetail!.alpha = 0
+                self.moreDailyDetai!.alpha = 0
             })
            
         }
