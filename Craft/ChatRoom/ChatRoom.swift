@@ -50,8 +50,9 @@ class ChatRoom: ViewControllerBase , UITextViewDelegate ,RCIMClientReceiveMessag
     var textViewInitialHeight: CGFloat = 0
     /// Message list for chat.
     var chatContentsList: [String] = [String]()
-
     var rtAudio = RTAudio.sharedInstance()
+    var chatType: String = "chatroom"
+    
     
     
     var dHeight : CGFloat?
@@ -313,7 +314,7 @@ class ChatRoom: ViewControllerBase , UITextViewDelegate ,RCIMClientReceiveMessag
         let message = RCTextMessage(content: self.enterForm!.enterTextView!.text)
         
         let model = ChatMessageModel()
-        model.type = "chatroom"
+        model.type = self.chatType
         model.userName = "test"
         model.userId = "1"
         
@@ -408,7 +409,7 @@ class ChatRoom: ViewControllerBase , UITextViewDelegate ,RCIMClientReceiveMessag
             let message = RCVoiceMessage(audio: self.rtAudio.soundData, duration: self.rtAudio.recordedDuration!)
             
             let model = ChatMessageModel()
-            model.type = "chatroom"
+            model.type = self.chatType
             model.userName = "test"
             model.userId = "1"
             
