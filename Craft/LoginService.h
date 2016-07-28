@@ -15,7 +15,10 @@
 
 @protocol LoginServiceDelegate <NSObject>
 
+@optional
 -(void)loginDidFinish:(ApiResult *)result response:(id)response;
+
+-(void)registerDidFinish:(ApiResult *)result response:(id)response;
 
 @end
 
@@ -30,6 +33,8 @@
 -(void)GetMyGroups;
 
 -(void)GetInitActivitiesData;
+
+-(void)registerNewAccount:(NSString*)account password:(NSString*)password battleAccount:(NSString*)battleAccount;
 
 @end
 

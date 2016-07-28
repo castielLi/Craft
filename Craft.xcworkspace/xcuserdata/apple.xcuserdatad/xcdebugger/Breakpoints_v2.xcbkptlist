@@ -9,13 +9,13 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Craft/LoginService.m"
-            timestampString = "491323431.231097"
+            filePath = "Craft/ChatRoom/ChatRoom.swift"
+            timestampString = "491377848.039955"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "144"
-            endingLineNumber = "144"
-            landmarkName = "-GetInitActivitiesData"
+            startingLineNumber = "222"
+            endingLineNumber = "222"
+            landmarkName = "setChatlistView()"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -26,12 +26,28 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Craft/LoginService.m"
-            timestampString = "491323431.627263"
+            timestampString = "491381456.766214"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "143"
-            endingLineNumber = "143"
-            landmarkName = "-GetInitActivitiesData"
+            startingLineNumber = "91"
+            endingLineNumber = "91"
+            landmarkName = "-GetMyFriends"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Craft/LoginService.m"
+            timestampString = "491381488.102627"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "94"
+            endingLineNumber = "94"
+            landmarkName = "-GetMyFriends"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

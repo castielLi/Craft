@@ -11,6 +11,7 @@
 #import <MJExtension/MJExtension.h>
 #import "ProfileModel.h"
 #import "initActivityModel.h"
+#import "friendListModel.h"
 
 
 @interface LoginService ()
@@ -88,14 +89,27 @@
     [_restService get:url parameters:nil
              callback:^ (ApiResult *result, id response){
                  if(result.state){
-                     
-                         //                         NSMutableArray * array = [[NSMutableArray alloc]init];
-                         //                         for(int i= 0; i<((NSArray *)response).count; i++){
-                         //                             [array addObject:((NSArray *)response)[i]];
-                         //                         }
-                         //
-                         //                         result.data = array;
-                     
+
+                   [_dbHelper DatabaseExecuteWithQuery:@"delete from FriendList" values:nil];
+                   for(int i= 0; i<((NSArray *)response).count; i++){
+                       friendListModel * model = [friendListModel mj_objectWithKeyValues:((NSArray *)response)[i]];
+                       if(model.friendName == nil){
+                          model.friendName = @"";
+                       }
+                       if(model.iconUrl == nil){
+                          model.iconUrl = @"";
+                       }
+                       if(model.battleAccount == nil){
+                           model.battleAccount = @"";
+                       }
+                       
+                       if ([_dbHelper DatabaseExecuteWithQuery:@"insert into FriendList (userId ,userName ,IconUrl , battleAccount ,markName ) values (?,?,?,?,?)" values:@[model.friendId,model.friendName,model.iconUrl,model.battleAccount,model.friendRemarkName]]){
+                           NSLog(@"insert FriendList success");
+                       }else{
+                           NSLog(@"insert FriendList failed");
+                       }
+
+                   }
                  }
              }];
     
@@ -189,6 +203,15 @@
                   }
               }];
 
+}
+
+-(void)registerNewAccount:(NSString*)account password:(NSString*)password battleAccount:(NSString*)battleAccount{
+    NSDictionary * parameters = @{@"userName":account,@"password":password,@"battle":battleAccount};
+    
+    [_restService post:@"/api/activity/init_activity_create" parameters:parameters
+              callback:^ (ApiResult *result, id response){
+                [_delegate registerDidFinish:result response:response];
+    }];
 }
 
 
