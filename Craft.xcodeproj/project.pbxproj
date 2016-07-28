@@ -118,6 +118,7 @@
 		18C6ABAA1D3E748E00196CD2 /* TwoRollSelection.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C6ABA81D3E748E00196CD2 /* TwoRollSelection.m */; };
 		18CE64341CF7354500834C2B /* DailyDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CE64331CF7354500834C2B /* DailyDetail.swift */; };
 		18CE64381CF74E2300834C2B /* dailyDutyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CE64371CF74E2300834C2B /* dailyDutyView.swift */; };
+		18D481501D49DD2800B86B70 /* friendListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D4814F1D49DD2800B86B70 /* friendListModel.m */; };
 		18D6CF651D2ABBED004DCF8A /* worldChatCompleteState.png in Resources */ = {isa = PBXBuildFile; fileRef = 18D6CF641D2ABBED004DCF8A /* worldChatCompleteState.png */; };
 		18E136251CFC73EE0046A6B8 /* MainBackGround.png in Resources */ = {isa = PBXBuildFile; fileRef = 18E136241CFC73EE0046A6B8 /* MainBackGround.png */; };
 		18E136271CFC74190046A6B8 /* blood.png in Resources */ = {isa = PBXBuildFile; fileRef = 18E136261CFC74190046A6B8 /* blood.png */; };
@@ -314,6 +315,8 @@
 		18C6ABA91D3E748E00196CD2 /* TwoRollSelection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TwoRollSelection.h; sourceTree = "<group>"; };
 		18CE64331CF7354500834C2B /* DailyDetail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DailyDetail.swift; path = SliderMain/DailyDetail.swift; sourceTree = "<group>"; };
 		18CE64371CF74E2300834C2B /* dailyDutyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = dailyDutyView.swift; path = Common/dailyDutyView.swift; sourceTree = "<group>"; };
+		18D4814E1D49DD2800B86B70 /* friendListModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = friendListModel.h; sourceTree = "<group>"; };
+		18D4814F1D49DD2800B86B70 /* friendListModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = friendListModel.m; sourceTree = "<group>"; };
 		18D6CF641D2ABBED004DCF8A /* worldChatCompleteState.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = worldChatCompleteState.png; sourceTree = "<group>"; };
 		18E136241CFC73EE0046A6B8 /* MainBackGround.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = MainBackGround.png; path = Assets.xcassets/BackGround/Main/MainBackGround.imageset/MainBackGround.png; sourceTree = "<group>"; };
 		18E136261CFC74190046A6B8 /* blood.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = blood.png; path = Assets.xcassets/BackGround/blood.imageset/blood.png; sourceTree = "<group>"; };
@@ -718,6 +721,7 @@
 		18A824421BEDCDA600084589 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				18D4814C1D49DCFE00B86B70 /* chat */,
 				18FA0CBB1D465A420046C4BC /* initActivity */,
 				181000AB1D3B6D7400A9E468 /* ProfileModel.h */,
 				181000AC1D3B6D7400A9E468 /* ProfileModel.m */,
@@ -981,6 +985,15 @@
 				18C44C4C1D1197560087EBF6 /* StartView.m */,
 			);
 			name = start;
+			sourceTree = "<group>";
+		};
+		18D4814C1D49DCFE00B86B70 /* chat */ = {
+			isa = PBXGroup;
+			children = (
+				18D4814E1D49DD2800B86B70 /* friendListModel.h */,
+				18D4814F1D49DD2800B86B70 /* friendListModel.m */,
+			);
+			name = chat;
 			sourceTree = "<group>";
 		};
 		18E136231CFC73B10046A6B8 /* Images */ = {
@@ -1330,6 +1343,7 @@
 				187464951C3F9FAC009E4041 /* LocalNotification.swift in Sources */,
 				183E8EF41CC666F600F1F291 /* UserSetting.swift in Sources */,
 				18A593D51C099BBB00458308 /* ActivityUserTableSource.swift in Sources */,
+				18D481501D49DD2800B86B70 /* friendListModel.m in Sources */,
 				182647791C2E689C0078D4C2 /* RegisterController.swift in Sources */,
 				1895CEFD1D324A830047C8F0 /* InviteTableCell.swift in Sources */,
 				18A8245C1BEDF62D00084589 /* ChooseSideCollectionSource.swift in Sources */,

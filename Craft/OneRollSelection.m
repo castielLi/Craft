@@ -16,6 +16,8 @@
     UITapGestureRecognizer * blankTap;
     UILabel * splitLabel;
     UILabel * buttonsplitLabel;
+    UITapGestureRecognizer * tap;
+    UILabel * displaylabel;
 }
 @end
 
@@ -48,12 +50,18 @@
     mainView.layer.masksToBounds = true;
     [[self view]addSubview:mainView];
     
+   
+    
     
     picker = [[UIPickerView alloc]initWithFrame:CGRectMake((self.view.frame.size.width - 240) / 2, (self.view.frame.size.height - 240)/2, 240, 240)];
     [[self view]addSubview:picker];
     picker.delegate = self;
     picker.dataSource = self;
     picker.showsSelectionIndicator = NO;
+    
+    tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(selected:)];
+    tap.numberOfTapsRequired = 1;
+    [mainView addGestureRecognizer:tap];
     
     
 //    splitLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 280, 300, 1)];
@@ -138,13 +146,24 @@
 
 -(UIView *)pickerView:(UIPickerView *)pickerView viewForRow:(NSInteger)row forComponent:(NSInteger)component reusingView:(UIView *)view{
     
-    UILabel * label = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 240, 30)];
-    label.textColor = [UIColor whiteColor];
-    label.text = [_dataArray[row] valueForKey:self.displayKey];
-    label.textAlignment = NSTextAlignmentCenter;
-    label.font = [UIFont systemFontOfSize:25];
-    return label;
+    displaylabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 240, 30)];
+    displaylabel.textColor = [UIColor whiteColor];
+    displaylabel.text = [_dataArray[row] valueForKey:self.displayKey];
+    displaylabel.textAlignment = NSTextAlignmentCenter;
+    displaylabel.tag = row + 1;
+    displaylabel.font = [UIFont systemFontOfSize:25];
+    return displaylabel;
     
+}
+
+-(void)selected:(UITapGestureRecognizer *)sender{
+    NSLog(@"click me");
+}
+
+-(void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component{
+    self.value = [_dataArray[row] valueForKey:self.valueKey];
+    self.key = [_dataArray[row] valueForKey:self.displayKey];
+    self.Block();
 }
 
 

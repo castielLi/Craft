@@ -11,6 +11,7 @@
 #import <MJExtension/MJExtension.h>
 #import "ProfileModel.h"
 #import "initActivityModel.h"
+#import "friendListModel.h"
 
 
 @interface LoginService ()
@@ -88,14 +89,27 @@
     [_restService get:url parameters:nil
              callback:^ (ApiResult *result, id response){
                  if(result.state){
-                     
-                         //                         NSMutableArray * array = [[NSMutableArray alloc]init];
-                         //                         for(int i= 0; i<((NSArray *)response).count; i++){
-                         //                             [array addObject:((NSArray *)response)[i]];
-                         //                         }
-                         //
-                         //                         result.data = array;
-                     
+
+                   [_dbHelper DatabaseExecuteWithQuery:@"delete from FriendList" values:nil];
+                   for(int i= 0; i<((NSArray *)response).count; i++){
+                       friendListModel * model = [friendListModel mj_objectWithKeyValues:((NSArray *)response)[i]];
+                       if(model.friendName == nil){
+                          model.friendName = @"";
+                       }
+                       if(model.iconUrl == nil){
+                          model.iconUrl = @"";
+                       }
+                       if(model.battleAccount == nil){
+                           model.battleAccount = @"";
+                       }
+                       
+                       if ([_dbHelper DatabaseExecuteWithQuery:@"insert into FriendList (userId ,userName ,IconUrl , battleAccount ,markName ) values (?,?,?,?,?)" values:@[model.friendId,model.friendName,model.iconUrl,model.battleAccount,model.friendRemarkName]]){
+                           NSLog(@"insert FriendList success");
+                       }else{
+                           NSLog(@"insert FriendList failed");
+                       }
+
+                   }
                  }
              }];
     
@@ -127,15 +141,30 @@
 
 -(void)GetInitActivitiesData{
     
-    NSDictionary * parameters = @{@"newToken":@"1111"};
+    NSString * token = @"";
+    NSDictionary * values = [_dbHelper DatabaseQueryWithParameters:@[@"token"] query:@"select token from InitActivityToken" values:nil];
+    if(values != nil && values.count > 0){
+        token = [values valueForKey:@"token"];
+    }
+    
+    NSDictionary * parameters = @{@"token":token};
     
     [_restService post:@"/api/activity/init_activity_create" parameters:parameters
               callback:^ (ApiResult *result, id response){
                   if(result.state){
                       if(_delegate != nil)
                       {
-                          
+                          if(result.data != nil){
                           initActivityModel * model = [initActivityModel mj_objectWithKeyValues:response];
+                          
+                          [_dbHelper DatabaseExecuteWithQuery:@"delete from InitActivityToken" values:nil];
+                          if ([_dbHelper DatabaseExecuteWithQuery:@"insert into InitActivityToken (token) values (?)" values:@[model.newkey]]){
+                              NSLog(@"insert InitActivityToken success");
+                          }else{
+                              NSLog(@"insert InitActivityToken failed");
+                          }
+                          
+                          
                           [_dbHelper DatabaseExecuteWithQuery:@"delete from RaidType" values:nil];
                           [_dbHelper DatabaseExecuteWithQuery:@"delete from createRaidLevel" values:nil];
                           [_dbHelper DatabaseExecuteWithQuery:@"delete from Raid" values:nil];
@@ -152,7 +181,7 @@
                                   if(raid.levels.count > 0){
                                       for(raidLevels* level in raid.levels){
                                       
-                                      if ([_dbHelper DatabaseExecuteWithQuery:@"insert into createRaidLevel (aplName,aplCode,raidCode) values (?,?,?)" values:@[level.aplName,level.aplCode,raid.apdCode]]){
+                                      if ([_dbHelper DatabaseExecuteWithQuery:@"insert into RaidLevel (aplName,aplCode,raidCode) values (?,?,?)" values:@[level.aplName,level.aplCode,raid.apdCode]]){
                                           NSLog(@"insert createRaidLevel success");
                                       }else{
                                           NSLog(@"insert createRaidLevel failed");
@@ -168,11 +197,21 @@
                                      NSLog(@"insert Raid failed");
                                  }
                               }
-                          }
+                           }
+                         }
                       }
                   }
               }];
 
+}
+
+-(void)registerNewAccount:(NSString*)account password:(NSString*)password battleAccount:(NSString*)battleAccount{
+    NSDictionary * parameters = @{@"userName":account,@"password":password,@"battle":battleAccount};
+    
+    [_restService post:@"/api/activity/init_activity_create" parameters:parameters
+              callback:^ (ApiResult *result, id response){
+                [_delegate registerDidFinish:result response:response];
+    }];
 }
 
 
