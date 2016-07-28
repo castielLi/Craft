@@ -13,10 +13,11 @@ class ChooseSide: ViewControllerBase {
     
     var sideCollection : UICollectionView?
     var source : ChooseSideCollectionSource?
+    var fmdbHelper : FMDBHelper?
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-        
+        fmdbHelper = FMDBHelper.sharedData() as! FMDBHelper
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -42,7 +43,7 @@ class ChooseSide: ViewControllerBase {
     override func onLoad() {
         self.source = ChooseSideCollectionSource()
         self.source!._onRowSelected = self.sideSelected
-        source!._itemsImages = ["tribe","alliance"]
+        source!._itemsImages = ["alliance","tribe"]
         self.sideCollection!.dataSource = self.source!
         self.sideCollection!.delegate = self.source!
         self.sideCollection!.reloadData()
@@ -64,6 +65,14 @@ class ChooseSide: ViewControllerBase {
     }
     
     func sideSelected(side : Int){
+        
+        fmdbHelper!.DatabaseExecuteWithQuery("delete from Faction", values: nil)
+        
+        if(fmdbHelper!.DatabaseExecuteWithQuery("insert into Faction(faction) values(?)", values: [side])){
+            print("insert faction success")
+        }else{
+          print("insert faction failed")
+        }
         
         self.dismissViewControllerAnimated(false) { () -> Void in
              NSNotificationCenter.defaultCenter().postNotificationName("AfterChooseSide", object: self)

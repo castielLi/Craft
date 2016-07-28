@@ -51,7 +51,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         RestService.configBaseUrl("http://162.243.241.80:8080/wow")
         RestService.setNeedAuthentication(false)
 
-        FMDBHelper.configDatabaseWithName("craft", tableQueries: [DBContract.notificationTable,DBContract.createAccountTable,DBContract.createIconTable,DBContract.ProfileTable,DBContract.createRaidTypeName,DBContract.createRaid,DBContract.createRaidLevel,DBContract.createInitDataToken,DBContract.createFriendTable])
+        FMDBHelper.configDatabaseWithName("craft", tableQueries: [DBContract.notificationTable,DBContract.createAccountTable,DBContract.createIconTable,DBContract.ProfileTable,DBContract.createRaidTypeName,DBContract.createRaid,DBContract.createRaidLevel,DBContract.createInitDataToken,DBContract.createFriendTable,
+            DBContract.createFaction])
         instance = FMDBHelper.sharedData() as? FMDatabase
         
         RCIM.sharedRCIM().initWithAppKey("pkfcgjstfdgr8")

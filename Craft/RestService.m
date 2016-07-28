@@ -115,6 +115,7 @@ static NSDictionary * keepKeyValues;
     [manager.requestSerializer setTimeoutInterval:20.0];
     manager.responseSerializer = [AFJSONResponseSerializer alloc];
 //    manager.requestSerializer = [AFJSONRequestSerializer alloc];
+    
                       
                       AFJSONRequestSerializer *requestSerializer = [AFJSONRequestSerializer serializer];
                       

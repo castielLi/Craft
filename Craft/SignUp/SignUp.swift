@@ -9,8 +9,10 @@
 import UIKit
 import AVFoundation
 
-class SignUp: ViewControllerBase ,RCIMClientReceiveMessageDelegate,UITextViewDelegate{
+class SignUp: ViewControllerBase ,RCIMClientReceiveMessageDelegate,UITextViewDelegate,SignUpServiceDelegate{
 
+    var service : SignUpService?
+    
     var soundPlay :PlaySound?
     var firstTime : Bool = true
     var backGroundImage : UIImageView?
@@ -54,6 +56,17 @@ class SignUp: ViewControllerBase ,RCIMClientReceiveMessageDelegate,UITextViewDel
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
         soundPlay = PlaySound.sharedData()
         RCIMClient.sharedRCIMClient().setReceiveMessageDelegate(self, object: nil)
+        service = SignUpService()
+        service!.delegate = self
+    }
+    
+    func GetMyActivityDidFinish(result: ApiResult!, response: AnyObject!) {
+        self.closeProgress()
+        if(result.state){
+        
+        }else{
+           MsgBoxHelper.show("", message: result.message!)
+        }
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -64,6 +77,7 @@ class SignUp: ViewControllerBase ,RCIMClientReceiveMessageDelegate,UITextViewDel
         super.viewWillAppear(animated)
          self.tabBarController!.tabBar.hidden = true
         
+        if !self.firstTime{
         let unreadCount = RCIMClient.sharedRCIMClient().getTotalUnreadCount()
         
         let nc = NSNotificationCenter.defaultCenter()
@@ -103,10 +117,21 @@ class SignUp: ViewControllerBase ,RCIMClientReceiveMessageDelegate,UITextViewDel
         self.registerGesture()
 
         self.joinCurrentChatRoom()
+        
+        
+        
+        
+        //通过http获取数据
+        self.showProgress()
+        self.service!.getAllMyActivities()
+        }else{
+           self.firstTime = false
+        }
+        
+        
     }
     
     func showCurrentView(sender : NSNotification){
-        if self.firstTime {
             self.tabBarController?.tabBar.hidden = true
 //            self.navigationController?.setNavigationBarHidden(true, animated: false)
             UIView.animateWithDuration(1, animations: { () -> Void in
@@ -119,8 +144,6 @@ class SignUp: ViewControllerBase ,RCIMClientReceiveMessageDelegate,UITextViewDel
                     self.tabBarController?.tabBar.hidden = true
 //                    self.navigationController?.setNavigationBarHidden(false, animated: true) 
             })
-        }
-        self.firstTime = false
     }
 
 
