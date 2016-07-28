@@ -135,6 +135,12 @@ extension ChatRoom : UITableViewDelegate,UITableViewDataSource{
            }
         }
         
+        
+        // RT Start
+        // Juedge the type of current chatting.
+        guard tableView.tag == 11 else { return }
+        let cell = tableView.cellForRowAtIndexPath(indexPath) as! TableViewBaseCell
+        self.chatType = cell.chatType
     }
     
 }
