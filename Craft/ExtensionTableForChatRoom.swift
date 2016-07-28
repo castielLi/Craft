@@ -14,7 +14,7 @@ extension ChatRoom : UITableViewDelegate,UITableViewDataSource{
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if tableView.tag == 11{
             if self.selectedIndex == 1{
-               return conversationList!.count
+               return chatListArray!.count
             }else if selectedIndex == 2{
                return 10
             }
@@ -32,6 +32,15 @@ extension ChatRoom : UITableViewDelegate,UITableViewDataSource{
             if(cell == nil) {
                 
                 cell = ChatListCell(style: UITableViewCellStyle.Default, reuseIdentifier: "chatListCell", cellHeight: UIAdapter.shared.transferHeight(50),cellWidth: self.chatListView!.frame.width )
+                
+                let userId = self.chatListArray![indexPath.row].valueForKey("userId") as! String
+                
+                let chatContentArray = RCIMClient.sharedRCIMClient().getLatestMessages(RCConversationType.ConversationType_PRIVATE, targetId: userId, count: 1)
+
+                if(chatContentArray.count>0){
+                   let content = chatContentArray[0].valueForKey("content")!.valueForKey("content")!
+                   print(content)
+                }
                 
                 cell!.setTopLineHide()
                 cell!.setBottomLineHide()

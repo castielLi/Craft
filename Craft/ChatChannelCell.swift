@@ -19,7 +19,7 @@ class ChatChannelCell: TableViewBaseCell {
     
     init(style: UITableViewCellStyle, reuseIdentifier: String?, cellHeight: CGFloat, cellWidth: CGFloat) {
         super.init(style: style, reuseIdentifier: reuseIdentifier, cellHeight: cellHeight)
-        self.backgroundColor = nil
+        self.backgroundColor = UIColor.clearColor()
         
         backgroundImage = UIImageView(frame: CGRect(x: 0, y: 0, width: frame.width, height: cellHeight))
         backgroundImage!.image = UIImage(named: "activityItem")
