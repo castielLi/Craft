@@ -10,11 +10,10 @@ import UIKit
 
 class ChatRoom: ViewControllerBase , UITextViewDelegate ,RCIMClientReceiveMessageDelegate{
 
+    static let searchInfoInFriendList = "Select userId,userName,IconUrl, battleAccount,markName FROM FriendList where userId=?"
     
     var data: NSMutableArray?
-    
     var soundPlay :PlaySound?
-    
     var backgroundImage : UIImageView?
     var selectDialog : UIImageView?
     weak var sign : SignUp?
@@ -57,6 +56,8 @@ class ChatRoom: ViewControllerBase , UITextViewDelegate ,RCIMClientReceiveMessag
     
     var dHeight : CGFloat?
     var firstTimeEnter : Bool = true;
+    var chatListArray : NSMutableArray?
+    var _fmdbHelper : FMDBHelper?
     
     
     var dataChannels: [Dictionary<String, AnyObject>] = [
@@ -79,11 +80,8 @@ class ChatRoom: ViewControllerBase , UITextViewDelegate ,RCIMClientReceiveMessag
         selectedIndex = 1
         RCIMClient.sharedRCIMClient().setReceiveMessageDelegate(self, object: nil)
         self.data = NSMutableArray()
-        
-//        let message1 = ChatTextMessage(ownerType: .Mine, messageType: .Text, portrait: UIImage(contentsOfFile: NSBundle.mainBundle().pathForResource("10", ofType: "jpeg")!)!)
-//        message1.text = "This is a long text for testing attributedText, here i will insert some emojis : 🙂😎😚😶😝. Is this will be correct?"
-//        
-//        self.data!.addObject(message1)
+        _fmdbHelper = FMDBHelper.sharedData() as! FMDBHelper
+        chatListArray = NSMutableArray()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -129,6 +127,26 @@ class ChatRoom: ViewControllerBase , UITextViewDelegate ,RCIMClientReceiveMessag
         animation.fromValue = self.view.frame.width
         
         self.selectDialog!.layer.addAnimation(animation, forKey: nil)
+        
+        
+        //初始化聊天记录表数据
+        self.initDataForChatList()
+        
+    }
+    
+    
+    func initDataForChatList(){
+        self.conversationList = RCIMHelper.RetrunConversationList()
+        print(conversationList)
+        self.showProgress()
+        
+        self.chatListArray = self.getChatListInfoByRCMArray(self.conversationList!)
+        
+        self.closeProgress()
+        chatListView!.delegate = self
+        chatListView!.dataSource = self
+        chatListView!.reloadData()
+        
     }
     
     override func viewDidLoad() {
@@ -217,15 +235,10 @@ class ChatRoom: ViewControllerBase , UITextViewDelegate ,RCIMClientReceiveMessag
     
     // init chat table
     func setChatlistView(){
-        
-        self.conversationList = RCIMHelper.RetrunConversationList()
-        
-        print(conversationList)
-        
+
         chatListView = UITableView(frame: CGRect(x: self.view.frame.width - UIAdapter.shared.transferWidth(301)  , y: UIAdapter.shared.transferHeight(49), width: UIAdapter.shared.transferWidth(254), height: UIAdapter.shared.transferHeight(277)))
         chatListView!.backgroundColor = UIColor.clearColor()
-        chatListView!.delegate = self
-        chatListView!.dataSource = self
+
         chatListView!.tag = 11
         chatListView!.showsVerticalScrollIndicator = false
         chatListView!.showsHorizontalScrollIndicator = false

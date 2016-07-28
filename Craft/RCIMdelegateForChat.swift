@@ -9,7 +9,7 @@
 import Foundation
 
 extension ChatRoom{
-  
+    
     func onReceived(message: RCMessage!, left nLeft: Int32, object: AnyObject!) {
         
         if message.content.isMemberOfClass(RCTextMessage.classForCoder()){
@@ -67,4 +67,17 @@ extension ChatRoom{
         }
     }
     
+    
+    func getChatListInfoByRCMArray(RCMarray : NSArray)->NSMutableArray{
+        let array = NSMutableArray()
+        for item in RCMarray{
+            let userId = item.valueForKey("senderUserId") as! String
+            let user = _fmdbHelper!.DatabaseQueryWithParameters(["userId","userName","IconUrl","battleAccount","markName"], query: ChatRoom.searchInfoInFriendList, values: [userId])
+            
+            if (user != nil && user.count > 0){
+               array.addObject(user)
+            }
+        }
+        return array
+    }
 }
