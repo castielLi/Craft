@@ -27,31 +27,45 @@ extension ChatRoom : UITableViewDelegate,UITableViewDataSource{
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         if tableView.tag == 11{
             
-            if selectedIndex == 1 || selectedIndex == 2{
+            if selectedIndex == 1{
             var cell = tableView.dequeueReusableCellWithIdentifier("chatListCell") as? ChatListCell
             if(cell == nil) {
                 
                 cell = ChatListCell(style: UITableViewCellStyle.Default, reuseIdentifier: "chatListCell", cellHeight: UIAdapter.shared.transferHeight(50),cellWidth: self.chatListView!.frame.width )
                 
-                let userId = self.chatListArray![indexPath.row].valueForKey("userId") as! String
-                
-                let chatContentArray = RCIMClient.sharedRCIMClient().getLatestMessages(RCConversationType.ConversationType_PRIVATE, targetId: userId, count: 1)
-
-                if(chatContentArray.count>0){
-                   let content = chatContentArray[0].valueForKey("content")!.valueForKey("content")!
-                   print(content)
-                }
                 
                 cell!.setTopLineHide()
                 cell!.setBottomLineHide()
                 
             }
-            
+                
+                let userId = self.chatListArray![indexPath.row].valueForKey("userId") as! String
+                
+                let chatContentArray = RCIMClient.sharedRCIMClient().getLatestMessages(RCConversationType.ConversationType_PRIVATE, targetId: userId, count: 1)
+                
+                if(chatContentArray.count>0){
+                    let content = chatContentArray[0].valueForKey("content")!.valueForKey("content")!
+                    print(content)
+                }
+
             
             cell!.selectionStyle = UITableViewCellSelectionStyle.None
             return cell!
             
-            }else{
+            }else if selectedIndex == 2{
+                
+                var cell = tableView.dequeueReusableCellWithIdentifier("chatListCell") as? ChatListCell
+                if(cell == nil) {
+                    
+                    cell = ChatListCell(style: UITableViewCellStyle.Default, reuseIdentifier: "chatListCell", cellHeight: UIAdapter.shared.transferHeight(50),cellWidth: self.chatListView!.frame.width )
+                    
+                    cell!.setTopLineHide()
+                    cell!.setBottomLineHide()
+                    
+                }
+                return cell!
+            }else
+            {
                 var cell = tableView.dequeueReusableCellWithIdentifier("channelCell") as? ChatChannelCell
                 if cell == nil {
                     
