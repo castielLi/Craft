@@ -12,7 +12,6 @@ class MyActivities: ViewControllerBase ,UIGestureRecognizerDelegate , UITableVie
     
     
     var activitiesView : UIImageView?
-    var cancelView : UIImageView?
     var button : UIButton?
     var blankTap : UITapGestureRecognizer?
     
@@ -53,19 +52,6 @@ class MyActivities: ViewControllerBase ,UIGestureRecognizerDelegate , UITableVie
 
         self.activitiesView!.layer.addAnimation(animation, forKey: nil)
         
-        
-        let cancelAnimation = CASpringAnimation(keyPath: "position.x")
-        cancelAnimation.damping = 12
-        cancelAnimation.stiffness = 100
-        cancelAnimation.mass = 1
-        cancelAnimation.initialVelocity = 0
-        cancelAnimation.duration = animation.settlingDuration
-        cancelAnimation.removedOnCompletion = false
-        cancelAnimation.timingFunction = CAMediaTimingFunction( name: kCAMediaTimingFunctionEaseOut)
-        cancelAnimation.fromValue = UIAdapter.shared.transferWidth(150) + UIScreen.mainScreen().bounds.width
-
-        self.cancelView!.layer.addAnimation(cancelAnimation, forKey: nil)
-        
     }
 
     override func viewDidLoad() {
@@ -79,9 +65,7 @@ class MyActivities: ViewControllerBase ,UIGestureRecognizerDelegate , UITableVie
     override func initView() {
         setActivitiesView()
         setScroll()
-        setBlaBlaControls()
         setRaidMember()
-        setCancelView()
         setTapForBackgroundView()
     }
    
@@ -97,7 +81,6 @@ class MyActivities: ViewControllerBase ,UIGestureRecognizerDelegate , UITableVie
     
         UIView.animateWithDuration(0.4, delay: 0, options: UIViewAnimationOptions.CurveEaseInOut, animations: { () -> Void in
             self.activitiesView!.frame.origin.x = -UIAdapter.shared.transferWidth(300)
-            self.cancelView!.frame.origin.x = UIAdapter.shared.transferWidth(280) + UIScreen.mainScreen().bounds.width
             }) { (success) -> Void in
                 if success {
                    self.dismissViewControllerAnimated(false, completion: { () -> Void in
@@ -113,41 +96,18 @@ class MyActivities: ViewControllerBase ,UIGestureRecognizerDelegate , UITableVie
         
         self.scroll = UIScrollView(frame: CGRect(x: 0, y: 0, width: UIAdapter.shared.transferWidth(240), height: UIAdapter.shared.transferHeight(300)))
         self.scroll!.contentSize = CGSize(width: UIAdapter.shared.transferWidth(240) , height: UIAdapter.shared.transferHeight(500))
-        self.scroll?.backgroundColor = UIColor.brownColor()
+        self.scroll!.showsVerticalScrollIndicator = false
+        self.scroll!.showsHorizontalScrollIndicator = false
         self.activitiesView!.addSubview(self.scroll!)
         
         self.scroll?.mas_makeConstraints{ make in
-           make.top.equalTo()(self.activitiesView!.mas_top).with().offset()(UIAdapter.shared.transferHeight(25))
-           make.bottom.equalTo()(self.activitiesView!).with().offset()( -UIAdapter.shared.transferHeight(15) )
-           make.left.equalTo()(self.activitiesView!).with().offset()(UIAdapter.shared.transferWidth(20))
-           make.right.equalTo()(self.activitiesView!).with().offset()(UIAdapter.shared.transferWidth(-20))
+           make.top.equalTo()(self.activitiesView!.mas_top).with().offset()(UIAdapter.shared.transferHeight(32))
+           make.bottom.equalTo()(self.activitiesView!).with().offset()( -UIAdapter.shared.transferHeight(51) )
+           make.left.equalTo()(self.activitiesView!).with().offset()(UIAdapter.shared.transferWidth(19))
+           make.right.equalTo()(self.activitiesView!).with().offset()(UIAdapter.shared.transferWidth(-19))
         }
     }
-    
-    func setBlaBlaControls(){
-        self.raidDropdown = UIButton(frame: CGRect(x: 0, y: 0, width: 100, height: 50))
-        self.raidDropdown!.backgroundColor = UIColor.blackColor()
-        self.raidDropdown!.setTitle("副本", forState: UIControlState.Normal)
-        self.raidDropdown?.addTarget(self, action: "raidDropDown:", forControlEvents: UIControlEvents.TouchUpInside)
-        self.scroll!.addSubview(self.raidDropdown!)
-        
-        self.raidTitle = UITextView(frame: CGRect(x: 0, y: 60, width: 200, height: 50))
-        self.raidTitle!.backgroundColor = UIColor.blackColor()
-        self.scroll!.addSubview(self.raidTitle!)
-        
-        self.raidContent = UITextView(frame: CGRect(x: 0, y: 120, width: 200, height: 100))
-        self.raidContent!.backgroundColor = UIColor.blackColor()
-        self.scroll!.addSubview(self.raidContent!)
 
-    }
-    
-    func raidDropDown(sender : UIButton){
-        
-        let dropDown = DropDownSelection(nibName: nil, bundle: nil)
-        dropDown.modalPresentationStyle = UIModalPresentationStyle.OverCurrentContext
-
-        self.presentViewController(dropDown, animated: true, completion: nil)
-    }
     
     
     func setRaidMember(){
@@ -161,41 +121,16 @@ class MyActivities: ViewControllerBase ,UIGestureRecognizerDelegate , UITableVie
     }
     
     func setActivitiesView(){
-        self.activitiesView = UIImageView(frame: CGRect(x: 0, y: 64 + UIAdapter.shared.transferHeight(15), width: UIAdapter.shared.transferWidth(280), height: UIAdapter.shared.transferHeight(340)))
+        let path = NSBundle.mainBundle().pathForResource("activityDetailBackground", ofType: "png")
+        
+        self.activitiesView = UIImageView(frame: CGRect(x: 0, y: 64 + UIAdapter.shared.transferHeight(15), width: UIAdapter.shared.transferWidth(280), height: UIAdapter.shared.transferHeight(380)))
         self.activitiesView!.userInteractionEnabled = true
-        self.activitiesView!.backgroundColor = UIColor(red: 30/255, green: 69/255, blue: 102/255, alpha: 1)
-        self.activitiesView!.alpha = 0.7
+        self.activitiesView!.image = UIImage(contentsOfFile: path!)
         self.activitiesView!.layer.cornerRadius = 5
-        self.activitiesView!.layer.borderWidth = 2
-        self.activitiesView!.layer.borderColor = UIColor.grayColor().CGColor
         self.activitiesView!.layer.masksToBounds = true
         self.view.addSubview(self.activitiesView!)
-        
-        
-
-
     }
-    
-    func setCancelView(){
-        self.cancelView = UIImageView(frame: CGRect(x: 0, y: 64 + UIAdapter.shared.transferHeight(15), width: UIAdapter.shared.transferWidth(300), height: UIAdapter.shared.transferHeight(400)))
-        self.cancelView!.userInteractionEnabled = true
-        self.cancelView!.backgroundColor = UIColor(red: 30/255, green: 69/255, blue: 102/255, alpha: 1)
-        self.cancelView!.layer.cornerRadius = 5
-        self.cancelView!.layer.borderWidth = 2
-        self.cancelView!.layer.borderColor = UIColor.grayColor().CGColor
-        self.cancelView!.layer.masksToBounds = true
-        self.view.addSubview(self.cancelView!)
-        
-        self.cancelView!.hidden = true
-        
-        self.cancelView!.mas_makeConstraints{ make in
-           make.right.equalTo()(self.view)
-           make.left.equalTo()(self.view.mas_right).with().offset()(UIAdapter.shared.transferWidth(-100))
-           make.top.equalTo()(self.activitiesView!.mas_bottom).with().offset()(UIAdapter.shared.transferHeight(10))
-           make.bottom.equalTo()(self.activitiesView!.mas_bottom).with().offset()(UIAdapter.shared.transferHeight(35))
-        }
-        
-    }
+
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -233,32 +168,6 @@ class MyActivities: ViewControllerBase ,UIGestureRecognizerDelegate , UITableVie
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return UIAdapter.shared.transferHeight(50)
     }
-    
-    
-    
-    func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
-        
-        var rotation = CATransform3DMakeRotation( CGFloat(0.3 * M_PI) , 0.0, 0.5, 0.0);
-        rotation.m34 = 1.0 / -600;
-        
-        
-        //2. Define the initial state (Before the animation)
-//        cell.layer.shadowColor = UIColor.blackColor().CGColor
-//        cell.layer.shadowOffset = CGSizeMake(10, 10);
-        
-        cell.layer.transform = rotation;
-        cell.layer.anchorPoint = CGPointMake(0.5, 0.5);
-        
-        
-        UIView.beginAnimations("rotation", context: nil)
-        UIView.setAnimationDuration(0.8)
-        //3. Define the final state (After the animation) and commit the animation
-        cell.layer.transform = CATransform3DIdentity;
-        cell.alpha = 1;
-        cell.layer.shadowOffset = CGSizeMake(0, 0);
-        UIView.commitAnimations()
-    }
-    
     
     /*
     // MARK: - Navigation

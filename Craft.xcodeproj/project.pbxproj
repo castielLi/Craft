@@ -61,7 +61,6 @@
 		186D80D01CF9E322001A3EFE /* ExtensionForAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186D80CF1CF9E322001A3EFE /* ExtensionForAnimation.swift */; };
 		187464951C3F9FAC009E4041 /* LocalNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187464941C3F9FAC009E4041 /* LocalNotification.swift */; };
 		187464971C3FA3DD009E4041 /* SendNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187464961C3FA3DD009E4041 /* SendNotification.swift */; };
-		187F97A01CA962A3009CC7A9 /* RightMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187F979F1CA962A3009CC7A9 /* RightMenu.swift */; };
 		188138D81D3286E1004953EC /* invite_friend.png in Resources */ = {isa = PBXBuildFile; fileRef = 188138D71D3286E1004953EC /* invite_friend.png */; };
 		1882E8821D05C567006F5803 /* ChatTextMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1882E87C1D05C567006F5803 /* ChatTextMessage.swift */; };
 		1882E8831D05C567006F5803 /* ChatVoiceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1882E87D1D05C567006F5803 /* ChatVoiceCell.swift */; };
@@ -70,6 +69,9 @@
 		1882E8861D05C567006F5803 /* ChatMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1882E8801D05C567006F5803 /* ChatMessage.swift */; };
 		1882E8871D05C567006F5803 /* ChatVoiceMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1882E8811D05C567006F5803 /* ChatVoiceMessage.swift */; };
 		1882E8891D05C8AB006F5803 /* 10.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 1882E8881D05C8AB006F5803 /* 10.jpeg */; };
+		188C4C8E1D50C83200B6BA62 /* Papyrus-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 188C4C8D1D50C83200B6BA62 /* Papyrus-Regular.ttf */; };
+		188C4C901D50C83B00B6BA62 /* simkai.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 188C4C8F1D50C83B00B6BA62 /* simkai.ttf */; };
+		188C4C921D50CE6400B6BA62 /* activityDetailBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = 188C4C911D50CE6400B6BA62 /* activityDetailBackground.png */; };
 		189052FA1CA66310006EFE69 /* TimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189052F91CA66310006EFE69 /* TimerView.swift */; };
 		189052FC1CA66943006EFE69 /* ActivityMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189052FB1CA66943006EFE69 /* ActivityMainView.swift */; };
 		189053001CA6733C006EFE69 /* ExtensionForGesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189052FF1CA6733C006EFE69 /* ExtensionForGesture.swift */; };
@@ -113,7 +115,6 @@
 		18BD4A311D1AC2A800585D1D /* RCIMdelegateForSignUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18BD4A301D1AC2A800585D1D /* RCIMdelegateForSignUp.swift */; };
 		18BDB0451D2E8BA1000CC61D /* worldChatCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18BDB0441D2E8BA1000CC61D /* worldChatCell.swift */; };
 		18BDB0481D2E8E7B000CC61D /* UILabel+Nova_UILabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 18BDB0461D2E8E7B000CC61D /* UILabel+Nova_UILabel.m */; };
-		18C0DCD51D47925F00777A9F /* time.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 18C0DCD41D47925F00777A9F /* time.ttf */; };
 		18C44C4E1D1197560087EBF6 /* StartView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C44C4C1D1197560087EBF6 /* StartView.m */; };
 		18C6ABAA1D3E748E00196CD2 /* TwoRollSelection.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C6ABA81D3E748E00196CD2 /* TwoRollSelection.m */; };
 		18CE64341CF7354500834C2B /* DailyDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CE64331CF7354500834C2B /* DailyDetail.swift */; };
@@ -129,7 +130,6 @@
 		18E1362F1CFC74D70046A6B8 /* MyActivity.png in Resources */ = {isa = PBXBuildFile; fileRef = 18E1362E1CFC74D70046A6B8 /* MyActivity.png */; };
 		18E136311CFC752E0046A6B8 /* dailyBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = 18E136301CFC752E0046A6B8 /* dailyBackground.png */; };
 		18E1C8151D17E3150080EBC1 /* welcome_video.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 18E1C8141D17E3150080EBC1 /* welcome_video.mp4 */; };
-		18E259CB1CCA5F6000743FCA /* DropDownSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E259CA1CCA5F6000743FCA /* DropDownSelection.swift */; };
 		18E43FBA1CE0D1F000F9A382 /* PlaySound.m in Sources */ = {isa = PBXBuildFile; fileRef = 18E43FB91CE0D1F000F9A382 /* PlaySound.m */; };
 		18E43FBD1CE0E2E300F9A382 /* SoundResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E43FBC1CE0E2E300F9A382 /* SoundResource.swift */; };
 		18EDF2601D451E920054C86B /* selectedBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = 18EDF25F1D451E920054C86B /* selectedBackground.png */; };
@@ -248,7 +248,6 @@
 		186D80CF1CF9E322001A3EFE /* ExtensionForAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtensionForAnimation.swift; sourceTree = "<group>"; };
 		187464941C3F9FAC009E4041 /* LocalNotification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalNotification.swift; sourceTree = "<group>"; };
 		187464961C3FA3DD009E4041 /* SendNotification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SendNotification.swift; sourceTree = "<group>"; };
-		187F979F1CA962A3009CC7A9 /* RightMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RightMenu.swift; sourceTree = "<group>"; };
 		188138D71D3286E1004953EC /* invite_friend.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = invite_friend.png; sourceTree = "<group>"; };
 		1882E87C1D05C567006F5803 /* ChatTextMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChatTextMessage.swift; path = ChatRoom/ChatTextMessage.swift; sourceTree = "<group>"; };
 		1882E87D1D05C567006F5803 /* ChatVoiceCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChatVoiceCell.swift; path = ChatRoom/ChatVoiceCell.swift; sourceTree = "<group>"; };
@@ -257,6 +256,9 @@
 		1882E8801D05C567006F5803 /* ChatMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChatMessage.swift; path = ChatRoom/ChatMessage.swift; sourceTree = "<group>"; };
 		1882E8811D05C567006F5803 /* ChatVoiceMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChatVoiceMessage.swift; path = ChatRoom/ChatVoiceMessage.swift; sourceTree = "<group>"; };
 		1882E8881D05C8AB006F5803 /* 10.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 10.jpeg; sourceTree = "<group>"; };
+		188C4C8D1D50C83200B6BA62 /* Papyrus-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Papyrus-Regular.ttf"; sourceTree = "<group>"; };
+		188C4C8F1D50C83B00B6BA62 /* simkai.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = simkai.ttf; sourceTree = "<group>"; };
+		188C4C911D50CE6400B6BA62 /* activityDetailBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = activityDetailBackground.png; sourceTree = "<group>"; };
 		189052F91CA66310006EFE69 /* TimerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TimerView.swift; path = SignUp/TimerView.swift; sourceTree = "<group>"; };
 		189052FB1CA66943006EFE69 /* ActivityMainView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ActivityMainView.swift; path = SignUp/ActivityMainView.swift; sourceTree = "<group>"; };
 		189052FF1CA6733C006EFE69 /* ExtensionForGesture.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtensionForGesture.swift; sourceTree = "<group>"; };
@@ -309,7 +311,6 @@
 		18BDB0441D2E8BA1000CC61D /* worldChatCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = worldChatCell.swift; path = SignUp/worldChatCell.swift; sourceTree = "<group>"; };
 		18BDB0461D2E8E7B000CC61D /* UILabel+Nova_UILabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+Nova_UILabel.m"; sourceTree = "<group>"; };
 		18BDB0471D2E8E7B000CC61D /* UILabel+Nova_UILabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILabel+Nova_UILabel.h"; sourceTree = "<group>"; };
-		18C0DCD41D47925F00777A9F /* time.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = time.ttf; sourceTree = "<group>"; };
 		18C44C4B1D1197560087EBF6 /* StartView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StartView.h; sourceTree = "<group>"; };
 		18C44C4C1D1197560087EBF6 /* StartView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StartView.m; sourceTree = "<group>"; };
 		18C6ABA81D3E748E00196CD2 /* TwoRollSelection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TwoRollSelection.m; sourceTree = "<group>"; };
@@ -329,7 +330,6 @@
 		18E1362E1CFC74D70046A6B8 /* MyActivity.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = MyActivity.png; path = Assets.xcassets/BackGround/Main/MyActivity.imageset/MyActivity.png; sourceTree = "<group>"; };
 		18E136301CFC752E0046A6B8 /* dailyBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = dailyBackground.png; path = Assets.xcassets/dailyBackground.imageset/dailyBackground.png; sourceTree = "<group>"; };
 		18E1C8141D17E3150080EBC1 /* welcome_video.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = welcome_video.mp4; sourceTree = "<group>"; };
-		18E259CA1CCA5F6000743FCA /* DropDownSelection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DropDownSelection.swift; sourceTree = "<group>"; };
 		18E43FB91CE0D1F000F9A382 /* PlaySound.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlaySound.m; sourceTree = "<group>"; };
 		18E43FBB1CE0D20500F9A382 /* PlaySound.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PlaySound.h; sourceTree = "<group>"; };
 		18E43FBC1CE0E2E300F9A382 /* SoundResource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SoundResource.swift; sourceTree = "<group>"; };
@@ -586,14 +586,6 @@
 				187464941C3F9FAC009E4041 /* LocalNotification.swift */,
 			);
 			name = Notification;
-			sourceTree = "<group>";
-		};
-		187F979E1CA96278009CC7A9 /* Menu */ = {
-			isa = PBXGroup;
-			children = (
-				187F979F1CA962A3009CC7A9 /* RightMenu.swift */,
-			);
-			name = Menu;
 			sourceTree = "<group>";
 		};
 		189052F81CA65842006EFE69 /* Activity */ = {
@@ -943,7 +935,8 @@
 				18AF8CAD1BEDCCCB00539C0E /* LaunchScreen.storyboard */,
 				18AF8CB01BEDCCCB00539C0E /* Info.plist */,
 				18A824521BEDD86500084589 /* Craft-bridge-header.h */,
-				18C0DCD41D47925F00777A9F /* time.ttf */,
+				188C4C8D1D50C83200B6BA62 /* Papyrus-Regular.ttf */,
+				188C4C8F1D50C83B00B6BA62 /* simkai.ttf */,
 			);
 			path = Craft;
 			sourceTree = "<group>";
@@ -1004,6 +997,7 @@
 		18E136231CFC73B10046A6B8 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				188C4C911D50CE6400B6BA62 /* activityDetailBackground.png */,
 				18EDF25F1D451E920054C86B /* selectedBackground.png */,
 				188138D71D3286E1004953EC /* invite_friend.png */,
 				18D6CF641D2ABBED004DCF8A /* worldChatCompleteState.png */,
@@ -1028,7 +1022,6 @@
 				18C6ABA91D3E748E00196CD2 /* TwoRollSelection.h */,
 				1824C61A1D255045009078B4 /* OneRollSelection.m */,
 				1824C61B1D255045009078B4 /* OneRollSelection.h */,
-				18E259CA1CCA5F6000743FCA /* DropDownSelection.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -1064,7 +1057,6 @@
 		18F7E46D1C97F3E2007E3459 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				187F979E1CA96278009CC7A9 /* Menu */,
 				18F7E46E1C97F454007E3459 /* DutyDisplayView.swift */,
 				18568B111D02A7E600D9446E /* ChatNavigationView.swift */,
 			);
@@ -1200,7 +1192,7 @@
 				TargetAttributes = {
 					18AF8CA01BEDCCCB00539C0E = {
 						CreatedOnToolsVersion = 7.1;
-						DevelopmentTeam = 2B5FR9H7XS;
+						DevelopmentTeam = JJ43G346UA;
 					};
 					18AF8CB41BEDCCCB00539C0E = {
 						CreatedOnToolsVersion = 7.1;
@@ -1241,6 +1233,7 @@
 				1824C61E1D2556AF009078B4 /* create_activity_main.png in Resources */,
 				18E1362D1CFC74AE0046A6B8 /* chatDetailBackground.png in Resources */,
 				18AF8CAF1BEDCCCB00539C0E /* LaunchScreen.storyboard in Resources */,
+				188C4C921D50CE6400B6BA62 /* activityDetailBackground.png in Resources */,
 				18E136311CFC752E0046A6B8 /* dailyBackground.png in Resources */,
 				18EDF2601D451E920054C86B /* selectedBackground.png in Resources */,
 				18E1C8151D17E3150080EBC1 /* welcome_video.mp4 in Resources */,
@@ -1253,10 +1246,11 @@
 				18605E341CE095C6007D8114 /* swishin.mp3 in Resources */,
 				18AF8CAC1BEDCCCB00539C0E /* Assets.xcassets in Resources */,
 				1882E8891D05C8AB006F5803 /* 10.jpeg in Resources */,
+				188C4C901D50C83B00B6BA62 /* simkai.ttf in Resources */,
+				188C4C8E1D50C83200B6BA62 /* Papyrus-Regular.ttf in Resources */,
 				18E136271CFC74190046A6B8 /* blood.png in Resources */,
 				18610C4C1C12C88300B864F2 /* wow_main_theme.mp3 in Resources */,
 				18D6CF651D2ABBED004DCF8A /* worldChatCompleteState.png in Resources */,
-				18C0DCD51D47925F00777A9F /* time.ttf in Resources */,
 				188138D81D3286E1004953EC /* invite_friend.png in Resources */,
 				18605E321CE09147007D8114 /* clickevent.mp3 in Resources */,
 			);
@@ -1391,7 +1385,6 @@
 				CD5EB3931D195EF300802FC4 /* RTAudioManager.swift in Sources */,
 				180E193F1C62E39D00987CE6 /* ChatRoom.swift in Sources */,
 				1882E8841D05C567006F5803 /* ChatCell.swift in Sources */,
-				187F97A01CA962A3009CC7A9 /* RightMenu.swift in Sources */,
 				1826B31A1D02D4F400E34D9A /* ChatDetailCell.swift in Sources */,
 				18BDB0451D2E8BA1000CC61D /* worldChatCell.swift in Sources */,
 				18B322671D33D08A00FB93B6 /* InviteFriendCell.swift in Sources */,
@@ -1425,7 +1418,6 @@
 				1837D23E1CFAE3FB00FFE3FD /* ChatListCell.swift in Sources */,
 				CD5EB3941D195EF300802FC4 /* RTAudioPlayback.swift in Sources */,
 				18E43FBA1CE0D1F000F9A382 /* PlaySound.m in Sources */,
-				18E259CB1CCA5F6000743FCA /* DropDownSelection.swift in Sources */,
 				1893E2E01C7C604C00F74A2B /* MyActivities.swift in Sources */,
 				1895CEFF1D32761C0047C8F0 /* inviteMain.swift in Sources */,
 				18F7E4711C97FCC2007E3459 /* Resource.swift in Sources */,

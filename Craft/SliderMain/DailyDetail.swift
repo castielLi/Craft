@@ -44,7 +44,7 @@ class DailyDetail: UIView {
         self.raidName!.textColor = UIColor.whiteColor()
         raidName!.text = "纳克萨玛斯";
         raidName!.textAlignment = NSTextAlignment.Center
-        raidName!.font = UIFont.systemFontOfSize(18)
+        raidName!.font = UIFont(name: "KaiTi", size: 18)
         self.addSubview(self.raidName!)
         
         self.raidName!.mas_makeConstraints{ make in
