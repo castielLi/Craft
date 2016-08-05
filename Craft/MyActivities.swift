@@ -22,6 +22,12 @@ class MyActivities: ViewControllerBase ,UIGestureRecognizerDelegate , UITableVie
     var raidDropdown : UIButton?
     var raidTitle : UITextView?
     var raidContent : UITextView?
+    var activityDetailView : activityDetail?
+    
+    var applyList : UIButton?
+    var playerList : UIButton?
+    var invite : UIButton?
+    var buttonListBackground : UIImageView?
     
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
@@ -65,6 +71,8 @@ class MyActivities: ViewControllerBase ,UIGestureRecognizerDelegate , UITableVie
     override func initView() {
         setActivitiesView()
         setScroll()
+        setActivityDetail()
+        setButtonList()
         setRaidMember()
         setTapForBackgroundView()
     }
@@ -111,9 +119,10 @@ class MyActivities: ViewControllerBase ,UIGestureRecognizerDelegate , UITableVie
     
     
     func setRaidMember(){
-           self.table = UITableView(frame: CGRect(x: 30, y: 270, width: 400, height: 300))
-           self.table!.backgroundColor = UIColor.blueColor()
-        
+           self.table = UITableView(frame: CGRect(x: 0, y: UIAdapter.shared.transferHeight(150), width: UIAdapter.shared.transferWidth(240), height: 500))
+           self.table!.backgroundColor = UIColor.clearColor()
+           self.table!.scrollEnabled = false
+           self.table!.separatorStyle = UITableViewCellSeparatorStyle.None
            self.scroll!.addSubview(self.table!)
            self.table!.delegate = self
            self.table!.dataSource = self
@@ -130,7 +139,39 @@ class MyActivities: ViewControllerBase ,UIGestureRecognizerDelegate , UITableVie
         self.activitiesView!.layer.masksToBounds = true
         self.view.addSubview(self.activitiesView!)
     }
+    
+    func setActivityDetail(){
+        activityDetailView = activityDetail(frame: CGRect(x: 0, y: 0, width: UIAdapter.shared.transferWidth(240), height: UIAdapter.shared.transferHeight(130)))
+        self.scroll!.addSubview(activityDetailView!)
+    }
 
+    
+    func setButtonList(){
+       buttonListBackground = UIImageView(frame: CGRect(x: 0, y: UIAdapter.shared.transferHeight(130), width: UIAdapter.shared.transferWidth(240), height: UIAdapter.shared.transferHeight(20)))
+       buttonListBackground!.image = UIImage(named: "buttonlist")
+       self.scroll!.addSubview(buttonListBackground!)
+        
+       applyList = UIButton(frame: CGRect(x: 0, y: UIAdapter.shared.transferHeight(130), width: UIAdapter.shared.transferWidth(80), height: UIAdapter.shared.transferHeight(20)))
+       applyList!.setTitle("申请列表 3", forState: UIControlState.Normal)
+       applyList!.setTitleColor(Resources.Color.dailyColor, forState: UIControlState.Normal)
+       applyList!.titleLabel?.font = UIFont(name: "KaiTi",size: UIAdapter.shared.transferHeight(9))
+       applyList!.titleLabel?.textAlignment = NSTextAlignment.Center
+       self.scroll!.addSubview(applyList!)
+        
+        playerList = UIButton(frame: CGRect(x: UIAdapter.shared.transferWidth(80), y: UIAdapter.shared.transferHeight(130), width: UIAdapter.shared.transferWidth(80), height: UIAdapter.shared.transferHeight(20)))
+        playerList!.setTitle("成员列表 3/25", forState: UIControlState.Normal)
+        playerList!.setTitleColor(Resources.Color.dailyColor, forState: UIControlState.Normal)
+        playerList!.titleLabel?.font = UIFont(name: "KaiTi",size: UIAdapter.shared.transferHeight(9))
+        playerList!.titleLabel?.textAlignment = NSTextAlignment.Center
+         self.scroll!.addSubview(playerList!)
+        
+        invite = UIButton(frame: CGRect(x: UIAdapter.shared.transferWidth(160), y: UIAdapter.shared.transferHeight(130), width: UIAdapter.shared.transferWidth(80), height: UIAdapter.shared.transferHeight(20)))
+        invite!.setTitle("邀请", forState: UIControlState.Normal)
+        invite!.setTitleColor(Resources.Color.dailyColor, forState: UIControlState.Normal)
+        invite!.titleLabel?.font = UIFont(name: "KaiTi",size: UIAdapter.shared.transferHeight(9))
+        invite!.titleLabel?.textAlignment = NSTextAlignment.Center
+        self.scroll!.addSubview(invite!)
+    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -166,7 +207,7 @@ class MyActivities: ViewControllerBase ,UIGestureRecognizerDelegate , UITableVie
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return UIAdapter.shared.transferHeight(50)
+        return 50
     }
     
     /*

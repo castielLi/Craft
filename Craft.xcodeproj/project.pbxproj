@@ -112,6 +112,8 @@
 		18B16E7B1D3FBDA9006903D8 /* ChatMessageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B16E7A1D3FBDA9006903D8 /* ChatMessageModel.m */; };
 		18B322671D33D08A00FB93B6 /* InviteFriendCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18B322661D33D08900FB93B6 /* InviteFriendCell.swift */; };
 		18B322691D33D17700FB93B6 /* ExtensionTableForInviteMain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18B322681D33D17700FB93B6 /* ExtensionTableForInviteMain.swift */; };
+		18B5E9A51D521938004FDF5C /* activityDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18B5E9A41D521938004FDF5C /* activityDetail.swift */; };
+		18B5E9A71D5234E9004FDF5C /* playerListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18B5E9A61D5234E9004FDF5C /* playerListCell.swift */; };
 		18BD4A311D1AC2A800585D1D /* RCIMdelegateForSignUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18BD4A301D1AC2A800585D1D /* RCIMdelegateForSignUp.swift */; };
 		18BDB0451D2E8BA1000CC61D /* worldChatCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18BDB0441D2E8BA1000CC61D /* worldChatCell.swift */; };
 		18BDB0481D2E8E7B000CC61D /* UILabel+Nova_UILabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 18BDB0461D2E8E7B000CC61D /* UILabel+Nova_UILabel.m */; };
@@ -307,6 +309,8 @@
 		18B16E7A1D3FBDA9006903D8 /* ChatMessageModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatMessageModel.m; sourceTree = "<group>"; };
 		18B322661D33D08900FB93B6 /* InviteFriendCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InviteFriendCell.swift; path = SignUp/InviteFriendCell.swift; sourceTree = "<group>"; };
 		18B322681D33D17700FB93B6 /* ExtensionTableForInviteMain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtensionTableForInviteMain.swift; sourceTree = "<group>"; };
+		18B5E9A41D521938004FDF5C /* activityDetail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = activityDetail.swift; path = SignUp/activityDetail.swift; sourceTree = "<group>"; };
+		18B5E9A61D5234E9004FDF5C /* playerListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = playerListCell.swift; path = SignUp/playerListCell.swift; sourceTree = "<group>"; };
 		18BD4A301D1AC2A800585D1D /* RCIMdelegateForSignUp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RCIMdelegateForSignUp.swift; sourceTree = "<group>"; };
 		18BDB0441D2E8BA1000CC61D /* worldChatCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = worldChatCell.swift; path = SignUp/worldChatCell.swift; sourceTree = "<group>"; };
 		18BDB0461D2E8E7B000CC61D /* UILabel+Nova_UILabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+Nova_UILabel.m"; sourceTree = "<group>"; };
@@ -851,6 +855,7 @@
 		18A8247E1BEE2F9500084589 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				18B5E9A31D52191D004FDF5C /* activityDetal */,
 				18B322651D33D06D00FB93B6 /* Invite */,
 				1895CEF11D3220670047C8F0 /* createNew */,
 				1832D2691D198A11000803FF /* worldChat */,
@@ -974,6 +979,15 @@
 				18B322661D33D08900FB93B6 /* InviteFriendCell.swift */,
 			);
 			name = Invite;
+			sourceTree = "<group>";
+		};
+		18B5E9A31D52191D004FDF5C /* activityDetal */ = {
+			isa = PBXGroup;
+			children = (
+				18B5E9A41D521938004FDF5C /* activityDetail.swift */,
+				18B5E9A61D5234E9004FDF5C /* playerListCell.swift */,
+			);
+			name = activityDetal;
 			sourceTree = "<group>";
 		};
 		18C44C481D11974B0087EBF6 /* start */ = {
@@ -1372,6 +1386,7 @@
 				18B16E7B1D3FBDA9006903D8 /* ChatMessageModel.m in Sources */,
 				1882E8851D05C567006F5803 /* ChatTextCell.swift in Sources */,
 				1837D2361CFAE2B700FFE3FD /* ExtensionTableForChatRoom.swift in Sources */,
+				18B5E9A51D521938004FDF5C /* activityDetail.swift in Sources */,
 				180141051C53525800BE13B1 /* ImageOperation.swift in Sources */,
 				18B322691D33D17700FB93B6 /* ExtensionTableForInviteMain.swift in Sources */,
 				18568B0B1D02969000D9446E /* RCIMHelper.m in Sources */,
@@ -1384,6 +1399,7 @@
 				18AF8CA51BEDCCCB00539C0E /* AppDelegate.swift in Sources */,
 				CD5EB3931D195EF300802FC4 /* RTAudioManager.swift in Sources */,
 				180E193F1C62E39D00987CE6 /* ChatRoom.swift in Sources */,
+				18B5E9A71D5234E9004FDF5C /* playerListCell.swift in Sources */,
 				1882E8841D05C567006F5803 /* ChatCell.swift in Sources */,
 				1826B31A1D02D4F400E34D9A /* ChatDetailCell.swift in Sources */,
 				18BDB0451D2E8BA1000CC61D /* worldChatCell.swift in Sources */,
@@ -1579,7 +1595,7 @@
 				INFOPLIST_FILE = Craft/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.castiel.app.wowcraft;
+				PRODUCT_BUNDLE_IDENTIFIER = com.castiel.app.craft;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Craft/Craft-bridge-header.h";
@@ -1603,7 +1619,7 @@
 				INFOPLIST_FILE = Craft/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.castiel.app.wowcraft;
+				PRODUCT_BUNDLE_IDENTIFIER = com.castiel.app.craft;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Craft/Craft-bridge-header.h";
