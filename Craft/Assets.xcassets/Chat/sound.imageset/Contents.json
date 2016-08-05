@@ -2,11 +2,11 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "聊天按键-底部背板_09.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
+      "filename" : "聊天按键-底部背板_09.png",
       "scale" : "2x"
     },
     {

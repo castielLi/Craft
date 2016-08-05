@@ -10,7 +10,8 @@
 
 @protocol SignUpServiceDelegate <NSObject>
 
-
+@optional
+-(void)GetMyActivityDidFinish:(ApiResult *)result response:(id)response;
 
 @end
 
@@ -20,6 +21,6 @@
 
 -(instancetype)init;
 
-
+-(void)getAllMyActivities;
 
 @end

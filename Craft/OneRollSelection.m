@@ -151,7 +151,7 @@
     displaylabel.text = [_dataArray[row] valueForKey:self.displayKey];
     displaylabel.textAlignment = NSTextAlignmentCenter;
     displaylabel.tag = row + 1;
-    displaylabel.font = [UIFont systemFontOfSize:25];
+    displaylabel.font = [UIFont fontWithName:@"KaiTi" size:25.0];
     return displaylabel;
     
 }

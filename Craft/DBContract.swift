@@ -27,4 +27,6 @@ struct DBContract{
     static let createInitDataToken = "CREATE TABLE IF NOT EXISTS InitActivityToken(token text)";
     
     static let createFriendTable = "CREATE TABLE IF NOT EXISTS FriendList(userId text,userName text,IconUrl text, battleAccount text, markName text)";
+    
+    static let createFaction = "CREATE TABLE IF NOT EXISTS Faction(faction text)"; 
 }

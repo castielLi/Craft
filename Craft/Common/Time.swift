@@ -25,7 +25,7 @@ class Time: UIView {
         super.init(frame: frame)
         
         firstPart = UILabel()
-        firstPart!.font = UIFont(name: "DB LCD Temp", size: UIAdapter.shared.transferHeight(20))
+        firstPart!.font = UIFont(name: "Papyrus-Regular", size: UIAdapter.shared.transferHeight(21))
         firstPart!.textColor = UIColor.whiteColor()
         self.addSubview(firstPart!)
         
@@ -36,7 +36,7 @@ class Time: UIView {
         }
         
         midPart = UILabel()
-        midPart!.font = UIFont(name: "DB LCD Temp", size: UIAdapter.shared.transferHeight(20))
+        midPart!.font = UIFont(name: "Papyrus-Regular", size: UIAdapter.shared.transferHeight(21))
         midPart!.textColor = UIColor.whiteColor()
         self.addSubview(midPart!)
         
@@ -47,7 +47,7 @@ class Time: UIView {
         }
         
         secondPart = UILabel()
-        secondPart!.font = UIFont(name: "DB LCD Temp", size: UIAdapter.shared.transferHeight(20))
+        secondPart!.font = UIFont(name: "Papyrus-Regular", size: UIAdapter.shared.transferHeight(21))
         secondPart!.textColor = UIColor.whiteColor()
         self.addSubview(secondPart!)
         

@@ -41,6 +41,7 @@ class ActivityItemCell: TableViewBaseCell{
         
         self.raidName = UILabel()
         self.raidName!.textColor = UIColor.whiteColor()
+        self.raidName!.font = UIFont(name: "KaiTi", size: UIAdapter.shared.transferHeight(16))
         self.addSubview(raidName!)
         self.raidName?.mas_makeConstraints{ make in
           make.left.equalTo()(self.iconImage!.mas_right).with().offset()(UIAdapter.shared.transferWidth(6))
@@ -59,7 +60,7 @@ class ActivityItemCell: TableViewBaseCell{
         
         
         contentLabel = UILabel()
-        contentLabel!.font = UIFont(name: "TimesNewRomanPS-BoldMT", size: UIAdapter.shared.transferHeight(8))
+        contentLabel!.font = UIFont(name: "KaiTi", size: UIAdapter.shared.transferHeight(8))
         contentLabel!.textColor = UIColor.whiteColor()
         self.addSubview(contentLabel!)
         
@@ -78,12 +79,12 @@ class ActivityItemCell: TableViewBaseCell{
         self.timePart!.mas_makeConstraints{make in
            make.centerY.equalTo()(self)
            make.right.equalTo()(self).with().offset()(UIAdapter.shared.transferWidth(-20))
-           make.left.equalTo()(self.mas_right).with().offset()(-UIAdapter.shared.transferWidth(80))
+           make.left.equalTo()(self.mas_right).with().offset()(-UIAdapter.shared.transferWidth(90))
            make.height.equalTo()(UIAdapter.shared.transferHeight(20))
         }
         
         leadName = UILabel()
-        leadName!.font = UIFont(name: "TimesNewRomanPS-BoldMT", size: UIAdapter.shared.transferHeight(8))
+        leadName!.font = UIFont(name: "KaiTi", size: UIAdapter.shared.transferHeight(8))
         leadName!.textColor = UIColor.whiteColor()
         self.addSubview(leadName!)
         
