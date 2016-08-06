@@ -18,6 +18,7 @@
 #import "StartView.h"
 #import "OneRollSelection.h"
 
+
 //oc framework
 #import "RegexHelper.h"
 #import "MsgBoxHelper.h"
@@ -33,3 +34,7 @@
 //service
 #import "LoginService.h"
 #import "SignUpService.h"
+
+
+//model
+#import "ActivityItemModel.h"

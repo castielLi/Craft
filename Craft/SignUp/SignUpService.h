@@ -13,6 +13,8 @@
 @optional
 -(void)GetMyActivityDidFinish:(ApiResult *)result response:(id)response;
 
+-(void)GetActivityDetailFinish:(ApiResult *)result response:(id)response;
+
 @end
 
 @interface SignUpService: NSObject
@@ -21,6 +23,10 @@
 
 -(instancetype)init;
 
--(void)getAllMyActivities;
+-(void)getAllMyActivities:(NSString*)pageNum;
+
+-(void)getAllActivities:(NSString*)pageNum;
+
+-(void)getActivityDetail:(NSString*)activityId;
 
 @end

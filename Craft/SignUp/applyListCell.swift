@@ -1,28 +1,23 @@
 //
-//  playerListCell.swift
+//  applyListCell.swift
 //  Craft
 //
-//  Created by castiel on 16/8/3.
+//  Created by castiel on 16/8/6.
 //  Copyright © 2016年 castiel. All rights reserved.
 //
 
 import UIKit
 
-class playerListCell: UITableViewCell {
+class applyListCell: UITableViewCell {
 
     var icon : UIImageView?
     var name : UILabel?
     var account : UILabel?
-    var responseIcon : UIImageView?
     var jobIcon : UIButton?
     var dutyIcon : UIButton?
     var backgroundImage : UIImageView?
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
-    
+    var content : UILabel?
+
     init(style: UITableViewCellStyle, reuseIdentifier: String? , height : CGFloat) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
@@ -41,10 +36,10 @@ class playerListCell: UITableViewCell {
         self.addSubview(name!)
         
         self.name!.mas_makeConstraints{ make in
-           make.top.equalTo()(self.icon!).with().offset()(3)
-           make.left.equalTo()(self.icon!.mas_right).with().offset()(UIAdapter.shared.transferWidth(2))
-           make.height.equalTo()(20)
-           make.width.equalTo()(self.frame.width * 0.4)
+            make.top.equalTo()(self.icon!).with().offset()(3)
+            make.left.equalTo()(self.icon!.mas_right).with().offset()(UIAdapter.shared.transferWidth(2))
+            make.height.equalTo()(20)
+            make.width.equalTo()(self.frame.width * 0.4)
         }
         
         account = UILabel()
@@ -60,26 +55,15 @@ class playerListCell: UITableViewCell {
             make.width.equalTo()(self.frame.width * 0.4)
         }
         
-        responseIcon = UIImageView()
-        responseIcon!.image = UIImage(named: "leader")
-        self.addSubview(responseIcon!)
-        
-        self.responseIcon!.mas_makeConstraints{ make in
-           make.top.equalTo()(self).with().offset()(15)
-           make.bottom.equalTo()(self).with().offset()(-15)
-           make.width.equalTo()(13)
-           make.left.equalTo()(self.account!.mas_right).with().offset()(UIAdapter.shared.transferWidth(3))
-        }
-        
         jobIcon = UIButton()
         jobIcon!.setBackgroundImage(UIImage(named: "qs"), forState: UIControlState.Normal)
         self.addSubview(jobIcon!)
         
         self.jobIcon!.mas_makeConstraints{ make in
             make.top.equalTo()(self).with().offset()(12)
-            make.bottom.equalTo()(self).with().offset()(-12)
+            make.bottom.equalTo()(self).with().offset()(-22)
             make.width.equalTo()(26)
-            make.left.equalTo()(self.responseIcon!.mas_right).with().offset()(UIAdapter.shared.transferWidth(12))
+            make.left.equalTo()(self.account!.mas_right).with().offset()(UIAdapter.shared.transferWidth(24))
         }
         
         dutyIcon = UIButton()
@@ -88,23 +72,38 @@ class playerListCell: UITableViewCell {
         
         self.dutyIcon!.mas_makeConstraints{ make in
             make.top.equalTo()(self).with().offset()(12)
-            make.bottom.equalTo()(self).with().offset()(-12)
+            make.bottom.equalTo()(self).with().offset()(-22)
             make.width.equalTo()(26)
             make.left.equalTo()(self.jobIcon!.mas_right).with().offset()(UIAdapter.shared.transferWidth(8))
         }
-
+        
+        content = UILabel()
+        self.content!.text = "我是老司机,手法犀利,走位风骚"
+        self.content!.textColor = UIColor.whiteColor()
+        self.content!.font = UIFont(name: "KaiTi", size: 12)
+        self.addSubview(content!)
+        
+        self.content!.mas_makeConstraints{ make in
+           make.top.equalTo()(self.account!.mas_bottom).with().offset()(UIAdapter.shared.transferWidth(2))
+           make.bottom.equalTo()(self).with().offset()(-3)
+           make.left.equalTo()(self.icon!.mas_right).with().offset()(UIAdapter.shared.transferWidth(2))
+        }
+        
         
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+
     
-
-    override func setSelected(selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+    
+    /*
+    // Only override drawRect: if you perform custom drawing.
+    // An empty implementation adversely affects performance during animation.
+    override func drawRect(rect: CGRect) {
+        // Drawing code
     }
+    */
 
 }

@@ -23,6 +23,7 @@ class MyActivities: ViewControllerBase ,UIGestureRecognizerDelegate , UITableVie
     var raidTitle : UITextView?
     var raidContent : UITextView?
     var activityDetailView : activityDetail?
+    var selectedIndex : Int = 2;
     
     var applyList : UIButton?
     var playerList : UIButton?
@@ -155,6 +156,7 @@ class MyActivities: ViewControllerBase ,UIGestureRecognizerDelegate , UITableVie
        applyList!.setTitle("申请列表 3", forState: UIControlState.Normal)
        applyList!.setTitleColor(Resources.Color.dailyColor, forState: UIControlState.Normal)
        applyList!.titleLabel?.font = UIFont(name: "KaiTi",size: UIAdapter.shared.transferHeight(9))
+       applyList!.addTarget(self, action: "applyListClick:", forControlEvents: UIControlEvents.TouchUpInside)
        applyList!.titleLabel?.textAlignment = NSTextAlignment.Center
        self.scroll!.addSubview(applyList!)
         
@@ -162,6 +164,7 @@ class MyActivities: ViewControllerBase ,UIGestureRecognizerDelegate , UITableVie
         playerList!.setTitle("成员列表 3/25", forState: UIControlState.Normal)
         playerList!.setTitleColor(Resources.Color.dailyColor, forState: UIControlState.Normal)
         playerList!.titleLabel?.font = UIFont(name: "KaiTi",size: UIAdapter.shared.transferHeight(9))
+        playerList!.addTarget(self, action: "playerListClick:", forControlEvents: UIControlEvents.TouchUpInside)
         playerList!.titleLabel?.textAlignment = NSTextAlignment.Center
          self.scroll!.addSubview(playerList!)
         
@@ -171,6 +174,18 @@ class MyActivities: ViewControllerBase ,UIGestureRecognizerDelegate , UITableVie
         invite!.titleLabel?.font = UIFont(name: "KaiTi",size: UIAdapter.shared.transferHeight(9))
         invite!.titleLabel?.textAlignment = NSTextAlignment.Center
         self.scroll!.addSubview(invite!)
+    }
+    
+    func playerListClick(sender: UIButton){
+    
+        selectedIndex = 2
+        self.table!.reloadData()
+    }
+    
+    func applyListClick(sender : UIButton){
+       
+        selectedIndex = 1
+        self.table!.reloadData()
     }
     
     override func didReceiveMemoryWarning() {
@@ -193,21 +208,46 @@ class MyActivities: ViewControllerBase ,UIGestureRecognizerDelegate , UITableVie
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        var cell = tableView.dequeueReusableCellWithIdentifier("cell")
+        if selectedIndex == 2{
+        var cell = tableView.dequeueReusableCellWithIdentifier("cell") as? playerListCell
         if(cell == nil) {
             
-            cell = UITableViewCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier: "cell")
+            cell = playerListCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier: "cell" ,height: 50)
         }
         
-        cell!.imageView!.image = UIImage(named: "alliance")
-        cell!.textLabel!.text = "This is test label"
-        cell!.detailTextLabel!.text = "This is test description label"
-        cell!.backgroundColor = UIColor.clearColor()
+        cell?.backgroundColor = UIColor.clearColor()
+        cell!.selectionStyle = UITableViewCellSelectionStyle.None
         return cell!
+        }else{
+            var cell = tableView.dequeueReusableCellWithIdentifier("cell") as? applyListCell
+            if(cell == nil) {
+                
+                cell = applyListCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier: "cell" ,height: 60)
+            }
+            
+            cell?.backgroundColor = UIColor.clearColor()
+            cell!.selectionStyle = UITableViewCellSelectionStyle.None
+            return cell!
+        }
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        if selectedIndex == 2{
         return 50
+        }else{
+           return 60
+        }
+    }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        var cell = tableView.cellForRowAtIndexPath(indexPath) as! playerListCell
+        cell.backgroundImage!.image = UIImage(named: "cell_selected")
+    }
+    
+    func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
+        var cell = tableView.cellForRowAtIndexPath(indexPath) as! playerListCell
+        cell.backgroundImage!.image = UIImage(named: "player_cell")
+
     }
     
     /*

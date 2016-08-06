@@ -10,11 +10,24 @@
 
 @interface ActivityItemModel : NSObject
 
-@property (nonatomic,strong) NSString * activity_id;
-@property int status;
-@property int apl_id;
-@property int tank_count;
-@property int apd_id;
+@property (nonatomic,strong) NSString * activityId;
+@property (nonatomic,strong) NSString * detail;
+@property (nonatomic,strong) NSString * aplName;
+@property (nonatomic,strong) NSString * createUserName;
 
+@property int professionType;
+@property (nonatomic,strong) NSString * chatId;
+@property (nonatomic,strong) NSString * title;
+@property (nonatomic,strong) NSString * activity_code;
+
+@property int needDPSCount;
+@property int haveDPSCount;
+@property int needTankCount;
+@property int haveTankCount;
+@property int needHealCount;
+@property int haveHealCount;
+
+@property (nonatomic,strong) NSString * startDate;
+@property (nonatomic,strong) NSString * endDate;
 
 @end

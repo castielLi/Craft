@@ -13,6 +13,9 @@ class SignUp: ViewControllerBase ,RCIMClientReceiveMessageDelegate,UITextViewDel
 
     var service : SignUpService?
     
+    //datasource for activity
+    var myActivitiesDatasource : NSArray?
+    
     var soundPlay :PlaySound?
     var firstTime : Bool = true
     var backGroundImage : UIImageView?
@@ -63,7 +66,10 @@ class SignUp: ViewControllerBase ,RCIMClientReceiveMessageDelegate,UITextViewDel
     func GetMyActivityDidFinish(result: ApiResult!, response: AnyObject!) {
         self.closeProgress()
         if(result.state){
-        
+            myActivitiesDatasource = result.data as? NSArray
+            self.activityMainView!.activityTabel!.delegate = self
+            self.activityMainView!.activityTabel!.dataSource = self
+            self.activityMainView!.activityTabel!.reloadData()
         }else{
            MsgBoxHelper.show("", message: result.message!)
         }
@@ -123,7 +129,7 @@ class SignUp: ViewControllerBase ,RCIMClientReceiveMessageDelegate,UITextViewDel
         
         //通过http获取数据
         self.showProgress()
-        self.service!.getAllMyActivities()
+        self.service!.getAllMyActivities("1")
         }else{
            self.firstTime = false
         }
@@ -218,8 +224,6 @@ class SignUp: ViewControllerBase ,RCIMClientReceiveMessageDelegate,UITextViewDel
        self.view.addSubview(self.activityMainView!)
        self.activityMainView!.hidden = true
        self.activityMainView!.activityTabel!.tag = 2
-       self.activityMainView!.activityTabel!.delegate = self
-       self.activityMainView!.activityTabel!.dataSource = self
        self.activityMainView!.activityTabel!.separatorStyle = UITableViewCellSeparatorStyle.None
        self.activityMainView!.activityTabel!.showsVerticalScrollIndicator = false
        self.activityMainView!.activityTabel!.showsHorizontalScrollIndicator = false
@@ -242,6 +246,10 @@ class SignUp: ViewControllerBase ,RCIMClientReceiveMessageDelegate,UITextViewDel
         
         sender.setImage(UIImage(named: "searchActivity_selected"), forState: UIControlState.Normal)
         self.activityMainView!.MyActivityButton!.setImage(UIImage(named: "myActivity"), forState: UIControlState.Normal)
+        
+        self.showProgress()
+        self.service!.getAllActivities("1")
+        
     }
     
     func searchButtonClick(sender : UIButton){
@@ -258,6 +266,9 @@ class SignUp: ViewControllerBase ,RCIMClientReceiveMessageDelegate,UITextViewDel
         
         sender.setImage(UIImage(named: "myActivity_selected"), forState: UIControlState.Normal)
         self.activityMainView!.searchActivityButton!.setImage(UIImage(named: "searchActivity"), forState: UIControlState.Normal)
+        
+        self.showProgress()
+        self.service!.getAllMyActivities("1")
     }
     
     
@@ -405,7 +416,14 @@ class SignUp: ViewControllerBase ,RCIMClientReceiveMessageDelegate,UITextViewDel
             }, completion: nil)
     }
     
-    func displayActivityDetail(){
+    func displayActivityDetail(activityId : String){
+        self.showProgress()
+        self.service!.getActivityDetail(activityId)
+    }
+    
+    func GetActivityDetailFinish(result: ApiResult!, response: AnyObject!) {
+        self.closeProgress()
+        if (result.state){
         
         UIView.animateWithDuration(0.4, delay: 0, options: UIViewAnimationOptions.CurveEaseInOut, animations: { () -> Void in
             self.activityMainView!.frame.origin.x = -UIAdapter.shared.transferWidth(280)
@@ -416,15 +434,17 @@ class SignUp: ViewControllerBase ,RCIMClientReceiveMessageDelegate,UITextViewDel
                 let swishinId = self.soundPlay!.sound.valueForKey(SoundResource.swishinSound) as! String
                 let swishinid = UInt32(swishinId)
                 AudioServicesPlaySystemSound(swishinid!);
-
+                
                 
                 let activitiesView = MyActivities(nibName: nil, bundle: nil)
                 let activitiesNav = UINavigationController(rootViewController: activitiesView)
                 activitiesNav.modalPresentationStyle = UIModalPresentationStyle.OverFullScreen
                 self.presentViewController(activitiesNav, animated: false, completion: nil)
             }
+          }
+        }else{
+           MsgBoxHelper.show("错误", message: result.message!)
         }
-
     }
     
     
