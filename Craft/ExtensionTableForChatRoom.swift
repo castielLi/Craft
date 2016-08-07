@@ -39,13 +39,25 @@ extension ChatRoom : UITableViewDelegate,UITableViewDataSource{
                 
             }
                 
-                let userId = self.chatListArray![indexPath.row].valueForKey("userId") as! String
+                let userId = self.chatListArray![indexPath.row].valueForKey("userId") as? String
                 
-                let chatContentArray = RCIMClient.sharedRCIMClient().getLatestMessages(RCConversationType.ConversationType_PRIVATE, targetId: userId, count: 1)
+                if(userId != nil){
+                
+                let chatContentArray = RCIMClient.sharedRCIMClient().getLatestMessages(RCConversationType.ConversationType_PRIVATE, targetId: userId!, count: 1)
                 
                 if(chatContentArray.count>0){
                     let content = chatContentArray[0].valueForKey("content")!.valueForKey("content")!
                     print(content)
+                   }
+                }else{
+                    let groupId = self.chatListArray![indexPath.row].valueForKey("groupId") as? String
+                    let chatContentArray = RCIMClient.sharedRCIMClient().getLatestMessages(RCConversationType.ConversationType_GROUP, targetId: groupId, count: 1)
+                    
+                    if(chatContentArray.count>0){
+                        let content = chatContentArray[0].valueForKey("content")!.valueForKey("content")!
+                        print(content)
+                    }
+                   
                 }
 
             

@@ -12,6 +12,8 @@ class ChatRoom: ViewControllerBase , UITextViewDelegate ,RCIMClientReceiveMessag
 
     static let searchInfoInFriendList = "Select userId,userName,IconUrl, battleAccount,markName FROM FriendList where userId=?"
     
+    static let searchInfoInGroupList = "Select groupId,groupName,groupIntro FROM GroupList where groupId=?"
+    
     var data: NSMutableArray?
     var soundPlay :PlaySound?
     var backgroundImage : UIImageView?

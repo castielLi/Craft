@@ -32,6 +32,7 @@
 		181C3E9F1C57ABB600A822D0 /* CalendearCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181C3E9E1C57ABB600A822D0 /* CalendearCell.swift */; };
 		181DAA3B1D56F7DD00048216 /* ProfessionHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181DAA3A1D56F7DD00048216 /* ProfessionHelper.swift */; };
 		181DAA3D1D57350E00048216 /* ApplyFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181DAA3C1D57350E00048216 /* ApplyFooter.swift */; };
+		181DAA401D575B2500048216 /* groupListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 181DAA3F1D575B2500048216 /* groupListModel.m */; };
 		1824C61C1D255045009078B4 /* OneRollSelection.m in Sources */ = {isa = PBXBuildFile; fileRef = 1824C61A1D255045009078B4 /* OneRollSelection.m */; };
 		1824C61E1D2556AF009078B4 /* create_activity_main.png in Resources */ = {isa = PBXBuildFile; fileRef = 1824C61D1D2556AF009078B4 /* create_activity_main.png */; };
 		182647781C2E689C0078D4C2 /* ForgetPassword.swift in Sources */ = {isa = PBXBuildFile; fileRef = 182647761C2E689C0078D4C2 /* ForgetPassword.swift */; };
@@ -226,6 +227,8 @@
 		181C3E9E1C57ABB600A822D0 /* CalendearCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendearCell.swift; sourceTree = "<group>"; };
 		181DAA3A1D56F7DD00048216 /* ProfessionHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfessionHelper.swift; sourceTree = "<group>"; };
 		181DAA3C1D57350E00048216 /* ApplyFooter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApplyFooter.swift; sourceTree = "<group>"; };
+		181DAA3E1D575B2500048216 /* groupListModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = groupListModel.h; sourceTree = "<group>"; };
+		181DAA3F1D575B2500048216 /* groupListModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = groupListModel.m; sourceTree = "<group>"; };
 		1824C61A1D255045009078B4 /* OneRollSelection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OneRollSelection.m; sourceTree = "<group>"; };
 		1824C61B1D255045009078B4 /* OneRollSelection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OneRollSelection.h; sourceTree = "<group>"; };
 		1824C61D1D2556AF009078B4 /* create_activity_main.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = create_activity_main.png; sourceTree = "<group>"; };
@@ -1031,6 +1034,8 @@
 			children = (
 				18D4814E1D49DD2800B86B70 /* friendListModel.h */,
 				18D4814F1D49DD2800B86B70 /* friendListModel.m */,
+				181DAA3E1D575B2500048216 /* groupListModel.h */,
+				181DAA3F1D575B2500048216 /* groupListModel.m */,
 			);
 			name = chat;
 			sourceTree = "<group>";
@@ -1462,6 +1467,7 @@
 				184867821BF8506F00016A4E /* SliderMain.swift in Sources */,
 				1895CEF31D3220A80047C8F0 /* DropDownSelectView.swift in Sources */,
 				1895CEF51D322A4B0047C8F0 /* CreateActivityTime.swift in Sources */,
+				181DAA401D575B2500048216 /* groupListModel.m in Sources */,
 				1801FC671D29241B0083A37D /* RestService.m in Sources */,
 				1892E8D31CDE46D9002AAEBF /* Time.swift in Sources */,
 				18CE64341CF7354500834C2B /* DailyDetail.swift in Sources */,
