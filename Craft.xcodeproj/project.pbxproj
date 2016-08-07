@@ -30,6 +30,8 @@
 		1817585B1C4B8CB5008913DB /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1817585A1C4B8CB5008913DB /* CalendarView.swift */; };
 		1817585D1C4B8D45008913DB /* CustomLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1817585C1C4B8D45008913DB /* CustomLayout.swift */; };
 		181C3E9F1C57ABB600A822D0 /* CalendearCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181C3E9E1C57ABB600A822D0 /* CalendearCell.swift */; };
+		181DAA3B1D56F7DD00048216 /* ProfessionHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181DAA3A1D56F7DD00048216 /* ProfessionHelper.swift */; };
+		181DAA3D1D57350E00048216 /* ApplyFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181DAA3C1D57350E00048216 /* ApplyFooter.swift */; };
 		1824C61C1D255045009078B4 /* OneRollSelection.m in Sources */ = {isa = PBXBuildFile; fileRef = 1824C61A1D255045009078B4 /* OneRollSelection.m */; };
 		1824C61E1D2556AF009078B4 /* create_activity_main.png in Resources */ = {isa = PBXBuildFile; fileRef = 1824C61D1D2556AF009078B4 /* create_activity_main.png */; };
 		182647781C2E689C0078D4C2 /* ForgetPassword.swift in Sources */ = {isa = PBXBuildFile; fileRef = 182647761C2E689C0078D4C2 /* ForgetPassword.swift */; };
@@ -222,6 +224,8 @@
 		1817585A1C4B8CB5008913DB /* CalendarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
 		1817585C1C4B8D45008913DB /* CustomLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomLayout.swift; sourceTree = "<group>"; };
 		181C3E9E1C57ABB600A822D0 /* CalendearCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendearCell.swift; sourceTree = "<group>"; };
+		181DAA3A1D56F7DD00048216 /* ProfessionHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfessionHelper.swift; sourceTree = "<group>"; };
+		181DAA3C1D57350E00048216 /* ApplyFooter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApplyFooter.swift; sourceTree = "<group>"; };
 		1824C61A1D255045009078B4 /* OneRollSelection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OneRollSelection.m; sourceTree = "<group>"; };
 		1824C61B1D255045009078B4 /* OneRollSelection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OneRollSelection.h; sourceTree = "<group>"; };
 		1824C61D1D2556AF009078B4 /* create_activity_main.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = create_activity_main.png; sourceTree = "<group>"; };
@@ -764,6 +768,7 @@
 				CDDB47A41D1431FC00F723F1 /* RTKit */,
 				18A824491BEDCF0E00084589 /* UIAdapter.swift */,
 				184867831BF851AE00016A4E /* Common.swift */,
+				181DAA3A1D56F7DD00048216 /* ProfessionHelper.swift */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -1007,6 +1012,7 @@
 				18B5E9A61D5234E9004FDF5C /* playerListCell.swift */,
 				185BBC371D55F16200CB51E8 /* PlayerFooter.swift */,
 				185BBC391D55F17500CB51E8 /* applyListCell.swift */,
+				181DAA3C1D57350E00048216 /* ApplyFooter.swift */,
 			);
 			name = activityDetal;
 			sourceTree = "<group>";
@@ -1385,6 +1391,7 @@
 				18A8244A1BEDCF0E00084589 /* UIAdapter.swift in Sources */,
 				18FA0CB61D4659480046C4BC /* raidDetailModel.m in Sources */,
 				1801FC521D2918450083A37D /* LoginService.m in Sources */,
+				181DAA3D1D57350E00048216 /* ApplyFooter.swift in Sources */,
 				1815183F1C958ACF00AA4F33 /* SearchActivityView.swift in Sources */,
 				1817585B1C4B8CB5008913DB /* CalendarView.swift in Sources */,
 				18F7E46B1C97EE69007E3459 /* reviewTableCell.swift in Sources */,
@@ -1395,6 +1402,7 @@
 				1882E8831D05C567006F5803 /* ChatVoiceCell.swift in Sources */,
 				18A593DA1C099C5A00458308 /* BaseTextfiledDeletgate.swift in Sources */,
 				181000A91D3B5AFF00A9E468 /* DBContract.swift in Sources */,
+				181DAA3B1D56F7DD00048216 /* ProfessionHelper.swift in Sources */,
 				18A8245A1BEDF5CC00084589 /* ChooseSideCollectionCell.swift in Sources */,
 				1826B3181D02D25700E34D9A /* TableViewForChat.swift in Sources */,
 				182BE1781D5618E700224330 /* ActivityDetailModel.m in Sources */,

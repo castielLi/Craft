@@ -17,13 +17,14 @@ class playerListCell: UITableViewCell {
     var jobIcon : UIButton?
     var dutyIcon : UIButton?
     var backgroundImage : UIImageView?
+    var footer : PlayerFooter?
     
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
     }
     
-    init(style: UITableViewCellStyle, reuseIdentifier: String? , height : CGFloat) {
+    init(style: UITableViewCellStyle, reuseIdentifier: String? , height : CGFloat , width: CGFloat) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         backgroundImage = UIImageView(frame: CGRect(x: 0, y: 0, width: self.frame.width, height: height))
@@ -66,7 +67,7 @@ class playerListCell: UITableViewCell {
         
         self.responseIcon!.mas_makeConstraints{ make in
            make.top.equalTo()(self).with().offset()(15)
-           make.bottom.equalTo()(self).with().offset()(-15)
+           make.height.equalTo()(20)
            make.width.equalTo()(13)
            make.left.equalTo()(self.account!.mas_right).with().offset()(UIAdapter.shared.transferWidth(3))
         }
@@ -77,7 +78,7 @@ class playerListCell: UITableViewCell {
         
         self.jobIcon!.mas_makeConstraints{ make in
             make.top.equalTo()(self).with().offset()(12)
-            make.bottom.equalTo()(self).with().offset()(-12)
+            make.height.equalTo()(26)
             make.width.equalTo()(26)
             make.left.equalTo()(self.responseIcon!.mas_right).with().offset()(UIAdapter.shared.transferWidth(12))
         }
@@ -88,12 +89,14 @@ class playerListCell: UITableViewCell {
         
         self.dutyIcon!.mas_makeConstraints{ make in
             make.top.equalTo()(self).with().offset()(12)
-            make.bottom.equalTo()(self).with().offset()(-12)
+            make.height.equalTo()(26)
             make.width.equalTo()(26)
             make.left.equalTo()(self.jobIcon!.mas_right).with().offset()(UIAdapter.shared.transferWidth(8))
         }
 
-        
+        footer = PlayerFooter(frame: CGRect(x: 0, y: 50, width: width, height: 30))
+        footer!.hidden = true
+        self.addSubview(footer!)
     }
     
     required init?(coder aDecoder: NSCoder) {

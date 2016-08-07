@@ -120,12 +120,34 @@
                      
                     ActivityDetailModel * data = [ActivityDetailModel mj_objectWithKeyValues: response];
                     result.data = data;
-                    [self.delegate GetActivityDetailFinish:result response:response];
+                    [self.delegate GetActivityDetailFinish:result response:response activityId:activityId];
                   }else{
-                     [self.delegate GetActivityDetailFinish:result response:response];
+                     [self.delegate GetActivityDetailFinish:result response:response activityId:activityId];
                   }
               }];
 }
 
+
+-(void)getApplyList:(NSString*)activityId{
+    
+    NSString * url = [NSString stringWithFormat:@"/api/activity/get_request_list?activityId=%@",activityId];
+    
+    [_restService get:url parameters:nil
+             callback:^ (ApiResult *result, id response){
+                 if(result.state){
+                     NSMutableArray * array = [[NSMutableArray alloc]init];
+                     for(int i= 0; i<((NSArray *)response).count; i++){
+                         ActivityItemModel * model = [ActivityItemModel mj_objectWithKeyValues:((NSArray *)response)[i]];
+                         [array addObject:model];
+                     }
+                     
+                     result.data = array;
+                     [self.delegate GetApplylistDidFinish:result response:response];
+                 }else{
+                     [self.delegate GetApplylistDidFinish:result response:response];
+                 }
+             }];
+
+}
 
 @end

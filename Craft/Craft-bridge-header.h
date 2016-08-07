@@ -38,3 +38,4 @@
 
 //model
 #import "ActivityItemModel.h"
+#import "ActivityDetailModel.h"

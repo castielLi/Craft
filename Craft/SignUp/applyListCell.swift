@@ -17,8 +17,11 @@ class applyListCell: UITableViewCell {
     var dutyIcon : UIButton?
     var backgroundImage : UIImageView?
     var content : UILabel?
+    var footer : ApplyFooter?
+    var honor : UIImageView?
+    var honorNum : UILabel?
 
-    init(style: UITableViewCellStyle, reuseIdentifier: String? , height : CGFloat) {
+    init(style: UITableViewCellStyle, reuseIdentifier: String? , height : CGFloat , width : CGFloat) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         backgroundImage = UIImageView(frame: CGRect(x: 0, y: 0, width: self.frame.width, height: height))
@@ -39,7 +42,7 @@ class applyListCell: UITableViewCell {
             make.top.equalTo()(self.icon!).with().offset()(3)
             make.left.equalTo()(self.icon!.mas_right).with().offset()(UIAdapter.shared.transferWidth(2))
             make.height.equalTo()(20)
-            make.width.equalTo()(self.frame.width * 0.4)
+            make.width.equalTo()(self.frame.width * 0.3)
         }
         
         account = UILabel()
@@ -55,15 +58,38 @@ class applyListCell: UITableViewCell {
             make.width.equalTo()(self.frame.width * 0.4)
         }
         
+        honor = UIImageView()
+        honor!.image = UIImage(named: "honour")
+        self.addSubview(honor!)
+        self.honor!.mas_makeConstraints{ make in
+            make.top.equalTo()(self).with().offset()(12)
+            make.height.equalTo()(15)
+            make.width.equalTo()(15)
+            make.left.equalTo()(self.name!.mas_right).with().offset()(UIAdapter.shared.transferWidth(3))
+        }
+        
+        honorNum = UILabel()
+        honorNum!.text = "1000"
+        honorNum!.textColor = Resources.Color.dailyColor
+        honorNum!.font = UIFont(name: "DB LCD Temp", size: 9)
+        self.addSubview(honorNum!)
+        
+        self.honorNum!.mas_makeConstraints{ make in
+            make.bottom.equalTo()(self.honor)
+            make.height.equalTo()(15)
+            make.width.equalTo()(22)
+            make.left.equalTo()(self.honor!.mas_right).with().offset()(UIAdapter.shared.transferWidth(5))
+        }
+        
         jobIcon = UIButton()
         jobIcon!.setBackgroundImage(UIImage(named: "qs"), forState: UIControlState.Normal)
         self.addSubview(jobIcon!)
         
         self.jobIcon!.mas_makeConstraints{ make in
             make.top.equalTo()(self).with().offset()(12)
-            make.bottom.equalTo()(self).with().offset()(-22)
+            make.height.equalTo()(26)
             make.width.equalTo()(26)
-            make.left.equalTo()(self.account!.mas_right).with().offset()(UIAdapter.shared.transferWidth(24))
+            make.left.equalTo()(self.account!.mas_right).with().offset()(UIAdapter.shared.transferWidth(30))
         }
         
         dutyIcon = UIButton()
@@ -72,7 +98,7 @@ class applyListCell: UITableViewCell {
         
         self.dutyIcon!.mas_makeConstraints{ make in
             make.top.equalTo()(self).with().offset()(12)
-            make.bottom.equalTo()(self).with().offset()(-22)
+            make.height.equalTo()(26)
             make.width.equalTo()(26)
             make.left.equalTo()(self.jobIcon!.mas_right).with().offset()(UIAdapter.shared.transferWidth(8))
         }
@@ -85,11 +111,13 @@ class applyListCell: UITableViewCell {
         
         self.content!.mas_makeConstraints{ make in
            make.top.equalTo()(self.account!.mas_bottom).with().offset()(UIAdapter.shared.transferWidth(2))
-           make.bottom.equalTo()(self).with().offset()(-3)
-           make.left.equalTo()(self.icon!.mas_right).with().offset()(UIAdapter.shared.transferWidth(2))
+           make.bottom.equalTo()(self.account!.mas_bottom).with().offset()(12)
+           make.left.equalTo()(self).with().offset()(5)
         }
         
-        
+        footer = ApplyFooter(frame: CGRect(x: 0, y: 60, width: width, height: 30))
+        footer!.hidden = true
+        self.addSubview(footer!)
     }
     
     required init?(coder aDecoder: NSCoder) {

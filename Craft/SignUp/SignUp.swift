@@ -421,12 +421,12 @@ class SignUp: ViewControllerBase ,RCIMClientReceiveMessageDelegate,UITextViewDel
         self.service!.getActivityDetail(activityId)
     }
     
-    func GetActivityDetailFinish(result: ApiResult!, response: AnyObject!) {
+    func GetActivityDetailFinish(result: ApiResult!, response: AnyObject!,activityId:String) {
         self.closeProgress()
         if (result.state){
         
         UIView.animateWithDuration(0.4, delay: 0, options: UIViewAnimationOptions.CurveEaseInOut, animations: { () -> Void in
-            self.activityMainView!.frame.origin.x = -UIAdapter.shared.transferWidth(280)
+            self.activityMainView!.frame.origin.x = -UIAdapter.shared.transferWidth(290)
             
         }) { (success) -> Void in
             if success {
@@ -437,6 +437,9 @@ class SignUp: ViewControllerBase ,RCIMClientReceiveMessageDelegate,UITextViewDel
                 
                 
                 let activitiesView = MyActivities(nibName: nil, bundle: nil)
+                activitiesView.dataModel = result.data as! ActivityDetailModel
+                activitiesView.playerListSource = (result.data as! ActivityDetailModel).activityUser
+                activitiesView.activityId = activityId
                 let activitiesNav = UINavigationController(rootViewController: activitiesView)
                 activitiesNav.modalPresentationStyle = UIModalPresentationStyle.OverFullScreen
                 self.presentViewController(activitiesNav, animated: false, completion: nil)

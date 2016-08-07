@@ -8,13 +8,18 @@
 
 import UIKit
 
-class MyActivities: ViewControllerBase ,UIGestureRecognizerDelegate , UITableViewDataSource, UITableViewDelegate{
+class MyActivities: ViewControllerBase ,UIGestureRecognizerDelegate , UITableViewDataSource, UITableViewDelegate,SignUpServiceDelegate{
     
-    
+    var service : SignUpService?
+    var activityId : String?
     var activitiesView : UIImageView?
     var button : UIButton?
     var blankTap : UITapGestureRecognizer?
+    var dataModel : ActivityDetailModel?
     
+    
+    var playerSelected : Int?
+    var applySelected : Int?
     
     var scroll : UIScrollView?
     var table : UITableView?
@@ -31,8 +36,14 @@ class MyActivities: ViewControllerBase ,UIGestureRecognizerDelegate , UITableVie
     var buttonListBackground : UIImageView?
     
     
+    var playerListSource : NSArray?
+    var applylistSource : NSArray?
+    
+    
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+        service = SignUpService()
+        service!.delegate = self
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -144,6 +155,36 @@ class MyActivities: ViewControllerBase ,UIGestureRecognizerDelegate , UITableVie
     func setActivityDetail(){
         activityDetailView = activityDetail(frame: CGRect(x: 0, y: 0, width: UIAdapter.shared.transferWidth(240), height: UIAdapter.shared.transferHeight(130)))
         self.scroll!.addSubview(activityDetailView!)
+        activityDetailView!.level!.text = dataModel!.activity.aplName
+        activityDetailView!.content!.text = dataModel!.activity.detail
+        activityDetailView!.name!.text = dataModel!.activity.title
+        activityDetailView!.type!.text = dataModel!.activity.apName
+        
+        let timeStamp = NSString(string :dataModel!.activity.startDate)
+        let timeInterval:NSTimeInterval = NSTimeInterval(timeStamp.doubleValue) / 1000
+        let startDate = NSDate(timeIntervalSince1970: timeInterval)
+        
+        let endTimeStamp = NSString(string :dataModel!.activity.startDate)
+        let endTimeInterval:NSTimeInterval = NSTimeInterval(timeStamp.doubleValue) / 1000
+        let endDate =  NSDate(timeIntervalSince1970: endTimeInterval)
+
+        var dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        let time = dateFormatter.stringFromDate(startDate)
+        activityDetailView!.time!.text = time
+        
+        
+        var timeFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = "HH:mm"
+        let startTime = dateFormatter.stringFromDate(endDate)
+        let endTime = dateFormatter.stringFromDate(endDate)
+        
+        let now = NSDate()
+        let dtime = now.timeIntervalSinceDate(startDate)
+        
+        activityDetailView!.startTime!.text = startTime
+        activityDetailView!.endTime!.text = endTime
+
     }
 
     
@@ -177,16 +218,45 @@ class MyActivities: ViewControllerBase ,UIGestureRecognizerDelegate , UITableVie
     }
     
     func playerListClick(sender: UIButton){
-    
         selectedIndex = 2
-        self.table!.reloadData()
+        self.showProgress()
+        self.service!.getActivityDetail(self.activityId!)
+    }
+    
+    func GetActivityDetailFinish(result: ApiResult!, response: AnyObject!, activityId: String!) {
+        self.closeProgress()
+        if(result.state){
+           playerListSource = (result.data as! ActivityDetailModel).activityUser
+            if self.table!.indexPathForSelectedRow != nil{
+           self.table!.deselectRowAtIndexPath(self.table!.indexPathForSelectedRow!, animated: false)
+            }
+           self.table!.reloadData()
+        }else{
+           MsgBoxHelper.show("错误", message: result.message!)
+        }
     }
     
     func applyListClick(sender : UIButton){
        
         selectedIndex = 1
-        self.table!.reloadData()
+        self.showProgress()
+        self.service!.getApplyList(self.activityId!)
+        
     }
+
+    func GetApplylistDidFinish(result: ApiResult!, response: AnyObject!) {
+        self.closeProgress()
+        if(result.state){
+            applylistSource = result.data as! NSArray
+            if self.table!.indexPathForSelectedRow != nil{
+            self.table!.deselectRowAtIndexPath(self.table!.indexPathForSelectedRow!, animated: false)
+            }
+            self.table!.reloadData()
+        }else{
+            MsgBoxHelper.show("错误", message: result.message!)
+        }
+    }
+    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -204,7 +274,25 @@ class MyActivities: ViewControllerBase ,UIGestureRecognizerDelegate , UITableVie
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        if selectedIndex == 2{
+            return self.playerListSource!.count
+        }
+        return self.applylistSource!.count
+    }
+    
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        if selectedIndex == 2{
+            if tableView.indexPathForSelectedRow == indexPath{
+                return 80
+            }
+            return 50
+        }else{
+            if tableView.indexPathForSelectedRow == indexPath{
+                return 90
+            }
+  
+            return 60
+        }
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -212,42 +300,72 @@ class MyActivities: ViewControllerBase ,UIGestureRecognizerDelegate , UITableVie
         var cell = tableView.dequeueReusableCellWithIdentifier("cell") as? playerListCell
         if(cell == nil) {
             
-            cell = playerListCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier: "cell" ,height: 50)
+            cell = playerListCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier: "cell" ,height: 50 ,width: self.table!.frame.width)
         }
-        
-        cell?.backgroundColor = UIColor.clearColor()
         cell!.selectionStyle = UITableViewCellSelectionStyle.None
+        cell?.backgroundColor = UIColor.clearColor()
+            
+            if indexPath != tableView.indexPathForSelectedRow{
+                cell!.footer!.hidden = true
+                cell!.backgroundImage!.image = UIImage(named: "player_cell")
+            }else{
+                cell!.footer!.hidden = false
+            }
+
         return cell!
         }else{
             var cell = tableView.dequeueReusableCellWithIdentifier("cell") as? applyListCell
             if(cell == nil) {
                 
-                cell = applyListCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier: "cell" ,height: 60)
+                cell = applyListCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier: "cell" ,height: 60 , width: self.table!.frame.width)
+            }
+//            cell!.account!.text = playerListSource![indexPath.row].valueForKey("")
+            
+            if indexPath != tableView.indexPathForSelectedRow{
+               cell!.footer!.hidden = true
+               cell!.backgroundImage!.image = UIImage(named: "player_cell")
+            }else{
+               cell!.footer!.hidden = false
             }
             
             cell?.backgroundColor = UIColor.clearColor()
             cell!.selectionStyle = UITableViewCellSelectionStyle.None
+
             return cell!
         }
     }
     
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if selectedIndex == 2{
-        return 50
+        var cell = tableView.cellForRowAtIndexPath(indexPath) as! playerListCell
+        cell.backgroundImage!.image = UIImage(named: "cell_selected")
+        tableView.beginUpdates()
+        cell.footer!.hidden = false
+        tableView.endUpdates()
         }else{
-           return 60
+            var cell = tableView.cellForRowAtIndexPath(indexPath) as! applyListCell
+            cell.backgroundImage!.image = UIImage(named: "cell_selected")
+            tableView.beginUpdates()
+            cell.footer!.hidden = false
+            tableView.endUpdates()
+
         }
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        var cell = tableView.cellForRowAtIndexPath(indexPath) as! playerListCell
-        cell.backgroundImage!.image = UIImage(named: "cell_selected")
-    }
-    
     func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
+        if selectedIndex == 2{
         var cell = tableView.cellForRowAtIndexPath(indexPath) as! playerListCell
+        cell.footer!.hidden = true
         cell.backgroundImage!.image = UIImage(named: "player_cell")
-
+        
+        tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.None)
+        }else{
+            var cell = tableView.cellForRowAtIndexPath(indexPath) as! applyListCell
+            cell.footer!.hidden = true
+            cell.backgroundImage!.image = UIImage(named: "player_cell")
+            
+            tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.None)
+        }
     }
     
     /*

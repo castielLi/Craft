@@ -18,6 +18,7 @@
 @property (nonatomic,strong) NSString * title;
 @property (nonatomic,strong) NSString * chatId;
 @property (nonatomic,strong) NSString * aplName;
+@property (nonatomic,strong) NSString * apName;
 @property int needCount;
 @property int haveCount;
 
