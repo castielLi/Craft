@@ -28,5 +28,7 @@ struct DBContract{
     
     static let createFriendTable = "CREATE TABLE IF NOT EXISTS FriendList(userId text,userName text,IconUrl text, battleAccount text, markName text)";
     
+    static let createGroupTable = "CREATE TABLE IF NOT EXISTS GroupList(groupId text,groupName text,groupIntro text)";
+    
     static let createFaction = "CREATE TABLE IF NOT EXISTS Faction(faction text)"; 
 }

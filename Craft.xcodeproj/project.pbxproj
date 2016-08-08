@@ -30,12 +30,18 @@
 		1817585B1C4B8CB5008913DB /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1817585A1C4B8CB5008913DB /* CalendarView.swift */; };
 		1817585D1C4B8D45008913DB /* CustomLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1817585C1C4B8D45008913DB /* CustomLayout.swift */; };
 		181C3E9F1C57ABB600A822D0 /* CalendearCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181C3E9E1C57ABB600A822D0 /* CalendearCell.swift */; };
+		181DAA3B1D56F7DD00048216 /* ProfessionHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181DAA3A1D56F7DD00048216 /* ProfessionHelper.swift */; };
+		181DAA3D1D57350E00048216 /* ApplyFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181DAA3C1D57350E00048216 /* ApplyFooter.swift */; };
+		181DAA401D575B2500048216 /* groupListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 181DAA3F1D575B2500048216 /* groupListModel.m */; };
 		1824C61C1D255045009078B4 /* OneRollSelection.m in Sources */ = {isa = PBXBuildFile; fileRef = 1824C61A1D255045009078B4 /* OneRollSelection.m */; };
 		1824C61E1D2556AF009078B4 /* create_activity_main.png in Resources */ = {isa = PBXBuildFile; fileRef = 1824C61D1D2556AF009078B4 /* create_activity_main.png */; };
 		182647781C2E689C0078D4C2 /* ForgetPassword.swift in Sources */ = {isa = PBXBuildFile; fileRef = 182647761C2E689C0078D4C2 /* ForgetPassword.swift */; };
 		182647791C2E689C0078D4C2 /* RegisterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 182647771C2E689C0078D4C2 /* RegisterController.swift */; };
 		1826B3181D02D25700E34D9A /* TableViewForChat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1826B3171D02D25700E34D9A /* TableViewForChat.swift */; };
 		1826B31A1D02D4F400E34D9A /* ChatDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1826B3191D02D4F400E34D9A /* ChatDetailCell.swift */; };
+		182BE1781D5618E700224330 /* ActivityDetailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 182BE1771D5618E700224330 /* ActivityDetailModel.m */; };
+		182BE17B1D56198300224330 /* ActivityDetailContentModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 182BE17A1D56198300224330 /* ActivityDetailContentModel.m */; };
+		182BE17E1D561CC600224330 /* ActivityMemberItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 182BE17D1D561CC600224330 /* ActivityMemberItem.m */; };
 		1832D26B1D198A37000803FF /* WorldChat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1832D26A1D198A37000803FF /* WorldChat.swift */; };
 		1837D2361CFAE2B700FFE3FD /* ExtensionTableForChatRoom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1837D2351CFAE2B700FFE3FD /* ExtensionTableForChatRoom.swift */; };
 		1837D23E1CFAE3FB00FFE3FD /* ChatListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1837D23D1CFAE3FB00FFE3FD /* ChatListCell.swift */; };
@@ -49,6 +55,8 @@
 		18568B0B1D02969000D9446E /* RCIMHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 18568B0A1D02969000D9446E /* RCIMHelper.m */; };
 		18568B0D1D02A00A00D9446E /* RCIMdelegateForChat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18568B0C1D02A00A00D9446E /* RCIMdelegateForChat.swift */; };
 		18568B121D02A7E600D9446E /* ChatNavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18568B111D02A7E600D9446E /* ChatNavigationView.swift */; };
+		185BBC381D55F16200CB51E8 /* PlayerFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 185BBC371D55F16200CB51E8 /* PlayerFooter.swift */; };
+		185BBC3A1D55F17500CB51E8 /* applyListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 185BBC391D55F17500CB51E8 /* applyListCell.swift */; };
 		18605E2E1CE0913E007D8114 /* ReadyForBattle.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 18605E2D1CE0913E007D8114 /* ReadyForBattle.mp3 */; };
 		18605E301CE09143007D8114 /* openBook.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 18605E2F1CE09143007D8114 /* openBook.mp3 */; };
 		18605E321CE09147007D8114 /* clickevent.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 18605E311CE09147007D8114 /* clickevent.mp3 */; };
@@ -217,6 +225,10 @@
 		1817585A1C4B8CB5008913DB /* CalendarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
 		1817585C1C4B8D45008913DB /* CustomLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomLayout.swift; sourceTree = "<group>"; };
 		181C3E9E1C57ABB600A822D0 /* CalendearCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendearCell.swift; sourceTree = "<group>"; };
+		181DAA3A1D56F7DD00048216 /* ProfessionHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfessionHelper.swift; sourceTree = "<group>"; };
+		181DAA3C1D57350E00048216 /* ApplyFooter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApplyFooter.swift; sourceTree = "<group>"; };
+		181DAA3E1D575B2500048216 /* groupListModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = groupListModel.h; sourceTree = "<group>"; };
+		181DAA3F1D575B2500048216 /* groupListModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = groupListModel.m; sourceTree = "<group>"; };
 		1824C61A1D255045009078B4 /* OneRollSelection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OneRollSelection.m; sourceTree = "<group>"; };
 		1824C61B1D255045009078B4 /* OneRollSelection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OneRollSelection.h; sourceTree = "<group>"; };
 		1824C61D1D2556AF009078B4 /* create_activity_main.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = create_activity_main.png; sourceTree = "<group>"; };
@@ -224,6 +236,12 @@
 		182647771C2E689C0078D4C2 /* RegisterController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RegisterController.swift; path = Modules/Login/RegisterController.swift; sourceTree = "<group>"; };
 		1826B3171D02D25700E34D9A /* TableViewForChat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TableViewForChat.swift; path = ChatRoom/TableViewForChat.swift; sourceTree = "<group>"; };
 		1826B3191D02D4F400E34D9A /* ChatDetailCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChatDetailCell.swift; path = ChatRoom/ChatDetailCell.swift; sourceTree = "<group>"; };
+		182BE1761D5618E700224330 /* ActivityDetailModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ActivityDetailModel.h; path = SignUp/ActivityDetailModel.h; sourceTree = "<group>"; };
+		182BE1771D5618E700224330 /* ActivityDetailModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ActivityDetailModel.m; path = SignUp/ActivityDetailModel.m; sourceTree = "<group>"; };
+		182BE1791D56198300224330 /* ActivityDetailContentModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ActivityDetailContentModel.h; path = SignUp/ActivityDetailContentModel.h; sourceTree = "<group>"; };
+		182BE17A1D56198300224330 /* ActivityDetailContentModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ActivityDetailContentModel.m; path = SignUp/ActivityDetailContentModel.m; sourceTree = "<group>"; };
+		182BE17C1D561CC600224330 /* ActivityMemberItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ActivityMemberItem.h; path = SignUp/ActivityMemberItem.h; sourceTree = "<group>"; };
+		182BE17D1D561CC600224330 /* ActivityMemberItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ActivityMemberItem.m; path = SignUp/ActivityMemberItem.m; sourceTree = "<group>"; };
 		1832D26A1D198A37000803FF /* WorldChat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WorldChat.swift; path = SignUp/WorldChat.swift; sourceTree = "<group>"; };
 		1837D2351CFAE2B700FFE3FD /* ExtensionTableForChatRoom.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtensionTableForChatRoom.swift; sourceTree = "<group>"; };
 		1837D23D1CFAE3FB00FFE3FD /* ChatListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChatListCell.swift; path = ChatRoom/ChatListCell.swift; sourceTree = "<group>"; };
@@ -238,6 +256,8 @@
 		18568B0A1D02969000D9446E /* RCIMHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RCIMHelper.m; path = ChatRoom/RCIMHelper.m; sourceTree = "<group>"; };
 		18568B0C1D02A00A00D9446E /* RCIMdelegateForChat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RCIMdelegateForChat.swift; sourceTree = "<group>"; };
 		18568B111D02A7E600D9446E /* ChatNavigationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatNavigationView.swift; sourceTree = "<group>"; };
+		185BBC371D55F16200CB51E8 /* PlayerFooter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlayerFooter.swift; path = SignUp/PlayerFooter.swift; sourceTree = "<group>"; };
+		185BBC391D55F17500CB51E8 /* applyListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = applyListCell.swift; path = SignUp/applyListCell.swift; sourceTree = "<group>"; };
 		18605E2D1CE0913E007D8114 /* ReadyForBattle.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = ReadyForBattle.mp3; sourceTree = "<group>"; };
 		18605E2F1CE09143007D8114 /* openBook.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = openBook.mp3; sourceTree = "<group>"; };
 		18605E311CE09147007D8114 /* clickevent.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = clickevent.mp3; sourceTree = "<group>"; };
@@ -751,6 +771,7 @@
 				CDDB47A41D1431FC00F723F1 /* RTKit */,
 				18A824491BEDCF0E00084589 /* UIAdapter.swift */,
 				184867831BF851AE00016A4E /* Common.swift */,
+				181DAA3A1D56F7DD00048216 /* ProfessionHelper.swift */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -869,6 +890,12 @@
 			children = (
 				18D481511D4A1E2200B86B70 /* ActivityItemModel.h */,
 				18D481521D4A1E2200B86B70 /* ActivityItemModel.m */,
+				182BE1761D5618E700224330 /* ActivityDetailModel.h */,
+				182BE1771D5618E700224330 /* ActivityDetailModel.m */,
+				182BE1791D56198300224330 /* ActivityDetailContentModel.h */,
+				182BE17A1D56198300224330 /* ActivityDetailContentModel.m */,
+				182BE17C1D561CC600224330 /* ActivityMemberItem.h */,
+				182BE17D1D561CC600224330 /* ActivityMemberItem.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -986,6 +1013,9 @@
 			children = (
 				18B5E9A41D521938004FDF5C /* activityDetail.swift */,
 				18B5E9A61D5234E9004FDF5C /* playerListCell.swift */,
+				185BBC371D55F16200CB51E8 /* PlayerFooter.swift */,
+				185BBC391D55F17500CB51E8 /* applyListCell.swift */,
+				181DAA3C1D57350E00048216 /* ApplyFooter.swift */,
 			);
 			name = activityDetal;
 			sourceTree = "<group>";
@@ -1004,6 +1034,8 @@
 			children = (
 				18D4814E1D49DD2800B86B70 /* friendListModel.h */,
 				18D4814F1D49DD2800B86B70 /* friendListModel.m */,
+				181DAA3E1D575B2500048216 /* groupListModel.h */,
+				181DAA3F1D575B2500048216 /* groupListModel.m */,
 			);
 			name = chat;
 			sourceTree = "<group>";
@@ -1364,6 +1396,7 @@
 				18A8244A1BEDCF0E00084589 /* UIAdapter.swift in Sources */,
 				18FA0CB61D4659480046C4BC /* raidDetailModel.m in Sources */,
 				1801FC521D2918450083A37D /* LoginService.m in Sources */,
+				181DAA3D1D57350E00048216 /* ApplyFooter.swift in Sources */,
 				1815183F1C958ACF00AA4F33 /* SearchActivityView.swift in Sources */,
 				1817585B1C4B8CB5008913DB /* CalendarView.swift in Sources */,
 				18F7E46B1C97EE69007E3459 /* reviewTableCell.swift in Sources */,
@@ -1374,8 +1407,11 @@
 				1882E8831D05C567006F5803 /* ChatVoiceCell.swift in Sources */,
 				18A593DA1C099C5A00458308 /* BaseTextfiledDeletgate.swift in Sources */,
 				181000A91D3B5AFF00A9E468 /* DBContract.swift in Sources */,
+				181DAA3B1D56F7DD00048216 /* ProfessionHelper.swift in Sources */,
 				18A8245A1BEDF5CC00084589 /* ChooseSideCollectionCell.swift in Sources */,
 				1826B3181D02D25700E34D9A /* TableViewForChat.swift in Sources */,
+				182BE1781D5618E700224330 /* ActivityDetailModel.m in Sources */,
+				185BBC3A1D55F17500CB51E8 /* applyListCell.swift in Sources */,
 				1882E8821D05C567006F5803 /* ChatTextMessage.swift in Sources */,
 				18A8244F1BEDCF9400084589 /* BaseViewController.swift in Sources */,
 				187464971C3FA3DD009E4041 /* SendNotification.swift in Sources */,
@@ -1410,12 +1446,15 @@
 				18FA0CBA1D4659EB0046C4BC /* raidLevels.m in Sources */,
 				1832D26B1D198A37000803FF /* WorldChat.swift in Sources */,
 				1892E8D11CDE3BED002AAEBF /* dutyView.swift in Sources */,
+				182BE17E1D561CC600224330 /* ActivityMemberItem.m in Sources */,
+				185BBC381D55F16200CB51E8 /* PlayerFooter.swift in Sources */,
 				1801FC681D29241B0083A37D /* FMDBHelper.m in Sources */,
 				1895CEF71D322B470047C8F0 /* CreateNewTimeView.swift in Sources */,
 				18B16E721D3FA738006903D8 /* ExtensionForCreateActivityGesture.swift in Sources */,
 				18D481531D4A1E2200B86B70 /* ActivityItemModel.m in Sources */,
 				18A824461BEDCDF200084589 /* LoginController.swift in Sources */,
 				18C44C4E1D1197560087EBF6 /* StartView.m in Sources */,
+				182BE17B1D56198300224330 /* ActivityDetailContentModel.m in Sources */,
 				18F7E46F1C97F454007E3459 /* DutyDisplayView.swift in Sources */,
 				181000A61D3B546C00A9E468 /* SignUpService.m in Sources */,
 				18610C531C12E15600B864F2 /* StringExtensions.swift in Sources */,
@@ -1428,6 +1467,7 @@
 				184867821BF8506F00016A4E /* SliderMain.swift in Sources */,
 				1895CEF31D3220A80047C8F0 /* DropDownSelectView.swift in Sources */,
 				1895CEF51D322A4B0047C8F0 /* CreateActivityTime.swift in Sources */,
+				181DAA401D575B2500048216 /* groupListModel.m in Sources */,
 				1801FC671D29241B0083A37D /* RestService.m in Sources */,
 				1892E8D31CDE46D9002AAEBF /* Time.swift in Sources */,
 				18CE64341CF7354500834C2B /* DailyDetail.swift in Sources */,

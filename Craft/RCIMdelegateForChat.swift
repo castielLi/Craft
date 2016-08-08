@@ -71,11 +71,23 @@ extension ChatRoom{
     func getChatListInfoByRCMArray(RCMarray : NSArray)->NSMutableArray{
         let array = NSMutableArray()
         for item in RCMarray{
+            //私聊
+            if item.conversationType == RCConversationType.ConversationType_PRIVATE{
             let userId = item.valueForKey("senderUserId") as! String
             let user = _fmdbHelper!.DatabaseQueryWithParameters(["userId","userName","IconUrl","battleAccount","markName"], query: ChatRoom.searchInfoInFriendList, values: [userId])
             
             if (user != nil && user.count > 0){
                array.addObject(user)
+             }
+            }
+            if item.conversationType == RCConversationType.ConversationType_GROUP{
+               
+                let groupId = item.valueForKey("targetId") as! String
+                let group = _fmdbHelper!.DatabaseQueryWithParameters(["groupId","groupName","groupIntro"], query: ChatRoom.searchInfoInGroupList, values: [groupId])
+                
+                if(group != nil && group.count > 0){
+                   array.addObject(group)
+                }
             }
         }
         return array

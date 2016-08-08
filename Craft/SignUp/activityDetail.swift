@@ -144,11 +144,10 @@ class activityDetail: UIView {
         self.addSubview(setting!)
         self.setting!.mas_makeConstraints{ make in
             make.top.equalTo()(self.mas_bottom).with().offset()(UIAdapter.shared.transferHeight(-30))
-            make.bottom.equalTo()(self).with().offset()(UIAdapter.shared.transferHeight(-10))
-            make.right.equalTo()(self).with().offset()(UIAdapter.shared.transferWidth(-8))
+            make.height.equalTo()(UIAdapter.shared.transferWidth(20))
+            make.width.equalTo()(UIAdapter.shared.transferWidth(20))
             make.left.equalTo()(self.mas_right).with().offset()(UIAdapter.shared.transferWidth(-28))
         }
-
         
     }
     

@@ -12,7 +12,7 @@ extension SignUp: UITableViewDelegate , UITableViewDataSource {
 
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if tableView.tag == 2{
-        return 10
+        return myActivitiesDatasource!.count
         }else{
            return chatDetail.count
         }
@@ -28,27 +28,35 @@ extension SignUp: UITableViewDelegate , UITableViewDataSource {
             cell = ActivityItemCell(style: UITableViewCellStyle.Value1, reuseIdentifier: "activityItemCell", cellHeight: UIAdapter.shared.transferHeight(65),cellWidth: self.activityMainView!.activityTabel!.bounds.width )
         }
         
+        
         cell!.backgroundImage!.image = UIImage(named: "activityItem")
+          
+        let level = myActivitiesDatasource![indexPath.row].valueForKey("aplName") as! String
+        if level == "普通"{
         cell!.iconImage!.image = UIImage(named: "challenge")
-        cell!.raidName!.text = "纳克萨玛斯"
-        cell!.dutyPart!.damageLabel!.text = "13"
-        cell!.dutyPart!.tankLabel!.text = "3"
-        cell!.dutyPart!.healLabel!.text = "4"
-        cell!.contentLabel!.text = "老1-老4,来熟练工，不墨迹 老1-老4,来熟练工，不墨迹 老1-老4,来熟练工，不墨迹"
-        cell!.leadName!.text = "伊莎贝拉殿下"
-        
-        if indexPath.row % 3 == 0 {
-            cell!.timePart!.firstPart?.text = "165"
-            cell!.timePart!.midPart!.text = ":"
-            cell!.timePart!.midPart!.font = UIFont(name: "DB LCD Temp", size: UIAdapter.shared.transferHeight(20))
-            cell!.timePart!.secondPart!.text = "43"
-        }else{
-            cell!.timePart!.firstPart?.text = "07"
-            cell!.timePart!.midPart!.text = ":"
-            cell!.timePart!.midPart!.font = UIFont(name: "DB LCD Temp", size: UIAdapter.shared.transferHeight(20))
-            cell!.timePart!.secondPart!.text = "43"
         }
+            
+        cell!.raidName!.text = myActivitiesDatasource![indexPath.row].valueForKey("title") as! String
+        cell!.dutyPart!.damageLabel!.text = "\(myActivitiesDatasource![indexPath.row].valueForKey("haveDPSCount") as! Int)"
+        cell!.dutyPart!.tankLabel!.text = "\(myActivitiesDatasource![indexPath.row].valueForKey("haveTankCount") as! Int)"
+        cell!.dutyPart!.healLabel!.text = "\(myActivitiesDatasource![indexPath.row].valueForKey("haveHealCount") as! Int)"
+        cell!.contentLabel!.text = myActivitiesDatasource![indexPath.row].valueForKey("detail") as! String
+        cell!.leadName!.text = myActivitiesDatasource![indexPath.row].valueForKey("createUserName") as! String
         
+            let timeStamp = NSString(string :myActivitiesDatasource![indexPath.row].valueForKey("startDate") as! String)
+        let timeInterval:NSTimeInterval = NSTimeInterval(timeStamp.doubleValue) / 1000
+        let startDate = NSDate(timeIntervalSince1970: timeInterval)
+
+        let now = NSDate()
+            
+        let dtime = now.timeIntervalSinceDate(startDate)
+            
+            
+        cell!.timePart!.firstPart?.text = "\(Int(dtime / 3600))"
+        cell!.timePart!.midPart!.text = ":"
+        cell!.timePart!.midPart!.font = UIFont(name: "DB LCD Temp", size: UIAdapter.shared.transferHeight(20))
+        cell!.timePart!.secondPart!.text = "\(Int(dtime % 3600 / 60))"
+            
         cell!.selectionStyle = UITableViewCellSelectionStyle.None
         return cell!
         }else{
@@ -81,14 +89,14 @@ extension SignUp: UITableViewDelegate , UITableViewDataSource {
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if tableView.tag == 2{
-        let cell = tableView.cellForRowAtIndexPath(indexPath) as! ActivityItemCell
+//        let cell = tableView.cellForRowAtIndexPath(indexPath) as! ActivityItemCell
 //        cell.backgroundImage!.image = UIImage(named: "activityItem_click")
         
         let soundId = soundPlay!.sound.valueForKey(SoundResource.clickEventSound) as! String
         let id = UInt32(soundId)
         AudioServicesPlaySystemSound(id!);
         
-        displayActivityDetail()
+        displayActivityDetail(myActivitiesDatasource![indexPath.row].valueForKey("activityId") as! String)
         }
     }
     

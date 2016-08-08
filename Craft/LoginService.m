@@ -12,6 +12,8 @@
 #import "ProfileModel.h"
 #import "initActivityModel.h"
 #import "friendListModel.h"
+#import "groupListModel.h"
+
 
 
 @interface LoginService ()
@@ -127,14 +129,20 @@
     [_restService get:url parameters:nil
              callback:^ (ApiResult *result, id response){
                  if(result.state){
+                     [_dbHelper DatabaseExecuteWithQuery:@"delete from GroupList" values:nil];
+                     NSMutableArray * array = [[NSMutableArray alloc]init];
+                     for(int i= 0; i<((NSArray *)response).count; i++){
+//                     for(int i= 0; i<1; i++){
                      
-                     //                         NSMutableArray * array = [[NSMutableArray alloc]init];
-                     //                         for(int i= 0; i<((NSArray *)response).count; i++){
-                     //                             [array addObject:((NSArray *)response)[i]];
-                     //                         }
-                     //
-                     //                         result.data = array;
-                     
+                         groupListModel * model = [groupListModel mj_objectWithKeyValues:((NSArray *)response)[i]];
+//                         model.groupId = @"102";
+                         if ([_dbHelper DatabaseExecuteWithQuery:@"insert into GroupList (groupId ,groupName ,groupIntro ) values (?,?,?)" values:@[model.groupId,model.groupName,model.groupIntro]]){
+                             NSLog(@"insert GroupList success");
+                         }else{
+                             NSLog(@"insert GroupList failed");
+                         }
+                         
+                     }
                  }
              }];
 }
