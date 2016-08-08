@@ -135,7 +135,7 @@
 //                     for(int i= 0; i<1; i++){
                      
                          groupListModel * model = [groupListModel mj_objectWithKeyValues:((NSArray *)response)[i]];
-                         model.groupId = @"102";
+//                         model.groupId = @"102";
                          if ([_dbHelper DatabaseExecuteWithQuery:@"insert into GroupList (groupId ,groupName ,groupIntro ) values (?,?,?)" values:@[model.groupId,model.groupName,model.groupIntro]]){
                              NSLog(@"insert GroupList success");
                          }else{
