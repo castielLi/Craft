@@ -36,12 +36,15 @@ class MyActivities: ViewControllerBase ,UIGestureRecognizerDelegate , UITableVie
     var buttonListBackground : UIImageView?
     
     
-    var playerListSource : NSArray?
-    var applylistSource : NSArray?
+    var playerListSource : NSMutableArray?
+    var applylistSource : NSMutableArray?
+    
+    var soundPlay : PlaySound?
     
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+        soundPlay = PlaySound.sharedData()
         service = SignUpService()
         service!.delegate = self
     }
@@ -202,7 +205,7 @@ class MyActivities: ViewControllerBase ,UIGestureRecognizerDelegate , UITableVie
        self.scroll!.addSubview(applyList!)
         
         playerList = UIButton(frame: CGRect(x: UIAdapter.shared.transferWidth(80), y: UIAdapter.shared.transferHeight(130), width: UIAdapter.shared.transferWidth(80), height: UIAdapter.shared.transferHeight(20)))
-        playerList!.setTitle("成员列表 3/25", forState: UIControlState.Normal)
+        playerList!.setTitle("成员列表 \(playerListSource!.count)", forState: UIControlState.Normal)
         playerList!.setTitleColor(Resources.Color.dailyColor, forState: UIControlState.Normal)
         playerList!.titleLabel?.font = UIFont(name: "KaiTi",size: UIAdapter.shared.transferHeight(9))
         playerList!.addTarget(self, action: "playerListClick:", forControlEvents: UIControlEvents.TouchUpInside)
@@ -213,8 +216,13 @@ class MyActivities: ViewControllerBase ,UIGestureRecognizerDelegate , UITableVie
         invite!.setTitle("邀请", forState: UIControlState.Normal)
         invite!.setTitleColor(Resources.Color.dailyColor, forState: UIControlState.Normal)
         invite!.titleLabel?.font = UIFont(name: "KaiTi",size: UIAdapter.shared.transferHeight(9))
+        invite!.addTarget(self, action: "invitePlayer:", forControlEvents: UIControlEvents.TouchUpInside)
         invite!.titleLabel?.textAlignment = NSTextAlignment.Center
         self.scroll!.addSubview(invite!)
+    }
+    
+    func invitePlayer(sender : UIButton){
+       displayInviteFriendList()
     }
     
     func playerListClick(sender: UIButton){
@@ -247,7 +255,7 @@ class MyActivities: ViewControllerBase ,UIGestureRecognizerDelegate , UITableVie
     func GetApplylistDidFinish(result: ApiResult!, response: AnyObject!) {
         self.closeProgress()
         if(result.state){
-            applylistSource = result.data as! NSArray
+            applylistSource = result.data as! NSMutableArray
             if self.table!.indexPathForSelectedRow != nil{
             self.table!.deselectRowAtIndexPath(self.table!.indexPathForSelectedRow!, animated: false)
             }
@@ -301,7 +309,37 @@ class MyActivities: ViewControllerBase ,UIGestureRecognizerDelegate , UITableVie
         if(cell == nil) {
             
             cell = playerListCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier: "cell" ,height: 50 ,width: self.table!.frame.width)
+            cell!.footer!.infoClick = self.infoClick
+            cell!.footer!.addClick = self.addClick
+            cell!.footer!.chatClick = self.chatClick
+            cell!.footer!.kickClick = self.kickClick
+            cell!.footer!.releaseClick = self.releaseClick
         }
+            
+        let joinType = self.playerListSource![indexPath.row].valueForKey("joinType") as! Int
+            if(joinType == 0){
+               cell!.responseIcon!.hidden = true
+            }else if(joinType == 1){
+               cell!.responseIcon!.hidden = false
+               cell!.responseIcon!.image = UIImage(named: "assist")
+            }
+            
+        let professionType = self.playerListSource![indexPath.row].valueForKey("professionType") as! Int
+            if(professionType == 0){
+               cell!.dutyIcon!.setBackgroundImage(UIImage(named: "tank"), forState: UIControlState.Normal)
+            }else if(professionType == 1){
+               cell!.dutyIcon!.setBackgroundImage(UIImage(named: "heal"), forState: UIControlState.Normal)
+            }else{
+               cell!.dutyIcon!.setBackgroundImage(UIImage(named: "damage"), forState: UIControlState.Normal)
+            }
+            
+        let profression = self.playerListSource![indexPath.row].valueForKey("professionId") as! Int
+            let image = ProfessionHelper.getProfressionImage(professionType, profression: profression)
+            cell!.jobIcon!.setBackgroundImage(image, forState: UIControlState.Normal)
+            
+        cell!.name!.text = self.playerListSource![indexPath.row].valueForKey("userName") as! String
+        cell!.account!.text = self.playerListSource![indexPath.row].valueForKey("email") as! String
+        
         cell!.selectionStyle = UITableViewCellSelectionStyle.None
         cell?.backgroundColor = UIColor.clearColor()
             
@@ -318,6 +356,10 @@ class MyActivities: ViewControllerBase ,UIGestureRecognizerDelegate , UITableVie
             if(cell == nil) {
                 
                 cell = applyListCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier: "cell" ,height: 60 , width: self.table!.frame.width)
+                cell!.footer!.infoClick = self.infoClick
+                cell!.footer!.inviteClick = self.inviteClick
+                cell!.footer!.chatClick = self.chatClick
+                cell!.footer!.refusesClick = self.refusesClick
             }
 //            cell!.account!.text = playerListSource![indexPath.row].valueForKey("")
             
@@ -367,6 +409,28 @@ class MyActivities: ViewControllerBase ,UIGestureRecognizerDelegate , UITableVie
             tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.None)
         }
     }
+    
+    func displayInviteFriendList(){
+        
+        UIView.animateWithDuration(0.4, delay: 0, options: UIViewAnimationOptions.CurveEaseInOut, animations: { () -> Void in
+            self.activitiesView!.frame.origin.x = -UIAdapter.shared.transferWidth(300)
+            
+        }) { (success) -> Void in
+            if success {
+                
+                let swishinId = self.soundPlay!.sound.valueForKey(SoundResource.swishinSound) as! String
+                let swishinid = UInt32(swishinId)
+                AudioServicesPlaySystemSound(swishinid!);
+                
+                
+                let invite = inviteMain(nibName: nil, bundle: nil)
+                let inviteNav = UINavigationController(rootViewController: invite)
+                inviteNav.modalPresentationStyle = UIModalPresentationStyle.OverFullScreen
+                self.presentViewController(inviteNav, animated: false, completion: nil)
+            }
+        }
+    }
+
     
     /*
     // MARK: - Navigation

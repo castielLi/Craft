@@ -29,13 +29,13 @@ class DropDownSelectView: UIView {
         self.addSubview(backgroundImage!)
         
         self.displayLabel = UILabel()
-        self.displayLabel!.font = UIAdapter.shared.transferFont(10)
+        self.displayLabel!.font = UIFont(name: "KaiTi", size: UIAdapter.shared.transferHeight(9) )
         self.displayLabel!.textColor = Resources.Color.dailyColor
         self.addSubview(displayLabel!)
         
         self.displayLabel!.mas_makeConstraints{ make in
            make.width.equalTo()(self.frame.width * 0.85)
-           make.left.equalTo()(self)
+           make.left.equalTo()(self).with().offset()(3)
            make.top.equalTo()(self).with().offset()(UIAdapter.shared.transferHeight(2))
            make.bottom.equalTo()(self).with().offset()(UIAdapter.shared.transferHeight(-2))
         }

@@ -12,6 +12,7 @@
 
 @property (nonatomic,strong) NSString * userId;
 @property (nonatomic,strong) NSString * userName;
+@property (nonatomic,strong) NSString * email;
 @property int joinType;
 @property (nonatomic,strong) NSString * headPic;
 @property int professionType;

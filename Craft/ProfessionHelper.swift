@@ -10,16 +10,18 @@ import UIKit
 
 class ProfessionHelper {
     
-    static func getProfessionTypeImage(type : Int)->UIImage{
-        switch type {
-        case 0:
-            return UIImage(named: "zs")!
-        case 1:
-            return UIImage(named: "qs")!
-        default:
-            return UIImage(named: "dk")!
+    static func getProfressionImage(type : Int, profression : Int)->UIImage{
+        if(type == 0){
+           return getTankProfessionImage(profression)
+        }else if(type == 1){
+           return getHealProfessionImage(profression)
+        }else if (type == 2){
+           return getDpsProfessionImage(profression)
+        }else{
+           return getDistranceDpsProfessionImage(profression)
         }
     }
+    
 
     static func getTankProfessionImage(type : Int)->UIImage{
         switch type {
@@ -54,7 +56,7 @@ class ProfessionHelper {
         }
     }
     
-    static func getDistranceDpsProfessionImage(type : Int)->UIImage{
+    static func getDpsProfessionImage(type : Int)->UIImage{
         switch type {
         case 1:
             return UIImage(named: "zs")!
@@ -76,7 +78,7 @@ class ProfessionHelper {
         }
     }
     
-    static func getDpsProfessionImage(type : Int)->UIImage{
+    static func getDistranceDpsProfessionImage(type : Int)->UIImage{
         switch type {
         case 4:
             return UIImage(named: "sm")!

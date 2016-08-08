@@ -14,6 +14,6 @@
 
 @property int joinType;
 @property (nonatomic,strong) ActivityDetailContentModel * activity;
-@property (nonatomic,strong) NSArray<ActivityMemberItem*> * activityUser;
+@property (nonatomic,strong) NSMutableArray<ActivityMemberItem*> * activityUser;
 
 @end

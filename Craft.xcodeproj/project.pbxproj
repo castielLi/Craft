@@ -140,6 +140,7 @@
 		18E1362F1CFC74D70046A6B8 /* MyActivity.png in Resources */ = {isa = PBXBuildFile; fileRef = 18E1362E1CFC74D70046A6B8 /* MyActivity.png */; };
 		18E136311CFC752E0046A6B8 /* dailyBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = 18E136301CFC752E0046A6B8 /* dailyBackground.png */; };
 		18E1C8151D17E3150080EBC1 /* welcome_video.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 18E1C8141D17E3150080EBC1 /* welcome_video.mp4 */; };
+		18E27E2E1D58B8F200AB147B /* ActivityDetailFooterEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E27E2D1D58B8F200AB147B /* ActivityDetailFooterEvent.swift */; };
 		18E43FBA1CE0D1F000F9A382 /* PlaySound.m in Sources */ = {isa = PBXBuildFile; fileRef = 18E43FB91CE0D1F000F9A382 /* PlaySound.m */; };
 		18E43FBD1CE0E2E300F9A382 /* SoundResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E43FBC1CE0E2E300F9A382 /* SoundResource.swift */; };
 		18EDF2601D451E920054C86B /* selectedBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = 18EDF25F1D451E920054C86B /* selectedBackground.png */; };
@@ -354,6 +355,7 @@
 		18E1362E1CFC74D70046A6B8 /* MyActivity.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = MyActivity.png; path = Assets.xcassets/BackGround/Main/MyActivity.imageset/MyActivity.png; sourceTree = "<group>"; };
 		18E136301CFC752E0046A6B8 /* dailyBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = dailyBackground.png; path = Assets.xcassets/dailyBackground.imageset/dailyBackground.png; sourceTree = "<group>"; };
 		18E1C8141D17E3150080EBC1 /* welcome_video.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = welcome_video.mp4; sourceTree = "<group>"; };
+		18E27E2D1D58B8F200AB147B /* ActivityDetailFooterEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityDetailFooterEvent.swift; sourceTree = "<group>"; };
 		18E43FB91CE0D1F000F9A382 /* PlaySound.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlaySound.m; sourceTree = "<group>"; };
 		18E43FBB1CE0D20500F9A382 /* PlaySound.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PlaySound.h; sourceTree = "<group>"; };
 		18E43FBC1CE0E2E300F9A382 /* SoundResource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SoundResource.swift; sourceTree = "<group>"; };
@@ -903,18 +905,11 @@
 		18A824801BEE2F9F00084589 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				18AFE5D01CBE6FF1000DAD84 /* AddNewActivity.swift */,
-				186D80CF1CF9E322001A3EFE /* ExtensionForAnimation.swift */,
-				189052FF1CA6733C006EFE69 /* ExtensionForGesture.swift */,
-				186D80CD1CF9D5EE001A3EFE /* ExtensionTableForActivity.swift */,
-				1895CEFA1D3249CE0047C8F0 /* ExtensionTableForCreateActivitiy.swift */,
-				1893E2DF1C7C604C00F74A2B /* MyActivities.swift */,
+				18E27E2C1D58B8B500AB147B /* ActivityDetail */,
+				18E27E2B1D58B8A600AB147B /* Invite */,
+				18E27E2A1D58B86A00AB147B /* SignUp */,
+				18E27E291D58B83000AB147B /* CreateNew */,
 				18BD4A301D1AC2A800585D1D /* RCIMdelegateForSignUp.swift */,
-				18A824811BEE2FCA00084589 /* SignUp.swift */,
-				1837D2451CFAF32D00FFE3FD /* signupNavEvents.swift */,
-				1895CEFE1D32761C0047C8F0 /* inviteMain.swift */,
-				18B322681D33D17700FB93B6 /* ExtensionTableForInviteMain.swift */,
-				18B16E711D3FA738006903D8 /* ExtensionForCreateActivityGesture.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -1070,6 +1065,46 @@
 				1824C61B1D255045009078B4 /* OneRollSelection.h */,
 			);
 			name = Controller;
+			sourceTree = "<group>";
+		};
+		18E27E291D58B83000AB147B /* CreateNew */ = {
+			isa = PBXGroup;
+			children = (
+				18B16E711D3FA738006903D8 /* ExtensionForCreateActivityGesture.swift */,
+				1895CEFA1D3249CE0047C8F0 /* ExtensionTableForCreateActivitiy.swift */,
+				18AFE5D01CBE6FF1000DAD84 /* AddNewActivity.swift */,
+			);
+			name = CreateNew;
+			sourceTree = "<group>";
+		};
+		18E27E2A1D58B86A00AB147B /* SignUp */ = {
+			isa = PBXGroup;
+			children = (
+				186D80CD1CF9D5EE001A3EFE /* ExtensionTableForActivity.swift */,
+				186D80CF1CF9E322001A3EFE /* ExtensionForAnimation.swift */,
+				189052FF1CA6733C006EFE69 /* ExtensionForGesture.swift */,
+				18A824811BEE2FCA00084589 /* SignUp.swift */,
+				1837D2451CFAF32D00FFE3FD /* signupNavEvents.swift */,
+			);
+			name = SignUp;
+			sourceTree = "<group>";
+		};
+		18E27E2B1D58B8A600AB147B /* Invite */ = {
+			isa = PBXGroup;
+			children = (
+				1895CEFE1D32761C0047C8F0 /* inviteMain.swift */,
+				18B322681D33D17700FB93B6 /* ExtensionTableForInviteMain.swift */,
+			);
+			name = Invite;
+			sourceTree = "<group>";
+		};
+		18E27E2C1D58B8B500AB147B /* ActivityDetail */ = {
+			isa = PBXGroup;
+			children = (
+				1893E2DF1C7C604C00F74A2B /* MyActivities.swift */,
+				18E27E2D1D58B8F200AB147B /* ActivityDetailFooterEvent.swift */,
+			);
+			name = ActivityDetail;
 			sourceTree = "<group>";
 		};
 		18E43FB61CE0C7D300F9A382 /* PlaySound */ = {
@@ -1474,6 +1509,7 @@
 				1837D23E1CFAE3FB00FFE3FD /* ChatListCell.swift in Sources */,
 				CD5EB3941D195EF300802FC4 /* RTAudioPlayback.swift in Sources */,
 				18E43FBA1CE0D1F000F9A382 /* PlaySound.m in Sources */,
+				18E27E2E1D58B8F200AB147B /* ActivityDetailFooterEvent.swift in Sources */,
 				1893E2E01C7C604C00F74A2B /* MyActivities.swift in Sources */,
 				1895CEFF1D32761C0047C8F0 /* inviteMain.swift in Sources */,
 				18F7E4711C97FCC2007E3459 /* Resource.swift in Sources */,
