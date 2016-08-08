@@ -14,7 +14,6 @@ class TableViewBaseCell: UITableViewCell {
     var topline : UILabel?
     var bottomline : UILabel?
     var type : CellType?
-    var chatType: String = "chatroom"
 //    var selectedDelegate : PhoneTableProtocol?
     
     private var frameHeight : CGFloat = 0

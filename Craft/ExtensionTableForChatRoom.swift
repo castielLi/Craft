@@ -174,8 +174,16 @@ extension ChatRoom : UITableViewDelegate,UITableViewDataSource{
         // RT Start
         // Juedge the type of current chatting.
         guard tableView.tag == 11 else { return }
-        let cell = tableView.cellForRowAtIndexPath(indexPath) as! TableViewBaseCell
-        self.chatType = cell.chatType
+        
+        let userId = self.chatListArray![indexPath.row].valueForKey("userId") as? String
+        if(userId != nil){
+            self.targetId = userId
+            self.chatType = RCConversationType.ConversationType_PRIVATE
+        }else{
+            let groupId = self.chatListArray![indexPath.row].valueForKey("groupId") as? String
+            self.targetId = groupId
+            self.chatType = RCConversationType.ConversationType_GROUP
+        }
     }
     
 }
