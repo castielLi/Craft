@@ -131,8 +131,8 @@
                  if(result.state){
                      [_dbHelper DatabaseExecuteWithQuery:@"delete from GroupList" values:nil];
                      NSMutableArray * array = [[NSMutableArray alloc]init];
-//                     for(int i= 0; i<((NSArray *)response).count; i++){
-                     for(int i= 0; i<1; i++){
+                     for(int i= 0; i<((NSArray *)response).count; i++){
+//                     for(int i= 0; i<1; i++){
                      
                          groupListModel * model = [groupListModel mj_objectWithKeyValues:((NSArray *)response)[i]];
                          model.groupId = @"102";
