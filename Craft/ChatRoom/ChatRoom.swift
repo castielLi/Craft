@@ -326,10 +326,32 @@ class ChatRoom: ViewControllerBase , UITextViewDelegate ,RCIMClientReceiveMessag
     
     
     private func sendText() {
-        let message = RCTextMessage(content: self.enterForm!.enterTextView!.text)
+        guard self.targetId != nil else {
+            print("unexpectedly met nil targetId")
+            return
+        }
+        guard self.chatType != nil else {
+            print("unexpectedly met nil chattype")
+            return
+        }
         
+        
+        let message = RCTextMessage(content: self.enterForm!.enterTextView!.text)
         let model = ChatMessageModel()
-        model.type = self.chatType! == RCConversationType.ConversationType_PRIVATE ? "chatroom" : "group"
+        
+        var cType = "private"
+        
+        if self.chatType! == RCConversationType.ConversationType_CHATROOM {
+            cType = "chatroom"
+        }
+        if self.chatType! == RCConversationType.ConversationType_GROUP {
+            cType = "group"
+        }
+        if self.chatType! == RCConversationType.ConversationType_PRIVATE {
+            cType = "private"
+        }
+        
+        model.type = cType
         model.userName = "test"
         model.userId = "1"
         
@@ -411,6 +433,16 @@ class ChatRoom: ViewControllerBase , UITextViewDelegate ,RCIMClientReceiveMessag
 
     
     func recordVoice(recognizer: UILongPressGestureRecognizer) {
+        guard self.targetId != nil else {
+            print("unexpectedly met nil targetId")
+            return
+        }
+        guard self.chatType != nil else {
+            print("unexpectedly met nil chattype")
+            return
+        }
+        
+        
         switch recognizer.state {
         case .Began:
             print("recording...")
@@ -424,7 +456,18 @@ class ChatRoom: ViewControllerBase , UITextViewDelegate ,RCIMClientReceiveMessag
             let message = RCVoiceMessage(audio: self.rtAudio.soundData, duration: self.rtAudio.recordedDuration!)
             
             let model = ChatMessageModel()
-            model.type = self.chatType! == RCConversationType.ConversationType_PRIVATE ? "chatroom" : "group"
+            var cType = "private"
+            if self.chatType! == RCConversationType.ConversationType_CHATROOM {
+                cType = "chatroom"
+            }
+            if self.chatType! == RCConversationType.ConversationType_GROUP {
+                cType = "group"
+            }
+            if self.chatType! == RCConversationType.ConversationType_PRIVATE {
+                cType = "private"
+            }
+            
+            model.type = cType
             model.userName = "test"
             model.userId = "1"
             
