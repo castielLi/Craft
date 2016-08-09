@@ -52,8 +52,8 @@ class ChatRoom: ViewControllerBase , UITextViewDelegate ,RCIMClientReceiveMessag
     /// Message list for chat.
     var chatContentsList: [String] = [String]()
     var rtAudio = RTAudio.sharedInstance()
-    var chatType: String = "chatroom"
-    
+    var chatType: RCConversationType?
+    var targetId: String?
     
     
     var dHeight : CGFloat?
@@ -326,16 +326,38 @@ class ChatRoom: ViewControllerBase , UITextViewDelegate ,RCIMClientReceiveMessag
     
     
     private func sendText() {
-        let message = RCTextMessage(content: self.enterForm!.enterTextView!.text)
+        guard self.targetId != nil else {
+            print("unexpectedly met nil targetId")
+            return
+        }
+        guard self.chatType != nil else {
+            print("unexpectedly met nil chattype")
+            return
+        }
         
+        
+        let message = RCTextMessage(content: self.enterForm!.enterTextView!.text)
         let model = ChatMessageModel()
-        model.type = self.chatType
+        
+        var cType = "private"
+        
+        if self.chatType! == RCConversationType.ConversationType_CHATROOM {
+            cType = "chatroom"
+        }
+        if self.chatType! == RCConversationType.ConversationType_GROUP {
+            cType = "group"
+        }
+        if self.chatType! == RCConversationType.ConversationType_PRIVATE {
+            cType = "private"
+        }
+        
+        model.type = cType
         model.userName = "test"
         model.userId = "1"
         
         message.extra = model.currentModelToJsonString()
         print(message.extra)
-        RCIMClient.sharedRCIMClient().sendMessage(RCConversationType.ConversationType_PRIVATE, targetId: "2", content: message, pushContent: nil, success: { (messageId) in
+        RCIMClient.sharedRCIMClient().sendMessage(self.chatType!, targetId: self.targetId!, content: message, pushContent: nil, success: { (messageId) in
             print("发送成功")
             }, error: { (error, messageId) in
                 print("发送失败")
@@ -411,6 +433,16 @@ class ChatRoom: ViewControllerBase , UITextViewDelegate ,RCIMClientReceiveMessag
 
     
     func recordVoice(recognizer: UILongPressGestureRecognizer) {
+        guard self.targetId != nil else {
+            print("unexpectedly met nil targetId")
+            return
+        }
+        guard self.chatType != nil else {
+            print("unexpectedly met nil chattype")
+            return
+        }
+        
+        
         switch recognizer.state {
         case .Began:
             print("recording...")
@@ -424,12 +456,23 @@ class ChatRoom: ViewControllerBase , UITextViewDelegate ,RCIMClientReceiveMessag
             let message = RCVoiceMessage(audio: self.rtAudio.soundData, duration: self.rtAudio.recordedDuration!)
             
             let model = ChatMessageModel()
-            model.type = self.chatType
+            var cType = "private"
+            if self.chatType! == RCConversationType.ConversationType_CHATROOM {
+                cType = "chatroom"
+            }
+            if self.chatType! == RCConversationType.ConversationType_GROUP {
+                cType = "group"
+            }
+            if self.chatType! == RCConversationType.ConversationType_PRIVATE {
+                cType = "private"
+            }
+            
+            model.type = cType
             model.userName = "test"
             model.userId = "1"
             
             message.extra = model.currentModelToJsonString()
-            RCIMClient.sharedRCIMClient().sendMessage(.ConversationType_PRIVATE, targetId: "2", content: message, pushContent: nil, success: {
+            RCIMClient.sharedRCIMClient().sendMessage(self.chatType!, targetId: self.targetId!, content: message, pushContent: nil, success: {
                 mesageId in
                 print("sent successfully")
                 }, error: {

@@ -22,7 +22,12 @@ extension ChatRoom{
             do {
                 let dataDict = try NSJSONSerialization.JSONObjectWithData(dataExtra!, options: []) as? [String: AnyObject]
                 let model = ChatMessageModel.getModelFromDictionary(dataDict)
-                guard model.type == "chatroom" else { return }
+                let id = model.userId
+                
+                guard id == self.targetId! else {
+                    // update number of icon at here.
+                    return
+                }
             
                 let txtMsg = ChatTextMessage(ownerType: .Other, messageType: .Text, portrait: UIImage(contentsOfFile: NSBundle.mainBundle().pathForResource("10", ofType: "jpeg")!)!)
                 txtMsg.text = text
@@ -51,7 +56,12 @@ extension ChatRoom{
             do {
                 let dataDict = try NSJSONSerialization.JSONObjectWithData(dataExtra!, options: []) as? [String: AnyObject]
                 let model = ChatMessageModel.getModelFromDictionary(dataDict)
-                guard model.type == "chatroom" else { return }
+                let id = model.userId
+                
+                guard id == self.targetId! else {
+                    // update number of icon at here.
+                    return
+                }
                 
                 let voiceMsg = ChatVoiceMessage(ownerType: .Other, messageType: .Voice, portrait: UIImage(contentsOfFile: NSBundle.mainBundle().pathForResource("10", ofType: "jpeg")!)!, voiceSecs: duration)
                 voiceMsg.voiceData = data
