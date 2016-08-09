@@ -118,10 +118,12 @@ class MyActivities: ViewControllerBase ,UIGestureRecognizerDelegate , UITableVie
     func setScroll(){
         
         self.scroll = UIScrollView(frame: CGRect(x: 0, y: 0, width: UIAdapter.shared.transferWidth(240), height: UIAdapter.shared.transferHeight(300)))
-        self.scroll!.contentSize = CGSize(width: UIAdapter.shared.transferWidth(240) , height: UIAdapter.shared.transferHeight(500))
         self.scroll!.showsVerticalScrollIndicator = false
         self.scroll!.showsHorizontalScrollIndicator = false
         self.activitiesView!.addSubview(self.scroll!)
+        
+        self.scroll!.contentSize = CGSize(width: UIAdapter.shared.transferWidth(240), height: UIAdapter.shared.transferHeight(150) + CGFloat(playerListSource!.count + 1) * CGFloat(50))
+        
         
         self.scroll?.mas_makeConstraints{ make in
            make.top.equalTo()(self.activitiesView!.mas_top).with().offset()(UIAdapter.shared.transferHeight(32))
@@ -239,6 +241,7 @@ class MyActivities: ViewControllerBase ,UIGestureRecognizerDelegate , UITableVie
            self.table!.deselectRowAtIndexPath(self.table!.indexPathForSelectedRow!, animated: false)
             }
            self.table!.reloadData()
+           self.scroll!.contentSize = CGSize(width: UIAdapter.shared.transferWidth(240), height: UIAdapter.shared.transferHeight(150) + CGFloat(playerListSource!.count + 1) * CGFloat(50))
         }else{
            MsgBoxHelper.show("错误", message: result.message!)
         }
@@ -260,6 +263,7 @@ class MyActivities: ViewControllerBase ,UIGestureRecognizerDelegate , UITableVie
             self.table!.deselectRowAtIndexPath(self.table!.indexPathForSelectedRow!, animated: false)
             }
             self.table!.reloadData()
+            self.scroll!.contentSize = CGSize(width: UIAdapter.shared.transferWidth(240), height: UIAdapter.shared.transferHeight(150) + CGFloat(applylistSource!.count + 1) * CGFloat(60))
         }else{
             MsgBoxHelper.show("错误", message: result.message!)
         }
@@ -392,9 +396,14 @@ class MyActivities: ViewControllerBase ,UIGestureRecognizerDelegate , UITableVie
             tableView.endUpdates()
 
         }
+        let size = self.scroll!.contentSize
+        self.scroll!.contentSize = CGSize(width: size.width, height: size.height + 30)
     }
     
     func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
+        
+        tableView.scrollToRowAtIndexPath(indexPath, atScrollPosition: UITableViewScrollPosition.Bottom, animated: true)
+        
         if selectedIndex == 2{
         var cell = tableView.cellForRowAtIndexPath(indexPath) as! playerListCell
         cell.footer!.hidden = true
@@ -408,6 +417,8 @@ class MyActivities: ViewControllerBase ,UIGestureRecognizerDelegate , UITableVie
             
             tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.None)
         }
+        let size = self.scroll!.contentSize
+        self.scroll!.contentSize = CGSize(width: size.width, height: size.height - 30)
     }
     
     func displayInviteFriendList(){

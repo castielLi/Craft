@@ -27,6 +27,8 @@
 
 -(void)getAllMyActivities:(NSString*)pageNum;
 
+-(void)searchActivityies:(NSString*)Content pageNum:(NSString*)pageNum;
+
 -(void)getAllActivities:(NSString*)pageNum;
 
 -(void)getActivityDetail:(NSString*)activityId;

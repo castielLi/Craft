@@ -61,7 +61,11 @@ extension SignUp{
     }
     
     func showActivity(sender : UISwipeGestureRecognizer){
-        self.showActivity()
+        
+        //通过http获取数据
+        self.showProgress()
+        self.service!.getAllMyActivities("1")
+        
     }
     
     func showDaily(sender : UISwipeGestureRecognizer){
@@ -162,7 +166,6 @@ extension SignUp{
     }
     
     func showActivity(){
-        
         self.activityMainView!.activityTabel?.reloadData()
         
         if self.activityMainView!.frame.origin.x < 0{

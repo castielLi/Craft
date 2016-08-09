@@ -42,7 +42,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var startTime : NSDate?
     
-    var instance : FMDatabase?
+    var instance : FMDBHelper?
     
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
@@ -52,8 +52,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         RestService.setNeedAuthentication(false)
 
         FMDBHelper.configDatabaseWithName("craft", tableQueries: [DBContract.notificationTable,DBContract.createAccountTable,DBContract.createIconTable,DBContract.ProfileTable,DBContract.createRaidTypeName,DBContract.createRaid,DBContract.createRaidLevel,DBContract.createInitDataToken,DBContract.createFriendTable,
-            DBContract.createFaction,DBContract.createGroupTable])
-        instance = FMDBHelper.sharedData() as? FMDatabase
+            DBContract.createFaction,DBContract.createGroupTable,DBContract.deviceTokenTable])
+        
         
         RCIM.sharedRCIM().initWithAppKey("pkfcgjstfdgr8")
         
@@ -182,11 +182,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationDidBecomeActive(application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-        
-//        let now = NSDate()
-//        let timeInterval = now.timeIntervalSinceDate(self.startTime!)
-//        
-//        print(timeInterval)
+
     }
 
     func applicationWillTerminate(application: UIApplication) {
@@ -201,6 +197,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     
     func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
+        
+        var token = NSString(format: "%@", deviceToken)
+        token = token.stringByReplacingOccurrencesOfString("<", withString: "")
+        token = token.stringByReplacingOccurrencesOfString(">", withString: "")
+        token = token.stringByReplacingOccurrencesOfString(" ", withString: "")
+        
+        instance = FMDBHelper.sharedData() as? FMDBHelper
+        instance!.DatabaseExecuteWithQuery("delete from devicetoken", values: nil)
+        if(instance!.DatabaseExecuteWithQuery("insert into devicetoken (devicetoken) values (?)", values: [token])){
+            print("success")
+        }else{
+           print("failed")
+        }
+
+        
         UMessage.registerDeviceToken(deviceToken)
     }
     

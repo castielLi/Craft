@@ -44,7 +44,13 @@
 
 -(void) login:(NSString *)username password:(NSString *)password
 {
-    NSDictionary * parameter = @{@"userName":username,@"password":password};
+    NSString * token = @"";
+    NSDictionary * values = [_dbHelper DatabaseQueryWithParameters:@[@"devicetoken"] query:@"select devicetoken from DeviceToken" values:nil];
+    if(values != nil && values.count > 0){
+        token = [values valueForKey:@"devicetoken"];
+    }
+    
+    NSDictionary * parameter = @{@"userName":username,@"password":password,@"umengToken":token};
     
     [_restService post:@"/api/common/login" parameters:parameter
               callback:^ (ApiResult *result, id response){

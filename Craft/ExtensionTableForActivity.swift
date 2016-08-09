@@ -49,7 +49,7 @@ extension SignUp: UITableViewDelegate , UITableViewDataSource {
 
         let now = NSDate()
             
-        let dtime = now.timeIntervalSinceDate(startDate)
+        let dtime = startDate.timeIntervalSinceDate(now)
             
             
         cell!.timePart!.firstPart?.text = "\(Int(dtime / 3600))"

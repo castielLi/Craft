@@ -46,14 +46,15 @@ class ActivityMainView: UIView {
     
     func setSearchTextField(){
         searchTextField = UITextField()
-        searchTextField!.placeholder = "查找活动"
+        searchTextField!.textColor = UIColor.whiteColor()
+        searchTextField!.font = UIFont(name: "KaiTi", size: UIAdapter.shared.transferHeight(12))
         self.addSubview(searchTextField!)
         
         self.searchTextField!.mas_makeConstraints{ make in
            make.top.equalTo()(self.activityMainView!).with().offset()(UIAdapter.shared.transferHeight(27))
            make.right.equalTo()(self.activityMainView!).with().offset()(UIAdapter.shared.transferWidth(-110))
            make.bottom.equalTo()(self.activityMainView!.mas_top).with().offset()(UIAdapter.shared.transferHeight(45))
-           make.left.equalTo()(self.activityMainView!).with().offset()(UIAdapter.shared.transferWidth(18))
+           make.left.equalTo()(self.activityMainView!).with().offset()(UIAdapter.shared.transferWidth(22))
         }
     }
     

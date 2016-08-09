@@ -12,9 +12,11 @@ import AVFoundation
 class SignUp: ViewControllerBase ,RCIMClientReceiveMessageDelegate,UITextViewDelegate,SignUpServiceDelegate{
 
     var service : SignUpService?
+    var selectedIndex : Int = 1
     
     //datasource for activity
-    var myActivitiesDatasource : NSArray?
+    var myActivitiesDatasource : NSMutableArray?
+    var originActivityDatasource : NSMutableArray?
     
     var soundPlay :PlaySound?
     var firstTime : Bool = true
@@ -61,15 +63,23 @@ class SignUp: ViewControllerBase ,RCIMClientReceiveMessageDelegate,UITextViewDel
         RCIMClient.sharedRCIMClient().setReceiveMessageDelegate(self, object: nil)
         service = SignUpService()
         service!.delegate = self
+        originActivityDatasource = NSMutableArray()
     }
     
     func GetMyActivityDidFinish(result: ApiResult!, response: AnyObject!) {
         self.closeProgress()
         if(result.state){
-            myActivitiesDatasource = result.data as? NSArray
+            myActivitiesDatasource = result.data as? NSMutableArray
             self.activityMainView!.activityTabel!.delegate = self
             self.activityMainView!.activityTabel!.dataSource = self
             self.activityMainView!.activityTabel!.reloadData()
+            self.showActivity()
+            if(selectedIndex == 1){
+               
+                for item in myActivitiesDatasource!{
+                    originActivityDatasource!.addObject(item)
+                }
+            }
         }else{
            MsgBoxHelper.show("", message: result.message!)
         }
@@ -123,13 +133,6 @@ class SignUp: ViewControllerBase ,RCIMClientReceiveMessageDelegate,UITextViewDel
         self.registerGesture()
 
         self.joinCurrentChatRoom()
-        
-        
-        
-        
-        //通过http获取数据
-        self.showProgress()
-        self.service!.getAllMyActivities("1")
         }else{
            self.firstTime = false
         }
@@ -246,8 +249,9 @@ class SignUp: ViewControllerBase ,RCIMClientReceiveMessageDelegate,UITextViewDel
         
         sender.setImage(UIImage(named: "searchActivity_selected"), forState: UIControlState.Normal)
         self.activityMainView!.MyActivityButton!.setImage(UIImage(named: "myActivity"), forState: UIControlState.Normal)
-        
+        self.activityMainView!.searchTextField!.text = ""
         self.showProgress()
+        self.selectedIndex = 2
         self.service!.getAllActivities("1")
         
     }
@@ -256,6 +260,34 @@ class SignUp: ViewControllerBase ,RCIMClientReceiveMessageDelegate,UITextViewDel
         let soundId = soundPlay!.sound.valueForKey(SoundResource.clickEventSound) as! String
         let id = UInt32(soundId)
         AudioServicesPlaySystemSound(id!);
+        
+        if selectedIndex == 2{
+            self.showProgress()
+            self.service!.searchActivityies(self.activityMainView!.searchTextField!.text!, pageNum: "1")
+        }else{
+            myActivitiesDatasource!.removeAllObjects()
+            for item in originActivityDatasource!{
+               myActivitiesDatasource!.addObject(item)
+            }
+            
+            if( self.activityMainView!.searchTextField!.text! == ""){
+               self.activityMainView!.activityTabel!.reloadData()
+               return 
+            }
+            
+            for item in myActivitiesDatasource!{
+                
+                let name = item.valueForKey("title") as! String
+                let username = item.valueForKey("createUserName") as! String
+                if( (name.rangeOfString(self.activityMainView!.searchTextField!.text!) == nil) &&
+                (username.rangeOfString(self.activityMainView!.searchTextField!.text!) == nil))
+                {
+                    myActivitiesDatasource!.removeObject(item)
+                }
+            }
+            self.activityMainView!.activityTabel!.reloadData()
+            
+        }
     }
     
     func myActivityClick(sender : UIButton){
@@ -267,7 +299,9 @@ class SignUp: ViewControllerBase ,RCIMClientReceiveMessageDelegate,UITextViewDel
         sender.setImage(UIImage(named: "myActivity_selected"), forState: UIControlState.Normal)
         self.activityMainView!.searchActivityButton!.setImage(UIImage(named: "searchActivity"), forState: UIControlState.Normal)
         
+        self.activityMainView!.searchTextField!.text = ""
         self.showProgress()
+        self.selectedIndex = 1
         self.service!.getAllMyActivities("1")
     }
     

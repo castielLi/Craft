@@ -94,13 +94,32 @@ class AddNewActivityController: ViewControllerBase ,UIGestureRecognizerDelegate{
     
     func initActivityData(typeCode:String){
         self.showProgress()
+        activitySelected!.displayLabel!.text = "请选择"
+        detailSelected!.displayLabel!.text = "请选择"
         activityArray = instance!.DatabaseSearchValuesWithParameters(["apdName","apdCode"], query: searchActivity, values: [typeCode])
+        if(activityArray!.count < 1){
+           activitySelected!.displayLabel!.text = "无"
+           activitySelected!.userInteractionEnabled = false
+           detailSelected!.displayLabel!.text = "无"
+           detailSelected!.userInteractionEnabled = false
+        }else{
+            activitySelected!.userInteractionEnabled = true
+            detailSelected!.userInteractionEnabled = true
+        }
         self.closeProgress()
     }
     
     func initLevelData(raidCode:String){
         self.showProgress()
+        detailSelected!.displayLabel!.text = "请选择"
         levelArray = instance!.DatabaseSearchValuesWithParameters(["aplName","aplCode"], query: searchLevel, values: [raidCode])
+        if(levelArray!.count < 1){
+            detailSelected!.displayLabel!.text = "无"
+            detailSelected!.userInteractionEnabled = false
+        }else{
+            activitySelected!.userInteractionEnabled = true
+            detailSelected!.userInteractionEnabled = true
+        }
         self.closeProgress()
     }
     
@@ -140,16 +159,16 @@ class AddNewActivityController: ViewControllerBase ,UIGestureRecognizerDelegate{
     }
     
     func setDropDown(){
-        typeSelected = DropDownSelectView(frame: CGRect(x: UIAdapter.shared.transferWidth(1), y: UIAdapter.shared.transferHeight(2), width: (UIAdapter.shared.transferWidth(250) * 0.3 - UIAdapter.shared.transferWidth(1)) , height: UIAdapter.shared.transferHeight(20)))
+        typeSelected = DropDownSelectView(frame: CGRect(x: UIAdapter.shared.transferWidth(1), y: UIAdapter.shared.transferHeight(3), width: (UIAdapter.shared.transferWidth(250) * 0.3 - UIAdapter.shared.transferWidth(1)) , height: UIAdapter.shared.transferHeight(20)))
         self.activityMain!.addSubview(typeSelected!)
         
         
         
         
-        activitySelected = DropDownSelectView(frame: CGRect(x: UIAdapter.shared.transferWidth(76), y: UIAdapter.shared.transferHeight(2), width: (UIAdapter.shared.transferWidth(250) * 0.4 - UIAdapter.shared.transferWidth(1) ), height: UIAdapter.shared.transferHeight(20)))
+        activitySelected = DropDownSelectView(frame: CGRect(x: UIAdapter.shared.transferWidth(76), y: UIAdapter.shared.transferHeight(3), width: (UIAdapter.shared.transferWidth(250) * 0.4 - UIAdapter.shared.transferWidth(1) ), height: UIAdapter.shared.transferHeight(20)))
         self.activityMain!.addSubview(activitySelected!)
         
-        detailSelected = DropDownSelectView(frame: CGRect(x: UIAdapter.shared.transferWidth(250) * 0.7 + UIAdapter.shared.transferWidth(1), y: UIAdapter.shared.transferHeight(2), width: UIAdapter.shared.transferWidth(250) * 0.3, height: UIAdapter.shared.transferHeight(20)))
+        detailSelected = DropDownSelectView(frame: CGRect(x: UIAdapter.shared.transferWidth(250) * 0.7 + UIAdapter.shared.transferWidth(1), y: UIAdapter.shared.transferHeight(3), width: UIAdapter.shared.transferWidth(250) * 0.29, height: UIAdapter.shared.transferHeight(20)))
         self.activityMain!.addSubview(detailSelected!)
     
     }

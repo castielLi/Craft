@@ -10,6 +10,8 @@ import Foundation
 
 struct DBContract{
     
+    static let deviceTokenTable = "CREATE TABLE IF NOT EXISTS DeviceToken(devicetoken text)"
+    
     static let notificationTable = "CREATE TABLE IF NOT EXISTS RemindActivity(uuid text, activityid text)"
     
     static let createAccountTable = "CREATE TABLE IF NOT EXISTS User(account text, password text)";
