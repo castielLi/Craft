@@ -17,5 +17,7 @@
 @property (nonatomic,strong) NSString * headPic;
 @property int professionType;
 @property int professionId;
+@property (nonatomic,strong) NSString * content;
+@property int jifen;
 
 @end

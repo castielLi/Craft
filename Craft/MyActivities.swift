@@ -365,7 +365,25 @@ class MyActivities: ViewControllerBase ,UIGestureRecognizerDelegate , UITableVie
                 cell!.footer!.chatClick = self.chatClick
                 cell!.footer!.refusesClick = self.refusesClick
             }
-//            cell!.account!.text = playerListSource![indexPath.row].valueForKey("")
+
+            
+            let professionType = self.applylistSource![indexPath.row].valueForKey("professionType") as! Int
+            if(professionType == 0){
+                cell!.dutyIcon!.setBackgroundImage(UIImage(named: "tank"), forState: UIControlState.Normal)
+            }else if(professionType == 1){
+                cell!.dutyIcon!.setBackgroundImage(UIImage(named: "heal"), forState: UIControlState.Normal)
+            }else{
+                cell!.dutyIcon!.setBackgroundImage(UIImage(named: "damage"), forState: UIControlState.Normal)
+            }
+            
+            let profression = self.applylistSource![indexPath.row].valueForKey("professionId") as! Int
+            let image = ProfessionHelper.getProfressionImage(professionType, profression: profression)
+            cell!.jobIcon!.setBackgroundImage(image, forState: UIControlState.Normal)
+            
+            cell!.name!.text = self.applylistSource![indexPath.row].valueForKey("userName") as! String
+            cell!.account!.text = self.applylistSource![indexPath.row].valueForKey("email") as! String
+            cell!.content!.text = self.applylistSource![indexPath.row].valueForKey("content") as! String
+            cell!.honorNum!.text = "\(self.applylistSource![indexPath.row].valueForKey("jifen") as! Int)"
             
             if indexPath != tableView.indexPathForSelectedRow{
                cell!.footer!.hidden = true

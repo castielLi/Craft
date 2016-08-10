@@ -25,18 +25,38 @@ extension MyActivities{
     func inviteClick(indexPath : Int){
         print("invite")
         
-        self.applylistSource!.removeObject(applylistSource![indexPath])
+        self.showProgress()
         
-        self.table!.reloadData()
+        let activityId = dataModel!.activity!.activityId
+        let requestUserId = applylistSource![indexPath].valueForKey("userId") as! String
+        self.service!.applyRequest(activityId, requestUserId: requestUserId,index: "\(indexPath)")
+        
+        
     }
     
     func refusesClick(indexPath : Int){
         print("refuses")
         
-        self.applylistSource!.removeObject(applylistSource![indexPath])
+        self.showProgress()
         
-        self.table!.reloadData()
+        let activityId = dataModel!.activity!.activityId
+        let requestUserId = applylistSource![indexPath].valueForKey("userId") as! String
+        self.service!.refuseRequest(activityId, requestUserId: requestUserId,index: "\(indexPath)")
     }
+    
+    func DealApplyRequestFinish(result: ApiResult!, response: AnyObject!, index: String!) {
+        self.closeProgress()
+        if(result.state){
+            MsgBoxHelper.show("", message: "操作成功")
+            self.applylistSource!.removeObject(applylistSource![ Int(index)! ])
+            self.table!.reloadData()
+        }else{
+            MsgBoxHelper.show("", message: "操作失败")
+        }
+    }
+    
+
+    
     
     func releaseClick(indexPath : Int , setAssist: Bool){
         print("release")

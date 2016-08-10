@@ -137,7 +137,7 @@
                  if(result.state){
                      NSMutableArray * array = [[NSMutableArray alloc]init];
                      for(int i= 0; i<((NSArray *)response).count; i++){
-                         ActivityItemModel * model = [ActivityItemModel mj_objectWithKeyValues:((NSArray *)response)[i]];
+                         ActivityMemberItem * model = [ActivityMemberItem mj_objectWithKeyValues:((NSArray *)response)[i]];
                          [array addObject:model];
                      }
                      
@@ -178,6 +178,39 @@
                       [self.delegate GetMyActivityDidFinish:result response:response];
                   }
               }];
+}
+
+-(void)applyRequest:(NSString*)activityId requestUserId:(NSString*)userId index:(NSString*)index{
+    NSString * currentUserId = @"";
+    NSDictionary * profileValues = [_dbHelper DatabaseQueryWithParameters:@[@"userid"] query:@"select userid from Profile" values:nil];
+    if (profileValues != nil){
+        currentUserId = [profileValues valueForKey:@"userid"];
+    }
+    
+    NSDictionary * parameters = @{@"activityId":activityId,@"requestUserId":userId,@"userId":currentUserId};
+    
+    [_restService post:@"/api/activity/pass_request" parameters:parameters
+              callback:^ (ApiResult *result, id response){
+              
+                  [self.delegate DealApplyRequestFinish:result response:response index:index];
+              }];
+}
+
+-(void)refuseRequest:(NSString*)activityId requestUserId:(NSString*)userId index:(NSString*)index{
+ 
+    NSString * currentUserId = @"";
+    NSDictionary * profileValues = [_dbHelper DatabaseQueryWithParameters:@[@"userid"] query:@"select userid from Profile" values:nil];
+    if (profileValues != nil){
+        currentUserId = [profileValues valueForKey:@"userid"];
+    }
+    
+    NSDictionary * parameters = @{@"activityId":activityId,@"requestUserId":userId,@"userId":currentUserId};
+    
+    [_restService post:@"/api/activity/refuse_request" parameters:parameters
+              callback:^ (ApiResult *result, id response){
+                 [self.delegate DealApplyRequestFinish:result response:response index:index];
+              }];
+    
 }
 
 @end

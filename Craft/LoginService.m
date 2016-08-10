@@ -142,7 +142,11 @@
                      
                          groupListModel * model = [groupListModel mj_objectWithKeyValues:((NSArray *)response)[i]];
 //                         model.groupId = @"102";
-                         if ([_dbHelper DatabaseExecuteWithQuery:@"insert into GroupList (groupId ,groupName ,groupIntro ) values (?,?,?)" values:@[model.groupId,model.groupName,model.groupIntro]]){
+                         if (model.groupCode == nil){
+                            model.groupCode = @"123";
+                         }
+                         
+                         if ([_dbHelper DatabaseExecuteWithQuery:@"insert into GroupList (groupId ,groupName ,groupIntro ,groupCode) values (?,?,?,?)" values:@[model.groupId,model.groupName,model.groupIntro,model.groupCode]]){
                              NSLog(@"insert GroupList success");
                          }else{
                              NSLog(@"insert GroupList failed");
