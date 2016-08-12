@@ -21,10 +21,19 @@ class LoginController: ViewControllerBase,LoginServiceDelegate {
     var loginButton : UIButton?
     var player : AVAudioPlayer?
     var service : LoginService?
-    
-    
     var forgetPassword : UILabel?
     var register : UILabel?
+    
+    
+    //register
+    var nick : UITextField?
+    var battleAccount : UITextField?
+    var password : UITextField?
+    var passwordConfirm : UITextField?
+    var telphone : UITextField?
+    var registerButton : UIButton?
+    var cancelButton : UIButton?
+    
 
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
@@ -88,17 +97,25 @@ class LoginController: ViewControllerBase,LoginServiceDelegate {
     }
     
     override func onLoad() {
-        self.acccountTextfield!.text = "jack"
-        self.passwordTextfield!.text = "123"
+//        self.acccountTextfield!.text = "jack"
+//        self.passwordTextfield!.text = "123"
     }
     
     override func initView() {
          setBackGroundImage()
          setIconImage()
-         setEnterPart()
-         setRegister()
-         setForgetPassword()
-         setLoginButton()
+        
+        //login page
+//         setRegister()
+//         setForgetPassword()
+//         setLoginButton()
+//         setEnterPart()
+        
+        
+        //register page
+        setRegisterEnterView()
+        setRegisterButton()
+        
          beginSound()
     }
     
@@ -194,52 +211,6 @@ class LoginController: ViewControllerBase,LoginServiceDelegate {
     }
     
     
-    func setEnterPart(){
-        
-        self.acccountTextfield = UITextField()
-        self.acccountTextfield!.backgroundColor = UIColor.blackColor()
-        self.acccountTextfield!.textColor = UIColor.whiteColor()
-        self.acccountTextfield!.leftView = UIView(frame:CGRect(x: 0, y: 0, width: 5, height: UIAdapter.shared.transferHeight(30) ))
-        self.acccountTextfield!.font = UIFont(name: "KaiTi", size: UIAdapter.shared.transferHeight(15))
-        self.acccountTextfield!.layer.cornerRadius = 5
-        self.acccountTextfield!.layer.masksToBounds = true
-        self.acccountTextfield!.layer.borderWidth = 2
-        acccountTextfield!.leftViewMode = UITextFieldViewMode.Always
-        self.acccountTextfield!.layer.borderColor = UIColor(red: 28/255, green: 34/255, blue: 38/255, alpha: 1).CGColor
-
-        self.view!.addSubview(self.acccountTextfield!)
-     
-        self.acccountTextfield!.mas_makeConstraints{ make in
-           make.top.equalTo()(self.view!.mas_bottom).with().offset()(UIAdapter.shared.transferHeight(-200))
-           make.bottom.equalTo()(self.view!.mas_bottom).with().offset()(UIAdapter.shared.transferHeight(-170))
-           make.left.equalTo()(self.view).with().offset()(UIAdapter.shared.transferWidth(50))
-           make.right.equalTo()(self.view!).with().offset()(-UIAdapter.shared.transferWidth(50))
-        }
-        
-
-        
-        self.passwordTextfield = UITextField()
-        self.passwordTextfield!.backgroundColor = UIColor.blackColor()
-        self.passwordTextfield!.textColor = UIColor.whiteColor()
-        self.passwordTextfield!.leftView = UIView(frame:CGRect(x: 0, y: 0, width: 5, height: UIAdapter.shared.transferHeight(30)))
-        passwordTextfield!.leftViewMode = UITextFieldViewMode.Always
-        self.passwordTextfield!.font = UIFont(name: "KaiTi", size: UIAdapter.shared.transferHeight(15))
-        self.passwordTextfield!.layer.cornerRadius = 5
-        self.passwordTextfield!.layer.masksToBounds = true
-        self.passwordTextfield!.layer.borderWidth = 2
-        self.passwordTextfield!.secureTextEntry = true
-        self.passwordTextfield!.layer.borderColor = UIColor(red: 28/255, green: 34/255, blue: 38/255, alpha: 1).CGColor
-        self.view!.addSubview(self.passwordTextfield!)
-        
-        self.passwordTextfield!.mas_makeConstraints{ make in
-            make.top.equalTo()(self.acccountTextfield!.mas_bottom).with().offset()(UIAdapter.shared.transferHeight(25))
-            make.bottom.equalTo()(self.acccountTextfield!).with().offset()(UIAdapter.shared.transferHeight(55))
-            make.left.equalTo()(self.acccountTextfield)
-            make.right.equalTo()(self.acccountTextfield)
-        }
-    }
-    
-    
     func setLoginButton(){
         self.loginButton = UIButton()
         self.loginButton!.layer.cornerRadius = 5
@@ -272,12 +243,61 @@ class LoginController: ViewControllerBase,LoginServiceDelegate {
 
     }
     
-    
+
+    func setEnterPart(){
+        
+        self.acccountTextfield = UITextField()
+        self.acccountTextfield!.backgroundColor = UIColor.blackColor()
+        self.acccountTextfield!.textColor = UIColor.whiteColor()
+        self.acccountTextfield!.leftView = UIView(frame:CGRect(x: 0, y: 0, width: 5, height: UIAdapter.shared.transferHeight(30) ))
+        self.acccountTextfield!.font = UIFont(name: "KaiTi", size: UIAdapter.shared.transferHeight(15))
+        self.acccountTextfield!.layer.cornerRadius = 5
+        self.acccountTextfield!.layer.masksToBounds = true
+        self.acccountTextfield!.layer.borderWidth = 2
+        acccountTextfield!.leftViewMode = UITextFieldViewMode.Always
+        self.acccountTextfield!.layer.borderColor = UIColor(red: 28/255, green: 34/255, blue: 38/255, alpha: 1).CGColor
+        
+        self.view!.addSubview(self.acccountTextfield!)
+        
+        self.acccountTextfield!.mas_makeConstraints{ make in
+            make.top.equalTo()(self.view!.mas_bottom).with().offset()(UIAdapter.shared.transferHeight(-200))
+            make.bottom.equalTo()(self.view!.mas_bottom).with().offset()(UIAdapter.shared.transferHeight(-170))
+            make.left.equalTo()(self.view).with().offset()(UIAdapter.shared.transferWidth(50))
+            make.right.equalTo()(self.view!).with().offset()(-UIAdapter.shared.transferWidth(50))
+        }
+        
+        
+        
+        self.passwordTextfield = UITextField()
+        self.passwordTextfield!.backgroundColor = UIColor.blackColor()
+        self.passwordTextfield!.textColor = UIColor.whiteColor()
+        self.passwordTextfield!.leftView = UIView(frame:CGRect(x: 0, y: 0, width: 5, height: UIAdapter.shared.transferHeight(30)))
+        passwordTextfield!.leftViewMode = UITextFieldViewMode.Always
+        self.passwordTextfield!.font = UIFont(name: "KaiTi", size: UIAdapter.shared.transferHeight(15))
+        self.passwordTextfield!.layer.cornerRadius = 5
+        self.passwordTextfield!.layer.masksToBounds = true
+        self.passwordTextfield!.layer.borderWidth = 2
+        self.passwordTextfield!.secureTextEntry = true
+        self.passwordTextfield!.layer.borderColor = UIColor(red: 28/255, green: 34/255, blue: 38/255, alpha: 1).CGColor
+        self.view!.addSubview(self.passwordTextfield!)
+        
+        self.passwordTextfield!.mas_makeConstraints{ make in
+            make.top.equalTo()(self.acccountTextfield!.mas_bottom).with().offset()(UIAdapter.shared.transferHeight(25))
+            make.bottom.equalTo()(self.acccountTextfield!).with().offset()(UIAdapter.shared.transferHeight(55))
+            make.left.equalTo()(self.acccountTextfield)
+            make.right.equalTo()(self.acccountTextfield)
+        }
+    }
+
     
     func loginButtonClick(sender : UIButton){
         self.showProgress()
         self.service!.login(self.acccountTextfield!.text, password: self.passwordTextfield!.text)
     }
+    
+    
+    
+    
     
     func didLogin(){
         self.acccountTextfield!.hidden = true

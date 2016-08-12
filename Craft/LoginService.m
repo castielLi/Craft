@@ -223,14 +223,16 @@
 
 }
 
--(void)registerNewAccount:(NSString*)account password:(NSString*)password battleAccount:(NSString*)battleAccount{
-    NSDictionary * parameters = @{@"userName":account,@"password":password,@"battle":battleAccount};
+-(void)Register:(NSString*)battleAccount nick:(NSString*)nick password:(NSString*)password telphone:(NSString*)
+telphone{
     
-    [_restService post:@"/api/activity/init_activity_create" parameters:parameters
+    NSDictionary * parameter = @{@"battleNetMail":battleAccount,@"password":password,@"userName":nick,@"telNumber":telphone};
+    
+    [_restService post:@"/api/common/register" parameters:parameter
               callback:^ (ApiResult *result, id response){
-                [_delegate registerDidFinish:result response:response];
-    }];
-}
+                        [_delegate registerDidFinish:result response:response];
+              }];
 
+}
 
 @end

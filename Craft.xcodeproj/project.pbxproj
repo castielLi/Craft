@@ -43,6 +43,7 @@
 		182BE17B1D56198300224330 /* ActivityDetailContentModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 182BE17A1D56198300224330 /* ActivityDetailContentModel.m */; };
 		182BE17E1D561CC600224330 /* ActivityMemberItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 182BE17D1D561CC600224330 /* ActivityMemberItem.m */; };
 		1832D26B1D198A37000803FF /* WorldChat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1832D26A1D198A37000803FF /* WorldChat.swift */; };
+		1835FA161D5CAC3C00ECA50A /* RegisterForLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1835FA151D5CAC3C00ECA50A /* RegisterForLogin.swift */; };
 		1837D2361CFAE2B700FFE3FD /* ExtensionTableForChatRoom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1837D2351CFAE2B700FFE3FD /* ExtensionTableForChatRoom.swift */; };
 		1837D23E1CFAE3FB00FFE3FD /* ChatListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1837D23D1CFAE3FB00FFE3FD /* ChatListCell.swift */; };
 		1837D2401CFAEB3300FFE3FD /* ExtensionForChatGesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1837D23F1CFAEB3300FFE3FD /* ExtensionForChatGesture.swift */; };
@@ -244,6 +245,7 @@
 		182BE17C1D561CC600224330 /* ActivityMemberItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ActivityMemberItem.h; path = SignUp/ActivityMemberItem.h; sourceTree = "<group>"; };
 		182BE17D1D561CC600224330 /* ActivityMemberItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ActivityMemberItem.m; path = SignUp/ActivityMemberItem.m; sourceTree = "<group>"; };
 		1832D26A1D198A37000803FF /* WorldChat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WorldChat.swift; path = SignUp/WorldChat.swift; sourceTree = "<group>"; };
+		1835FA151D5CAC3C00ECA50A /* RegisterForLogin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterForLogin.swift; sourceTree = "<group>"; };
 		1837D2351CFAE2B700FFE3FD /* ExtensionTableForChatRoom.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtensionTableForChatRoom.swift; sourceTree = "<group>"; };
 		1837D23D1CFAE3FB00FFE3FD /* ChatListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChatListCell.swift; path = ChatRoom/ChatListCell.swift; sourceTree = "<group>"; };
 		1837D23F1CFAEB3300FFE3FD /* ExtensionForChatGesture.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtensionForChatGesture.swift; sourceTree = "<group>"; };
@@ -763,6 +765,7 @@
 				182647761C2E689C0078D4C2 /* ForgetPassword.swift */,
 				182647771C2E689C0078D4C2 /* RegisterController.swift */,
 				18A824451BEDCDF200084589 /* LoginController.swift */,
+				1835FA151D5CAC3C00ECA50A /* RegisterForLogin.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -1410,6 +1413,7 @@
 				1882E8871D05C567006F5803 /* ChatVoiceMessage.swift in Sources */,
 				1817585D1C4B8D45008913DB /* CustomLayout.swift in Sources */,
 				1837D2421CFAF2C800FFE3FD /* navigationClickEvents.swift in Sources */,
+				1835FA161D5CAC3C00ECA50A /* RegisterForLogin.swift in Sources */,
 				18BDB0481D2E8E7B000CC61D /* UILabel+Nova_UILabel.m in Sources */,
 				1895CEF91D3238970047C8F0 /* currentDutyView.swift in Sources */,
 				181518411C958C4000AA4F33 /* MyAcitivitiesView.swift in Sources */,

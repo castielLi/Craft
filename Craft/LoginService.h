@@ -34,7 +34,9 @@
 
 -(void)GetInitActivitiesData;
 
--(void)registerNewAccount:(NSString*)account password:(NSString*)password battleAccount:(NSString*)battleAccount;
+-(void)Register:(NSString*)battleAccount nick:(NSString*)nick password:(NSString*)password telphone:(NSString*)
+telphone;
+
 
 @end
 

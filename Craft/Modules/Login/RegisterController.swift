@@ -128,8 +128,8 @@ class RegisterController: ViewControllerBase,LoginServiceDelegate {
         self.passwordConfirm!.mas_makeConstraints{ make in
             make.top.equalTo()(self.password!.mas_bottom).with().offset()(UIAdapter.shared.transferHeight(10))
             make.bottom.equalTo()(self.password!.mas_bottom).with().offset()(UIAdapter.shared.transferHeight(40))
-            make.left.equalTo()(self.view!.mas_left).with().offset()(UIAdapter.shared.transferWidth(60))
-            make.right.equalTo()(self.view!.mas_right).with().offset()(UIAdapter.shared.transferWidth(-60))
+            make.left.equalTo()(self.view!.mas_left).with().offset()(UIAdapter.shared.transferWidth(50))
+            make.right.equalTo()(self.view!.mas_right).with().offset()(UIAdapter.shared.transferWidth(-50))
         }
 
         
@@ -146,8 +146,8 @@ class RegisterController: ViewControllerBase,LoginServiceDelegate {
         self.battleAccount!.mas_makeConstraints{ make in
             make.top.equalTo()(self.passwordConfirm!.mas_bottom).with().offset()(UIAdapter.shared.transferHeight(10))
             make.bottom.equalTo()(self.passwordConfirm!.mas_bottom).with().offset()(UIAdapter.shared.transferHeight(40))
-            make.left.equalTo()(self.view!.mas_left).with().offset()(UIAdapter.shared.transferWidth(60))
-            make.right.equalTo()(self.view!.mas_right).with().offset()(UIAdapter.shared.transferWidth(-60))
+            make.left.equalTo()(self.view!.mas_left).with().offset()(UIAdapter.shared.transferWidth(50))
+            make.right.equalTo()(self.view!.mas_right).with().offset()(UIAdapter.shared.transferWidth(-50))
         }
         
     }
@@ -158,7 +158,6 @@ class RegisterController: ViewControllerBase,LoginServiceDelegate {
         self.registerButton!.titleLabel?.font = UIFont(name: "TimesNewRomanPS-BoldMT", size: UIAdapter.shared.transferHeight(12))
         self.registerButton!.setTitle("注    册", forState: UIControlState.Normal)
         self.registerButton!.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
-        self.registerButton!.addTarget(self, action: "registerButtonClick:", forControlEvents: UIControlEvents.TouchUpInside)
         self.view!.addSubview(registerButton!)
         
         self.registerButton!.mas_makeConstraints{make in
@@ -189,16 +188,6 @@ class RegisterController: ViewControllerBase,LoginServiceDelegate {
     }
     
 
-    func registerButtonClick (sender : UIButton){
-        
-        let validate:Bool = self.Validate()
-        if(!validate) {return}
-        
-        self.showProgress()
-        service!.registerNewAccount(nick!.text!, password: password!.text!, battleAccount: "")
-        
-    }
-    
     func registerDidFinish(result: ApiResult!, response: AnyObject!) {
         self.closeProgress()
         if(result.state){
