@@ -24,6 +24,11 @@ class CreateActivityTime: UIView {
     var startTime : CreateNewTimeView?
     var endTime : CreateNewTimeView?
     var backgroundImage : UIImageView?
+    var hours : String?
+    var minutes : String?
+    var month : String?
+    var day : String?
+    var year : String?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -57,15 +62,40 @@ class CreateActivityTime: UIView {
             make.right.equalTo()(self.labelBackground!).with().offset()(UIAdapter.shared.transferWidth(-30))
         }
         
+        let now = NSDate()
+        let format = NSDateFormatter()
+        format.dateFormat = "M月dd日"
+        let date = format.stringFromDate(now)
+        
+        let yearFormat = NSDateFormatter()
+        yearFormat.dateFormat = "yyyy"
+        year = yearFormat.stringFromDate(now)
+        
+        let monthFormat = NSDateFormatter()
+        monthFormat.dateFormat = "M"
+        month = monthFormat.stringFromDate(now)
+        
+        
+        let dayFormat = NSDateFormatter()
+        dayFormat.dateFormat = "d"
+        day = dayFormat.stringFromDate(now)
+        
+        let hourFormat = NSDateFormatter()
+        hourFormat.dateFormat = "HH"
+        hours = hourFormat.stringFromDate(now)
+        
+        let minFormat = NSDateFormatter()
+        minFormat.dateFormat = "ss"
+        minutes = minFormat.stringFromDate(now)
         
         self.startTime = CreateNewTimeView(frame: CGRect(x: 0, y: UIAdapter.shared.transferHeight(17), width: self.frame.width / 3, height: UIAdapter.shared.transferHeight(35)))
-        self.startTime!.date!.text = "7月20日"
-        self.startTime!.time?.text = "19:00"
+        self.startTime!.date!.text = date
+        self.startTime!.time?.text = "00:00"
         self.addSubview(startTime!)
         
         self.endTime = CreateNewTimeView(frame: CGRect(x: self.frame.width / 3 * 2, y: UIAdapter.shared.transferHeight(17), width: self.frame.width / 3, height: UIAdapter.shared.transferHeight(35)))
-        self.endTime!.date!.text = "7月20日"
-        self.endTime!.time?.text = "23:00"
+        self.endTime!.date!.text = date
+        self.endTime!.time?.text = "00:00"
         self.addSubview(endTime!)
         
         

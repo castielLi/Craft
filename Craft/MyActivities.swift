@@ -56,8 +56,9 @@ class MyActivities: ViewControllerBase ,UIGestureRecognizerDelegate , UITableVie
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
-//        self.navigationController!.navigationBar.barStyle = UIBarStyle.BlackTranslucent
-//        self.navigationController!.navigationBar.setBackgroundImage(UIImage(named: "navigationBackGround"), forBarMetrics: UIBarMetrics.Default)
+        let center = NSNotificationCenter.defaultCenter()
+        center.addObserver(self,
+                           selector: "inviteListDialogDisappear:", name: "dismissAcitivtiesDialogFromDetail", object: nil)
         
         self.navigationController!.setNavigationBarHidden(true, animated: false)
 
@@ -73,6 +74,16 @@ class MyActivities: ViewControllerBase ,UIGestureRecognizerDelegate , UITableVie
 
         self.activitiesView!.layer.addAnimation(animation, forKey: nil)
         
+    }
+    
+    func inviteListDialogDisappear(sender : NSNotification){
+        let swishinId = self.soundPlay!.sound.valueForKey(SoundResource.swishinSound) as! String
+        let swishinid = UInt32(swishinId)
+        AudioServicesPlaySystemSound(swishinid!);
+        
+       UIView.animateWithDuration(0.4) {
+        self.activitiesView!.frame.origin.x += UIAdapter.shared.transferWidth(300)
+        }
     }
 
     override func viewDidLoad() {
@@ -224,10 +235,19 @@ class MyActivities: ViewControllerBase ,UIGestureRecognizerDelegate , UITableVie
     }
     
     func invitePlayer(sender : UIButton){
+    
+        let swishinId = self.soundPlay!.sound.valueForKey(SoundResource.clickEventSound) as! String
+        let swishinid = UInt32(swishinId)
+        AudioServicesPlaySystemSound(swishinid!);
+        
        displayInviteFriendList()
     }
     
     func playerListClick(sender: UIButton){
+        let swishinId = self.soundPlay!.sound.valueForKey(SoundResource.clickEventSound) as! String
+        let swishinid = UInt32(swishinId)
+        AudioServicesPlaySystemSound(swishinid!);
+        
         selectedIndex = 2
         self.showProgress()
         self.service!.getActivityDetail(self.activityId!)
@@ -249,6 +269,10 @@ class MyActivities: ViewControllerBase ,UIGestureRecognizerDelegate , UITableVie
     
     func applyListClick(sender : UIButton){
        
+        let swishinId = self.soundPlay!.sound.valueForKey(SoundResource.clickEventSound) as! String
+        let swishinid = UInt32(swishinId)
+        AudioServicesPlaySystemSound(swishinid!);
+        
         selectedIndex = 1
         self.showProgress()
         self.service!.getApplyList(self.activityId!)
@@ -453,6 +477,7 @@ class MyActivities: ViewControllerBase ,UIGestureRecognizerDelegate , UITableVie
                 
                 
                 let invite = inviteMain(nibName: nil, bundle: nil)
+                invite.fromDetail = true;
                 let inviteNav = UINavigationController(rootViewController: invite)
                 inviteNav.modalPresentationStyle = UIModalPresentationStyle.OverFullScreen
                 self.presentViewController(inviteNav, animated: false, completion: nil)

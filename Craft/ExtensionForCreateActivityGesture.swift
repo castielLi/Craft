@@ -84,4 +84,57 @@ extension AddNewActivityController {
         Nav.modalPresentationStyle = UIModalPresentationStyle.OverFullScreen
         self.presentViewController(Nav, animated: true, completion: nil)
     }
+    
+    func addTimeTapGesture(){
+        timeTap = UITapGestureRecognizer(target: self, action: "timeViewDidTap:")
+        timeTap!.numberOfTapsRequired = 1
+        self.timeView!.addGestureRecognizer(timeTap!)
+    }
+    
+    func timeViewDidTap(sender : UITapGestureRecognizer){
+        
+
+        UIView.animateWithDuration(0.4, animations: {
+            
+            self.activitiesView!.frame.origin.x = -UIAdapter.shared.transferWidth(300)
+            self.activityMain!.frame.origin.x = -UIAdapter.shared.transferWidth(270)
+            self.cancelButton!.frame.origin.x = -UIAdapter.shared.transferWidth(140)
+            self.createButton!.frame.origin.x = -UIAdapter.shared.transferWidth(270)
+            
+            })
+        { (success) in
+            
+            let swishinId = self.soundPlay!.sound.valueForKey(SoundResource.swishinSound) as! String
+            let swishinid = UInt32(swishinId)
+            AudioServicesPlaySystemSound(swishinid!);
+            
+            let timeDetail = TwoRollSelection()
+            weak var currentTimeDetail = timeDetail
+            currentTimeDetail!.currentMonth = self.timeView!.month!
+            currentTimeDetail!.currentDay = self.timeView!.day!
+            currentTimeDetail!.currentHour = self.timeView!.month!
+            currentTimeDetail!.currentYear = self.timeView!.year!
+            currentTimeDetail!.currentMinute = self.timeView!.minutes!
+            currentTimeDetail!.Block = {
+                UIView.animateWithDuration(0.4, animations: {
+                    
+                    let swishinId = self.soundPlay!.sound.valueForKey(SoundResource.swishinSound) as! String
+                    let swishinid = UInt32(swishinId)
+                    AudioServicesPlaySystemSound(swishinid!);
+                    
+                    self.activitiesView!.frame.origin.x += UIAdapter.shared.transferWidth(300)
+                    self.activityMain!.frame.origin.x += UIAdapter.shared.transferWidth(300)
+                    self.cancelButton!.frame.origin.x += UIAdapter.shared.transferWidth(300)
+                    self.createButton!.frame.origin.x += UIAdapter.shared.transferWidth(300)
+                    
+                })
+            }
+            
+            let Nav = UINavigationController(rootViewController: currentTimeDetail!)
+            Nav.modalPresentationStyle = UIModalPresentationStyle.OverFullScreen
+            self.presentViewController(Nav, animated: true, completion: nil)
+        }
+        
+        
+    }
 }

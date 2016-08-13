@@ -18,6 +18,7 @@
     UILabel * buttonsplitLabel;
     UITapGestureRecognizer * tap;
     UILabel * displaylabel;
+    
 }
 @end
 
@@ -39,6 +40,8 @@
 
 -(void)initView{
 
+    
+   
     
     mainView = [[UIImageView alloc]initWithFrame:CGRectMake((self.view.frame.size.width - 240) / 2, (self.view.frame.size.height - 240)/2, 240, 240)];
     NSString * path = [[NSBundle mainBundle] pathForResource:@"selectedBackground" ofType:@"png"];

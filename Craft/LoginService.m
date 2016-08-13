@@ -50,7 +50,7 @@
         token = [values valueForKey:@"devicetoken"];
     }
     
-    NSDictionary * parameter = @{@"userName":username,@"password":password,@"umengToken":token};
+    NSDictionary * parameter = @{@"battleNetMail":username,@"password":password,@"umengToken":token};
     
     [_restService post:@"/api/common/login" parameters:parameter
               callback:^ (ApiResult *result, id response){

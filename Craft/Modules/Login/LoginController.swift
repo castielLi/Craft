@@ -97,8 +97,8 @@ class LoginController: ViewControllerBase,LoginServiceDelegate {
     }
     
     override func onLoad() {
-//        self.acccountTextfield!.text = "jack"
-//        self.passwordTextfield!.text = "123"
+        self.acccountTextfield!.text = "1120753340@qq.com"
+        self.passwordTextfield!.text = "123"
     }
     
     override func initView() {
@@ -106,15 +106,14 @@ class LoginController: ViewControllerBase,LoginServiceDelegate {
          setIconImage()
         
         //login page
-//         setRegister()
-//         setForgetPassword()
-//         setLoginButton()
-//         setEnterPart()
-        
+         setEnterPart()
+         setRegister()
+         setForgetPassword()
+         setLoginButton()
         
         //register page
-        setRegisterEnterView()
-        setRegisterButton()
+//        setRegisterEnterView()
+//        setRegisterButton()
         
          beginSound()
     }
@@ -294,10 +293,6 @@ class LoginController: ViewControllerBase,LoginServiceDelegate {
         self.showProgress()
         self.service!.login(self.acccountTextfield!.text, password: self.passwordTextfield!.text)
     }
-    
-    
-    
-    
     
     func didLogin(){
         self.acccountTextfield!.hidden = true

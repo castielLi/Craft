@@ -18,6 +18,7 @@ class inviteMain: ViewControllerBase , UIGestureRecognizerDelegate{
     var searchTextField : UITextField?
     var searchButton : UIButton?
     var blankTap : UITapGestureRecognizer?
+    var fromDetail : Bool?
     
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
@@ -138,9 +139,15 @@ class inviteMain: ViewControllerBase , UIGestureRecognizerDelegate{
 //            self.createButton!.frame.origin.x = -UIAdapter.shared.transferWidth(250)
         }) { (success) -> Void in
             if success {
-                self.dismissViewControllerAnimated(false, completion: { () -> Void in
-                    NSNotificationCenter.defaultCenter().postNotificationName("dismissAcitivtiesDialog", object: self)
-                })
+                if (self.fromDetail == nil || !self.fromDetail!){
+                    self.dismissViewControllerAnimated(false, completion: { () -> Void in
+                        NSNotificationCenter.defaultCenter().postNotificationName("dismissInviteDialog", object: self)
+                    })
+                }else{
+                    self.dismissViewControllerAnimated(false, completion: { () -> Void in
+                        NSNotificationCenter.defaultCenter().postNotificationName("dismissAcitivtiesDialogFromDetail", object: self)
+                    })
+                }
                 
             }
         }

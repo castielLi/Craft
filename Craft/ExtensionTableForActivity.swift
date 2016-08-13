@@ -34,7 +34,9 @@ extension SignUp: UITableViewDelegate , UITableViewDataSource {
         let level = myActivitiesDatasource![indexPath.row].valueForKey("aplName") as! String
         if level == "普通"{
         cell!.iconImage!.image = UIImage(named: "challenge")
-        }
+        }else{
+              cell!.iconImage!.image = UIImage(named: "challenge")
+            }
             
         cell!.raidName!.text = myActivitiesDatasource![indexPath.row].valueForKey("title") as! String
         cell!.dutyPart!.damageLabel!.text = "\(myActivitiesDatasource![indexPath.row].valueForKey("haveDPSCount") as! Int)"

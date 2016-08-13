@@ -37,6 +37,7 @@ class AddNewActivityController: ViewControllerBase ,UIGestureRecognizerDelegate{
     
     
     var timeView : CreateActivityTime?
+    var timeTap : UITapGestureRecognizer?
     var contentView : UITextView?
     
     var dutyView : currentDutyView?
@@ -51,6 +52,7 @@ class AddNewActivityController: ViewControllerBase ,UIGestureRecognizerDelegate{
     var typeCode : String?
     var activityCode : String?
     var levelCode : String?
+    var currentUserInfo : currentUserInformation?
     
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
@@ -69,6 +71,10 @@ class AddNewActivityController: ViewControllerBase ,UIGestureRecognizerDelegate{
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
+        let center = NSNotificationCenter.defaultCenter()
+        center.addObserver(self,
+                           selector: "inviteListDisappear:", name: "dismissInviteDialog", object: nil)
+        
         self.navigationController!.setNavigationBarHidden(true, animated: false)
         
         let animation = CABasicAnimation(keyPath: "position.x")
@@ -82,9 +88,25 @@ class AddNewActivityController: ViewControllerBase ,UIGestureRecognizerDelegate{
         self.cancelButton!.layer.addAnimation(animation, forKey: nil)
         
         self.addGestureForDropdowns()
+        self.addTimeTapGesture()
         initArrayData()
     }
 
+    func inviteListDisappear(sender : NSNotification){
+        UIView.animateWithDuration(0.3, animations: { () -> Void in
+            
+            let swishinId = self.soundPlay!.sound.valueForKey(SoundResource.swishinSound) as! String
+            let swishinid = UInt32(swishinId)
+            AudioServicesPlaySystemSound(swishinid!);
+            
+            self.activitiesView!.frame.origin.x += UIAdapter.shared.transferWidth(290)
+            self.activityMain!.frame.origin.x += UIAdapter.shared.transferWidth(290)
+            self.cancelButton!.frame.origin.x += UIAdapter.shared.transferWidth(290)
+            self.createButton!.frame.origin.x += UIAdapter.shared.transferWidth(290)
+        })
+    }
+    
+    
     func initArrayData(){
        self.showProgress()
        
@@ -175,7 +197,7 @@ class AddNewActivityController: ViewControllerBase ,UIGestureRecognizerDelegate{
     
     func setTime(){
          self.timeView = CreateActivityTime(frame: CGRect(x: UIAdapter.shared.transferWidth(1), y: UIAdapter.shared.transferHeight(24), width: UIAdapter.shared.transferWidth(250) - UIAdapter.shared.transferWidth(2) , height: UIAdapter.shared.transferHeight(52)))
-        
+         self.timeView!.userInteractionEnabled = true
          self.activityMain!.addSubview(self.timeView!)
     }
     

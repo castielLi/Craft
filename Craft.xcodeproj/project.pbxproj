@@ -17,6 +17,11 @@
 		1801FC6B1D29241B0083A37D /* RegexHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 1801FC621D29241B0083A37D /* RegexHelper.m */; };
 		1801FC6C1D29241B0083A37D /* UIColorHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 1801FC641D29241B0083A37D /* UIColorHelper.m */; };
 		1801FC6D1D29241B0083A37D /* MsgBoxHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 1801FC661D29241B0083A37D /* MsgBoxHelper.m */; };
+		1809CC4E1D5F428D00FDA00C /* DutyResponseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1809CC4D1D5F428D00FDA00C /* DutyResponseView.m */; };
+		1809CC501D5F61D500FDA00C /* MyActivity.png in Resources */ = {isa = PBXBuildFile; fileRef = 1809CC4F1D5F61D500FDA00C /* MyActivity.png */; };
+		1809CC521D5F61EE00FDA00C /* blood.png in Resources */ = {isa = PBXBuildFile; fileRef = 1809CC511D5F61EE00FDA00C /* blood.png */; };
+		1809CC541D5F620700FDA00C /* MainBackGround.png in Resources */ = {isa = PBXBuildFile; fileRef = 1809CC531D5F620700FDA00C /* MainBackGround.png */; };
+		1809CC561D5F646A00FDA00C /* currentUserInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1809CC551D5F646A00FDA00C /* currentUserInformation.swift */; };
 		180E193F1C62E39D00987CE6 /* ChatRoom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180E193E1C62E39D00987CE6 /* ChatRoom.swift */; };
 		180E19441C62EE7C00987CE6 /* libstdc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 180E19431C62EE7C00987CE6 /* libstdc++.tbd */; };
 		180E194B1C63204900987CE6 /* MainMenuProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180E194A1C63204900987CE6 /* MainMenuProtocol.swift */; };
@@ -134,11 +139,8 @@
 		18D481501D49DD2800B86B70 /* friendListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D4814F1D49DD2800B86B70 /* friendListModel.m */; };
 		18D481531D4A1E2200B86B70 /* ActivityItemModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D481521D4A1E2200B86B70 /* ActivityItemModel.m */; };
 		18D6CF651D2ABBED004DCF8A /* worldChatCompleteState.png in Resources */ = {isa = PBXBuildFile; fileRef = 18D6CF641D2ABBED004DCF8A /* worldChatCompleteState.png */; };
-		18E136251CFC73EE0046A6B8 /* MainBackGround.png in Resources */ = {isa = PBXBuildFile; fileRef = 18E136241CFC73EE0046A6B8 /* MainBackGround.png */; };
-		18E136271CFC74190046A6B8 /* blood.png in Resources */ = {isa = PBXBuildFile; fileRef = 18E136261CFC74190046A6B8 /* blood.png */; };
 		18E1362B1CFC74960046A6B8 /* chatBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = 18E1362A1CFC74960046A6B8 /* chatBackground.png */; };
 		18E1362D1CFC74AE0046A6B8 /* chatDetailBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = 18E1362C1CFC74AE0046A6B8 /* chatDetailBackground.png */; };
-		18E1362F1CFC74D70046A6B8 /* MyActivity.png in Resources */ = {isa = PBXBuildFile; fileRef = 18E1362E1CFC74D70046A6B8 /* MyActivity.png */; };
 		18E136311CFC752E0046A6B8 /* dailyBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = 18E136301CFC752E0046A6B8 /* dailyBackground.png */; };
 		18E1C8151D17E3150080EBC1 /* welcome_video.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 18E1C8141D17E3150080EBC1 /* welcome_video.mp4 */; };
 		18E27E2E1D58B8F200AB147B /* ActivityDetailFooterEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E27E2D1D58B8F200AB147B /* ActivityDetailFooterEvent.swift */; };
@@ -211,6 +213,12 @@
 		1801FC641D29241B0083A37D /* UIColorHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIColorHelper.m; sourceTree = "<group>"; };
 		1801FC651D29241B0083A37D /* UIColorHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIColorHelper.h; sourceTree = "<group>"; };
 		1801FC661D29241B0083A37D /* MsgBoxHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MsgBoxHelper.m; sourceTree = "<group>"; };
+		1809CC4C1D5F428D00FDA00C /* DutyResponseView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DutyResponseView.h; path = Common/DutyResponseView.h; sourceTree = "<group>"; };
+		1809CC4D1D5F428D00FDA00C /* DutyResponseView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DutyResponseView.m; path = Common/DutyResponseView.m; sourceTree = "<group>"; };
+		1809CC4F1D5F61D500FDA00C /* MyActivity.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = MyActivity.png; path = Assets.xcassets/MyActivity.imageset/MyActivity.png; sourceTree = "<group>"; };
+		1809CC511D5F61EE00FDA00C /* blood.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = blood.png; path = Assets.xcassets/blood.imageset/blood.png; sourceTree = "<group>"; };
+		1809CC531D5F620700FDA00C /* MainBackGround.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = MainBackGround.png; path = Assets.xcassets/MainBackGround.imageset/MainBackGround.png; sourceTree = "<group>"; };
+		1809CC551D5F646A00FDA00C /* currentUserInformation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = currentUserInformation.swift; path = SignUp/currentUserInformation.swift; sourceTree = "<group>"; };
 		180E193E1C62E39D00987CE6 /* ChatRoom.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChatRoom.swift; path = ChatRoom/ChatRoom.swift; sourceTree = "<group>"; };
 		180E19431C62EE7C00987CE6 /* libstdc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.tbd"; path = "usr/lib/libstdc++.tbd"; sourceTree = SDKROOT; };
 		180E194A1C63204900987CE6 /* MainMenuProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainMenuProtocol.swift; sourceTree = "<group>"; };
@@ -350,11 +358,8 @@
 		18D481511D4A1E2200B86B70 /* ActivityItemModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ActivityItemModel.h; path = SignUp/ActivityItemModel.h; sourceTree = "<group>"; };
 		18D481521D4A1E2200B86B70 /* ActivityItemModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ActivityItemModel.m; path = SignUp/ActivityItemModel.m; sourceTree = "<group>"; };
 		18D6CF641D2ABBED004DCF8A /* worldChatCompleteState.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = worldChatCompleteState.png; sourceTree = "<group>"; };
-		18E136241CFC73EE0046A6B8 /* MainBackGround.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = MainBackGround.png; path = Assets.xcassets/BackGround/Main/MainBackGround.imageset/MainBackGround.png; sourceTree = "<group>"; };
-		18E136261CFC74190046A6B8 /* blood.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = blood.png; path = Assets.xcassets/BackGround/blood.imageset/blood.png; sourceTree = "<group>"; };
 		18E1362A1CFC74960046A6B8 /* chatBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = chatBackground.png; path = Assets.xcassets/Chat/chatBackground.imageset/chatBackground.png; sourceTree = "<group>"; };
 		18E1362C1CFC74AE0046A6B8 /* chatDetailBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = chatDetailBackground.png; path = Assets.xcassets/Chat/chatDetailBackground.imageset/chatDetailBackground.png; sourceTree = "<group>"; };
-		18E1362E1CFC74D70046A6B8 /* MyActivity.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = MyActivity.png; path = Assets.xcassets/BackGround/Main/MyActivity.imageset/MyActivity.png; sourceTree = "<group>"; };
 		18E136301CFC752E0046A6B8 /* dailyBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = dailyBackground.png; path = Assets.xcassets/dailyBackground.imageset/dailyBackground.png; sourceTree = "<group>"; };
 		18E1C8141D17E3150080EBC1 /* welcome_video.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = welcome_video.mp4; sourceTree = "<group>"; };
 		18E27E2D1D58B8F200AB147B /* ActivityDetailFooterEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityDetailFooterEvent.swift; sourceTree = "<group>"; };
@@ -644,6 +649,7 @@
 				1895CEF61D322B470047C8F0 /* CreateNewTimeView.swift */,
 				1895CEF81D3238970047C8F0 /* currentDutyView.swift */,
 				1895CEFC1D324A830047C8F0 /* InviteTableCell.swift */,
+				1809CC551D5F646A00FDA00C /* currentUserInformation.swift */,
 			);
 			name = createNew;
 			sourceTree = "<group>";
@@ -1041,6 +1047,8 @@
 		18E136231CFC73B10046A6B8 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				1809CC531D5F620700FDA00C /* MainBackGround.png */,
+				1809CC511D5F61EE00FDA00C /* blood.png */,
 				188C4C911D50CE6400B6BA62 /* activityDetailBackground.png */,
 				18EDF25F1D451E920054C86B /* selectedBackground.png */,
 				188138D71D3286E1004953EC /* invite_friend.png */,
@@ -1049,12 +1057,10 @@
 				18E1C8141D17E3150080EBC1 /* welcome_video.mp4 */,
 				1882E8881D05C8AB006F5803 /* 10.jpeg */,
 				18E136301CFC752E0046A6B8 /* dailyBackground.png */,
-				18E1362E1CFC74D70046A6B8 /* MyActivity.png */,
+				1809CC4F1D5F61D500FDA00C /* MyActivity.png */,
 				18E1362C1CFC74AE0046A6B8 /* chatDetailBackground.png */,
 				18E1362A1CFC74960046A6B8 /* chatBackground.png */,
 				18D0E3881D5A028E004EDFF6 /* LoginBackGround.png */,
-				18E136261CFC74190046A6B8 /* blood.png */,
-				18E136241CFC73EE0046A6B8 /* MainBackGround.png */,
 			);
 			name = Images;
 			sourceTree = "<group>";
@@ -1066,6 +1072,8 @@
 				18C6ABA91D3E748E00196CD2 /* TwoRollSelection.h */,
 				1824C61A1D255045009078B4 /* OneRollSelection.m */,
 				1824C61B1D255045009078B4 /* OneRollSelection.h */,
+				1809CC4C1D5F428D00FDA00C /* DutyResponseView.h */,
+				1809CC4D1D5F428D00FDA00C /* DutyResponseView.m */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -1316,23 +1324,23 @@
 				1824C61E1D2556AF009078B4 /* create_activity_main.png in Resources */,
 				18E1362D1CFC74AE0046A6B8 /* chatDetailBackground.png in Resources */,
 				18AF8CAF1BEDCCCB00539C0E /* LaunchScreen.storyboard in Resources */,
+				1809CC501D5F61D500FDA00C /* MyActivity.png in Resources */,
 				188C4C921D50CE6400B6BA62 /* activityDetailBackground.png in Resources */,
 				18E136311CFC752E0046A6B8 /* dailyBackground.png in Resources */,
 				18EDF2601D451E920054C86B /* selectedBackground.png in Resources */,
 				18E1C8151D17E3150080EBC1 /* welcome_video.mp4 in Resources */,
 				18D0E3891D5A028E004EDFF6 /* LoginBackGround.png in Resources */,
-				18E136251CFC73EE0046A6B8 /* MainBackGround.png in Resources */,
 				18605E2E1CE0913E007D8114 /* ReadyForBattle.mp3 in Resources */,
+				1809CC541D5F620700FDA00C /* MainBackGround.png in Resources */,
 				18E1362B1CFC74960046A6B8 /* chatBackground.png in Resources */,
 				18605E361CE095CC007D8114 /* swishout.mp3 in Resources */,
-				18E1362F1CFC74D70046A6B8 /* MyActivity.png in Resources */,
 				18605E301CE09143007D8114 /* openBook.mp3 in Resources */,
 				18605E341CE095C6007D8114 /* swishin.mp3 in Resources */,
 				18AF8CAC1BEDCCCB00539C0E /* Assets.xcassets in Resources */,
 				1882E8891D05C8AB006F5803 /* 10.jpeg in Resources */,
 				188C4C901D50C83B00B6BA62 /* simkai.ttf in Resources */,
+				1809CC521D5F61EE00FDA00C /* blood.png in Resources */,
 				188C4C8E1D50C83200B6BA62 /* Papyrus-Regular.ttf in Resources */,
-				18E136271CFC74190046A6B8 /* blood.png in Resources */,
 				18610C4C1C12C88300B864F2 /* wow_main_theme.mp3 in Resources */,
 				18D6CF651D2ABBED004DCF8A /* worldChatCompleteState.png in Resources */,
 				188138D81D3286E1004953EC /* invite_friend.png in Resources */,
@@ -1469,6 +1477,7 @@
 				18FA0CB31D4657940046C4BC /* activityItemModel.m in Sources */,
 				18A8247C1BEE2B5D00084589 /* MainTabbar.swift in Sources */,
 				181518431C95907500AA4F33 /* ActivityTableCell.swift in Sources */,
+				1809CC561D5F646A00FDA00C /* currentUserInformation.swift in Sources */,
 				1801FC6C1D29241B0083A37D /* UIColorHelper.m in Sources */,
 				1837D2461CFAF32D00FFE3FD /* signupNavEvents.swift in Sources */,
 				18AF8CA51BEDCCCB00539C0E /* AppDelegate.swift in Sources */,
@@ -1518,6 +1527,7 @@
 				1895CEFF1D32761C0047C8F0 /* inviteMain.swift in Sources */,
 				18F7E4711C97FCC2007E3459 /* Resource.swift in Sources */,
 				18A593DC1C099D4100458308 /* CellType.swift in Sources */,
+				1809CC4E1D5F428D00FDA00C /* DutyResponseView.m in Sources */,
 				CD5EB3921D195EF300802FC4 /* RTAudioItem.swift in Sources */,
 				18BD4A311D1AC2A800585D1D /* RCIMdelegateForSignUp.swift in Sources */,
 				18A593D81C099C5300458308 /* TableViewBaseCell.swift in Sources */,
