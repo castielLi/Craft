@@ -292,6 +292,7 @@ class LoginController: ViewControllerBase,LoginServiceDelegate {
     func loginButtonClick(sender : UIButton){
         self.showProgress()
         self.service!.login(self.acccountTextfield!.text, password: self.passwordTextfield!.text)
+        
     }
     
     func didLogin(){

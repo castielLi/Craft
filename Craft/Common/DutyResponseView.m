@@ -28,13 +28,14 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor clearColor];
-    [self initView];
+    
     [self registerEvent];
     
     self.firstRollData = [[NSMutableArray alloc]initWithObjects:@"tank",@"heal",@"damage",@"damage", nil];
     
-    self.secondRollData = [[NSMutableArray alloc]initWithObjects:@{@"perfressId":@"1",@"image":@"zs"},@{@"perfressId":@"2",@"image":@"qs"},@{@"perfressId":@"3",@"image":@"dk"},@{@"perfressId":@"6",@"image":@"d"}, @{@"perfressId":@"8",@"image":@"ws"},@{@"perfressId":@"9",@"image":@"dk"},nil];
+    self.secondRollData = [[NSMutableArray alloc]initWithObjects:@{@"perfressId":@"1",@"image":@"zs"},@{@"perfressId":@"2",@"image":@"qs"},@{@"perfressId":@"3",@"image":@"dk"},@{@"perfressId":@"6",@"image":@"d"}, @{@"perfressId":@"8",@"image":@"ws"},@{@"perfressId":@"9",@"image":@"dh"},nil];
     
+    [self initView];
     // Do any additional setup after loading the view.
 }
 
@@ -129,7 +130,7 @@
         }else if([self.perfressType isEqualToString:@"1"]){
            self.secondRollData = [[NSMutableArray alloc]initWithObjects:@{@"perfressId":@"2",@"image":@"qs"},@{@"perfressId":@"4",@"image":@"sm"},@{@"perfressId":@"8",@"image":@"ws"},@{@"perfressId":@"11",@"image":@"ms"}, @{@"perfressId":@"6",@"image":@"d"},nil];
         }else if([self.perfressType isEqualToString:@"2"]){
-            self.secondRollData = [[NSMutableArray alloc]initWithObjects:@{@"perfressId":@"1",@"image":@"zs"},@{@"perfressId":@"2",@"image":@"qs"},@{@"perfressId":@"3",@"image":@"dk"},@{@"perfressId":@"4",@"image":@"sm"}, @{@"perfressId":@"7",@"image":@"dz"},@{@"perfressId":@"9",@"image":@"dk"},@{@"perfressId":@"6",@"image":@"d"},@{@"perfressId":@"8",@"image":@"ws"},nil];
+            self.secondRollData = [[NSMutableArray alloc]initWithObjects:@{@"perfressId":@"1",@"image":@"zs"},@{@"perfressId":@"2",@"image":@"qs"},@{@"perfressId":@"3",@"image":@"dk"},@{@"perfressId":@"4",@"image":@"sm"}, @{@"perfressId":@"7",@"image":@"dz"},@{@"perfressId":@"9",@"image":@"dh"},@{@"perfressId":@"6",@"image":@"d"},@{@"perfressId":@"8",@"image":@"ws"},nil];
         }else{
             self.secondRollData = [[NSMutableArray alloc]initWithObjects:@{@"perfressId":@"4",@"image":@"sm"},@{@"perfressId":@"5",@"image":@"lr"},@{@"perfressId":@"10",@"image":@"fs"},@{@"perfressId":@"11",@"image":@"ms"}, @{@"perfressId":@"12",@"image":@"ss"},@{@"perfressId":@"6",@"image":@"d"},nil];
         }

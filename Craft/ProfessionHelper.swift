@@ -36,7 +36,7 @@ class ProfessionHelper {
         case 8:
             return UIImage(named: "ws")!
         default:
-            return UIImage(named: "dk")!
+            return UIImage(named: "dh")!
             //恶魔猎手
         }
     }
@@ -73,7 +73,7 @@ class ProfessionHelper {
         case 8:
             return UIImage(named: "ws")!
         default:
-            return UIImage(named: "dk")!
+            return UIImage(named: "dh")!
             //恶魔猎手
         }
     }
