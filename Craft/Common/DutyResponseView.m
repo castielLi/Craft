@@ -14,6 +14,7 @@
     UIPickerView * secondPicker;
     UITapGestureRecognizer * blankTap;
     UIImageView * displayImage;
+    UIView * contentView;
 }
 @end
 
@@ -29,6 +30,11 @@
     self.view.backgroundColor = [UIColor clearColor];
     [self initView];
     [self registerEvent];
+    
+    self.firstRollData = [[NSMutableArray alloc]initWithObjects:@"tank",@"heal",@"damage",@"damage", nil];
+    
+    self.secondRollData = [[NSMutableArray alloc]initWithObjects:@{@"perfressId":@"1",@"image":@"zs"},@{@"perfressId":@"2",@"image":@"qs"},@{@"perfressId":@"3",@"image":@"dk"},@{@"perfressId":@"6",@"image":@"d"}, @{@"perfressId":@"8",@"image":@"ws"},@{@"perfressId":@"9",@"image":@"dk"},nil];
+    
     // Do any additional setup after loading the view.
 }
 
@@ -45,7 +51,6 @@
     [[self view]addSubview:mainView];
     
     
-    
     firstPicker = [[UIPickerView alloc]initWithFrame:CGRectMake((self.view.frame.size.width - 280) / 2, (self.view.frame.size.height - 240)/2, 140, 240)];
     [[self view]addSubview:firstPicker];
     firstPicker.delegate = self;
@@ -58,6 +63,9 @@
     secondPicker.delegate = self;
     secondPicker.dataSource = self;
     secondPicker.tag = 2;
+    
+    self.perfressType = self.firstRollData[0];
+    self.perfressId = [self.secondRollData[0] valueForKey:@"perfressId"];
 }
 
 -(void)CancelClick:(UIButton*)sender{
@@ -96,25 +104,44 @@
 }
 
 -(UIView *)pickerView:(UIPickerView *)pickerView viewForRow:(NSInteger)row forComponent:(NSInteger)component reusingView:(UIView *)view{
-    displayImage = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 140, 240)];
-    return displayImage;
+    contentView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 140, 60)];
+    displayImage = [[UIImageView alloc]initWithFrame:CGRectMake(70, 5, 50, 50)];
+    [contentView addSubview:displayImage];
+    if(pickerView.tag == 1){
+    
+    displayImage.image = [UIImage imageNamed:self.firstRollData[row]];
+    
+    }else{
+        [displayImage setFrame:CGRectMake(30, 5, 50, 50)];
+        displayImage.image = [UIImage imageNamed:  [self.secondRollData[row] valueForKey:@"image"]];
+    }
+    return contentView;
 }
 
 
--(NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component{
-    if (pickerView.tag == 1){
-        return _firstRollData[row];
-    }
-    return _secondRollData[row];
-};
-
 -(void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component{
     if (pickerView.tag == 1){
-       
+        self.perfressType = [NSString stringWithFormat:@"%li",(long)row];
+        
+        [self.secondRollData removeAllObjects];
+        if([self.perfressType isEqualToString:@"0"]){
+            self.secondRollData = [[NSMutableArray alloc]initWithObjects:@{@"perfressId":@"1",@"image":@"zs"},@{@"perfressId":@"2",@"image":@"qs"},@{@"perfressId":@"3",@"image":@"dk"},@{@"perfressId":@"6",@"image":@"d"}, @{@"perfressId":@"8",@"image":@"ws"},@{@"perfressId":@"9",@"image":@"dk"},nil];
+        }else if([self.perfressType isEqualToString:@"1"]){
+           self.secondRollData = [[NSMutableArray alloc]initWithObjects:@{@"perfressId":@"2",@"image":@"qs"},@{@"perfressId":@"4",@"image":@"sm"},@{@"perfressId":@"8",@"image":@"ws"},@{@"perfressId":@"11",@"image":@"ms"}, @{@"perfressId":@"6",@"image":@"d"},nil];
+        }else if([self.perfressType isEqualToString:@"2"]){
+            self.secondRollData = [[NSMutableArray alloc]initWithObjects:@{@"perfressId":@"1",@"image":@"zs"},@{@"perfressId":@"2",@"image":@"qs"},@{@"perfressId":@"3",@"image":@"dk"},@{@"perfressId":@"4",@"image":@"sm"}, @{@"perfressId":@"7",@"image":@"dz"},@{@"perfressId":@"9",@"image":@"dk"},@{@"perfressId":@"6",@"image":@"d"},@{@"perfressId":@"8",@"image":@"ws"},nil];
+        }else{
+            self.secondRollData = [[NSMutableArray alloc]initWithObjects:@{@"perfressId":@"4",@"image":@"sm"},@{@"perfressId":@"5",@"image":@"lr"},@{@"perfressId":@"10",@"image":@"fs"},@{@"perfressId":@"11",@"image":@"ms"}, @{@"perfressId":@"12",@"image":@"ss"},@{@"perfressId":@"6",@"image":@"d"},nil];
+        }
+        [secondPicker reloadAllComponents];
     }
     else{
-        
+        self.perfressId = [self.secondRollData[row] valueForKey:@"perfressId"];
     }
+}
+
+-(CGFloat)pickerView:(UIPickerView *)pickerView rowHeightForComponent:(NSInteger)component{
+    return 60;
 }
 
 

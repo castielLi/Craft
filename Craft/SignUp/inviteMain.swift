@@ -34,12 +34,19 @@ class inviteMain: ViewControllerBase , UIGestureRecognizerDelegate{
         self.navigationController!.setNavigationBarHidden(true, animated: false)
         
         let animation = CABasicAnimation(keyPath: "position.y")
-//        animation.removedOnCompletion = false
-//        animation.fillMode = kCAFillModeForwards
         animation.timingFunction = CAMediaTimingFunction( name: kCAMediaTimingFunctionEaseOut)
         animation.fromValue = -UIAdapter.shared.transferHeight(370)
         
         self.inviteMainView!.layer.addAnimation(animation, forKey: nil)
+        
+        self.initFriendList()
+    }
+    
+    func initFriendList(){
+        self.showProgress()
+        
+        
+        self.closeProgress()
     }
     
     override func viewDidLoad() {
@@ -114,14 +121,7 @@ class inviteMain: ViewControllerBase , UIGestureRecognizerDelegate{
         cancelButton!.setImage(UIImage(named: "cancelCreate"), forState: UIControlState.Highlighted)
         cancelButton!.backgroundColor = UIColor.blackColor()
         self.inviteMainView!.addSubview(cancelButton!)
-        
-//            cancelButton!.mas_makeConstraints{make in
-//                make.top.equalTo()(self.activityMain!.mas_bottom).with().offset()(UIAdapter.shared.transferHeight(17))
-//                make.right.equalTo()(self.activityMain!)
-//                make.bottom.equalTo()(self.activitiesView!).with().offset()(-UIAdapter.shared.transferHeight(8))
-//                make.left.equalTo()(self.activitiesView!.mas_right).with().offset()(-(self.activitiesView!.frame.width / 2 - 10))
-//        }
-    
+
     }
     
     func setTapForBackgroundView(){
@@ -135,8 +135,6 @@ class inviteMain: ViewControllerBase , UIGestureRecognizerDelegate{
         
         UIView.animateWithDuration(0.4, delay: 0, options: UIViewAnimationOptions.CurveEaseInOut, animations: { () -> Void in
             self.inviteMainView!.frame.origin.y = -UIAdapter.shared.transferHeight(370)
-//            self.cancelButton!.frame.origin.x = -UIAdapter.shared.transferWidth(140)
-//            self.createButton!.frame.origin.x = -UIAdapter.shared.transferWidth(250)
         }) { (success) -> Void in
             if success {
                 if (self.fromDetail == nil || !self.fromDetail!){

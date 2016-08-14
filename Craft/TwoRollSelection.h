@@ -21,6 +21,7 @@
 @property (nonatomic,strong) NSString * currentMinute;
 @property (nonatomic,strong) NSString * date;
 
+@property (nonatomic,strong) NSString * year;
 @property (nonatomic,strong) NSString* month;
 @property (nonatomic,strong) NSString* day;
 

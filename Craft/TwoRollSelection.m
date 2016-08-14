@@ -32,6 +32,7 @@
     
     UILabel * titleLabel;
     UIButton * confirmButton;
+    UIView * contentView;
     
 }
 
@@ -46,7 +47,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor clearColor];
-    [self initView];
+    
     [self registerEvent];
     
     sound = [PlaySound sharedData];
@@ -55,7 +56,7 @@
     
     hoursDataSource = [[NSArray alloc]initWithObjects:@"00",@"01",@"02",@"03",@"04",@"05",@"06",@"07",@"08",@"09",@"10",@"11",@"12",@"13",@"14",@"15",@"16",@"17",@"18",@"19",@"20",@"21",@"22",@"23" ,nil];
     
-    
+    [self initView];
     index = 1;
     // Do any additional setup after loading the view.
 }
@@ -147,6 +148,13 @@
     secondPicker.delegate = self;
     secondPicker.dataSource = self;
     secondPicker.tag = 2;
+    
+    self.month = self.firstRollData[0];
+    self.day = self.secondRollData[0];
+    self.beginHour = hoursDataSource[0];
+    self.endHour = hoursDataSource[0];
+    self.beginMinute = minutesDataSource[0];
+    self.endMinute = minutesDataSource[0];
 }
 
 -(void)ConfirmClick:(UIButton*)sender{
@@ -303,6 +311,10 @@
     return 1;
 }
 
+-(CGFloat)pickerView:(UIPickerView *)pickerView rowHeightForComponent:(NSInteger)component{
+    return 45;
+}
+
 -(NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component{
     if (index == 1){
         if (pickerView.tag == 1){
@@ -319,19 +331,32 @@
 }
 
 -(UIView *)pickerView:(UIPickerView *)pickerView viewForRow:(NSInteger)row forComponent:(NSInteger)component reusingView:(UIView *)view{
-    displaylabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 120, 45)];
+    contentView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 120, 45)];
+    displaylabel = [[UILabel alloc]initWithFrame:CGRectMake(60, 0, 60, 45)];
     displaylabel.textColor = [UIColor whiteColor];
-    displaylabel.textAlignment = NSTextAlignmentCenter;
+    displaylabel.textAlignment = NSTextAlignmentLeft;
     displaylabel.font = [UIFont fontWithName:@"Papyrus-Regular" size:45];
+    [contentView addSubview:displaylabel];
     displaylabel.tag = row + 1;
     
     if(index == 1){
-        
+
     displaylabel.text = pickerView.tag == 1? self.firstRollData[row]:self.secondRollData[row];
+        
+        if(pickerView.tag == 2){
+            [displaylabel setFrame:CGRectMake(20, 0, 100, 45)];
+            displaylabel.textAlignment = NSTextAlignmentLeft;
+        }
+        
     }else{
+
         displaylabel.text = pickerView.tag == 1? hoursDataSource[row]:minutesDataSource[row];
+        if(pickerView.tag == 2){
+            [displaylabel setFrame:CGRectMake(20, 0, 100, 45)];
+            displaylabel.textAlignment = NSTextAlignmentLeft;
+        }
     }
-    return displaylabel;
+    return contentView;
 }
 
 
@@ -346,6 +371,13 @@
     if (index == 1){
     if (pickerView.tag == 1){
         self.month = _firstRollData[row];
+        
+        if(row == 1 && [self.month isEqualToString:@"1"]){
+            self.year = [NSString stringWithFormat:@"%i", [self.currentYear intValue] + 1];
+        }else{
+            self.year = self.currentYear;
+        }
+        
         int month = [self.month intValue];
         [self.secondRollData removeAllObjects];
         if(month == 1 || month == 3 || month == 5 || month == 7 || month == 8 || month == 10 || month == 12){
@@ -376,6 +408,35 @@
     else{
        self.day = _secondRollData[row];
     }
+    }else if(index == 2){
+        if (pickerView.tag == 1){
+            if(row < 10){
+                self.beginHour = [NSString stringWithFormat:@"%02li",(long)row];
+            }else{
+               self.beginHour = [NSString stringWithFormat:@"%li",(long)row];
+            }
+        
+        }else{
+//            if(row == 0){
+//                self.beginMinute = [NSString stringWithFormat:@"%li",(long)row];
+//            }else{
+                self.beginMinute = minutesDataSource[row];
+//            }
+        }
+    }else{
+        if (pickerView.tag == 1){
+            if(row < 10){
+                self.endHour = [NSString stringWithFormat:@"%02li",(long)row];
+            }else{
+                self.endHour = [NSString stringWithFormat:@"%li",(long)row];
+            }
+        }else{
+//            if(row == 0){
+//                self.endMinute = [NSString stringWithFormat:@"%li",(long)row];
+//            }else{
+                self.endMinute = minutesDataSource[row];
+//            }
+        }
     }
 }
 

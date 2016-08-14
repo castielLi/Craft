@@ -18,17 +18,26 @@ extension inviteMain: UITableViewDelegate, UITableViewDataSource{
         var cell = tableView.dequeueReusableCellWithIdentifier("inviteFriendItemCell") as? InviteFriendCell
         
         if cell == nil{
-            cell = InviteFriendCell(style: UITableViewCellStyle.Value1, reuseIdentifier: "inviteFriendItemCell",cellWidth: UIAdapter.shared.transferWidth(250),cellHeight:44 )
+            cell = InviteFriendCell(style: UITableViewCellStyle.Value1, reuseIdentifier: "inviteFriendItemCell",cellWidth: UIAdapter.shared.transferWidth(250),cellHeight:54 )
         }
+        
+        
         
         cell!.selectionStyle = UITableViewCellSelectionStyle.None
         return cell!
 
     }
     
+    
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return 54
+    }
+    
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let cell = tableView.cellForRowAtIndexPath(indexPath) as! InviteFriendCell
         cell.selectedBackgroundImage!.hidden = !cell.selectedBackgroundImage!.hidden
+        
+        
     }
 
 }

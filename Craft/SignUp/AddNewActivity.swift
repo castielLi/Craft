@@ -22,6 +22,7 @@ class AddNewActivityController: ViewControllerBase ,UIGestureRecognizerDelegate{
     var typeDropDownTap : UITapGestureRecognizer?
     var activityDropDownTap : UITapGestureRecognizer?
     var detailDropDownTap : UITapGestureRecognizer?
+    var selfDutyInfoTap : UITapGestureRecognizer?
     
     var createButton : UIButton?
     var cancelButton : UIButton?
@@ -53,6 +54,15 @@ class AddNewActivityController: ViewControllerBase ,UIGestureRecognizerDelegate{
     var activityCode : String?
     var levelCode : String?
     var currentUserInfo : currentUserInformation?
+    
+    var year : String?
+    var month : String?
+    var day : String?
+    
+    var beginHour : String?
+    var beginMin : String?
+    var endHour : String?
+    var endMin : String?
     
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
@@ -89,6 +99,7 @@ class AddNewActivityController: ViewControllerBase ,UIGestureRecognizerDelegate{
         
         self.addGestureForDropdowns()
         self.addTimeTapGesture()
+        self.addSelfDutyGesture()
         initArrayData()
     }
 
@@ -161,6 +172,7 @@ class AddNewActivityController: ViewControllerBase ,UIGestureRecognizerDelegate{
         setDropDown()
         setTime()
         setContent()
+        setSelfDutyView()
         setDutyView()
         setInviteTable()
         setInviteButton()
@@ -169,7 +181,7 @@ class AddNewActivityController: ViewControllerBase ,UIGestureRecognizerDelegate{
     func setActivityTabel(){
         self.activityMain = UIScrollView()
         self.activityMain!.backgroundColor = UIColor.clearColor()
-        self.activityMain!.contentSize = CGSize(width: self.activityMain!.frame.width, height: UIAdapter.shared.transferHeight(420))
+        self.activityMain!.contentSize = CGSize(width: self.activityMain!.frame.width, height: UIAdapter.shared.transferHeight(520))
         self.view.addSubview(activityMain!)
         
         self.activityMain!.mas_makeConstraints{ make in
@@ -211,15 +223,21 @@ class AddNewActivityController: ViewControllerBase ,UIGestureRecognizerDelegate{
     
     func setDutyView(){
      
-        self.dutyView = currentDutyView(frame: CGRect(x: UIAdapter.shared.transferWidth(50), y: UIAdapter.shared.transferHeight(24 + 54 + 74), width: UIAdapter.shared.transferWidth(150), height: UIAdapter.shared.transferHeight(50)))
+        self.dutyView = currentDutyView(frame: CGRect(x: UIAdapter.shared.transferWidth(50), y:UIAdapter.shared.transferHeight(24 + 54 + 74 + 50) , width: UIAdapter.shared.transferWidth(150), height: UIAdapter.shared.transferHeight(50)))
         self.activityMain!.addSubview(self.dutyView!)
         self.dutyView!.tankLabel?.text = "0"
         self.dutyView!.damageLabel?.text = "1"
         self.dutyView!.healLabel?.text = "0"
     }
     
+    func setSelfDutyView(){
+       currentUserInfo = currentUserInformation(frame: CGRect(x: UIAdapter.shared.transferWidth(1), y:UIAdapter.shared.transferHeight(24 + 54 + 74) , width: UIAdapter.shared.transferWidth(250) - UIAdapter.shared.transferWidth(2), height: UIAdapter.shared.transferHeight(40)))
+        currentUserInfo!.userInteractionEnabled = true
+        self.activityMain!.addSubview(currentUserInfo!)
+    }
+    
     func setInviteTable(){
-        self.inviteTable = UITableView(frame: CGRect(x: UIAdapter.shared.transferWidth(2), y: UIAdapter.shared.transferHeight(24 + 54 + 74 + 50 + 10), width: UIAdapter.shared.transferWidth(246), height: 44 * 5))
+        self.inviteTable = UITableView(frame: CGRect(x: UIAdapter.shared.transferWidth(2), y: UIAdapter.shared.transferHeight(24 + 54 + 74 + 50 + 10 + 40), width: UIAdapter.shared.transferWidth(246), height: 44 * 5))
         self.inviteTable!.delegate = self
         self.inviteTable!.dataSource = self
         self.inviteTable!.separatorStyle = UITableViewCellSeparatorStyle.None
