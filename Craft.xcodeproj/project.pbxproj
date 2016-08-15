@@ -138,6 +138,7 @@
 		18D0E3891D5A028E004EDFF6 /* LoginBackGround.png in Resources */ = {isa = PBXBuildFile; fileRef = 18D0E3881D5A028E004EDFF6 /* LoginBackGround.png */; };
 		18D481501D49DD2800B86B70 /* friendListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D4814F1D49DD2800B86B70 /* friendListModel.m */; };
 		18D481531D4A1E2200B86B70 /* ActivityItemModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D481521D4A1E2200B86B70 /* ActivityItemModel.m */; };
+		18D5D8141D61FC2200E37920 /* ChatHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D5D8131D61FC2200E37920 /* ChatHelper.swift */; };
 		18D6CF651D2ABBED004DCF8A /* worldChatCompleteState.png in Resources */ = {isa = PBXBuildFile; fileRef = 18D6CF641D2ABBED004DCF8A /* worldChatCompleteState.png */; };
 		18E1362B1CFC74960046A6B8 /* chatBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = 18E1362A1CFC74960046A6B8 /* chatBackground.png */; };
 		18E1362D1CFC74AE0046A6B8 /* chatDetailBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = 18E1362C1CFC74AE0046A6B8 /* chatDetailBackground.png */; };
@@ -357,6 +358,7 @@
 		18D4814F1D49DD2800B86B70 /* friendListModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = friendListModel.m; sourceTree = "<group>"; };
 		18D481511D4A1E2200B86B70 /* ActivityItemModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ActivityItemModel.h; path = SignUp/ActivityItemModel.h; sourceTree = "<group>"; };
 		18D481521D4A1E2200B86B70 /* ActivityItemModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ActivityItemModel.m; path = SignUp/ActivityItemModel.m; sourceTree = "<group>"; };
+		18D5D8131D61FC2200E37920 /* ChatHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatHelper.swift; sourceTree = "<group>"; };
 		18D6CF641D2ABBED004DCF8A /* worldChatCompleteState.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = worldChatCompleteState.png; sourceTree = "<group>"; };
 		18E1362A1CFC74960046A6B8 /* chatBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = chatBackground.png; path = Assets.xcassets/Chat/chatBackground.imageset/chatBackground.png; sourceTree = "<group>"; };
 		18E1362C1CFC74AE0046A6B8 /* chatDetailBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = chatDetailBackground.png; path = Assets.xcassets/Chat/chatDetailBackground.imageset/chatDetailBackground.png; sourceTree = "<group>"; };
@@ -1132,6 +1134,7 @@
 			isa = PBXGroup;
 			children = (
 				181000A81D3B5AFF00A9E468 /* DBContract.swift */,
+				18D5D8131D61FC2200E37920 /* ChatHelper.swift */,
 			);
 			name = Database;
 			sourceTree = "<group>";
@@ -1526,6 +1529,7 @@
 				1893E2E01C7C604C00F74A2B /* MyActivities.swift in Sources */,
 				1895CEFF1D32761C0047C8F0 /* inviteMain.swift in Sources */,
 				18F7E4711C97FCC2007E3459 /* Resource.swift in Sources */,
+				18D5D8141D61FC2200E37920 /* ChatHelper.swift in Sources */,
 				18A593DC1C099D4100458308 /* CellType.swift in Sources */,
 				1809CC4E1D5F428D00FDA00C /* DutyResponseView.m in Sources */,
 				CD5EB3921D195EF300802FC4 /* RTAudioItem.swift in Sources */,

@@ -59,7 +59,7 @@
                  {
                      
                      ProfileModel * profile = [ProfileModel mj_objectWithKeyValues:response];
-                     profile.battleAccount = @"853757935@qq.com";
+                     
                      [_dbHelper DatabaseExecuteWithQuery:@"delete from Profile" values:nil];
                      if ([_dbHelper DatabaseExecuteWithQuery:@"insert into Profile (userid,userName,battleAccount) values (?,?,?)" values:@[profile.userId,profile.userName,@""]]){
                          NSLog(@"insert profile success");
