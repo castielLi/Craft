@@ -74,6 +74,7 @@ class playerListCell: UITableViewCell {
         
         jobIcon = UIButton()
         jobIcon!.setBackgroundImage(UIImage(named: "qs"), forState: UIControlState.Normal)
+        
         self.addSubview(jobIcon!)
         
         self.jobIcon!.mas_makeConstraints{ make in
@@ -85,6 +86,7 @@ class playerListCell: UITableViewCell {
         
         dutyIcon = UIButton()
         dutyIcon!.setBackgroundImage(UIImage(named: "heal"), forState: UIControlState.Normal)
+        
         self.addSubview(dutyIcon!)
         
         self.dutyIcon!.mas_makeConstraints{ make in
@@ -103,7 +105,9 @@ class playerListCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-
+    
+    
+    
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
