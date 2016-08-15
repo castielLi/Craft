@@ -10,6 +10,8 @@ import Foundation
 
 struct DBContract{
     
+    static let deviceTokenTable = "CREATE TABLE IF NOT EXISTS DeviceToken(devicetoken text)"
+    
     static let notificationTable = "CREATE TABLE IF NOT EXISTS RemindActivity(uuid text, activityid text)"
     
     static let createAccountTable = "CREATE TABLE IF NOT EXISTS User(account text, password text)";
@@ -28,7 +30,7 @@ struct DBContract{
     
     static let createFriendTable = "CREATE TABLE IF NOT EXISTS FriendList(userId text,userName text,IconUrl text, battleAccount text, markName text)";
     
-    static let createGroupTable = "CREATE TABLE IF NOT EXISTS GroupList(groupId text,groupName text,groupIntro text)";
+    static let createGroupTable = "CREATE TABLE IF NOT EXISTS GroupList(groupId text,groupName text,groupIntro text,groupCode text)";
     
     static let createFaction = "CREATE TABLE IF NOT EXISTS Faction(faction text)"; 
 }

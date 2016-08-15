@@ -17,6 +17,8 @@
 #import "RCIMHelper.h"
 #import "StartView.h"
 #import "OneRollSelection.h"
+#import "TwoRollSelection.h"
+#import "DutyResponseView.h"
 
 
 //oc framework

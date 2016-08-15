@@ -13,5 +13,6 @@
 @property (nonatomic,strong) NSString * groupName;
 @property (nonatomic,strong) NSString * groupIntro;
 @property (nonatomic,strong) NSString * groupId;
+@property (nonatomic,strong) NSString * groupCode;
 
 @end

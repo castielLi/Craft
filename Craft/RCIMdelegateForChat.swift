@@ -93,7 +93,7 @@ extension ChatRoom{
             if item.conversationType == RCConversationType.ConversationType_GROUP{
                
                 let groupId = item.valueForKey("targetId") as! String
-                let group = _fmdbHelper!.DatabaseQueryWithParameters(["groupId","groupName","groupIntro"], query: ChatRoom.searchInfoInGroupList, values: [groupId])
+                let group = _fmdbHelper!.DatabaseQueryWithParameters(["groupId","groupName","groupIntro","groupCode"], query: ChatRoom.searchInfoInGroupList, values: [groupId])
                 
                 if(group != nil && group.count > 0){
                    array.addObject(group)

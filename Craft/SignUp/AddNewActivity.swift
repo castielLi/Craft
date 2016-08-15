@@ -22,6 +22,7 @@ class AddNewActivityController: ViewControllerBase ,UIGestureRecognizerDelegate{
     var typeDropDownTap : UITapGestureRecognizer?
     var activityDropDownTap : UITapGestureRecognizer?
     var detailDropDownTap : UITapGestureRecognizer?
+    var selfDutyInfoTap : UITapGestureRecognizer?
     
     var createButton : UIButton?
     var cancelButton : UIButton?
@@ -37,6 +38,7 @@ class AddNewActivityController: ViewControllerBase ,UIGestureRecognizerDelegate{
     
     
     var timeView : CreateActivityTime?
+    var timeTap : UITapGestureRecognizer?
     var contentView : UITextView?
     
     var dutyView : currentDutyView?
@@ -51,6 +53,16 @@ class AddNewActivityController: ViewControllerBase ,UIGestureRecognizerDelegate{
     var typeCode : String?
     var activityCode : String?
     var levelCode : String?
+    var currentUserInfo : currentUserInformation?
+    
+    var year : String?
+    var month : String?
+    var day : String?
+    
+    var beginHour : String?
+    var beginMin : String?
+    var endHour : String?
+    var endMin : String?
     
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
@@ -69,6 +81,10 @@ class AddNewActivityController: ViewControllerBase ,UIGestureRecognizerDelegate{
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
+        let center = NSNotificationCenter.defaultCenter()
+        center.addObserver(self,
+                           selector: "inviteListDisappear:", name: "dismissInviteDialog", object: nil)
+        
         self.navigationController!.setNavigationBarHidden(true, animated: false)
         
         let animation = CABasicAnimation(keyPath: "position.x")
@@ -82,9 +98,26 @@ class AddNewActivityController: ViewControllerBase ,UIGestureRecognizerDelegate{
         self.cancelButton!.layer.addAnimation(animation, forKey: nil)
         
         self.addGestureForDropdowns()
+        self.addTimeTapGesture()
+        self.addSelfDutyGesture()
         initArrayData()
     }
 
+    func inviteListDisappear(sender : NSNotification){
+        UIView.animateWithDuration(0.3, animations: { () -> Void in
+            
+            let swishinId = self.soundPlay!.sound.valueForKey(SoundResource.swishinSound) as! String
+            let swishinid = UInt32(swishinId)
+            AudioServicesPlaySystemSound(swishinid!);
+            
+            self.activitiesView!.frame.origin.x += UIAdapter.shared.transferWidth(290)
+            self.activityMain!.frame.origin.x += UIAdapter.shared.transferWidth(290)
+            self.cancelButton!.frame.origin.x += UIAdapter.shared.transferWidth(290)
+            self.createButton!.frame.origin.x += UIAdapter.shared.transferWidth(290)
+        })
+    }
+    
+    
     func initArrayData(){
        self.showProgress()
        
@@ -94,13 +127,32 @@ class AddNewActivityController: ViewControllerBase ,UIGestureRecognizerDelegate{
     
     func initActivityData(typeCode:String){
         self.showProgress()
+        activitySelected!.displayLabel!.text = "请选择"
+        detailSelected!.displayLabel!.text = "请选择"
         activityArray = instance!.DatabaseSearchValuesWithParameters(["apdName","apdCode"], query: searchActivity, values: [typeCode])
+        if(activityArray!.count < 1){
+           activitySelected!.displayLabel!.text = "无"
+           activitySelected!.userInteractionEnabled = false
+           detailSelected!.displayLabel!.text = "无"
+           detailSelected!.userInteractionEnabled = false
+        }else{
+            activitySelected!.userInteractionEnabled = true
+            detailSelected!.userInteractionEnabled = true
+        }
         self.closeProgress()
     }
     
     func initLevelData(raidCode:String){
         self.showProgress()
+        detailSelected!.displayLabel!.text = "请选择"
         levelArray = instance!.DatabaseSearchValuesWithParameters(["aplName","aplCode"], query: searchLevel, values: [raidCode])
+        if(levelArray!.count < 1){
+            detailSelected!.displayLabel!.text = "无"
+            detailSelected!.userInteractionEnabled = false
+        }else{
+            activitySelected!.userInteractionEnabled = true
+            detailSelected!.userInteractionEnabled = true
+        }
         self.closeProgress()
     }
     
@@ -120,6 +172,7 @@ class AddNewActivityController: ViewControllerBase ,UIGestureRecognizerDelegate{
         setDropDown()
         setTime()
         setContent()
+        setSelfDutyView()
         setDutyView()
         setInviteTable()
         setInviteButton()
@@ -128,7 +181,7 @@ class AddNewActivityController: ViewControllerBase ,UIGestureRecognizerDelegate{
     func setActivityTabel(){
         self.activityMain = UIScrollView()
         self.activityMain!.backgroundColor = UIColor.clearColor()
-        self.activityMain!.contentSize = CGSize(width: self.activityMain!.frame.width, height: UIAdapter.shared.transferHeight(420))
+        self.activityMain!.contentSize = CGSize(width: self.activityMain!.frame.width, height: UIAdapter.shared.transferHeight(520))
         self.view.addSubview(activityMain!)
         
         self.activityMain!.mas_makeConstraints{ make in
@@ -140,23 +193,23 @@ class AddNewActivityController: ViewControllerBase ,UIGestureRecognizerDelegate{
     }
     
     func setDropDown(){
-        typeSelected = DropDownSelectView(frame: CGRect(x: UIAdapter.shared.transferWidth(1), y: UIAdapter.shared.transferHeight(2), width: (UIAdapter.shared.transferWidth(250) * 0.3 - UIAdapter.shared.transferWidth(1)) , height: UIAdapter.shared.transferHeight(20)))
+        typeSelected = DropDownSelectView(frame: CGRect(x: UIAdapter.shared.transferWidth(1), y: UIAdapter.shared.transferHeight(3), width: (UIAdapter.shared.transferWidth(250) * 0.3 - UIAdapter.shared.transferWidth(1)) , height: UIAdapter.shared.transferHeight(20)))
         self.activityMain!.addSubview(typeSelected!)
         
         
         
         
-        activitySelected = DropDownSelectView(frame: CGRect(x: UIAdapter.shared.transferWidth(76), y: UIAdapter.shared.transferHeight(2), width: (UIAdapter.shared.transferWidth(250) * 0.4 - UIAdapter.shared.transferWidth(1) ), height: UIAdapter.shared.transferHeight(20)))
+        activitySelected = DropDownSelectView(frame: CGRect(x: UIAdapter.shared.transferWidth(76), y: UIAdapter.shared.transferHeight(3), width: (UIAdapter.shared.transferWidth(250) * 0.4 - UIAdapter.shared.transferWidth(1) ), height: UIAdapter.shared.transferHeight(20)))
         self.activityMain!.addSubview(activitySelected!)
         
-        detailSelected = DropDownSelectView(frame: CGRect(x: UIAdapter.shared.transferWidth(250) * 0.7 + UIAdapter.shared.transferWidth(1), y: UIAdapter.shared.transferHeight(2), width: UIAdapter.shared.transferWidth(250) * 0.3, height: UIAdapter.shared.transferHeight(20)))
+        detailSelected = DropDownSelectView(frame: CGRect(x: UIAdapter.shared.transferWidth(250) * 0.7 + UIAdapter.shared.transferWidth(1), y: UIAdapter.shared.transferHeight(3), width: UIAdapter.shared.transferWidth(250) * 0.29, height: UIAdapter.shared.transferHeight(20)))
         self.activityMain!.addSubview(detailSelected!)
     
     }
     
     func setTime(){
          self.timeView = CreateActivityTime(frame: CGRect(x: UIAdapter.shared.transferWidth(1), y: UIAdapter.shared.transferHeight(24), width: UIAdapter.shared.transferWidth(250) - UIAdapter.shared.transferWidth(2) , height: UIAdapter.shared.transferHeight(52)))
-        
+         self.timeView!.userInteractionEnabled = true
          self.activityMain!.addSubview(self.timeView!)
     }
     
@@ -170,15 +223,21 @@ class AddNewActivityController: ViewControllerBase ,UIGestureRecognizerDelegate{
     
     func setDutyView(){
      
-        self.dutyView = currentDutyView(frame: CGRect(x: UIAdapter.shared.transferWidth(50), y: UIAdapter.shared.transferHeight(24 + 54 + 74), width: UIAdapter.shared.transferWidth(150), height: UIAdapter.shared.transferHeight(50)))
+        self.dutyView = currentDutyView(frame: CGRect(x: UIAdapter.shared.transferWidth(50), y:UIAdapter.shared.transferHeight(24 + 54 + 74 + 50) , width: UIAdapter.shared.transferWidth(150), height: UIAdapter.shared.transferHeight(50)))
         self.activityMain!.addSubview(self.dutyView!)
         self.dutyView!.tankLabel?.text = "0"
         self.dutyView!.damageLabel?.text = "1"
         self.dutyView!.healLabel?.text = "0"
     }
     
+    func setSelfDutyView(){
+       currentUserInfo = currentUserInformation(frame: CGRect(x: UIAdapter.shared.transferWidth(1), y:UIAdapter.shared.transferHeight(24 + 54 + 74) , width: UIAdapter.shared.transferWidth(250) - UIAdapter.shared.transferWidth(2), height: UIAdapter.shared.transferHeight(40)))
+        currentUserInfo!.userInteractionEnabled = true
+        self.activityMain!.addSubview(currentUserInfo!)
+    }
+    
     func setInviteTable(){
-        self.inviteTable = UITableView(frame: CGRect(x: UIAdapter.shared.transferWidth(2), y: UIAdapter.shared.transferHeight(24 + 54 + 74 + 50 + 10), width: UIAdapter.shared.transferWidth(246), height: 44 * 5))
+        self.inviteTable = UITableView(frame: CGRect(x: UIAdapter.shared.transferWidth(2), y: UIAdapter.shared.transferHeight(24 + 54 + 74 + 50 + 10 + 40), width: UIAdapter.shared.transferWidth(246), height: 44 * 5))
         self.inviteTable!.delegate = self
         self.inviteTable!.dataSource = self
         self.inviteTable!.separatorStyle = UITableViewCellSeparatorStyle.None

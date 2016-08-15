@@ -17,6 +17,8 @@
 
 -(void)GetApplylistDidFinish:(ApiResult *)result response:(id)response;
 
+-(void)DealApplyRequestFinish:(ApiResult *)result response:(id)response index:(NSString*)index;
+
 @end
 
 @interface SignUpService: NSObject
@@ -27,10 +29,16 @@
 
 -(void)getAllMyActivities:(NSString*)pageNum;
 
+-(void)searchActivityies:(NSString*)Content pageNum:(NSString*)pageNum;
+
 -(void)getAllActivities:(NSString*)pageNum;
 
 -(void)getActivityDetail:(NSString*)activityId;
 
 -(void)getApplyList:(NSString*)activityId;
+
+-(void)applyRequest:(NSString*)activityId requestUserId:(NSString*)userId index:(NSString*)index;
+
+-(void)refuseRequest:(NSString*)activityId requestUserId:(NSString*)userId index:(NSString*)index;
 
 @end

@@ -16,7 +16,7 @@ extension ChatRoom : UITableViewDelegate,UITableViewDataSource{
             if self.selectedIndex == 1{
                return chatListArray!.count
             }else if selectedIndex == 2{
-               return 10
+               return friendListArray!.count
             }
             return self.dataChannels.count
         }else{
@@ -47,20 +47,40 @@ extension ChatRoom : UITableViewDelegate,UITableViewDataSource{
                 
                 if(chatContentArray.count>0){
                     let content = chatContentArray[0].valueForKey("content")!.valueForKey("content")!
-                    print(content)
+                    cell!.message!.text = content as! String
                    }
+                    
+                    
+                    let markName = self.chatListArray![indexPath.row].valueForKey("markName") as! String
+                    
+                    if(markName == ""){
+                        cell!.name!.text = self.chatListArray![indexPath.row].valueForKey("userName") as! String
+                    }else{
+                        cell!.name!.text = markName;
+                    }
+                    
+                    cell!.account!.text = self.chatListArray![indexPath.row].valueForKey("battleAccount") as! String
+                    
+                    let iconUrl = self.chatListArray![indexPath.row].valueForKey("IconUrl") as! String
+                    
+                    
                 }else{
+                    
                     let groupId = self.chatListArray![indexPath.row].valueForKey("groupId") as? String
                     let chatContentArray = RCIMClient.sharedRCIMClient().getLatestMessages(RCConversationType.ConversationType_GROUP, targetId: groupId, count: 1)
                     
                     if(chatContentArray.count>0){
                         let content = chatContentArray[0].valueForKey("content")!.valueForKey("content")!
-                        print(content)
+                        cell!.message!.text = content as! String
                     }
                    
+                    
+                    cell!.name!.text = "\(self.chatListArray![indexPath.row].valueForKey("groupName") as! String) (\(self.chatListArray![indexPath.row].valueForKey("groupCode") as! String))"
+                    
+                    cell!.account!.text = self.chatListArray![indexPath.row].valueForKey("groupIntro") as! String
                 }
 
-            
+            cell!.count!.hidden = false
             cell!.selectionStyle = UITableViewCellSelectionStyle.None
             return cell!
             
@@ -75,6 +95,21 @@ extension ChatRoom : UITableViewDelegate,UITableViewDataSource{
                     cell!.setBottomLineHide()
                     
                 }
+                cell!.count!.hidden = true
+                let markName = self.friendListArray![indexPath.row].valueForKey("markName") as! String
+                
+                if(markName == ""){
+                   cell!.name!.text = self.friendListArray![indexPath.row].valueForKey("userName") as! String
+                }else{
+                    cell!.name!.text = markName;
+                }
+                
+                cell!.account!.text = self.friendListArray![indexPath.row].valueForKey("battleAccount") as! String
+                
+                let iconUrl = self.friendListArray![indexPath.row].valueForKey("IconUrl") as! String
+
+                
+                cell!.selectionStyle = .None
                 return cell!
             }else
             {
@@ -168,7 +203,7 @@ extension ChatRoom : UITableViewDelegate,UITableViewDataSource{
                          self.setDetailTable()
                 })
            }
-        }
+        }else{
         
         
         // RT Start
@@ -191,6 +226,7 @@ extension ChatRoom : UITableViewDelegate,UITableViewDataSource{
         self.targetId = nil
         self.chatType  = RCConversationType.ConversationType_CHATROOM
         return
+        }
     }
     
 }

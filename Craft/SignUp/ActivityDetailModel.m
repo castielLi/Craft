@@ -11,7 +11,7 @@
 @implementation ActivityDetailModel
 
 +(NSDictionary*)mj_objectClassInArray{
-    return @{@"activityUser":@"activityItemModel"};
+    return @{@"activityUser":@"ActivityMemberItem"};
 }
 
 

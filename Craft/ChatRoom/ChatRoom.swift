@@ -12,7 +12,7 @@ class ChatRoom: ViewControllerBase , UITextViewDelegate ,RCIMClientReceiveMessag
 
     static let searchInfoInFriendList = "Select userId,userName,IconUrl, battleAccount,markName FROM FriendList where userId=?"
     
-    static let searchInfoInGroupList = "Select groupId,groupName,groupIntro FROM GroupList where groupId=?"
+    static let searchInfoInGroupList = "Select groupId,groupName,groupIntro,groupCode FROM GroupList where groupId=?"
     
     var data: NSMutableArray?
     var soundPlay :PlaySound?
@@ -59,6 +59,7 @@ class ChatRoom: ViewControllerBase , UITextViewDelegate ,RCIMClientReceiveMessag
     var dHeight : CGFloat?
     var firstTimeEnter : Bool = true;
     var chatListArray : NSMutableArray?
+    var friendListArray : NSMutableArray?
     var _fmdbHelper : FMDBHelper?
     
     
@@ -84,6 +85,7 @@ class ChatRoom: ViewControllerBase , UITextViewDelegate ,RCIMClientReceiveMessag
         self.data = NSMutableArray()
         _fmdbHelper = FMDBHelper.sharedData() as! FMDBHelper
         chatListArray = NSMutableArray()
+        friendListArray = NSMutableArray()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -143,6 +145,8 @@ class ChatRoom: ViewControllerBase , UITextViewDelegate ,RCIMClientReceiveMessag
         self.showProgress()
         
         self.chatListArray = self.getChatListInfoByRCMArray(self.conversationList!)
+        self.friendListArray = ChatHelper.getAllFriend()
+        
         
         self.closeProgress()
         chatListView!.delegate = self

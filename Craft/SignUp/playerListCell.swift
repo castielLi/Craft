@@ -68,7 +68,7 @@ class playerListCell: UITableViewCell {
         self.responseIcon!.mas_makeConstraints{ make in
            make.top.equalTo()(self).with().offset()(15)
            make.height.equalTo()(20)
-           make.width.equalTo()(13)
+           make.width.equalTo()(15)
            make.left.equalTo()(self.account!.mas_right).with().offset()(UIAdapter.shared.transferWidth(3))
         }
         

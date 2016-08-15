@@ -38,7 +38,7 @@ class CreateNewTimeView: UIView {
         
         time = UILabel()
         time!.textColor = UIColor.whiteColor()
-        time!.font = UIFont(name: "DB LCD Temp", size: UIAdapter.shared.transferHeight(20))
+        time!.font = UIFont(name: "Papyrus-Regular", size: UIAdapter.shared.transferHeight(20))
         self.addSubview(self.time!)
         
         self.time!.mas_makeConstraints{ make in

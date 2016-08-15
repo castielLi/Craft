@@ -44,7 +44,13 @@
 
 -(void) login:(NSString *)username password:(NSString *)password
 {
-    NSDictionary * parameter = @{@"userName":username,@"password":password};
+    NSString * token = @"";
+    NSDictionary * values = [_dbHelper DatabaseQueryWithParameters:@[@"devicetoken"] query:@"select devicetoken from DeviceToken" values:nil];
+    if(values != nil && values.count > 0){
+        token = [values valueForKey:@"devicetoken"];
+    }
+    
+    NSDictionary * parameter = @{@"battleNetMail":username,@"password":password,@"umengToken":token};
     
     [_restService post:@"/api/common/login" parameters:parameter
               callback:^ (ApiResult *result, id response){
@@ -53,7 +59,7 @@
                  {
                      
                      ProfileModel * profile = [ProfileModel mj_objectWithKeyValues:response];
-                     profile.battleAccount = @"853757935@qq.com";
+                     
                      [_dbHelper DatabaseExecuteWithQuery:@"delete from Profile" values:nil];
                      if ([_dbHelper DatabaseExecuteWithQuery:@"insert into Profile (userid,userName,battleAccount) values (?,?,?)" values:@[profile.userId,profile.userName,@""]]){
                          NSLog(@"insert profile success");
@@ -136,7 +142,11 @@
                      
                          groupListModel * model = [groupListModel mj_objectWithKeyValues:((NSArray *)response)[i]];
 //                         model.groupId = @"102";
-                         if ([_dbHelper DatabaseExecuteWithQuery:@"insert into GroupList (groupId ,groupName ,groupIntro ) values (?,?,?)" values:@[model.groupId,model.groupName,model.groupIntro]]){
+                         if (model.groupCode == nil){
+                            model.groupCode = @"123";
+                         }
+                         
+                         if ([_dbHelper DatabaseExecuteWithQuery:@"insert into GroupList (groupId ,groupName ,groupIntro ,groupCode) values (?,?,?,?)" values:@[model.groupId,model.groupName,model.groupIntro,model.groupCode]]){
                              NSLog(@"insert GroupList success");
                          }else{
                              NSLog(@"insert GroupList failed");
@@ -213,14 +223,16 @@
 
 }
 
--(void)registerNewAccount:(NSString*)account password:(NSString*)password battleAccount:(NSString*)battleAccount{
-    NSDictionary * parameters = @{@"userName":account,@"password":password,@"battle":battleAccount};
+-(void)Register:(NSString*)battleAccount nick:(NSString*)nick password:(NSString*)password telphone:(NSString*)
+telphone{
     
-    [_restService post:@"/api/activity/init_activity_create" parameters:parameters
+    NSDictionary * parameter = @{@"battleNetMail":battleAccount,@"password":password,@"userName":nick,@"telNumber":telphone};
+    
+    [_restService post:@"/api/common/register" parameters:parameter
               callback:^ (ApiResult *result, id response){
-                [_delegate registerDidFinish:result response:response];
-    }];
-}
+                        [_delegate registerDidFinish:result response:response];
+              }];
 
+}
 
 @end
