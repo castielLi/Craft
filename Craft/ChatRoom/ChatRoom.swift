@@ -363,12 +363,24 @@ class ChatRoom: ViewControllerBase , UITextViewDelegate ,RCIMClientReceiveMessag
         print(message.extra)
         RCIMClient.sharedRCIMClient().sendMessage(self.chatType!, targetId: self.targetId!, content: message, pushContent: nil, success: { (messageId) in
             print("发送成功")
+            
+            dispatch_async(dispatch_get_main_queue(), {
+                let txtMsg = ChatTextMessage(ownerType: .Mine, messageType: .Text, portrait: UIImage(contentsOfFile: NSBundle.mainBundle().pathForResource("10", ofType: "jpeg")!)!)
+                txtMsg.text = self.enterForm!.enterTextView!.text
+                self.data!.addObject(txtMsg)
+                self.detailTable!.reloadData()
+                self.enterForm!.enterTextView!.resignFirstResponder()
+                self.enterForm!.enterTextView!.text = ""
+            });
+
+            
             }, error: { (error, messageId) in
                 print("发送失败")
+                self.enterForm!.enterTextView!.resignFirstResponder()
+                self.enterForm!.enterTextView!.text = ""
         })
         
-        self.enterForm!.enterTextView!.resignFirstResponder()
-        self.enterForm!.enterTextView!.text = ""
+        
     }
     
     func textView(textView: UITextView, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool {
@@ -480,6 +492,11 @@ class ChatRoom: ViewControllerBase , UITextViewDelegate ,RCIMClientReceiveMessag
             RCIMClient.sharedRCIMClient().sendMessage(self.chatType!, targetId: self.targetId!, content: message, pushContent: nil, success: {
                 mesageId in
                 print("sent successfully")
+                
+                let voiceMsg = ChatVoiceMessage(ownerType: .Mine, messageType: .Voice, portrait: UIImage(contentsOfFile: NSBundle.mainBundle().pathForResource("10", ofType: "jpeg")!)!, voiceSecs: self.rtAudio.recordedDuration!)
+                self.data!.addObject(voiceMsg)
+                self.detailTable!.reloadData()
+                
                 }, error: {
                     (error, messageId) in
                     print("sent failed")

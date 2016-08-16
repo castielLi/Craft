@@ -26,7 +26,7 @@ class CreateNewTimeView: UIView {
         
         date = UILabel()
         date!.textColor = UIColor.whiteColor()
-        date!.font = UIAdapter.shared.transferFont(8)
+        date!.font = UIFont(name: "KaiTi", size: UIAdapter.shared.transferHeight(12))
         self.addSubview(self.date!)
         
         self.date!.mas_makeConstraints{ make in
@@ -38,11 +38,11 @@ class CreateNewTimeView: UIView {
         
         time = UILabel()
         time!.textColor = UIColor.whiteColor()
-        time!.font = UIFont(name: "Papyrus-Regular", size: UIAdapter.shared.transferHeight(20))
+        time!.font = UIFont(name: "Papyrus-Regular", size: UIAdapter.shared.transferHeight(28))
         self.addSubview(self.time!)
         
         self.time!.mas_makeConstraints{ make in
-           make.top.equalTo()(self.date!.mas_bottom).with().offset()(UIAdapter.shared.transferHeight(2))
+           make.top.equalTo()(self.date!.mas_bottom).with().offset()(UIAdapter.shared.transferHeight(5))
            make.height.equalTo()(UIAdapter.shared.transferHeight(22))
            make.centerX.equalTo()(self)
         }

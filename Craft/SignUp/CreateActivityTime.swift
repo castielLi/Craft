@@ -33,12 +33,18 @@ class CreateActivityTime: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
+        self.backgroundImage = UIImageView(frame: CGRect(x: 0, y: UIAdapter.shared.transferHeight(15), width: frame.width, height: frame.height))
+        self.backgroundImage!.image = UIImage(named: "BL")
+        
+        self.addSubview(backgroundImage!)
+        
+        
         labelBackground = UIView(frame: CGRect(x: 0, y: 0, width: self.frame.width, height: UIAdapter.shared.transferHeight(15)))
         labelBackground?.backgroundColor = UIColor(red: 13/255, green: 10/255, blue: 9/255, alpha: 1)
         self.addSubview(labelBackground!)
         
         self.startLabel = UILabel()
-        self.startLabel!.textColor = UIColor.whiteColor()
+        self.startLabel!.textColor = Resources.Color.dailyColor
         self.startLabel!.font = UIAdapter.shared.transferFont(8)
         self.labelBackground!.addSubview(self.startLabel!)
         self.startLabel!.textAlignment = NSTextAlignment.Left
@@ -51,7 +57,7 @@ class CreateActivityTime: UIView {
         
         
         self.endLabel = UILabel()
-        self.endLabel!.textColor = UIColor.whiteColor()
+        self.endLabel!.textColor = Resources.Color.dailyColor
         self.endLabel!.font = UIAdapter.shared.transferFont(8)
         self.labelBackground!.addSubview(self.endLabel!)
         self.endLabel!.textAlignment = NSTextAlignment.Right
@@ -88,21 +94,18 @@ class CreateActivityTime: UIView {
         minFormat.dateFormat = "ss"
         minutes = minFormat.stringFromDate(now)
         
-        self.startTime = CreateNewTimeView(frame: CGRect(x: 0, y: UIAdapter.shared.transferHeight(17), width: self.frame.width / 3, height: UIAdapter.shared.transferHeight(35)))
+        self.startTime = CreateNewTimeView(frame: CGRect(x: 0, y: UIAdapter.shared.transferHeight(17), width: self.frame.width / 3, height: UIAdapter.shared.transferHeight(40)))
         self.startTime!.date!.text = date
         self.startTime!.time?.text = "00:00"
         self.addSubview(startTime!)
         
-        self.endTime = CreateNewTimeView(frame: CGRect(x: self.frame.width / 3 * 2, y: UIAdapter.shared.transferHeight(17), width: self.frame.width / 3, height: UIAdapter.shared.transferHeight(35)))
+        self.endTime = CreateNewTimeView(frame: CGRect(x: self.frame.width / 3 * 2, y: UIAdapter.shared.transferHeight(17), width: self.frame.width / 3, height: UIAdapter.shared.transferHeight(40)))
         self.endTime!.date!.text = date
         self.endTime!.time?.text = "00:00"
         self.addSubview(endTime!)
         
         
-        self.backgroundImage = UIImageView(frame: CGRect(x: self.frame.width / 3 + UIAdapter.shared.transferWidth(4), y: UIAdapter.shared.transferHeight(17 + 21), width: self.frame.width / 3 - UIAdapter.shared.transferWidth(8), height: UIAdapter.shared.transferHeight(5)))
-        self.backgroundImage!.image = UIImage(named: "during")
         
-        self.addSubview(backgroundImage!)
 
     }
     
