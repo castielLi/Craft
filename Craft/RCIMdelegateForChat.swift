@@ -102,4 +102,24 @@ extension ChatRoom{
         }
         return array
     }
+    
+    private func updateNumberOfIcon() {
+        
+        // prepare for update icon's number
+        var data: NSMutableArray?
+        if self.selectedIndex! == 1 {
+            data = self.chatListArray
+        } else if self.selectedIndex! == 2 {
+            data = self.friendListArray
+        }
+        
+        if self.chatType! == RCConversationType.ConversationType_PRIVATE {
+            // search according userId.
+        } else if self.chatType! == RCConversationType.ConversationType_GROUP {
+            // search according groupId.
+        }
+        
+//        let userId = data![indexPath.row].valueForKey("userId") as? String
+//        let groupId = data![indexPath.row].valueForKey("groupId") as? String
+    }
 }

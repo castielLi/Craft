@@ -46,9 +46,17 @@ extension ChatRoom : UITableViewDelegate,UITableViewDataSource{
                 let chatContentArray = RCIMClient.sharedRCIMClient().getLatestMessages(RCConversationType.ConversationType_PRIVATE, targetId: userId!, count: 1)
                 
                 if(chatContentArray.count>0){
-                    let content = chatContentArray[0].valueForKey("content")!.valueForKey("content")!
-                    cell!.message!.text = content as! String
-                   }
+                    let objectName = chatContentArray[0].valueForKey("objectName") as! String
+                    let nameComponents = objectName.componentsSeparatedByString(":")
+                    
+                    if nameComponents[1] == "VcMsg" {
+                        // voice
+                        cell!.message!.text = "[语音消息]"
+                    } else {
+                        let content = chatContentArray[0].valueForKey("content")!.valueForKey("content")
+                        cell!.message!.text = content as! String
+                    }
+                 }
                     
                     
                     let markName = self.chatListArray![indexPath.row].valueForKey("markName") as! String
@@ -70,8 +78,16 @@ extension ChatRoom : UITableViewDelegate,UITableViewDataSource{
                     let chatContentArray = RCIMClient.sharedRCIMClient().getLatestMessages(RCConversationType.ConversationType_GROUP, targetId: groupId, count: 1)
                     
                     if(chatContentArray.count>0){
-                        let content = chatContentArray[0].valueForKey("content")!.valueForKey("content")!
-                        cell!.message!.text = content as! String
+                        let objectName = chatContentArray[0].valueForKey("objectName") as! String
+                        let nameComponents = objectName.componentsSeparatedByString(":")
+                        
+                        if nameComponents[1] == "VcMsg" {
+                            // voice
+                            cell!.message!.text = "[语音消息]"
+                        } else {
+                            let content = chatContentArray[0].valueForKey("content")!.valueForKey("content")
+                            cell!.message!.text = content as! String
+                        }
                     }
                    
                     
@@ -188,44 +204,53 @@ extension ChatRoom : UITableViewDelegate,UITableViewDataSource{
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if tableView.tag == 11{
-        let soundId = soundPlay!.sound.valueForKey(SoundResource.openBookSound) as! String
-        let id = UInt32(soundId)
-        AudioServicesPlaySystemSound(id!);
-        
-       
+            let soundId = soundPlay!.sound.valueForKey(SoundResource.openBookSound) as! String
+            let id = UInt32(soundId)
+            AudioServicesPlaySystemSound(id!);
             
-        if self.chatDetailView!.frame.origin.x < 0{
-                UIView.animateWithDuration(0.4, animations: {
-                    self.chatDetailView!.frame.origin.x = 0
-                    self.enterForm!.frame.origin.x = UIAdapter.shared.transferWidth(10)
-                    self.selectDialog!.frame.origin.x += UIAdapter.shared.transferWidth(220)
-                    }, completion: { (success) in
-                         self.setDetailTable()
-                })
-           }
-        }else{
-        
-        
-        // RT Start
-        
-        guard self.chatListArray!.count > 0 else { return }
-        
-        let userId = self.chatListArray![indexPath.row].valueForKey("userId") as? String
-        let groupId = self.chatListArray![indexPath.row].valueForKey("groupId") as? String
-        if userId != nil {
-            self.targetId = userId
-            self.chatType = RCConversationType.ConversationType_PRIVATE
+           
+                
+            if self.chatDetailView!.frame.origin.x < 0{
+                    UIView.animateWithDuration(0.4, animations: {
+                        self.chatDetailView!.frame.origin.x = 0
+                        self.enterForm!.frame.origin.x = UIAdapter.shared.transferWidth(10)
+                        self.selectDialog!.frame.origin.x += UIAdapter.shared.transferWidth(220)
+                        }, completion: { (success) in
+                             self.setDetailTable()
+                    })
+            }
+            
+            
+            // RT Start
+            var data: NSMutableArray?
+            if self.selectedIndex == 1 {
+                data = self.chatListArray
+            } else if self.selectedIndex == 2 {
+                data = self.friendListArray
+            }
+            
+            guard data!.count > 0 else { return }
+            
+            let userId = data![indexPath.row].valueForKey("userId") as? String
+            let groupId = data![indexPath.row].valueForKey("groupId") as? String
+            
+            print("userId: \(userId), groupId: \(groupId)")
+            if userId != nil {
+                self.targetId = userId
+                self.chatType = RCConversationType.ConversationType_PRIVATE
+                return
+            }
+            if groupId != nil {
+                self.targetId = groupId
+                self.chatType = RCConversationType.ConversationType_GROUP
+                return
+            }
+            
+            self.targetId = nil
+            self.chatType  = RCConversationType.ConversationType_CHATROOM
             return
-        }
-        if groupId != nil {
-            self.targetId = groupId
-            self.chatType = RCConversationType.ConversationType_GROUP
-            return
-        }
-        
-        self.targetId = nil
-        self.chatType  = RCConversationType.ConversationType_CHATROOM
-        return
+            
+            
         }
     }
     
