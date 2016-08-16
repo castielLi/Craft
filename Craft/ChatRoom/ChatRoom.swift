@@ -382,6 +382,7 @@ class ChatRoom: ViewControllerBase , UITextViewDelegate ,RCIMClientReceiveMessag
     
     func tableScrollToBottom() {
         if self.data!.count > 0 {
+            guard (self.data!.count - 1) != 0 else { return }
             self.detailTable?.scrollToRowAtIndexPath(NSIndexPath(forRow: self.data!.count - 1, inSection: 0), atScrollPosition: .Bottom, animated: true)
         }
     }
