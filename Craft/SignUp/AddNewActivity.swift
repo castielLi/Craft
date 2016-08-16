@@ -208,22 +208,35 @@ class AddNewActivityController: ViewControllerBase ,UIGestureRecognizerDelegate{
     }
     
     func setTime(){
-         self.timeView = CreateActivityTime(frame: CGRect(x: UIAdapter.shared.transferWidth(1), y: UIAdapter.shared.transferHeight(24), width: UIAdapter.shared.transferWidth(250) - UIAdapter.shared.transferWidth(2) , height: UIAdapter.shared.transferHeight(52)))
+         self.timeView = CreateActivityTime(frame: CGRect(x: UIAdapter.shared.transferWidth(1), y: UIAdapter.shared.transferHeight(24), width: UIAdapter.shared.transferWidth(250) - UIAdapter.shared.transferWidth(2) , height: UIAdapter.shared.transferHeight(65)))
          self.timeView!.userInteractionEnabled = true
          self.activityMain!.addSubview(self.timeView!)
+        
+//        NSDictionary * factionValues = [_dbHelper DatabaseQueryWithParameters:@[@"faction"] query:@"select faction from Faction" values:nil];
+//        if (factionValues != nil){
+//            faction = [factionValues valueForKey:@"faction"];
+//        }
+        
+        let factionValues = instance!.DatabaseQueryWithParameters(["faction"], query: "select faction from Faction", values: nil) as! NSDictionary
+        if((factionValues.valueForKey("faction") as! NSString).intValue == 0){
+            self.timeView!.backgroundImage!.image = UIImage(named: "LM")
+        }else{
+           self.timeView!.backgroundImage!.image = UIImage(named: "BL")
+        }
     }
     
     func setContent(){
-        self.contentView = UITextView(frame: CGRect(x: UIAdapter.shared.transferWidth(2), y: UIAdapter.shared.transferHeight(24 + 54), width: UIAdapter.shared.transferWidth(250) - UIAdapter.shared.transferWidth(4), height: UIAdapter.shared.transferHeight(70)))
+        self.contentView = UITextView(frame: CGRect(x: UIAdapter.shared.transferWidth(2), y: UIAdapter.shared.transferHeight(24 + 67), width: UIAdapter.shared.transferWidth(250) - UIAdapter.shared.transferWidth(4), height: UIAdapter.shared.transferHeight(70)))
         self.contentView!.backgroundColor = UIColor(red: 13/255, green: 10/255, blue: 9/255, alpha: 1)
         self.contentView!.textColor = UIColor.whiteColor()
-        self.contentView!.font = UIAdapter.shared.transferFont(13)
+        self.contentView!.text = "备注:"
+        self.contentView!.font = UIFont(name: "KaiTi", size: UIAdapter.shared.transferHeight(10))
         self.activityMain!.addSubview(self.contentView!)
     }
     
     func setDutyView(){
      
-        self.dutyView = currentDutyView(frame: CGRect(x: UIAdapter.shared.transferWidth(50), y:UIAdapter.shared.transferHeight(24 + 54 + 74 + 50) , width: UIAdapter.shared.transferWidth(150), height: UIAdapter.shared.transferHeight(50)))
+        self.dutyView = currentDutyView(frame: CGRect(x: UIAdapter.shared.transferWidth(50), y:UIAdapter.shared.transferHeight(24 + 67 + 74 + 50) , width: UIAdapter.shared.transferWidth(150), height: UIAdapter.shared.transferHeight(50)))
         self.activityMain!.addSubview(self.dutyView!)
         self.dutyView!.tankLabel?.text = "0"
         self.dutyView!.damageLabel?.text = "1"
@@ -231,13 +244,13 @@ class AddNewActivityController: ViewControllerBase ,UIGestureRecognizerDelegate{
     }
     
     func setSelfDutyView(){
-       currentUserInfo = currentUserInformation(frame: CGRect(x: UIAdapter.shared.transferWidth(1), y:UIAdapter.shared.transferHeight(24 + 54 + 74) , width: UIAdapter.shared.transferWidth(250) - UIAdapter.shared.transferWidth(2), height: UIAdapter.shared.transferHeight(40)))
+       currentUserInfo = currentUserInformation(frame: CGRect(x: UIAdapter.shared.transferWidth(1), y:UIAdapter.shared.transferHeight(24 + 67 + 74) , width: UIAdapter.shared.transferWidth(250) - UIAdapter.shared.transferWidth(2), height: UIAdapter.shared.transferHeight(40)))
         currentUserInfo!.userInteractionEnabled = true
         self.activityMain!.addSubview(currentUserInfo!)
     }
     
     func setInviteTable(){
-        self.inviteTable = UITableView(frame: CGRect(x: UIAdapter.shared.transferWidth(2), y: UIAdapter.shared.transferHeight(24 + 54 + 74 + 50 + 10 + 40), width: UIAdapter.shared.transferWidth(246), height: 44 * 5))
+        self.inviteTable = UITableView(frame: CGRect(x: UIAdapter.shared.transferWidth(2), y: UIAdapter.shared.transferHeight(24 + 67 + 74 + 50 + 10 + 40), width: UIAdapter.shared.transferWidth(246), height: 44 * 5))
         self.inviteTable!.delegate = self
         self.inviteTable!.dataSource = self
         self.inviteTable!.separatorStyle = UITableViewCellSeparatorStyle.None
