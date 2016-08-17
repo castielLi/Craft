@@ -221,6 +221,8 @@ extension ChatRoom : UITableViewDelegate,UITableViewDataSource{
             }
             
             
+            self.data?.removeAllObjects()
+            
             // RT Start
             var data: NSMutableArray?
             if self.selectedIndex == 1 {
@@ -238,19 +240,87 @@ extension ChatRoom : UITableViewDelegate,UITableViewDataSource{
             if userId != nil {
                 self.targetId = userId
                 self.chatType = RCConversationType.ConversationType_PRIVATE
+                
+                let chatContentArray = RCIMClient.sharedRCIMClient().getLatestMessages(RCConversationType.ConversationType_PRIVATE, targetId: userId!, count: 5)
+                
+                
+                if(chatContentArray.count>0){
+                    for item in chatContentArray{
+                    let objectName = item.valueForKey("objectName") as! String
+                    let nameComponents = objectName.componentsSeparatedByString(":")
+                    
+                    var ownerType = MessageOwnerType.Mine
+                    if( (item.valueForKey("senderUserId") as! String) != userId){
+                        
+                        ownerType = MessageOwnerType.Other
+                    }
+                    
+                    
+                    if nameComponents[1] == "VcMsg" {
+                        // voice
+                        let durant = item.valueForKey("content")!.valueForKey("duration") as! Int
+                        
+                        let voiceMsg = ChatVoiceMessage(ownerType: .Mine, messageType: .Voice, portrait: UIImage(contentsOfFile: NSBundle.mainBundle().pathForResource("10", ofType: "jpeg")!)!, voiceSecs: durant)
+                        self.data!.insertObject(voiceMsg, atIndex: 0)
+                        
+                    } else {
+                        let content = item.valueForKey("content")!.valueForKey("content")
+                        
+                        let txtMsg = ChatTextMessage(ownerType: ownerType, messageType: .Text, portrait: UIImage(contentsOfFile: NSBundle.mainBundle().pathForResource("10", ofType: "jpeg")!)!)
+                        txtMsg.text = content as! String
+                        self.data!.insertObject(txtMsg, atIndex: 0)
+                        
+                        }
+                    }
+                }
+                
                 return
             }
             if groupId != nil {
                 self.targetId = groupId
                 self.chatType = RCConversationType.ConversationType_GROUP
+                
+                
+                let chatContentArray = RCIMClient.sharedRCIMClient().getLatestMessages(RCConversationType.ConversationType_GROUP, targetId: groupId!, count: 5)
+                
+                if(chatContentArray.count>0){
+                    for item in chatContentArray{
+                        
+                    var ownerType = MessageOwnerType.Mine
+                    if( (item.valueForKey("senderUserId") as! String) != "1"){
+                      
+                        ownerType = MessageOwnerType.Other
+                    }
+                        
+                    let objectName = item.valueForKey("objectName") as! String
+                    let nameComponents = objectName.componentsSeparatedByString(":")
+                    
+                    if nameComponents[1] == "VcMsg" {
+                        // voice
+                        let durant = item.valueForKey("content")!.valueForKey("duration") as! Int
+                        
+                        let voiceMsg = ChatVoiceMessage(ownerType: ownerType, messageType: .Voice, portrait: UIImage(contentsOfFile: NSBundle.mainBundle().pathForResource("10", ofType: "jpeg")!)!, voiceSecs: durant)
+                        self.data!.insertObject(voiceMsg, atIndex: 0)
+                        
+                    } else {
+                        let content = item.valueForKey("content")!.valueForKey("content")
+                        
+                        let txtMsg = ChatTextMessage(ownerType: ownerType, messageType: .Text, portrait: UIImage(contentsOfFile: NSBundle.mainBundle().pathForResource("10", ofType: "jpeg")!)!)
+                        txtMsg.text = content as! String
+                        self.data!.insertObject(txtMsg, atIndex: 0)
+                        }
+                    }
+
+                }
+                
                 return
             }
             
             self.targetId = nil
             self.chatType  = RCConversationType.ConversationType_CHATROOM
+            self.detailTable!.reloadData()
+            self.tableScrollToBottom()
             return
-            
-            
         }
     }
     

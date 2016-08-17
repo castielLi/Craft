@@ -377,8 +377,12 @@ class MyActivities: ViewControllerBase ,UIGestureRecognizerDelegate , UITableVie
             }else{
                 cell!.footer!.hidden = false
             }
-
+        cell!.tag = indexPath.row
+        cell!.dutyIcon!.addTarget(self, action: "dutyClick:", forControlEvents: UIControlEvents.TouchUpInside)
+        cell!.jobIcon!.addTarget(self, action: "jobClick:", forControlEvents: UIControlEvents.TouchUpInside)
         return cell!
+            
+            
         }else{
             var cell = tableView.dequeueReusableCellWithIdentifier("cell") as? applyListCell
             if(cell == nil) {
@@ -416,7 +420,8 @@ class MyActivities: ViewControllerBase ,UIGestureRecognizerDelegate , UITableVie
                cell!.footer!.hidden = false
             }
             
-            cell?.backgroundColor = UIColor.clearColor()
+            cell!.backgroundColor = UIColor.clearColor()
+            
             cell!.selectionStyle = UITableViewCellSelectionStyle.None
 
             return cell!
@@ -483,6 +488,17 @@ class MyActivities: ViewControllerBase ,UIGestureRecognizerDelegate , UITableVie
                 self.presentViewController(inviteNav, animated: false, completion: nil)
             }
         }
+    }
+    
+    func jobClick(sender : UIButton){
+        
+        let cell = table!.cellForRowAtIndexPath(NSIndexPath(forRow: sender.tag, inSection: 0)) as! playerListCell
+        self.showDutyDialog(cell)
+    }
+    
+    func dutyClick(sender : UIButton){
+        let cell = table!.cellForRowAtIndexPath(NSIndexPath(forRow: sender.tag, inSection: 0)) as! playerListCell
+        self.showDutyDialog(cell)
     }
 
     
