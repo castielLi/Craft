@@ -83,7 +83,7 @@ extension ChatRoom{
         for item in RCMarray{
             //私聊
             if item.conversationType == RCConversationType.ConversationType_PRIVATE{
-            let userId = item.valueForKey("senderUserId") as! String
+            let userId = item.valueForKey("targetId") as! String
             let user = _fmdbHelper!.DatabaseQueryWithParameters(["userId","userName","IconUrl","battleAccount","markName"], query: ChatRoom.searchInfoInFriendList, values: [userId])
             
             if (user != nil && user.count > 0){
