@@ -104,7 +104,8 @@ extension ChatRoom : UITableViewDelegate,UITableViewDataSource{
             cell!.selectionStyle = UITableViewCellSelectionStyle.None
             return cell!
             
-            }else if selectedIndex == 2{
+            }
+            else if selectedIndex == 2{
                 
                 var cell = tableView.dequeueReusableCellWithIdentifier("chatListCell") as? ChatListCell
                 if(cell == nil) {
@@ -136,13 +137,13 @@ extension ChatRoom : UITableViewDelegate,UITableViewDataSource{
                 var cell = tableView.dequeueReusableCellWithIdentifier("channelCell") as? ChatChannelCell
                 if cell == nil {
                     
-                    cell = ChatChannelCell(style: .Default, reuseIdentifier: "channelCell", cellHeight: uiah(50), cellWidth: self.selectDialog!.frame.width)
+                    cell = ChatChannelCell(style: .Default, reuseIdentifier: "channelCell", cellHeight: uiah(50), cellWidth: self.chatListView!.frame.width)
                     
                     
                 }
                 
                 let dict: Dictionary<String, AnyObject> = self.dataChannels[indexPath.row]
-                cell!.setMessage(dict["title"] as! String, numberInThisChannel: dict["numberOfPlayers"] as! String, backgroundImage: dict["backgroundImage"] as! UIImage)
+                cell!.setMessage(dict["title"] as! String, numberInThisChannel: "0", backgroundImage: dict["backgroundImage"] as! UIImage)
                 
                 cell!.selectionStyle = .None
                 cell!.setTopLineHide()
@@ -346,11 +347,12 @@ extension ChatRoom : UITableViewDelegate,UITableViewDataSource{
     func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
         
         if(tableView.tag == 11){
+            if(selectedIndex == 1){
         let delete = UITableViewRowAction(style: UITableViewRowActionStyle.Normal, title: "删除") { (UITableViewRowAction, NSIndexPath) in
             
             let userId = self.chatListArray![indexPath.row].valueForKey("userId") as? String
             
-            let type = userId != nil ? RCConversationType.ConversationType_PRIVATE : RCConversationType.ConversationType_CHATROOM
+            let type = userId != nil ? RCConversationType.ConversationType_PRIVATE : RCConversationType.ConversationType_GROUP
                 if(type == RCConversationType.ConversationType_PRIVATE){
                 RCIMClient.sharedRCIMClient().clearMessages(type, targetId: userId!)
                 }else{
@@ -366,8 +368,62 @@ extension ChatRoom : UITableViewDelegate,UITableViewDataSource{
             delete.backgroundColor = UIColor.blackColor()
             
             return [delete]
+            }else if (selectedIndex == 2){
+                let delete = UITableViewRowAction(style: UITableViewRowActionStyle.Normal, title: "删除") { (UITableViewRowAction, NSIndexPath) in
+                    
+                    let userId = self.chatListArray![indexPath.row].valueForKey("userId") as? String
+                    
+                    RCIMClient.sharedRCIMClient().clearMessages(RCConversationType.ConversationType_PRIVATE, targetId: userId!)
+                        
+                    self.friendListArray!.removeObjectAtIndex(indexPath.row)
+                    
+                    //删除chatlist的纪录
+                    
+                    tableView.deleteRowsAtIndexPaths([ indexPath ], withRowAnimation: UITableViewRowAnimation.Left)
+                    
+                }
+                
+                delete.backgroundColor = UIColor.blackColor()
+                
+                return [delete]
+            }else{
+                let delete = UITableViewRowAction(style: UITableViewRowActionStyle.Normal, title: "删除") { (UITableViewRowAction, NSIndexPath) in
+                    
+                    let targetId = (self.dataChannels[indexPath.row] as NSDictionary).valueForKey("targetId") as? String
+                
+                    RCIMClient.sharedRCIMClient().clearMessages(RCConversationType.ConversationType_GROUP, targetId: targetId!)
+                    
+                    self.dataChannels.removeAtIndex(indexPath.row)
+                    
+                    //删除chatlist的纪录
+                    
+                    tableView.deleteRowsAtIndexPaths([ indexPath ], withRowAnimation: UITableViewRowAnimation.Left)
+                    
+                }
+                
+                delete.backgroundColor = UIColor.blackColor()
+                
+                return [delete]
+            }
         }else{
            return nil
+        }
+    }
+    
+    func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        if(tableView.tag == 11){
+            if(self.selectedIndex == 1){
+              return true
+            }else if (self.selectedIndex == 3){
+                if(indexPath.row < 9){
+                    return false
+                }
+                return true
+            }else{
+                return true
+            }
+        }else{
+          return false
         }
     }
     

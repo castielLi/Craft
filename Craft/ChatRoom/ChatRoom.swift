@@ -63,19 +63,26 @@ class ChatRoom: ViewControllerBase , UITextViewDelegate ,RCIMClientReceiveMessag
     var firstTimeEnter : Bool = true;
     var chatListArray : NSMutableArray?
     var friendListArray : NSMutableArray?
+    var groupList : NSMutableArray?
     var _fmdbHelper : FMDBHelper?
     
     
+    var searchTextfield : UITextField?
+    var addButton : UIButton?
+    var createGroupButton : UIButton?
+    var searchButton : UIButton?
+    
+    
     var dataChannels: [Dictionary<String, AnyObject>] = [
-        ["title": "世界频道", "numberOfPlayers": "2864", "backgroundImage": UIImage(named: "channel_world")!],
-        ["title": "联盟频道", "numberOfPlayers": "1432", "backgroundImage": UIImage(named: "channel_alliance")!],
-        ["title": "部落频道", "numberOfPlayers": "1432", "backgroundImage": UIImage(named: "channel_horde")!],
-        ["title": "副本频道", "numberOfPlayers": "1033", "backgroundImage": UIImage(named: "channel_raid")!],
-        ["title": "战场、竞技场频道", "numberOfPlayers": "4555", "backgroundImage": UIImage(named: "channel_competition")!],
-        ["title": "休闲频道", "numberOfPlayers": "264", "backgroundImage": UIImage(named: "channel_others_1")!],
-        ["title": "其他频道", "numberOfPlayers": "335", "backgroundImage": UIImage(named: "channel_others_2")!],
-        ["title": "战友团频道", "numberOfPlayers": "120", "backgroundImage": UIImage(named: "channel_teammates")!],
-        ["title": "团队频道", "numberOfPlayers": "24", "backgroundImage": UIImage(named: "channel_night")!],
+        ["title": "世界频道", "targetId": "1", "backgroundImage": UIImage(named: "channel_world")!,"type":"chatroom"],
+        ["title": "联盟频道", "targetId": "2", "backgroundImage": UIImage(named: "channel_alliance")!,"type":"chatroom"],
+        ["title": "部落频道", "targetId": "3", "backgroundImage": UIImage(named: "channel_horde")!,"type":"chatroom"],
+        ["title": "副本频道", "targetId": "4", "backgroundImage": UIImage(named: "channel_raid")!,"type":"chatroom"],
+        ["title": "战场、竞技场频道", "targetId": "5", "backgroundImage": UIImage(named: "channel_competition")!,"type":"chatroom"],
+        ["title": "休闲频道", "targetId": "6", "backgroundImage": UIImage(named: "channel_others_1")!,"type":"chatroom"],
+        ["title": "其他频道", "targetId": "7", "backgroundImage": UIImage(named: "channel_others_2")!,"type":"chatroom"],
+        ["title": "战友团频道", "targetId": "8", "backgroundImage": UIImage(named: "channel_teammates")!,"type":"chatroom"],
+        ["title": "团队频道", "targetId": "9", "backgroundImage": UIImage(named: "channel_night")!,"type":"chatroom"],
     ]
     
     // RT end
@@ -89,6 +96,7 @@ class ChatRoom: ViewControllerBase , UITextViewDelegate ,RCIMClientReceiveMessag
         _fmdbHelper = FMDBHelper.sharedData() as! FMDBHelper
         chatListArray = NSMutableArray()
         friendListArray = NSMutableArray()
+        groupList = NSMutableArray()
         
         currentUserId = (_fmdbHelper?.DatabaseQueryWithParameters(["userId"], query: ChatRoom.getCurrentUserId, values: nil) as! NSDictionary).valueForKey("userId") as! String
     }
@@ -151,7 +159,11 @@ class ChatRoom: ViewControllerBase , UITextViewDelegate ,RCIMClientReceiveMessag
         
         self.chatListArray = self.getChatListInfoByRCMArray(self.conversationList!)
         self.friendListArray = ChatHelper.getAllFriend()
+        self.groupList = ChatHelper.getAllGroup()
         
+        for item in self.groupList!{
+            self.dataChannels.append(["title": item.valueForKey("groupName") as! String, "targetId": item.valueForKey("groupId") as! String, "backgroundImage": UIImage(named: "channel_competition")!,"type":"group"])
+        }
         
         self.closeProgress()
         chatListView!.delegate = self
@@ -255,6 +267,26 @@ class ChatRoom: ViewControllerBase , UITextViewDelegate ,RCIMClientReceiveMessag
         chatListView!.showsHorizontalScrollIndicator = false
         chatListView!.separatorStyle = UITableViewCellSeparatorStyle.None
         self.selectDialog!.addSubview(chatListView!)
+        
+        self.searchTextfield = UITextField(frame: CGRect(x: self.view.frame.width - UIAdapter.shared.transferWidth(301), y: UIAdapter.shared.transferHeight(49 + 291), width: UIAdapter.shared.transferWidth(227), height: UIAdapter.shared.transferHeight(16)))
+        self.searchTextfield!.backgroundColor = UIColor.clearColor()
+        self.searchTextfield!.font = UIFont(name: "KaiTi", size: UIAdapter.shared.transferHeight(16))
+        self.searchTextfield!.textColor = Resources.Color.dailyColor
+        self.selectDialog!.addSubview(self.searchTextfield!)
+        
+        self.searchButton = UIButton(frame: CGRect(x: self.view.frame.width - UIAdapter.shared.transferWidth(301) + UIAdapter.shared.transferWidth(227), y: UIAdapter.shared.transferHeight(49 + 291), width: UIAdapter.shared.transferWidth(27), height: UIAdapter.shared.transferHeight(16)))
+        self.searchButton!.setImage(UIImage(named: "search"), forState: UIControlState.Normal)
+        self.selectDialog!.addSubview(self.searchButton!)
+        
+        self.addButton = UIButton(frame: CGRect(x: self.view.frame.width - UIAdapter.shared.transferWidth(301) + UIAdapter.shared.transferWidth(227), y: UIAdapter.shared.transferHeight(49 + 291), width: UIAdapter.shared.transferWidth(27), height: UIAdapter.shared.transferHeight(16)))
+        self.addButton!.setImage(UIImage(named: "search"), forState: UIControlState.Normal)
+        self.selectDialog!.addSubview(self.addButton!)
+        self.addButton!.hidden = true
+        
+        self.createGroupButton = UIButton(frame: CGRect(x: self.view.frame.width - UIAdapter.shared.transferWidth(301) + UIAdapter.shared.transferWidth(227), y: UIAdapter.shared.transferHeight(49 + 291), width: UIAdapter.shared.transferWidth(27), height: UIAdapter.shared.transferHeight(16)))
+        self.createGroupButton!.setImage(UIImage(named: "search"), forState: UIControlState.Normal)
+        self.selectDialog!.addSubview(self.createGroupButton!)
+        self.createGroupButton!.hidden = true
     }
     
     // init chat detail
@@ -330,6 +362,26 @@ class ChatRoom: ViewControllerBase , UITextViewDelegate ,RCIMClientReceiveMessag
     func chatTabButtonClick(sender : UIButton){
         self.selectedIndex = sender.tag
         self.chatListView?.reloadData()
+        
+        if(selectedIndex == 1){
+           self.addButton!.hidden = true
+           self.createGroupButton!.hidden = true
+           self.searchTextfield!.frame = CGRect(x: self.view.frame.width - UIAdapter.shared.transferWidth(301), y: UIAdapter.shared.transferHeight(49 + 291), width: UIAdapter.shared.transferWidth(227), height: UIAdapter.shared.transferHeight(16))
+           self.searchButton!.frame = CGRect(x: self.view.frame.width - UIAdapter.shared.transferWidth(301) + UIAdapter.shared.transferWidth(227), y: UIAdapter.shared.transferHeight(49 + 291), width: UIAdapter.shared.transferWidth(27), height: UIAdapter.shared.transferHeight(16))
+        }else if (selectedIndex == 2){
+            self.addButton!.hidden = false
+            self.createGroupButton!.hidden = true
+            self.searchTextfield!.frame = CGRect(x: self.view.frame.width - UIAdapter.shared.transferWidth(301), y: UIAdapter.shared.transferHeight(49 + 291), width: UIAdapter.shared.transferWidth(227 - 27), height: UIAdapter.shared.transferHeight(16))
+            self.searchButton!.frame = CGRect(x: self.view.frame.width - UIAdapter.shared.transferWidth(301) + UIAdapter.shared.transferWidth(200), y: UIAdapter.shared.transferHeight(49 + 291), width: UIAdapter.shared.transferWidth(27), height: UIAdapter.shared.transferHeight(16))
+            self.addButton!.frame = CGRect(x: self.view.frame.width - UIAdapter.shared.transferWidth(301) + UIAdapter.shared.transferWidth(227), y: UIAdapter.shared.transferHeight(49 + 291), width: UIAdapter.shared.transferWidth(27), height: UIAdapter.shared.transferHeight(16))
+            
+        }else{
+            self.addButton!.hidden = false
+            self.createGroupButton!.hidden = false
+            self.searchTextfield!.frame = CGRect(x: self.view.frame.width - UIAdapter.shared.transferWidth(301), y: UIAdapter.shared.transferHeight(49 + 291), width: UIAdapter.shared.transferWidth(227 - 27 - 27), height: UIAdapter.shared.transferHeight(16))
+            self.searchButton!.frame = CGRect(x: self.view.frame.width - UIAdapter.shared.transferWidth(301) + UIAdapter.shared.transferWidth(200 - 27), y: UIAdapter.shared.transferHeight(49 + 291), width: UIAdapter.shared.transferWidth(27), height: UIAdapter.shared.transferHeight(16))
+            self.addButton!.frame = CGRect(x: self.view.frame.width - UIAdapter.shared.transferWidth(301) + UIAdapter.shared.transferWidth(200), y: UIAdapter.shared.transferHeight(49 + 291), width: UIAdapter.shared.transferWidth(27), height: UIAdapter.shared.transferHeight(16))
+        }
     }
     
 
