@@ -16,13 +16,8 @@ extension ChatRoom{
             
             let content =  message.content as! RCTextMessage
             let text = content.content
-            let extra = content.extra
-            
-            let dataExtra = extra.dataUsingEncoding(NSUTF8StringEncoding)
-            do {
-                let dataDict = try NSJSONSerialization.JSONObjectWithData(dataExtra!, options: []) as? [String: AnyObject]
-                let model = ChatMessageModel.getModelFromDictionary(dataDict)
-                let id = model.userId
+
+                let id = message.targetId
                 
                 guard id == self.targetId! else {
                     // update number of icon at here.
@@ -33,18 +28,15 @@ extension ChatRoom{
                 txtMsg.text = text
                 
                 
-                dispatch_async(dispatch_get_main_queue(), {
+
                    self.data!.addObject(txtMsg)
                    self.detailTable!.reloadData()
-                    });
-                
+
+            
                 
                 self.tableScrollToBottom()
             
-            } catch let error as NSError {
-                print(error)
-                return
-            }
+
         }
         
         if message.content .isMemberOfClass(RCVoiceMessage.classForCoder()) {
@@ -52,11 +44,8 @@ extension ChatRoom{
             let data = content.wavAudioData
             let duration = content.duration
             let extra = content.extra
-            let dataExtra = extra.dataUsingEncoding(NSUTF8StringEncoding)
-            do {
-                let dataDict = try NSJSONSerialization.JSONObjectWithData(dataExtra!, options: []) as? [String: AnyObject]
-                let model = ChatMessageModel.getModelFromDictionary(dataDict)
-                let id = model.userId
+
+                let id = message.targetId
                 
                 guard id == self.targetId! else {
                     // update number of icon at here.
@@ -65,15 +54,12 @@ extension ChatRoom{
                 
                 let voiceMsg = ChatVoiceMessage(ownerType: .Other, messageType: .Voice, portrait: UIImage(contentsOfFile: NSBundle.mainBundle().pathForResource("10", ofType: "jpeg")!)!, voiceSecs: duration)
                 voiceMsg.voiceData = data
-                dispatch_async(dispatch_get_main_queue(), {
+
                     self.data!.addObject(voiceMsg)
                     self.detailTable!.reloadData()
-                });
+
                 self.tableScrollToBottom()
-            } catch let error as NSError {
-                print(error)
-                return
-            }
+
         }
     }
     
@@ -87,7 +73,14 @@ extension ChatRoom{
             let user = _fmdbHelper!.DatabaseQueryWithParameters(["userId","userName","IconUrl","battleAccount","markName"], query: ChatRoom.searchInfoInFriendList, values: [userId])
             
             if (user != nil && user.count > 0){
-               array.addObject(user)
+                
+                let chatContentArray = RCIMClient.sharedRCIMClient().getLatestMessages(RCConversationType.ConversationType_PRIVATE, targetId: userId, count: 1)
+                
+                if(chatContentArray.count>0){
+                    array.addObject(user)
+                }
+                
+               
              }
             }
             if item.conversationType == RCConversationType.ConversationType_GROUP{
@@ -96,7 +89,12 @@ extension ChatRoom{
                 let group = _fmdbHelper!.DatabaseQueryWithParameters(["groupId","groupName","groupIntro","groupCode"], query: ChatRoom.searchInfoInGroupList, values: [groupId])
                 
                 if(group != nil && group.count > 0){
-                   array.addObject(group)
+                    let chatContentArray = RCIMClient.sharedRCIMClient().getLatestMessages(RCConversationType.ConversationType_GROUP, targetId: groupId, count: 1)
+                    
+                    if(chatContentArray.count>0){
+                        
+                        array.addObject(group)
+                    }
                 }
             }
         }

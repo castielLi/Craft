@@ -60,8 +60,12 @@
                      
                      ProfileModel * profile = [ProfileModel mj_objectWithKeyValues:response];
                      
+                     if(profile.rongCloudToken == nil){
+                        profile.rongCloudToken = @"";
+                     }
+                     
                      [_dbHelper DatabaseExecuteWithQuery:@"delete from Profile" values:nil];
-                     if ([_dbHelper DatabaseExecuteWithQuery:@"insert into Profile (userid,userName,battleAccount) values (?,?,?)" values:@[profile.userId,profile.userName,@""]]){
+                     if ([_dbHelper DatabaseExecuteWithQuery:@"insert into Profile (userId,userName,battleAccount,rongCloudToken) values (?,?,?,?)" values:@[profile.userId,profile.userName,@"",@""]]){
                          NSLog(@"insert profile success");
                      }else{
                          NSLog(@"insert profile failed");
@@ -74,7 +78,7 @@
                          NSLog(@"insert user failed");
                      }
 
-                     
+                     result.data = profile;
                      [_delegate loginDidFinish:result response:response];
                      }
                   }else{

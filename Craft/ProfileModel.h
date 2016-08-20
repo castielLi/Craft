@@ -13,5 +13,6 @@
 @property (nonatomic,strong) NSString * userId;
 @property (nonatomic,strong) NSString * userName;
 @property (nonatomic,strong) NSString * battleAccount;
+@property (nonatomic,strong) NSString * rongCloudToken;
 
 @end

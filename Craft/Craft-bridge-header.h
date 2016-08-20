@@ -19,6 +19,7 @@
 #import "OneRollSelection.h"
 #import "TwoRollSelection.h"
 #import "DutyResponseView.h"
+#import "ProfileModel.h"
 
 
 //oc framework

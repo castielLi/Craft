@@ -224,7 +224,7 @@ extension ChatRoom : UITableViewDelegate,UITableViewDataSource{
                     })
             }
             
-            
+            self.enterForm?.enterTextView?.text = ""
             self.data?.removeAllObjects()
             
             // RT Start
@@ -232,7 +232,23 @@ extension ChatRoom : UITableViewDelegate,UITableViewDataSource{
             if self.selectedIndex == 1 {
                 data = self.chatListArray
             } else if self.selectedIndex == 2 {
-                data = self.friendListArray
+                
+                let targetId = self.friendListArray![indexPath.row].valueForKey("userId") as! String
+                var hasTarget :Bool = false
+                for item in self.chatListArray!{
+                    if((item.valueForKey("userId") as? String) != nil && (item.valueForKey("userId") as? String)! == targetId ){
+                        hasTarget = true
+                        break
+                    }
+                }
+                
+                if(!hasTarget){
+                   self.chatListArray!.insertObject(self.friendListArray![indexPath.row], atIndex: 0)
+                }
+                
+                data = self.chatListArray!
+                self.selectedIndex = 1
+                chatListView!.reloadData()
             }
             
             guard data!.count > 0 else { return }
@@ -254,7 +270,7 @@ extension ChatRoom : UITableViewDelegate,UITableViewDataSource{
                     let nameComponents = objectName.componentsSeparatedByString(":")
                     
                     var ownerType = MessageOwnerType.Mine
-                    if( (item.valueForKey("senderUserId") as! String) != userId){
+                    if( (item.valueForKey("senderUserId") as! String) != self.currentUserId!){
                         
                         ownerType = MessageOwnerType.Other
                     }
@@ -263,8 +279,9 @@ extension ChatRoom : UITableViewDelegate,UITableViewDataSource{
                     if nameComponents[1] == "VcMsg" {
                         // voice
                         let durant = item.valueForKey("content")!.valueForKey("duration") as! Int
-                        
-                        let voiceMsg = ChatVoiceMessage(ownerType: .Mine, messageType: .Voice, portrait: UIImage(contentsOfFile: NSBundle.mainBundle().pathForResource("10", ofType: "jpeg")!)!, voiceSecs: durant)
+                        let voiceData = item.valueForKey("content")!.valueForKey("wavAudioData") as! NSData
+                        let voiceMsg = ChatVoiceMessage(ownerType: ownerType, messageType: .Voice, portrait: UIImage(contentsOfFile: NSBundle.mainBundle().pathForResource("10", ofType: "jpeg")!)!, voiceSecs: durant)
+                        voiceMsg.voiceData = voiceData
                         self.data!.insertObject(voiceMsg, atIndex: 0)
                         
                     } else {
@@ -277,7 +294,7 @@ extension ChatRoom : UITableViewDelegate,UITableViewDataSource{
                         }
                     }
                 }
-                
+                self.detailTable?.reloadData()
                 return
             }
             if groupId != nil {
@@ -291,7 +308,7 @@ extension ChatRoom : UITableViewDelegate,UITableViewDataSource{
                     for item in chatContentArray{
                         
                     var ownerType = MessageOwnerType.Mine
-                    if( (item.valueForKey("senderUserId") as! String) != "1"){
+                    if( (item.valueForKey("senderUserId") as! String) != self.currentUserId!){
                       
                         ownerType = MessageOwnerType.Other
                     }
@@ -302,8 +319,9 @@ extension ChatRoom : UITableViewDelegate,UITableViewDataSource{
                     if nameComponents[1] == "VcMsg" {
                         // voice
                         let durant = item.valueForKey("content")!.valueForKey("duration") as! Int
-                        
+                        let voiceData = item.valueForKey("content")!.valueForKey("wavAudioData") as! NSData
                         let voiceMsg = ChatVoiceMessage(ownerType: ownerType, messageType: .Voice, portrait: UIImage(contentsOfFile: NSBundle.mainBundle().pathForResource("10", ofType: "jpeg")!)!, voiceSecs: durant)
+                        voiceMsg.voiceData = voiceData
                         self.data!.insertObject(voiceMsg, atIndex: 0)
                         
                     } else {
@@ -316,15 +334,40 @@ extension ChatRoom : UITableViewDelegate,UITableViewDataSource{
                     }
 
                 }
-                
-                return
             }
             
-            self.targetId = nil
-            self.chatType  = RCConversationType.ConversationType_CHATROOM
-            self.detailTable!.reloadData()
+
+            self.detailTable?.reloadData()
             self.tableScrollToBottom()
             return
+        }
+    }
+    
+    func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
+        
+        if(tableView.tag == 11){
+        let delete = UITableViewRowAction(style: UITableViewRowActionStyle.Normal, title: "删除") { (UITableViewRowAction, NSIndexPath) in
+            
+            let userId = self.chatListArray![indexPath.row].valueForKey("userId") as? String
+            
+            let type = userId != nil ? RCConversationType.ConversationType_PRIVATE : RCConversationType.ConversationType_CHATROOM
+                if(type == RCConversationType.ConversationType_PRIVATE){
+                RCIMClient.sharedRCIMClient().clearMessages(type, targetId: userId!)
+                }else{
+                   let groupId = self.chatListArray![indexPath.row].valueForKey("groupId") as? String
+                   RCIMClient.sharedRCIMClient().clearMessages(type, targetId: groupId!)
+                }
+            
+            self.chatListArray!.removeObjectAtIndex(indexPath.row)
+            tableView.deleteRowsAtIndexPaths([ indexPath ], withRowAnimation: UITableViewRowAnimation.Left)
+
+            }
+            
+            delete.backgroundColor = UIColor.blackColor()
+            
+            return [delete]
+        }else{
+           return nil
         }
     }
     

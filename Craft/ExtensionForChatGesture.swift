@@ -72,7 +72,7 @@ extension ChatRoom : UIGestureRecognizerDelegate{
     }
     
     func showActivity(sender : UISwipeGestureRecognizer){
-        self.disappearChat(self.sign!.showActivity)
+        self.disappearChat(self.sign!.showActivityFromOtherPage)
     }
     
     func showDaily(sender : UISwipeGestureRecognizer){

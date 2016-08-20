@@ -12,8 +12,11 @@ class ChatRoom: ViewControllerBase , UITextViewDelegate ,RCIMClientReceiveMessag
 
     static let searchInfoInFriendList = "Select userId,userName,IconUrl, battleAccount,markName FROM FriendList where userId=?"
     
+    static let getCurrentUserId = "Select userId FROM Profile"
+    
     static let searchInfoInGroupList = "Select groupId,groupName,groupIntro,groupCode FROM GroupList where groupId=?"
     
+    var currentUserId : String?
     var data: NSMutableArray?
     var soundPlay :PlaySound?
     var backgroundImage : UIImageView?
@@ -86,6 +89,8 @@ class ChatRoom: ViewControllerBase , UITextViewDelegate ,RCIMClientReceiveMessag
         _fmdbHelper = FMDBHelper.sharedData() as! FMDBHelper
         chatListArray = NSMutableArray()
         friendListArray = NSMutableArray()
+        
+        currentUserId = (_fmdbHelper?.DatabaseQueryWithParameters(["userId"], query: ChatRoom.getCurrentUserId, values: nil) as! NSDictionary).valueForKey("userId") as! String
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -275,6 +280,7 @@ class ChatRoom: ViewControllerBase , UITextViewDelegate ,RCIMClientReceiveMessag
         self.detailTable!.tag = 12
         self.detailTable!.backgroundColor = UIColor.clearColor()
         self.view!.addSubview(self.detailTable!)
+        self.tableScrollToBottom()
 
     }
     
@@ -314,7 +320,11 @@ class ChatRoom: ViewControllerBase , UITextViewDelegate ,RCIMClientReceiveMessag
     }
     
     func tapSend(sender: UIButton) {
+       
+        
         self.sendText()
+        
+        
     }
     
     func chatTabButtonClick(sender : UIButton){
@@ -355,16 +365,9 @@ class ChatRoom: ViewControllerBase , UITextViewDelegate ,RCIMClientReceiveMessag
             cType = "private"
         }
         
-        model.type = cType
-        model.userName = "test"
-        model.userId = "1"
-        
-        message.extra = model.currentModelToJsonString()
-        print(message.extra)
         RCIMClient.sharedRCIMClient().sendMessage(self.chatType!, targetId: self.targetId!, content: message, pushContent: nil, success: { (messageId) in
             print("发送成功")
-            
-            
+
             
             dispatch_async(dispatch_get_main_queue(), {
                 let txtMsg = ChatTextMessage(ownerType: .Mine, messageType: .Text, portrait: UIImage(contentsOfFile: NSBundle.mainBundle().pathForResource("10", ofType: "jpeg")!)!)
@@ -374,7 +377,6 @@ class ChatRoom: ViewControllerBase , UITextViewDelegate ,RCIMClientReceiveMessag
                 self.enterForm!.enterTextView!.resignFirstResponder()
                 self.enterForm!.enterTextView!.text = ""
                 self.tableScrollToBottom()
-                
             });
 
                       
@@ -384,6 +386,9 @@ class ChatRoom: ViewControllerBase , UITextViewDelegate ,RCIMClientReceiveMessag
                 self.enterForm!.enterTextView!.text = ""
         })
         
+        
+        self.enterForm!.frame = CGRect(x: self.enterForm!.frame.origin.x  , y: UIAdapter.shared.transferHeight(25 + 290), width: UIAdapter.shared.transferWidth(212), height: UIAdapter.shared.transferHeight(23))
+        self.enterForm!.enterTextView!.frame = CGRect(x: self.enterForm!.enterTextView!.frame.origin.x, y: self.enterForm!.enterTextView!.frame.origin.y, width: self.enterForm!.enterTextView!.frame.width, height: UIAdapter.shared.transferHeight(35))
         
     }
     
@@ -400,7 +405,12 @@ class ChatRoom: ViewControllerBase , UITextViewDelegate ,RCIMClientReceiveMessag
     func tableScrollToBottom() {
         if self.data!.count > 0 {
             guard (self.data!.count - 1) != 0 else { return }
-            self.detailTable?.scrollToRowAtIndexPath(NSIndexPath(forRow: self.data!.count - 1, inSection: 0), atScrollPosition: .Bottom, animated: true)
+            
+
+            
+            self.detailTable?.scrollToRowAtIndexPath(NSIndexPath(forRow: self.data!.count - 1, inSection: 0), atScrollPosition: .Top, animated: true)
+            
+
         }
     }
     
@@ -499,6 +509,11 @@ class ChatRoom: ViewControllerBase , UITextViewDelegate ,RCIMClientReceiveMessag
                 print("sent successfully")
                 
                 let voiceMsg = ChatVoiceMessage(ownerType: .Mine, messageType: .Voice, portrait: UIImage(contentsOfFile: NSBundle.mainBundle().pathForResource("10", ofType: "jpeg")!)!, voiceSecs: self.rtAudio.recordedDuration!)
+                
+                var path = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] + "/tmp.wav"
+                let data = NSData(contentsOfFile: path)
+                
+                voiceMsg.voiceData = data!
                 self.data!.addObject(voiceMsg)
                 self.detailTable!.reloadData()
                 self.tableScrollToBottom()

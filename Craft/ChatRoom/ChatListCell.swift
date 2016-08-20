@@ -72,7 +72,7 @@ class ChatListCell: TableViewBaseCell {
         
         name = UILabel()
         name!.textColor = UIColor.whiteColor()
-        name!.text = "夏拉诺瑞"
+
         name!.font = UIFont.systemFontOfSize(13)
         self.addSubview(name!)
         
@@ -85,7 +85,7 @@ class ChatListCell: TableViewBaseCell {
         
         account = UILabel()
         account!.textColor = Resources.Color.accountColor
-        account!.text = "sanctimony@126.com"
+
         account!.font = UIFont.systemFontOfSize(10)
         self.addSubview(account!)
         
@@ -98,7 +98,7 @@ class ChatListCell: TableViewBaseCell {
         
         message = UILabel()
         message!.textColor = UIColor.lightGrayColor()
-        message!.text = "今天晚上地狱火堡垒7-12h，7点半开始组，早点到去组人。自备合计药水！！"
+
         message!.font = UIFont.systemFontOfSize(12)
         self.addSubview(message!)
         

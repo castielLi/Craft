@@ -292,10 +292,9 @@ class LoginController: ViewControllerBase,LoginServiceDelegate {
     func loginButtonClick(sender : UIButton){
         self.showProgress()
         self.service!.login(self.acccountTextfield!.text, password: self.passwordTextfield!.text)
-        
     }
     
-    func didLogin(){
+    func didLogin(rcToken : String){
         self.acccountTextfield!.hidden = true
         self.passwordTextfield!.hidden = true
         self.loginButton!.hidden = true
@@ -312,6 +311,7 @@ class LoginController: ViewControllerBase,LoginServiceDelegate {
         service!.GetInitActivitiesData()
         
         //融云登录
+        print(rcToken)
         RCIM.sharedRCIM().connectWithToken("WR2i0I07FA3sS6yv3j5G8slRWzGSVmtCYmURsUlF14+e5Rr9BT+O3cQMFJ+FPDFeOIACenxFpzL7O3U2PAtoUA==",
                                            success: { (userId) -> Void in
                                             print("登陆成功。当前登录的用户ID：\(userId)")
@@ -346,7 +346,7 @@ class LoginController: ViewControllerBase,LoginServiceDelegate {
     func loginDidFinish(result: ApiResult!, response: AnyObject!) {
         self.closeProgress()
         if(result.state){
-            self.didLogin()
+            self.didLogin((result.data as! ProfileModel).rongCloudToken)
         }else{
             MsgBoxHelper.show("错误", message: result.message)
         }

@@ -165,6 +165,12 @@ extension SignUp{
         
     }
     
+    func showActivityFromOtherPage(){
+        showActivity()
+        self.showProgress()
+        self.service!.getAllMyActivities("1")
+    }
+    
     func showActivity(){
         self.activityMainView!.activityTabel?.reloadData()
         
@@ -172,27 +178,28 @@ extension SignUp{
             let soundId = soundPlay!.sound.valueForKey(SoundResource.swishout) as! String
             let id = UInt32(soundId)
             AudioServicesPlaySystemSound(id!);
-        }
         
-        let completion = {
-            UIView.animateWithDuration(1, delay: 0, usingSpringWithDamping: 100, initialSpringVelocity: 5, options: UIViewAnimationOptions.CurveEaseOut, animations: { () -> Void in
-                
-                self.activityMainView!.hidden = false
-                self.activityMainView!.frame.origin.x = 0
-                
-                }, completion: nil)
-            self.setAllInvisable()
-            self.activityVisible = true
-        }
         
-        if self.timerVisible{
-            self.disappearTimer(completion)
-        }
-        if self.chatVisible{
-            completion()
-        }
-        if self.dailyVisible{
-           completion()
+            let completion = {
+                UIView.animateWithDuration(1, delay: 0, usingSpringWithDamping: 100, initialSpringVelocity: 5, options: UIViewAnimationOptions.CurveEaseOut, animations: { () -> Void in
+                    
+                    self.activityMainView!.hidden = false
+                    self.activityMainView!.frame.origin.x = 0
+                    
+                    }, completion: nil)
+                self.setAllInvisable()
+                self.activityVisible = true
+            }
+        
+            if self.timerVisible{
+                self.disappearTimer(completion)
+            }
+            if self.chatVisible{
+                completion()
+            }
+            if self.dailyVisible{
+               completion()
+            }
         }
         
     }
