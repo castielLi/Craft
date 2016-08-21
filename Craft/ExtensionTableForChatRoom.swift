@@ -107,14 +107,9 @@ extension ChatRoom : UITableViewDelegate,UITableViewDataSource{
                 cell!.account!.text = self.chatListArray![indexPath.row].valueForKey("groupIntro") as! String
                 
                 
-                let unreadCount = RCIMClient.sharedRCIMClient().getUnreadCount(RCConversationType.ConversationType_GROUP, targetId: groupId)
-                if(unreadCount > 0){
-                    cell!.count!.text = "\(unreadCount)"
-                    cell!.count!.hidden = false
-                }else{
-                    cell!.count!.text = "0"
-                    cell!.count!.hidden = true
-                }
+               
+                cell!.count!.hidden = true
+               
             }
                 
             cell!.selectionStyle = UITableViewCellSelectionStyle.None
@@ -260,9 +255,11 @@ extension ChatRoom : UITableViewDelegate,UITableViewDataSource{
                 
                 if(userId != nil){
                 RCIMClient.sharedRCIMClient().sendReadReceiptMessage(RCConversationType.ConversationType_PRIVATE, targetId: userId!, time: Int64(cell.lastMessageTime!))
-                }else{
-                   RCIMClient.sharedRCIMClient().sendReadReceiptMessage(RCConversationType.ConversationType_GROUP, targetId: groupId!, time: Int64(cell.lastMessageTime!))
                 }
+                //融云现在不支持控制群组消息状态
+//                else{
+//                    RCIMClient.sharedRCIMClient().sendReadReceiptMessage(RCConversationType.ConversationType_GROUP, targetId: groupId!, time: Int64(cell.lastMessageTime!))
+//                }
                 
                 tableView.beginUpdates()
                 
@@ -430,7 +427,11 @@ extension ChatRoom : UITableViewDelegate,UITableViewDataSource{
             
             let type = userId != nil ? RCConversationType.ConversationType_PRIVATE : RCConversationType.ConversationType_GROUP
                 if(type == RCConversationType.ConversationType_PRIVATE){
-                RCIMClient.sharedRCIMClient().clearMessages(type, targetId: userId!)
+                    
+                   RCIMClient.sharedRCIMClient().clearMessages(type, targetId: userId!)
+                    
+                   self.updateChatCount()
+ 
                 }else{
                    let groupId = self.chatListArray![indexPath.row].valueForKey("groupId") as? String
                    RCIMClient.sharedRCIMClient().clearMessages(type, targetId: groupId!)

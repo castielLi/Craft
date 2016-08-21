@@ -20,7 +20,7 @@ extension ChatRoom{
             let id = message.targetId
             
             //需要改bug，当如果 没有带开聊天详情的时候
-                if(self.targetId == nil){
+                if(self.targetId == nil || self.detailTable!.frame.origin.x < 0){
                     var inChatList = false
                     var index = 0
                     for item in self.chatListArray!{
@@ -93,7 +93,7 @@ extension ChatRoom{
 
                 let id = message.targetId
                 
-            if(self.targetId == nil){
+            if(self.targetId == nil || self.detailTable!.frame.origin.x < 0){
                 var inChatList = false
                 var index = 0
                 for item in self.chatListArray!{
@@ -199,7 +199,7 @@ extension ChatRoom{
     }
     
     
-    private func updateChatCount(){
+    func updateChatCount(){
         dispatch_async(dispatch_get_main_queue(), {
             let unreadCount = RCIMClient.sharedRCIMClient().getUnreadCount([1])
             let chatButton = ChatNavigationView(frame: CGRect(x: 0, y: 0, width: UIAdapter.shared.transferWidth(30) + 5, height: UIAdapter.shared.transferHeight(12) + 20) )

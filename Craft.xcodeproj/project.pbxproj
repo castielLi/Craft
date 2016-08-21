@@ -131,6 +131,8 @@
 		18BD4A311D1AC2A800585D1D /* RCIMdelegateForSignUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18BD4A301D1AC2A800585D1D /* RCIMdelegateForSignUp.swift */; };
 		18BDB0451D2E8BA1000CC61D /* worldChatCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18BDB0441D2E8BA1000CC61D /* worldChatCell.swift */; };
 		18BDB0481D2E8E7B000CC61D /* UILabel+Nova_UILabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 18BDB0461D2E8E7B000CC61D /* UILabel+Nova_UILabel.m */; };
+		18C062CE1D69DA3D003111D8 /* ChatBottomEvents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C062CD1D69DA3D003111D8 /* ChatBottomEvents.swift */; };
+		18C062D01D69DB73003111D8 /* FriendAndGroupApply.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C062CF1D69DB73003111D8 /* FriendAndGroupApply.swift */; };
 		18C44C4E1D1197560087EBF6 /* StartView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C44C4C1D1197560087EBF6 /* StartView.m */; };
 		18C6ABAA1D3E748E00196CD2 /* TwoRollSelection.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C6ABA81D3E748E00196CD2 /* TwoRollSelection.m */; };
 		18CE64341CF7354500834C2B /* DailyDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CE64331CF7354500834C2B /* DailyDetail.swift */; };
@@ -348,6 +350,8 @@
 		18BDB0441D2E8BA1000CC61D /* worldChatCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = worldChatCell.swift; path = SignUp/worldChatCell.swift; sourceTree = "<group>"; };
 		18BDB0461D2E8E7B000CC61D /* UILabel+Nova_UILabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+Nova_UILabel.m"; sourceTree = "<group>"; };
 		18BDB0471D2E8E7B000CC61D /* UILabel+Nova_UILabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILabel+Nova_UILabel.h"; sourceTree = "<group>"; };
+		18C062CD1D69DA3D003111D8 /* ChatBottomEvents.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChatBottomEvents.swift; path = ChatRoom/ChatBottomEvents.swift; sourceTree = "<group>"; };
+		18C062CF1D69DB73003111D8 /* FriendAndGroupApply.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FriendAndGroupApply.swift; path = ChatRoom/FriendAndGroupApply.swift; sourceTree = "<group>"; };
 		18C44C4B1D1197560087EBF6 /* StartView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StartView.h; sourceTree = "<group>"; };
 		18C44C4C1D1197560087EBF6 /* StartView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StartView.m; sourceTree = "<group>"; };
 		18C6ABA81D3E748E00196CD2 /* TwoRollSelection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TwoRollSelection.m; sourceTree = "<group>"; };
@@ -480,6 +484,7 @@
 				1837D23F1CFAEB3300FFE3FD /* ExtensionForChatGesture.swift */,
 				1837D2411CFAF2C800FFE3FD /* navigationClickEvents.swift */,
 				18568B0C1D02A00A00D9446E /* RCIMdelegateForChat.swift */,
+				18C062CD1D69DA3D003111D8 /* ChatBottomEvents.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -498,6 +503,7 @@
 				1826B3191D02D4F400E34D9A /* ChatDetailCell.swift */,
 				CDDA536D1D22C96F00C45479 /* ChatChannelCell.swift */,
 				1801FC481D28D5EB0083A37D /* EnterForm.swift */,
+				18C062CF1D69DB73003111D8 /* FriendAndGroupApply.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -1514,6 +1520,8 @@
 				181000A61D3B546C00A9E468 /* SignUpService.m in Sources */,
 				18610C531C12E15600B864F2 /* StringExtensions.swift in Sources */,
 				181C3E9F1C57ABB600A822D0 /* CalendearCell.swift in Sources */,
+				18C062CE1D69DA3D003111D8 /* ChatBottomEvents.swift in Sources */,
+				18C062D01D69DB73003111D8 /* FriendAndGroupApply.swift in Sources */,
 				CDDA536E1D22C96F00C45479 /* ChatChannelCell.swift in Sources */,
 				18F7E4671C97B2EF007E3459 /* ReviewTableSource.swift in Sources */,
 				18568B121D02A7E600D9446E /* ChatNavigationView.swift in Sources */,
