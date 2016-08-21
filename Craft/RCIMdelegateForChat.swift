@@ -17,26 +17,72 @@ extension ChatRoom{
             let content =  message.content as! RCTextMessage
             let text = content.content
 
-                let id = message.targetId
-                
-                guard id == self.targetId! else {
-                    // update number of icon at here.
-                    return
+            let id = message.targetId
+            
+            //需要改bug，当如果 没有带开聊天详情的时候
+                if(self.targetId == nil){
+                    var inChatList = false
+                    var index = 0
+                    for item in self.chatListArray!{
+                        
+                        let userId = item.valueForKey("userId") as? String
+                        let groupId = item.valueForKey("groupId") as? String
+                        
+                        if(userId != nil && userId! == id){
+                             inChatList = true
+                             break
+                        }
+                        if(groupId != nil && groupId! == id){
+                            inChatList = true
+                            break
+                        }
+                        index += 1
+                    }
+                    
+                    if(inChatList){
+                        if(self.selectedIndex == 1){
+                            
+                            let cell = self.chatListView!.cellForRowAtIndexPath(NSIndexPath(forRow: index, inSection: 0)) as! ChatListCell
+                            
+                            let count = Int(cell.count!.text!)! + 1
+                            dispatch_async(dispatch_get_main_queue(), {
+                            self.chatListView!.beginUpdates()
+                            cell.count!.text = "\(count)"
+                            cell.count!.hidden = false
+                            self.chatListView!.endUpdates()
+                            })
+                            
+                            self.updateChatCount()
+                            
+                        }else{
+                            self.updateChatCount()
+                        }
+                    }else{
+                        if(self.selectedIndex == 1){
+                        
+                            self.conversationList = RCIMHelper.RetrunConversationList()
+                            self.chatListArray = self.getChatListInfoByRCMArray(self.conversationList!)
+                            dispatch_async(dispatch_get_main_queue(), {
+                            self.chatListView!.reloadData()
+                            })
+                            self.updateChatCount()
+                            
+                        }else{
+                            
+                            self.updateChatCount()
+                            self.conversationList = RCIMHelper.RetrunConversationList()
+                            self.chatListArray = self.getChatListInfoByRCMArray(self.conversationList!)
+                        }
+                    }
                 }
-            
-                let txtMsg = ChatTextMessage(ownerType: .Other, messageType: .Text, portrait: UIImage(contentsOfFile: NSBundle.mainBundle().pathForResource("10", ofType: "jpeg")!)!)
-                txtMsg.text = text
-                
-                
-
-                   self.data!.addObject(txtMsg)
-                   self.detailTable!.reloadData()
-
-            
-                
-                self.tableScrollToBottom()
-            
-
+                else{
+                    let txtMsg = ChatTextMessage(ownerType: .Other, messageType: .Text, portrait: UIImage(contentsOfFile: NSBundle.mainBundle().pathForResource("10", ofType: "jpeg")!)!)
+                    txtMsg.text = text
+                    self.data?.addObject(txtMsg)
+                    self.detailTable!.reloadData()
+                    self.tableScrollToBottom()
+                            
+                }
         }
         
         if message.content .isMemberOfClass(RCVoiceMessage.classForCoder()) {
@@ -47,18 +93,69 @@ extension ChatRoom{
 
                 let id = message.targetId
                 
-                guard id == self.targetId! else {
-                    // update number of icon at here.
-                    return
+            if(self.targetId == nil){
+                var inChatList = false
+                var index = 0
+                for item in self.chatListArray!{
+                    
+                    let userId = item.valueForKey("userId") as? String
+                    let groupId = item.valueForKey("groupId") as? String
+                    
+                    if(userId != nil && userId! == id){
+                        inChatList = true
+                        break
+                    }
+                    if(groupId != nil && groupId! == id){
+                        inChatList = true
+                        break
+                    }
+                    index += 1
                 }
                 
-                let voiceMsg = ChatVoiceMessage(ownerType: .Other, messageType: .Voice, portrait: UIImage(contentsOfFile: NSBundle.mainBundle().pathForResource("10", ofType: "jpeg")!)!, voiceSecs: duration)
+                if(inChatList){
+                    if(self.selectedIndex == 1){
+                        
+                        let cell = self.chatListView!.cellForRowAtIndexPath(NSIndexPath(forRow: index, inSection: 0)) as! ChatListCell
+                        
+                        let count = Int(cell.count!.text!)! + 1
+                        dispatch_async(dispatch_get_main_queue(), {
+                            self.chatListView!.beginUpdates()
+                            cell.count!.text = "\(count)"
+                            cell.count!.hidden = false
+                            self.chatListView!.endUpdates()
+                        })
+                        
+                        self.updateChatCount()
+                        
+                    }else{
+                        self.updateChatCount()
+                    }
+                }else{
+                    if(self.selectedIndex == 1){
+                        
+                        self.conversationList = RCIMHelper.RetrunConversationList()
+                        self.chatListArray = self.getChatListInfoByRCMArray(self.conversationList!)
+                        dispatch_async(dispatch_get_main_queue(), {
+                            self.chatListView!.reloadData()
+                        })
+                        self.updateChatCount()
+                        
+                    }else{
+                        
+                        self.updateChatCount()
+                        self.conversationList = RCIMHelper.RetrunConversationList()
+                        self.chatListArray = self.getChatListInfoByRCMArray(self.conversationList!)
+                    }
+                }
+            }else{
+            let voiceMsg = ChatVoiceMessage(ownerType: .Other, messageType: .Voice, portrait: UIImage(contentsOfFile: NSBundle.mainBundle().pathForResource("10", ofType: "jpeg")!)!, voiceSecs: duration)
                 voiceMsg.voiceData = data
 
-                    self.data!.addObject(voiceMsg)
+                    self.data?.addObject(voiceMsg)
                     self.detailTable!.reloadData()
 
                 self.tableScrollToBottom()
+            }
 
         }
     }
@@ -101,23 +198,18 @@ extension ChatRoom{
         return array
     }
     
-    private func updateNumberOfIcon() {
-        
-        // prepare for update icon's number
-        var data: NSMutableArray?
-        if self.selectedIndex! == 1 {
-            data = self.chatListArray
-        } else if self.selectedIndex! == 2 {
-            data = self.friendListArray
-        }
-        
-        if self.chatType! == RCConversationType.ConversationType_PRIVATE {
-            // search according userId.
-        } else if self.chatType! == RCConversationType.ConversationType_GROUP {
-            // search according groupId.
-        }
-        
-//        let userId = data![indexPath.row].valueForKey("userId") as? String
-//        let groupId = data![indexPath.row].valueForKey("groupId") as? String
+    
+    private func updateChatCount(){
+        dispatch_async(dispatch_get_main_queue(), {
+            let unreadCount = RCIMClient.sharedRCIMClient().getUnreadCount([1])
+            let chatButton = ChatNavigationView(frame: CGRect(x: 0, y: 0, width: UIAdapter.shared.transferWidth(30) + 5, height: UIAdapter.shared.transferHeight(12) + 20) )
+            chatButton.chat!.setBackgroundImage(UIImage(named: "friend"), forState: UIControlState.Normal)
+            chatButton.count!.text = "\(unreadCount)"
+            
+            
+            let rightBarButton = UIBarButtonItem(customView: chatButton)
+            self.navigationItem.rightBarButtonItem = rightBarButton
+        });
     }
+    
 }

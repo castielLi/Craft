@@ -39,67 +39,83 @@ extension ChatRoom : UITableViewDelegate,UITableViewDataSource{
                 
             }
                 
-                    let userId = self.chatListArray![indexPath.row].valueForKey("userId") as? String
+            let userId = self.chatListArray![indexPath.row].valueForKey("userId") as? String
+            
+            if(userId != nil){
+            
+            let chatContentArray = RCIMClient.sharedRCIMClient().getLatestMessages(RCConversationType.ConversationType_PRIVATE, targetId: userId!, count: 1)
+            
+            if(chatContentArray.count>0){
+                let objectName = chatContentArray[0].valueForKey("objectName") as! String
+                cell!.lastMessageTime = chatContentArray[0].valueForKey("sentTime") as! Int
+                let nameComponents = objectName.componentsSeparatedByString(":")
+                
+                if nameComponents[1] == "VcMsg" {
+                    // voice
+                    cell!.message!.text = "[语音消息]"
+                } else {
+                    let content = chatContentArray[0].valueForKey("content")!.valueForKey("content")
+                    cell!.message!.text = content as! String
+                }
+             }
+                
+                
+                let markName = self.chatListArray![indexPath.row].valueForKey("markName") as! String
+                
+                if(markName == ""){
+                    cell!.name!.text = self.chatListArray![indexPath.row].valueForKey("userName") as! String
+                }else{
+                    cell!.name!.text = markName;
+                }
+                
+                cell!.account!.text = self.chatListArray![indexPath.row].valueForKey("battleAccount") as! String
+                
+                let iconUrl = self.chatListArray![indexPath.row].valueForKey("IconUrl") as! String
+                
+                let unreadCount = RCIMClient.sharedRCIMClient().getUnreadCount(RCConversationType.ConversationType_PRIVATE, targetId: userId)
+                if(unreadCount > 0){
+                    cell!.count!.text = "\(unreadCount)"
+                    cell!.count!.hidden = false
+                }else{
+                    cell!.count!.text = "0"
+                    cell!.count!.hidden = true
+                }
+                
+                
+            }else{
+                
+                let groupId = self.chatListArray![indexPath.row].valueForKey("groupId") as? String
+                let chatContentArray = RCIMClient.sharedRCIMClient().getLatestMessages(RCConversationType.ConversationType_GROUP, targetId: groupId, count: 1)
+                
+                if(chatContentArray.count>0){
+                    let objectName = chatContentArray[0].valueForKey("objectName") as! String
+                    cell!.lastMessageTime = chatContentArray[0].valueForKey("sentTime") as! Int
+                    let nameComponents = objectName.componentsSeparatedByString(":")
                     
-                    if(userId != nil){
-                    
-                    let chatContentArray = RCIMClient.sharedRCIMClient().getLatestMessages(RCConversationType.ConversationType_PRIVATE, targetId: userId!, count: 1)
-                    
-                    if(chatContentArray.count>0){
-                        let objectName = chatContentArray[0].valueForKey("objectName") as! String
-                        let nameComponents = objectName.componentsSeparatedByString(":")
-                        
-                        if nameComponents[1] == "VcMsg" {
-                            // voice
-                            cell!.message!.text = "[语音消息]"
-                        } else {
-                            let content = chatContentArray[0].valueForKey("content")!.valueForKey("content")
-                            cell!.message!.text = content as! String
-                        }
-                     }
-                        
-                        
-                        let markName = self.chatListArray![indexPath.row].valueForKey("markName") as! String
-                        
-                        if(markName == ""){
-                            cell!.name!.text = self.chatListArray![indexPath.row].valueForKey("userName") as! String
-                        }else{
-                            cell!.name!.text = markName;
-                        }
-                        
-                        cell!.account!.text = self.chatListArray![indexPath.row].valueForKey("battleAccount") as! String
-                        
-                        let iconUrl = self.chatListArray![indexPath.row].valueForKey("IconUrl") as! String
-                        
-                        
-                    }else{
-                        
-                        let groupId = self.chatListArray![indexPath.row].valueForKey("groupId") as? String
-                        let chatContentArray = RCIMClient.sharedRCIMClient().getLatestMessages(RCConversationType.ConversationType_GROUP, targetId: groupId, count: 1)
-                        
-                        if(chatContentArray.count>0){
-                            let objectName = chatContentArray[0].valueForKey("objectName") as! String
-                            let nameComponents = objectName.componentsSeparatedByString(":")
-                            
-                            if nameComponents[1] == "VcMsg" {
-                                // voice
-                                cell!.message!.text = "[语音消息]"
-                            } else {
-                                let content = chatContentArray[0].valueForKey("content")!.valueForKey("content")
-                                cell!.message!.text = content as! String
-                            }
-                        }
-                       
-                        
-                        cell!.name!.text = "\(self.chatListArray![indexPath.row].valueForKey("groupName") as! String) (\(self.chatListArray![indexPath.row].valueForKey("groupCode") as! String))"
-                        
-                        cell!.account!.text = self.chatListArray![indexPath.row].valueForKey("groupIntro") as! String
+                    if nameComponents[1] == "VcMsg" {
+                        // voice
+                        cell!.message!.text = "[语音消息]"
+                    } else {
+                        let content = chatContentArray[0].valueForKey("content")!.valueForKey("content")
+                        cell!.message!.text = content as! String
                     }
-
+                }
+               
                 
-            cell!.count!.hidden = true
+                cell!.name!.text = "\(self.chatListArray![indexPath.row].valueForKey("groupName") as! String) (\(self.chatListArray![indexPath.row].valueForKey("groupCode") as! String))"
+                
+                cell!.account!.text = self.chatListArray![indexPath.row].valueForKey("groupIntro") as! String
                 
                 
+                let unreadCount = RCIMClient.sharedRCIMClient().getUnreadCount(RCConversationType.ConversationType_GROUP, targetId: groupId)
+                if(unreadCount > 0){
+                    cell!.count!.text = "\(unreadCount)"
+                    cell!.count!.hidden = false
+                }else{
+                    cell!.count!.text = "0"
+                    cell!.count!.hidden = true
+                }
+            }
                 
             cell!.selectionStyle = UITableViewCellSelectionStyle.None
             return cell!
@@ -209,6 +225,10 @@ extension ChatRoom : UITableViewDelegate,UITableViewDataSource{
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if tableView.tag == 11{
+            
+            var userId : String? = ""
+            var groupId : String? = ""
+            
             let soundId = soundPlay!.sound.valueForKey(SoundResource.openBookSound) as! String
             let id = UInt32(soundId)
             AudioServicesPlaySystemSound(id!);
@@ -230,8 +250,38 @@ extension ChatRoom : UITableViewDelegate,UITableViewDataSource{
             
             // RT Start
             var data: NSMutableArray?
+            
             if self.selectedIndex == 1 {
+                userId = self.chatListArray![indexPath.row].valueForKey("userId") as? String
+                groupId = self.chatListArray![indexPath.row].valueForKey("groupId") as? String
                 data = self.chatListArray
+                
+                let cell = tableView.cellForRowAtIndexPath(indexPath) as! ChatListCell
+                
+                if(userId != nil){
+                RCIMClient.sharedRCIMClient().sendReadReceiptMessage(RCConversationType.ConversationType_PRIVATE, targetId: userId!, time: Int64(cell.lastMessageTime!))
+                }else{
+                   RCIMClient.sharedRCIMClient().sendReadReceiptMessage(RCConversationType.ConversationType_GROUP, targetId: groupId!, time: Int64(cell.lastMessageTime!))
+                }
+                
+                tableView.beginUpdates()
+                
+                cell.count!.text = "0"
+                cell.count!.hidden = true
+                
+                tableView.endUpdates()
+                
+                let unreadCount = RCIMClient.sharedRCIMClient().getUnreadCount(["1"])
+                let chatButton = ChatNavigationView(frame: CGRect(x: 0, y: 0, width: UIAdapter.shared.transferWidth(30) + 5, height: UIAdapter.shared.transferHeight(12) + 20) )
+                chatButton.chat!.setBackgroundImage(UIImage(named: "friend"), forState: UIControlState.Normal)
+                chatButton.count!.text = "\(unreadCount)"
+                
+                
+                let rightBarButton = UIBarButtonItem(customView: chatButton)
+                self.navigationItem.rightBarButtonItem = rightBarButton
+                
+                
+                
             } else if self.selectedIndex == 2 {
                 
                 let targetId = self.friendListArray![indexPath.row].valueForKey("userId") as! String
@@ -247,18 +297,44 @@ extension ChatRoom : UITableViewDelegate,UITableViewDataSource{
                    self.chatListArray!.insertObject(self.friendListArray![indexPath.row], atIndex: 0)
                 }
                 
+                userId = targetId
                 data = self.chatListArray!
+                
                 self.selectedIndex = 1
                 chatListView!.reloadData()
+                self.changeBottomOpreatorView()
+                
+            }else if selectedIndex == 3{
+                let targetId = (self.dataChannels[indexPath.row] as NSDictionary).valueForKey("targetId") as! String
+                if Int(targetId) > 100{
+                var hasTarget :Bool = false
+                    for item in self.chatListArray!{
+                        if((item.valueForKey("groupId") as? String) != nil && (item.valueForKey("groupId") as? String)! == targetId ){
+                            hasTarget = true
+                            break
+                        }
+                    }
+                    
+                    if(!hasTarget){
+//                        self.chatListArray!.insertObject(self.dataChannels[indexPath.row], atIndex: 0)
+                        
+                    }
+                    data = self.chatListArray!
+                    groupId = targetId
+                    self.selectedIndex = 1
+                    chatListView!.reloadData()
+                    self.changeBottomOpreatorView()
+                }else{
+                   data = NSMutableArray()
+                }
             }
             
             guard data!.count > 0 else { return }
             
-            let userId = data![indexPath.row].valueForKey("userId") as? String
-            let groupId = data![indexPath.row].valueForKey("groupId") as? String
+            
             
             print("userId: \(userId), groupId: \(groupId)")
-            if userId != nil {
+            if (userId != nil && userId != "") {
                 self.targetId = userId
                 self.chatType = RCConversationType.ConversationType_PRIVATE
                 
@@ -298,7 +374,7 @@ extension ChatRoom : UITableViewDelegate,UITableViewDataSource{
                 self.detailTable?.reloadData()
                 return
             }
-            if groupId != nil {
+            if (groupId != nil  && groupId != ""){
                 self.targetId = groupId
                 self.chatType = RCConversationType.ConversationType_GROUP
                 
@@ -362,7 +438,7 @@ extension ChatRoom : UITableViewDelegate,UITableViewDataSource{
             
             self.chatListArray!.removeObjectAtIndex(indexPath.row)
             tableView.deleteRowsAtIndexPaths([ indexPath ], withRowAnimation: UITableViewRowAnimation.Left)
-
+            self.targetId = nil
             }
             
             delete.backgroundColor = UIColor.blackColor()
@@ -378,8 +454,14 @@ extension ChatRoom : UITableViewDelegate,UITableViewDataSource{
                     self.friendListArray!.removeObjectAtIndex(indexPath.row)
                     
                     //删除chatlist的纪录
+                    for item in self.chatListArray!{
+                        if( item.valueForKey("userId") != nil && (item.valueForKey("userId") as! String) == userId!){
+                            self.chatListArray!.removeObject(item)
+                        }
+                    }
                     
                     tableView.deleteRowsAtIndexPaths([ indexPath ], withRowAnimation: UITableViewRowAnimation.Left)
+                    self.targetId = nil
                     
                 }
                 
@@ -396,8 +478,14 @@ extension ChatRoom : UITableViewDelegate,UITableViewDataSource{
                     self.dataChannels.removeAtIndex(indexPath.row)
                     
                     //删除chatlist的纪录
+                    for item in self.chatListArray!{
+                        if( item.valueForKey("groupId") != nil && (item.valueForKey("groupId") as! String) == targetId!){
+                          self.chatListArray!.removeObject(item)
+                        }
+                    }
                     
                     tableView.deleteRowsAtIndexPaths([ indexPath ], withRowAnimation: UITableViewRowAnimation.Left)
+                    self.targetId = nil
                     
                 }
                 

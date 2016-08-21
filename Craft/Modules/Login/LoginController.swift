@@ -311,8 +311,7 @@ class LoginController: ViewControllerBase,LoginServiceDelegate {
         service!.GetInitActivitiesData()
         
         //融云登录
-        print(rcToken)
-        RCIM.sharedRCIM().connectWithToken("WR2i0I07FA3sS6yv3j5G8slRWzGSVmtCYmURsUlF14+e5Rr9BT+O3cQMFJ+FPDFeOIACenxFpzL7O3U2PAtoUA==",
+        RCIM.sharedRCIM().connectWithToken(rcToken,
                                            success: { (userId) -> Void in
                                             print("登陆成功。当前登录的用户ID：\(userId)")
             }, error: { (status) -> Void in
@@ -346,7 +345,7 @@ class LoginController: ViewControllerBase,LoginServiceDelegate {
     func loginDidFinish(result: ApiResult!, response: AnyObject!) {
         self.closeProgress()
         if(result.state){
-            self.didLogin((result.data as! ProfileModel).rongCloudToken)
+            self.didLogin((result.data as! ProfileModel).chatToken)
         }else{
             MsgBoxHelper.show("错误", message: result.message)
         }

@@ -24,6 +24,9 @@ class ChatNavigationView: UIView {
         self.count = UILabel(frame:CGRect(x: UIAdapter.shared.transferWidth(30) - 15 , y: 0, width: 20, height: 20))
         self.count?.backgroundColor = UIColor.redColor()
         self.count!.layer.cornerRadius = 10
+        self.count!.layer.borderColor = UIColor.blackColor().CGColor
+        self.count!.layer.borderWidth = 1
+        self.count!.font = UIFont.systemFontOfSize(12)
         self.count!.textColor = UIColor.whiteColor()
         self.count!.layer.masksToBounds = true
         self.count!.textAlignment = NSTextAlignment.Center

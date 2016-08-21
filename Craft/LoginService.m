@@ -60,12 +60,12 @@
                      
                      ProfileModel * profile = [ProfileModel mj_objectWithKeyValues:response];
                      
-                     if(profile.rongCloudToken == nil){
-                        profile.rongCloudToken = @"";
+                     if(profile.chatToken == nil){
+                        profile.chatToken = @"";
                      }
                      
                      [_dbHelper DatabaseExecuteWithQuery:@"delete from Profile" values:nil];
-                     if ([_dbHelper DatabaseExecuteWithQuery:@"insert into Profile (userId,userName,battleAccount,rongCloudToken) values (?,?,?,?)" values:@[profile.userId,profile.userName,@"",@""]]){
+                     if ([_dbHelper DatabaseExecuteWithQuery:@"insert into Profile (userId,userName,battleAccount,rongCloudToken) values (?,?,?,?)" values:@[profile.userId,profile.userName,@"",profile.chatToken]]){
                          NSLog(@"insert profile success");
                      }else{
                          NSLog(@"insert profile failed");

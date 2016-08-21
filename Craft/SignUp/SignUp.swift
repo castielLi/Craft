@@ -94,7 +94,7 @@ class SignUp: ViewControllerBase ,RCIMClientReceiveMessageDelegate,UITextViewDel
          self.tabBarController!.tabBar.hidden = true
         
         if !self.firstTime{
-        let unreadCount = RCIMClient.sharedRCIMClient().getTotalUnreadCount()
+        let unreadCount = RCIMClient.sharedRCIMClient().getUnreadCount([1])
         
         let nc = NSNotificationCenter.defaultCenter()
         nc.addObserver(self, selector: "showCurrentView:", name: "loginDisappear", object: nil)

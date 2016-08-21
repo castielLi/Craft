@@ -17,6 +17,7 @@ class ChatListCell: TableViewBaseCell {
     var account : UILabel?
     var count : UILabel?
     var message : UILabel?
+    var lastMessageTime : Int?
     
     
     override func awakeFromNib() {
@@ -58,7 +59,8 @@ class ChatListCell: TableViewBaseCell {
         count!.layer.cornerRadius = 7
         count!.layer.masksToBounds = true
         count!.backgroundColor = UIColor.redColor()
-        count!.text = "99"
+        count!.text = "0"
+        count!.textAlignment = NSTextAlignment.Center
         count!.font = UIFont.systemFontOfSize(10)
         self.addSubview(count!)
         
