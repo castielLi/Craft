@@ -37,6 +37,7 @@
 //service
 #import "LoginService.h"
 #import "SignUpService.h"
+#import "ChatService.h"
 
 
 //model

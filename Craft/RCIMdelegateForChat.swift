@@ -158,6 +158,71 @@ extension ChatRoom{
             }
 
         }
+        
+        
+        if message.content.isMemberOfClass(RCInformationNotificationMessage.classForCoder()){
+            
+            if(self.selectedIndex == 4){
+                let content =  message.content as! RCInformationNotificationMessage
+                let message = content.message
+                let extra = content.extra
+                let dataExtra = extra.dataUsingEncoding(NSUTF8StringEncoding)
+                do{
+                let dictionary = try NSJSONSerialization.JSONObjectWithData(dataExtra!, options: []) as? [String: AnyObject]
+                let chatModel = ChatMessageModel.getModelFromDictionary(dictionary)
+                //添加好友信息
+                    
+                    let messageModel = InfoMessageModel()
+                    messageModel.content = chatModel.content
+                    messageModel.userId = chatModel.userId
+                    messageModel.type = chatModel.type
+                    messageModel.message = content.message
+                    
+                    self.inforList!.addObject(messageModel)
+                    self.chatListView!.reloadData()
+                }catch{
+                }
+            }
+            
+            
+        }
+    }
+    
+    func getInfoListByRCMArray(RCMarray : NSArray)->NSMutableArray{
+        let array = NSMutableArray()
+        for item in RCMarray{
+            //私聊
+            let type = item.valueForKey("objectName") as! String
+            
+            if(type != "RC:InfoNtf"){
+                continue
+            }
+            
+            if item.conversationType == RCConversationType.ConversationType_PRIVATE{
+                let content = item.valueForKey("lastestMessage") as! RCInformationNotificationMessage
+                let message = content.message
+                let extra = content.extra
+                let dataExtra = extra.dataUsingEncoding(NSUTF8StringEncoding)
+                do{
+                    let dictionary = try NSJSONSerialization.JSONObjectWithData(dataExtra!, options: []) as? [String: AnyObject]
+                    let chatModel = ChatMessageModel.getModelFromDictionary(dictionary)
+                    //添加好友信息
+                    
+                    let messageModel = InfoMessageModel()
+                    messageModel.content = chatModel.content
+                    messageModel.userId = chatModel.userId
+                    messageModel.type = chatModel.type
+                    messageModel.message = message
+                    messageModel.messageId = item.valueForKey("lastestMessageId") as! Int
+                    
+                    array.addObject(messageModel)
+                }catch{
+                }
+
+            }
+        }
+        return array
+
     }
     
     
@@ -165,6 +230,12 @@ extension ChatRoom{
         let array = NSMutableArray()
         for item in RCMarray{
             //私聊
+            let type = item.valueForKey("objectName") as! String
+            
+            if(type == "RC:InfoNtf"){
+                continue
+            }
+            
             if item.conversationType == RCConversationType.ConversationType_PRIVATE{
             let userId = item.valueForKey("targetId") as! String
             let user = _fmdbHelper!.DatabaseQueryWithParameters(["userId","userName","IconUrl","battleAccount","markName"], query: ChatRoom.searchInfoInFriendList, values: [userId])

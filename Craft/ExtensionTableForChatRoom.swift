@@ -17,8 +17,11 @@ extension ChatRoom : UITableViewDelegate,UITableViewDataSource{
                return chatListArray!.count
             }else if selectedIndex == 2{
                return friendListArray!.count
-            }
+            }else if selectedIndex == 3{
             return self.dataChannels.count
+            }else{
+              return self.inforList!.count
+            }
         }else{
            return self.data!.count
         }
@@ -143,7 +146,7 @@ extension ChatRoom : UITableViewDelegate,UITableViewDataSource{
                 
                 cell!.selectionStyle = .None
                 return cell!
-            }else
+            }else if(selectedIndex == 3)
             {
                 var cell = tableView.dequeueReusableCellWithIdentifier("channelCell") as? ChatChannelCell
                 if cell == nil {
@@ -160,6 +163,36 @@ extension ChatRoom : UITableViewDelegate,UITableViewDataSource{
                 cell!.setTopLineHide()
                 cell!.setBottomLineHide()
                 return cell!
+            }else{
+                
+                var cell = tableView.dequeueReusableCellWithIdentifier("FriendAndGroupApply") as? FriendAndGroupApply
+                if cell == nil {
+                    
+                    cell = FriendAndGroupApply(style: .Default, reuseIdentifier: "FriendAndGroupApply", height: uiah(40), width: self.chatListView!.frame.width)
+                    
+                    
+                }
+                
+                let model = self.inforList![indexPath.row] as! InfoMessageModel
+
+                cell!.icon!.image = UIImage(named: "playericon")
+                cell!.name!.text = model.content!
+                cell!.content!.text = model.message!
+                
+                if(model.type! == "friend"){
+                    cell!.applyButton!.hidden = false
+                    cell!.applyButton!.tag = indexPath.row
+                    cell!.applyButton!.backgroundColor = UIColor.greenColor()
+                    cell!.applyButton!.setTitle("接受", forState: UIControlState.Normal)
+                    cell!.applyButton!.addTarget(self, action: "applyAddFriend:", forControlEvents: UIControlEvents.TouchUpInside)
+                }
+                
+                
+                cell!.selectionStyle = .None
+                cell!.setTopLineHide()
+                cell!.setBottomLineHide()
+                return cell!
+
             }
             
         }else {
@@ -203,7 +236,11 @@ extension ChatRoom : UITableViewDelegate,UITableViewDataSource{
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         if tableView.tag == 11{
-        return UIAdapter.shared.transferHeight(50)
+            if self.selectedIndex == 4{
+               return UIAdapter.shared.transferHeight(40)
+            }else{
+               return UIAdapter.shared.transferHeight(50)
+            }
         }else {
             var height: CGFloat = 60
             let message = self.data![indexPath.row] as! ChatMessage
@@ -324,6 +361,8 @@ extension ChatRoom : UITableViewDelegate,UITableViewDataSource{
                 }else{
                    data = NSMutableArray()
                 }
+            }else{
+               return
             }
             
             guard data!.count > 0 else { return }
@@ -469,7 +508,7 @@ extension ChatRoom : UITableViewDelegate,UITableViewDataSource{
                 delete.backgroundColor = UIColor.blackColor()
                 
                 return [delete]
-            }else{
+            }else if(selectedIndex == 3){
                 let delete = UITableViewRowAction(style: UITableViewRowActionStyle.Normal, title: "删除") { (UITableViewRowAction, NSIndexPath) in
                     
                     let targetId = (self.dataChannels[indexPath.row] as NSDictionary).valueForKey("targetId") as? String
@@ -493,6 +532,23 @@ extension ChatRoom : UITableViewDelegate,UITableViewDataSource{
                 delete.backgroundColor = UIColor.blackColor()
                 
                 return [delete]
+            }else{
+                let delete = UITableViewRowAction(style: UITableViewRowActionStyle.Normal, title: "删除") { (UITableViewRowAction, NSIndexPath) in
+                    
+                    RCIMClient.sharedRCIMClient().deleteMessages([(self.inforList![indexPath.row] as! InfoMessageModel).messageId!])
+                    
+                    self.inforList!.removeObjectAtIndex(indexPath.row)
+                    
+            
+                    tableView.deleteRowsAtIndexPaths([ indexPath ], withRowAnimation: UITableViewRowAnimation.Left)
+                    self.targetId = nil
+                    
+                }
+                
+                delete.backgroundColor = UIColor.blackColor()
+                
+                return [delete]
+
             }
         }else{
            return nil

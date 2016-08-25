@@ -17,11 +17,14 @@ class ChatRoom: ViewControllerBase , UITextViewDelegate ,RCIMClientReceiveMessag
     static let searchInfoInGroupList = "Select groupId,groupName,groupIntro,groupCode FROM GroupList where groupId=?"
     
     var currentUserId : String?
+    var addTargetId: String?
     var data: NSMutableArray?
     var soundPlay :PlaySound?
     var backgroundImage : UIImageView?
     var selectDialog : UIImageView?
     weak var sign : SignUp?
+    var service : ChatService?
+    var loginService : LoginService?
     
     // chat detail
     var chatDetailView : UIImageView?
@@ -64,6 +67,7 @@ class ChatRoom: ViewControllerBase , UITextViewDelegate ,RCIMClientReceiveMessag
     var chatListArray : NSMutableArray?
     var friendListArray : NSMutableArray?
     var groupList : NSMutableArray?
+    var inforList : NSMutableArray?
     var _fmdbHelper : FMDBHelper?
     
     
@@ -97,6 +101,7 @@ class ChatRoom: ViewControllerBase , UITextViewDelegate ,RCIMClientReceiveMessag
         chatListArray = NSMutableArray()
         friendListArray = NSMutableArray()
         groupList = NSMutableArray()
+        inforList = NSMutableArray()
         
         currentUserId = (_fmdbHelper?.DatabaseQueryWithParameters(["userId"], query: ChatRoom.getCurrentUserId, values: nil) as! NSDictionary).valueForKey("userId") as! String
     }
@@ -158,6 +163,7 @@ class ChatRoom: ViewControllerBase , UITextViewDelegate ,RCIMClientReceiveMessag
         self.showProgress()
         
         self.chatListArray = self.getChatListInfoByRCMArray(self.conversationList!)
+        self.inforList = self.getInfoListByRCMArray(self.conversationList!)
         self.friendListArray = ChatHelper.getAllFriend()
         self.groupList = ChatHelper.getAllGroup()
         
@@ -179,8 +185,9 @@ class ChatRoom: ViewControllerBase , UITextViewDelegate ,RCIMClientReceiveMessag
         self.navigationController!.navigationBar.setBackgroundImage(UIImage(named: "navigationBackGround"), forBarMetrics: UIBarMetrics.Default)
 
         self.view.backgroundColor = UIColor.clearColor()
-        
-        
+        self.service = ChatService()
+        self.service!.delegate = self
+        self.loginService = LoginService()
     
         
         // Do any additional setup after loading the view.
@@ -244,6 +251,7 @@ class ChatRoom: ViewControllerBase , UITextViewDelegate ,RCIMClientReceiveMessag
         }
         
         news = UIButton()
+        news!.tag = 4
         news!.addTarget(self, action: "chatTabButtonClick:", forControlEvents: UIControlEvents.TouchUpInside)
         news!.setBackgroundImage(UIImage(named: "news"), forState: UIControlState.Normal)
         self.selectDialog!.addSubview(news!)

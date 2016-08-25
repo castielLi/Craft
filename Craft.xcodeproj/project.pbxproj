@@ -86,12 +86,15 @@
 		188C4C8E1D50C83200B6BA62 /* Papyrus-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 188C4C8D1D50C83200B6BA62 /* Papyrus-Regular.ttf */; };
 		188C4C901D50C83B00B6BA62 /* simkai.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 188C4C8F1D50C83B00B6BA62 /* simkai.ttf */; };
 		188C4C921D50CE6400B6BA62 /* activityDetailBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = 188C4C911D50CE6400B6BA62 /* activityDetailBackground.png */; };
+		188CE1E31D6F18AD00F8DEA3 /* ChatService.m in Sources */ = {isa = PBXBuildFile; fileRef = 188CE1E21D6F18AD00F8DEA3 /* ChatService.m */; };
+		188CE1E81D6F1AE700F8DEA3 /* DBBaseInfoHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 188CE1E71D6F1AE700F8DEA3 /* DBBaseInfoHelper.swift */; };
 		189052FA1CA66310006EFE69 /* TimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189052F91CA66310006EFE69 /* TimerView.swift */; };
 		189052FC1CA66943006EFE69 /* ActivityMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189052FB1CA66943006EFE69 /* ActivityMainView.swift */; };
 		189053001CA6733C006EFE69 /* ExtensionForGesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189052FF1CA6733C006EFE69 /* ExtensionForGesture.swift */; };
 		1892E8CE1CDDAA2C002AAEBF /* ActivityItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1892E8CD1CDDAA2C002AAEBF /* ActivityItemCell.swift */; };
 		1892E8D11CDE3BED002AAEBF /* dutyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1892E8D01CDE3BED002AAEBF /* dutyView.swift */; };
 		1892E8D31CDE46D9002AAEBF /* Time.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1892E8D21CDE46D9002AAEBF /* Time.swift */; };
+		18935AAD1D6B386F008D150C /* InfoMessageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18935AAC1D6B386F008D150C /* InfoMessageModel.swift */; };
 		1893E2E01C7C604C00F74A2B /* MyActivities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1893E2DF1C7C604C00F74A2B /* MyActivities.swift */; };
 		1895CEF31D3220A80047C8F0 /* DropDownSelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1895CEF21D3220A80047C8F0 /* DropDownSelectView.swift */; };
 		1895CEF51D322A4B0047C8F0 /* CreateActivityTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1895CEF41D322A4B0047C8F0 /* CreateActivityTime.swift */; };
@@ -296,12 +299,16 @@
 		188C4C8D1D50C83200B6BA62 /* Papyrus-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Papyrus-Regular.ttf"; sourceTree = "<group>"; };
 		188C4C8F1D50C83B00B6BA62 /* simkai.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = simkai.ttf; sourceTree = "<group>"; };
 		188C4C911D50CE6400B6BA62 /* activityDetailBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = activityDetailBackground.png; sourceTree = "<group>"; };
+		188CE1E11D6F18AD00F8DEA3 /* ChatService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ChatService.h; path = ChatRoom/ChatService.h; sourceTree = "<group>"; };
+		188CE1E21D6F18AD00F8DEA3 /* ChatService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ChatService.m; path = ChatRoom/ChatService.m; sourceTree = "<group>"; };
+		188CE1E71D6F1AE700F8DEA3 /* DBBaseInfoHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DBBaseInfoHelper.swift; sourceTree = "<group>"; };
 		189052F91CA66310006EFE69 /* TimerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TimerView.swift; path = SignUp/TimerView.swift; sourceTree = "<group>"; };
 		189052FB1CA66943006EFE69 /* ActivityMainView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ActivityMainView.swift; path = SignUp/ActivityMainView.swift; sourceTree = "<group>"; };
 		189052FF1CA6733C006EFE69 /* ExtensionForGesture.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtensionForGesture.swift; sourceTree = "<group>"; };
 		1892E8CD1CDDAA2C002AAEBF /* ActivityItemCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ActivityItemCell.swift; path = SignUp/ActivityItemCell.swift; sourceTree = "<group>"; };
 		1892E8D01CDE3BED002AAEBF /* dutyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = dutyView.swift; path = Common/dutyView.swift; sourceTree = "<group>"; };
 		1892E8D21CDE46D9002AAEBF /* Time.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Time.swift; path = Common/Time.swift; sourceTree = "<group>"; };
+		18935AAC1D6B386F008D150C /* InfoMessageModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InfoMessageModel.swift; path = ChatRoom/InfoMessageModel.swift; sourceTree = "<group>"; };
 		1893E2DF1C7C604C00F74A2B /* MyActivities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyActivities.swift; sourceTree = "<group>"; };
 		1895CEF21D3220A80047C8F0 /* DropDownSelectView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DropDownSelectView.swift; path = SignUp/DropDownSelectView.swift; sourceTree = "<group>"; };
 		1895CEF41D322A4B0047C8F0 /* CreateActivityTime.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CreateActivityTime.swift; path = SignUp/CreateActivityTime.swift; sourceTree = "<group>"; };
@@ -461,6 +468,7 @@
 		180E193A1C62E26C00987CE6 /* Chat */ = {
 			isa = PBXGroup;
 			children = (
+				188515691D6DE3F8006A74CE /* service */,
 				18568B081D02966300D9446E /* RCIM */,
 				180E193D1C62E28300987CE6 /* View */,
 				180E193C1C62E27C00987CE6 /* Controller */,
@@ -472,6 +480,7 @@
 		180E193B1C62E27500987CE6 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				18935AAC1D6B386F008D150C /* InfoMessageModel.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -629,6 +638,15 @@
 				187464941C3F9FAC009E4041 /* LocalNotification.swift */,
 			);
 			name = Notification;
+			sourceTree = "<group>";
+		};
+		188515691D6DE3F8006A74CE /* service */ = {
+			isa = PBXGroup;
+			children = (
+				188CE1E11D6F18AD00F8DEA3 /* ChatService.h */,
+				188CE1E21D6F18AD00F8DEA3 /* ChatService.m */,
+			);
+			name = service;
 			sourceTree = "<group>";
 		};
 		189052F81CA65842006EFE69 /* Activity */ = {
@@ -1144,6 +1162,7 @@
 			children = (
 				181000A81D3B5AFF00A9E468 /* DBContract.swift */,
 				18D5D8131D61FC2200E37920 /* ChatHelper.swift */,
+				188CE1E71D6F1AE700F8DEA3 /* DBBaseInfoHelper.swift */,
 			);
 			name = Database;
 			sourceTree = "<group>";
@@ -1430,6 +1449,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1824C61C1D255045009078B4 /* OneRollSelection.m in Sources */,
+				188CE1E31D6F18AD00F8DEA3 /* ChatService.m in Sources */,
 				1882E8871D05C567006F5803 /* ChatVoiceMessage.swift in Sources */,
 				1817585D1C4B8D45008913DB /* CustomLayout.swift in Sources */,
 				1837D2421CFAF2C800FFE3FD /* navigationClickEvents.swift in Sources */,
@@ -1442,6 +1462,7 @@
 				1892E8CE1CDDAA2C002AAEBF /* ActivityItemCell.swift in Sources */,
 				18E43FBD1CE0E2E300F9A382 /* SoundResource.swift in Sources */,
 				18C6ABAA1D3E748E00196CD2 /* TwoRollSelection.m in Sources */,
+				188CE1E81D6F1AE700F8DEA3 /* DBBaseInfoHelper.swift in Sources */,
 				1895CEFB1D3249CE0047C8F0 /* ExtensionTableForCreateActivitiy.swift in Sources */,
 				189052FC1CA66943006EFE69 /* ActivityMainView.swift in Sources */,
 				187464951C3F9FAC009E4041 /* LocalNotification.swift in Sources */,
@@ -1468,6 +1489,7 @@
 				181000A91D3B5AFF00A9E468 /* DBContract.swift in Sources */,
 				181DAA3B1D56F7DD00048216 /* ProfessionHelper.swift in Sources */,
 				18A8245A1BEDF5CC00084589 /* ChooseSideCollectionCell.swift in Sources */,
+				18935AAD1D6B386F008D150C /* InfoMessageModel.swift in Sources */,
 				1826B3181D02D25700E34D9A /* TableViewForChat.swift in Sources */,
 				182BE1781D5618E700224330 /* ActivityDetailModel.m in Sources */,
 				185BBC3A1D55F17500CB51E8 /* applyListCell.swift in Sources */,
