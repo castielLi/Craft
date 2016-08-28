@@ -15,35 +15,13 @@ extension ChatRoom:ChatServiceDelegate{
     }
     
     func chatBottomAddClick(sender : UIButton){
-    
-        if(self.selectedIndex == 2){
-            self.addTargetId = "2"
-            let addModel = ChatMessageModel()
-            addModel.type = "friend"
-            addModel.userId = self.currentUserId!
-            addModel.content = DBBaseInfoHelper.GetCurrentUserInfo()![1] as! String
-            
-            let message = RCInformationNotificationMessage()
-            message.message = "申请加你为好友"
-            
-            let json = addModel.currentModelToJsonString()
-            message.extra = json
-            RCIMClient.sharedRCIMClient().sendMessage(RCConversationType.ConversationType_PRIVATE, targetId: self.addTargetId!, content: message, pushContent: nil, success: { (messageId) in
-                print("发送成功")
-                self.addTargetId = nil
-                
-                
-                }, error: { (error, messageId) in
-                    print("发送失败")
-                   
-            })
-
-            
-        }else{
-        
-        }
+        let friend = AddNewFriend(nibName: nil, bundle: nil)
+        let friendNav = UINavigationController(rootViewController: friend)
+        friendNav.modalPresentationStyle = UIModalPresentationStyle.OverFullScreen
+        self.presentViewController(friendNav, animated: true, completion: nil)
     }
     
+      
     func chatBottomCreateClick(sender : UIButton){
         
     }
@@ -51,24 +29,32 @@ extension ChatRoom:ChatServiceDelegate{
     func applyAddFriend(sender : UIButton){
         self.showProgress()
         let addModel = ChatMessageModel()
-        addModel.type = "acceptFriend"
+        addModel.type = "agreeToAddFriend"
         addModel.userId = self.currentUserId!
         addModel.content = DBBaseInfoHelper.GetCurrentUserInfo()![1] as! String
         
         let message = RCInformationNotificationMessage()
         message.message = "\(addModel.content!)通过了你的好友请求"
         
-        self.addTargetId = (self.inforList![sender.tag] as! InfoMessageModel).userId!
+        let model = self.inforList![sender.tag] as! InfoMessageModel
+        
+        self.addTargetId = model.userId!
+        
+        let currentMessageId = model.messageId!
         
         let json = addModel.currentModelToJsonString()
         message.extra = json
         RCIMClient.sharedRCIMClient().sendMessage(RCConversationType.ConversationType_PRIVATE, targetId: self.addTargetId!, content: message, pushContent: nil, success: { (messageId) in
             print("发送成功")
             
-            
             self.service!.AddFriend(self.addTargetId!)
             self.addTargetId = nil
             
+            
+            let currentMessage = RCIMClient.sharedRCIMClient().getMessage(currentMessageId) as! RCMessage
+            RCIMClient.sharedRCIMClient().deleteMessages([messageId])
+            
+    
             }, error: { (error, messageId) in
                 print("发送失败")
                 

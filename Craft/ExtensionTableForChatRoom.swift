@@ -46,6 +46,8 @@ extension ChatRoom : UITableViewDelegate,UITableViewDataSource{
             
             if(userId != nil){
             
+            let unreadCount = RCIMClient.sharedRCIMClient().getUnreadCount(RCConversationType.ConversationType_PRIVATE, targetId: userId)
+                
             let chatContentArray = RCIMClient.sharedRCIMClient().getLatestMessages(RCConversationType.ConversationType_PRIVATE, targetId: userId!, count: 1)
             
             if(chatContentArray.count>0){
@@ -75,7 +77,7 @@ extension ChatRoom : UITableViewDelegate,UITableViewDataSource{
                 
                 let iconUrl = self.chatListArray![indexPath.row].valueForKey("IconUrl") as! String
                 
-                let unreadCount = RCIMClient.sharedRCIMClient().getUnreadCount(RCConversationType.ConversationType_PRIVATE, targetId: userId)
+                
                 if(unreadCount > 0){
                     cell!.count!.text = "\(unreadCount)"
                     cell!.count!.hidden = false
@@ -88,6 +90,10 @@ extension ChatRoom : UITableViewDelegate,UITableViewDataSource{
             }else{
                 
                 let groupId = self.chatListArray![indexPath.row].valueForKey("groupId") as? String
+                
+                let unreadCount = RCIMClient.sharedRCIMClient().getUnreadCount(RCConversationType.ConversationType_GROUP, targetId: groupId)
+                
+                
                 let chatContentArray = RCIMClient.sharedRCIMClient().getLatestMessages(RCConversationType.ConversationType_GROUP, targetId: groupId, count: 1)
                 
                 if(chatContentArray.count>0){
@@ -104,15 +110,18 @@ extension ChatRoom : UITableViewDelegate,UITableViewDataSource{
                     }
                 }
                
+                if(unreadCount > 0){
+                    cell!.count!.text = "\(unreadCount)"
+                    cell!.count!.hidden = false
+                }else{
+                    cell!.count!.text = "0"
+                    cell!.count!.hidden = true
+                }
                 
                 cell!.name!.text = "\(self.chatListArray![indexPath.row].valueForKey("groupName") as! String) (\(self.chatListArray![indexPath.row].valueForKey("groupCode") as! String))"
                 
                 cell!.account!.text = self.chatListArray![indexPath.row].valueForKey("groupIntro") as! String
-                
-                
-               
-                cell!.count!.hidden = true
-               
+
             }
                 
             cell!.selectionStyle = UITableViewCellSelectionStyle.None
@@ -177,14 +186,23 @@ extension ChatRoom : UITableViewDelegate,UITableViewDataSource{
 
                 cell!.icon!.image = UIImage(named: "playericon")
                 cell!.name!.text = model.content!
-                cell!.content!.text = model.message!
+               
                 
                 if(model.type! == "friend"){
                     cell!.applyButton!.hidden = false
+                     cell!.content!.text = model.message!
                     cell!.applyButton!.tag = indexPath.row
-                    cell!.applyButton!.backgroundColor = UIColor.greenColor()
+                    cell!.applyButton!.setTitleColor(UIColor.greenColor(), forState: UIControlState.Normal)
                     cell!.applyButton!.setTitle("接受", forState: UIControlState.Normal)
+                    cell!.applyButton!.backgroundColor = UIColor.clearColor()
                     cell!.applyButton!.addTarget(self, action: "applyAddFriend:", forControlEvents: UIControlEvents.TouchUpInside)
+                }else if (model.type! == "agreeToAddFriend"){
+                    cell!.applyButton!.hidden = false
+                     cell!.content!.text = "请求添加你为好友"
+                    cell!.applyButton!.tag = indexPath.row
+                    cell!.applyButton!.setTitleColor(UIColor.grayColor(), forState: UIControlState.Normal)
+                    cell!.applyButton!.setTitle("已添加", forState: UIControlState.Normal)
+                    cell!.applyButton!.backgroundColor = UIColor.clearColor()
                 }
                 
                 
@@ -258,6 +276,10 @@ extension ChatRoom : UITableViewDelegate,UITableViewDataSource{
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if tableView.tag == 11{
             
+            if(selectedIndex == 4){
+               return
+            }
+            
             var userId : String? = ""
             var groupId : String? = ""
             
@@ -294,9 +316,22 @@ extension ChatRoom : UITableViewDelegate,UITableViewDataSource{
                 RCIMClient.sharedRCIMClient().sendReadReceiptMessage(RCConversationType.ConversationType_PRIVATE, targetId: userId!, time: Int64(cell.lastMessageTime!))
                 }
                 //融云现在不支持控制群组消息状态
-//                else{
-//                    RCIMClient.sharedRCIMClient().sendReadReceiptMessage(RCConversationType.ConversationType_GROUP, targetId: groupId!, time: Int64(cell.lastMessageTime!))
-//                }
+                else{
+                    
+                    let unreadCount = RCIMClient.sharedRCIMClient().getUnreadCount(RCConversationType.ConversationType_GROUP, targetId: groupId)
+                    
+                    let array = RCIMClient.sharedRCIMClient().getLatestMessages(RCConversationType.ConversationType_GROUP, targetId: groupId, count: unreadCount)
+                    
+                    if array != nil && array.count > 0 {
+                    
+                        for item in array{
+                            let currentItem = item as! RCMessage
+                            RCIMClient.sharedRCIMClient().setMessageReceivedStatus(currentItem.messageId, receivedStatus: RCReceivedStatus.ReceivedStatus_READ)
+                        }
+                        
+                    }
+  
+                }
                 
                 tableView.beginUpdates()
                 
@@ -305,7 +340,7 @@ extension ChatRoom : UITableViewDelegate,UITableViewDataSource{
                 
                 tableView.endUpdates()
                 
-                let unreadCount = RCIMClient.sharedRCIMClient().getUnreadCount(["1"])
+                let unreadCount = RCIMClient.sharedRCIMClient().getTotalUnreadCount()
                 let chatButton = ChatNavigationView(frame: CGRect(x: 0, y: 0, width: UIAdapter.shared.transferWidth(30) + 5, height: UIAdapter.shared.transferHeight(12) + 20) )
                 chatButton.chat!.setBackgroundImage(UIImage(named: "friend"), forState: UIControlState.Normal)
                 chatButton.count!.text = "\(unreadCount)"
@@ -316,7 +351,8 @@ extension ChatRoom : UITableViewDelegate,UITableViewDataSource{
                 
                 
                 
-            } else if self.selectedIndex == 2 {
+            }
+            else if self.selectedIndex == 2 {
                 
                 let targetId = self.friendListArray![indexPath.row].valueForKey("userId") as! String
                 var hasTarget :Bool = false
@@ -338,7 +374,8 @@ extension ChatRoom : UITableViewDelegate,UITableViewDataSource{
                 chatListView!.reloadData()
                 self.changeBottomOpreatorView()
                 
-            }else if selectedIndex == 3{
+            }
+            else if selectedIndex == 3{
                 let targetId = (self.dataChannels[indexPath.row] as NSDictionary).valueForKey("targetId") as! String
                 if Int(targetId) > 100{
                 var hasTarget :Bool = false
@@ -360,9 +397,11 @@ extension ChatRoom : UITableViewDelegate,UITableViewDataSource{
                     self.changeBottomOpreatorView()
                 }else{
                    data = NSMutableArray()
+                    
+                   let chatRoomNumber = (self.dataChannels[indexPath.row] as NSDictionary).valueForKey("targetId") as! String
+                   joinCurrentChatRoom( chatRoomNumber )
+                   self.chatRoomNumber = chatRoomNumber
                 }
-            }else{
-               return
             }
             
             guard data!.count > 0 else { return }
@@ -571,5 +610,25 @@ extension ChatRoom : UITableViewDelegate,UITableViewDataSource{
           return false
         }
     }
+    
+    func joinCurrentChatRoom(chatRoomNumber : String){
+        RCIMClient.sharedRCIMClient().joinChatRoom(chatRoomNumber, messageCount: -1, success: {
+            
+            print("进入聊天室成功")
+            
+        }) { (error) in
+            print(error)
+        }
+    }
+    
+    func quitCurrentChatRoom(chatRoomNumber : String){
+        RCIMClient.sharedRCIMClient().quitChatRoom(chatRoomNumber, success: {
+            print("退出聊天室成功")
+            self.chatRoomNumber = nil
+            }) { (error) in
+                print(error)
+        }
+    }
+
     
 }

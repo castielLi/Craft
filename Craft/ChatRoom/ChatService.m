@@ -7,6 +7,7 @@
 //
 
 #import "ChatService.h"
+#import "UserInfoModel.h"
 
 @interface ChatService ()
 {
@@ -42,8 +43,35 @@
     
     [_restService post:@"/user/chat/add_friend" parameters:parameters
               callback:^ (ApiResult *result, id response){
-                  [self.delegate DidAddFriendFinish:result response:response];
+                  
+                    [self.delegate DidAddFriendFinish:result response:response];
+                  
               }];
 }
+
+-(void)SearchAccount:(NSString*)account{
+    
+    NSString * url = [NSString stringWithFormat:@"/user/chat/search_friend?battleUrl=%@",account];
+    
+    [_restService get:url parameters:nil
+              callback:^ (ApiResult *result, id response){
+                  
+                  if(result.state){
+                      if (((NSArray*)response).count > 0){
+                      
+                      UserInfoModel * model = [UserInfoModel mj_objectWithKeyValues:response[0]];
+                      result.data = model;
+                      }else{
+                          result.data = nil;
+                      }
+                     [self.delegate DidSearchFriendFinish:result response:response];
+                  }else{
+                      [self.delegate DidSearchFriendFinish:result response:response];
+                  }
+                  
+              }];
+
+}
+
 
 @end

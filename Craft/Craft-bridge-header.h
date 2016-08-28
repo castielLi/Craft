@@ -20,6 +20,7 @@
 #import "TwoRollSelection.h"
 #import "DutyResponseView.h"
 #import "ProfileModel.h"
+#import "UserInfoModel.h"
 
 
 //oc framework

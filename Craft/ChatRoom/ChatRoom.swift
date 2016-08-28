@@ -51,6 +51,7 @@ class ChatRoom: ViewControllerBase , UITextViewDelegate ,RCIMClientReceiveMessag
     //conversation List 
     var conversationList : NSArray?
     var selectedIndex : Int?
+    var chatRoomNumber : String?
     
     // RT Start
     // UITextView for chat.
@@ -112,7 +113,7 @@ class ChatRoom: ViewControllerBase , UITextViewDelegate ,RCIMClientReceiveMessag
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        let unreadCount = RCIMClient.sharedRCIMClient().getUnreadCount([1])
+        let unreadCount = RCIMClient.sharedRCIMClient().getTotalUnreadCount()
         let chatButton = ChatNavigationView(frame: CGRect(x: 0, y: 0, width: UIAdapter.shared.transferWidth(30) + 5, height: UIAdapter.shared.transferHeight(12) + 20) )
         chatButton.chat!.setBackgroundImage(UIImage(named: "friend"), forState: UIControlState.Normal)
         chatButton.count!.text = "\(unreadCount)"
@@ -379,27 +380,35 @@ class ChatRoom: ViewControllerBase , UITextViewDelegate ,RCIMClientReceiveMessag
     
     func changeBottomOpreatorView(){
         if(selectedIndex == 1){
+            self.searchTextfield!.hidden = false
             self.addButton!.hidden = true
+            self.searchButton!.hidden = false
             self.createGroupButton!.hidden = true
             self.searchTextfield!.frame = CGRect(x: self.view.frame.width - UIAdapter.shared.transferWidth(301), y: UIAdapter.shared.transferHeight(49 + 291), width: UIAdapter.shared.transferWidth(227), height: UIAdapter.shared.transferHeight(16))
             self.searchButton!.frame = CGRect(x: self.view.frame.width - UIAdapter.shared.transferWidth(301) + UIAdapter.shared.transferWidth(227), y: UIAdapter.shared.transferHeight(49 + 291), width: UIAdapter.shared.transferWidth(27), height: UIAdapter.shared.transferHeight(16))
         }else if (selectedIndex == 2){
+            self.searchButton!.hidden = false
             self.addButton!.hidden = false
-            
+            self.searchTextfield!.hidden = false
             self.createGroupButton!.hidden = true
             self.searchTextfield!.frame = CGRect(x: self.view.frame.width - UIAdapter.shared.transferWidth(301), y: UIAdapter.shared.transferHeight(49 + 291), width: UIAdapter.shared.transferWidth(227 - 35), height: UIAdapter.shared.transferHeight(16))
             self.searchButton!.frame = CGRect(x: self.view.frame.width - UIAdapter.shared.transferWidth(301) + UIAdapter.shared.transferWidth(227 - 35), y: UIAdapter.shared.transferHeight(49 + 291), width: UIAdapter.shared.transferWidth(27), height: UIAdapter.shared.transferHeight(16))
             self.addButton!.frame = CGRect(x: self.view.frame.width - UIAdapter.shared.transferWidth(301) + UIAdapter.shared.transferWidth(227 - 35 + 27), y: UIAdapter.shared.transferHeight(49 + 291), width: UIAdapter.shared.transferWidth(35), height: UIAdapter.shared.transferHeight(16))
             
-        }else{
-            self.addButton!.hidden = false
-            self.addButton!.setBackgroundImage(UIImage(named: "addgroup"), forState: UIControlState.Normal)
+        }else if(selectedIndex == 3){
+            self.searchButton!.hidden = false
+            self.addButton!.hidden = true
+            self.searchTextfield!.hidden = false
             self.createGroupButton!.hidden = false
-            self.searchTextfield!.frame = CGRect(x: self.view.frame.width - UIAdapter.shared.transferWidth(301 + 32), y: UIAdapter.shared.transferHeight(49 + 291), width: UIAdapter.shared.transferWidth(227 - 35), height: UIAdapter.shared.transferHeight(16))
-            self.searchButton!.frame = CGRect(x: self.view.frame.width - UIAdapter.shared.transferWidth(301) + UIAdapter.shared.transferWidth(227 - 35), y: UIAdapter.shared.transferHeight(49 + 291), width: UIAdapter.shared.transferWidth(27), height: UIAdapter.shared.transferHeight(16))
-            self.addButton!.frame = CGRect(x: self.view.frame.width - UIAdapter.shared.transferWidth(301) + UIAdapter.shared.transferWidth(227 - 35 + 27), y: UIAdapter.shared.transferHeight(49 + 291), width: UIAdapter.shared.transferWidth(35), height: UIAdapter.shared.transferHeight(16))
-        }
+            self.searchTextfield!.frame = CGRect(x: self.view.frame.width - UIAdapter.shared.transferWidth(301 - 35), y: UIAdapter.shared.transferHeight(49 + 291), width: UIAdapter.shared.transferWidth(235), height: UIAdapter.shared.transferHeight(16))
+            self.searchButton!.frame = CGRect(x: self.view.frame.width - UIAdapter.shared.transferWidth(301) + UIAdapter.shared.transferWidth(235), y: UIAdapter.shared.transferHeight(49 + 291), width: UIAdapter.shared.transferWidth(27), height: UIAdapter.shared.transferHeight(16))
 
+        }else{
+           self.searchTextfield!.hidden = true
+           self.searchButton!.hidden = true
+           self.addButton!.hidden = true
+           self.createGroupButton!.hidden = true
+        }
     }
     
 

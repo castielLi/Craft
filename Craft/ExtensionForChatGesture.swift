@@ -111,7 +111,11 @@ extension ChatRoom : UIGestureRecognizerDelegate{
     
        self.enterForm!.enterTextView!.resignFirstResponder()
 //       self.searchText!.resignFirstResponder()
-
+        
+        //如果当前是聊天室，就关闭聊天时的接受消息代理
+        if(self.chatRoomNumber != nil && self.selectedIndex == 3){
+            self.quitCurrentChatRoom(self.chatRoomNumber!)
+        }
     }
     
     func gestureRecognizer(gestureRecognizer: UIGestureRecognizer, shouldReceiveTouch touch: UITouch) -> Bool {

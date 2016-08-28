@@ -13,6 +13,7 @@
 @optional
 -(void)DidAddFriendFinish:(ApiResult *)result response:(id)response;
 
+-(void)DidSearchFriendFinish:(ApiResult *)result response:(id)response;
 
 @end
 
@@ -21,5 +22,7 @@
 @property (nonatomic, weak) id<ChatServiceDelegate> delegate;
 
 -(void)AddFriend:(NSString*)friendId;
+
+-(void)SearchAccount:(NSString*)account;
 
 @end

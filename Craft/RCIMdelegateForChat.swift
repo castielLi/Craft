@@ -208,10 +208,21 @@ extension ChatRoom{
                     let chatModel = ChatMessageModel.getModelFromDictionary(dictionary)
                     //添加好友信息
                     
+                    
                     let messageModel = InfoMessageModel()
+                    let user = _fmdbHelper!.DatabaseQueryWithParameters(["userId","userName","IconUrl","battleAccount","markName"], query: ChatRoom.searchInfoInFriendList, values: [chatModel.userId])
+                    
+                    if (user != nil && user.count > 0){
+                       messageModel.type = "agreeToAddFriend"
+                    }else{
+                       messageModel.type = chatModel.type
+                    }
+                    
+                    
+                    
                     messageModel.content = chatModel.content
                     messageModel.userId = chatModel.userId
-                    messageModel.type = chatModel.type
+                    
                     messageModel.message = message
                     messageModel.messageId = item.valueForKey("lastestMessageId") as! Int
                     
@@ -272,7 +283,7 @@ extension ChatRoom{
     
     func updateChatCount(){
         dispatch_async(dispatch_get_main_queue(), {
-            let unreadCount = RCIMClient.sharedRCIMClient().getUnreadCount([1])
+            let unreadCount = RCIMClient.sharedRCIMClient().getTotalUnreadCount()
             let chatButton = ChatNavigationView(frame: CGRect(x: 0, y: 0, width: UIAdapter.shared.transferWidth(30) + 5, height: UIAdapter.shared.transferHeight(12) + 20) )
             chatButton.chat!.setBackgroundImage(UIImage(named: "friend"), forState: UIControlState.Normal)
             chatButton.count!.text = "\(unreadCount)"
