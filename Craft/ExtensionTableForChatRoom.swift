@@ -624,6 +624,7 @@ extension ChatRoom : UITableViewDelegate,UITableViewDataSource{
     func quitCurrentChatRoom(chatRoomNumber : String){
         RCIMClient.sharedRCIMClient().quitChatRoom(chatRoomNumber, success: {
             print("退出聊天室成功")
+            RCIMClient.sharedRCIMClient().clearMessages(RCConversationType.ConversationType_CHATROOM, targetId: self.chatRoomNumber!)
             self.chatRoomNumber = nil
             }) { (error) in
                 print(error)

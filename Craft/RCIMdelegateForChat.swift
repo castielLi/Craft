@@ -19,7 +19,21 @@ extension ChatRoom{
 
             let id = message.targetId
             
-            //需要改bug，当如果 没有带开聊天详情的时候
+            
+            if (message.conversationType == RCConversationType.ConversationType_CHATROOM){
+                if(nLeft == 0){
+                    dispatch_async(dispatch_get_main_queue(), {
+                    let txtMsg = ChatTextMessage(ownerType: .Other, messageType: .Text, portrait: UIImage(contentsOfFile: NSBundle.mainBundle().pathForResource("10", ofType: "jpeg")!)!)
+                    txtMsg.text = text
+                    self.data?.addObject(txtMsg)
+                    self.detailTable!.reloadData()
+                    self.tableScrollToBottom()
+                    })
+                }else{
+                    return
+                }
+            }else{
+            
                 if(self.targetId == nil || self.detailTable!.frame.origin.x < 0){
                     var inChatList = false
                     var index = 0
@@ -83,6 +97,7 @@ extension ChatRoom{
                     self.tableScrollToBottom()
                             
                 }
+            }
         }
         
         if message.content .isMemberOfClass(RCVoiceMessage.classForCoder()) {
@@ -91,7 +106,23 @@ extension ChatRoom{
             let duration = content.duration
             let extra = content.extra
 
-                let id = message.targetId
+            let id = message.targetId
+            
+            
+            if (message.conversationType == RCConversationType.ConversationType_CHATROOM){
+                if(nLeft == 0){
+                    dispatch_async(dispatch_get_main_queue(), {
+                    let voiceMsg = ChatVoiceMessage(ownerType: .Other, messageType: .Voice, portrait: UIImage(contentsOfFile: NSBundle.mainBundle().pathForResource("10", ofType: "jpeg")!)!, voiceSecs: duration)
+                    voiceMsg.voiceData = data
+                    
+                    self.data?.addObject(voiceMsg)
+                    self.detailTable!.reloadData()
+                    
+                    self.tableScrollToBottom()
+                    })
+                }
+            }else{
+            
                 
             if(self.targetId == nil || self.detailTable!.frame.origin.x < 0){
                 var inChatList = false
@@ -148,14 +179,15 @@ extension ChatRoom{
                     }
                 }
             }else{
-            let voiceMsg = ChatVoiceMessage(ownerType: .Other, messageType: .Voice, portrait: UIImage(contentsOfFile: NSBundle.mainBundle().pathForResource("10", ofType: "jpeg")!)!, voiceSecs: duration)
-                voiceMsg.voiceData = data
+                let voiceMsg = ChatVoiceMessage(ownerType: .Other, messageType: .Voice, portrait: UIImage(contentsOfFile: NSBundle.mainBundle().pathForResource("10", ofType: "jpeg")!)!, voiceSecs: duration)
+                    voiceMsg.voiceData = data
 
-                    self.data?.addObject(voiceMsg)
-                    self.detailTable!.reloadData()
+                        self.data?.addObject(voiceMsg)
+                        self.detailTable!.reloadData()
 
-                self.tableScrollToBottom()
-            }
+                    self.tableScrollToBottom()
+              }
+           }
 
         }
         

@@ -54,7 +54,7 @@ class SignUp: ViewControllerBase ,RCIMClientReceiveMessageDelegate,UITextViewDel
     var textViewInitialHeight: CGFloat = 0
     
     
-    var chatDetail:NSMutableArray = ["麦迪文说:卡德加你这个坑爹的学徒，老子正虚弱着的时候给我来了一套爆发，也不留心给老子祛除下debuff","卡德加说：.......就是不想","安度因罗萨说:好样的小伙子,我看好你！","杜隆坦说:我来拯救我的人民！我的世界正在消亡,我们必须联手打败古尔丹,他那黑暗魔法迟早会给我的人民带来灭亡","黑手说:你尽然背叛自己的同类,你以后别想模装备了"]
+    var chatDetail:NSMutableArray = []
     
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
@@ -488,9 +488,10 @@ class SignUp: ViewControllerBase ,RCIMClientReceiveMessageDelegate,UITextViewDel
    
     
     func tableScrollToBottom() {
-//        if self.data.count > 0 {
-//            self.detailTable?.scrollToRowAtIndexPath(NSIndexPath(forRow: self.data.count - 1, inSection: 0), atScrollPosition: .Bottom, animated: true)
-//        }
+        let count = self.chatDetail.count
+        if count > 0 {
+        self.worldChat!.worldChatDetail!.scrollToRowAtIndexPath( NSIndexPath(forRow: count - 1  , inSection :0) , atScrollPosition: UITableViewScrollPosition.Bottom, animated: true)
+        }
     }
     
     func textViewShouldBeginEditing(textView: UITextView) -> Bool {
@@ -533,9 +534,9 @@ class SignUp: ViewControllerBase ,RCIMClientReceiveMessageDelegate,UITextViewDel
                 }
                 }, completion: {
                     finished in
-                    dispatch_async(dispatch_get_main_queue(), {
-                        self.tableScrollToBottom()
-                    })
+//                    dispatch_async(dispatch_get_main_queue(), {
+//                        self.tableScrollToBottom()
+//                    })
             })
         }
     }
@@ -561,6 +562,18 @@ class SignUp: ViewControllerBase ,RCIMClientReceiveMessageDelegate,UITextViewDel
             
             textView.resignFirstResponder()
             textView.text = ""
+            
+            
+            dispatch_async(dispatch_get_main_queue(), {
+
+    
+                self.worldChat!.enterForm = UIView(frame: CGRect(x: UIAdapter.shared.transferWidth(18), y:self.view.frame.height - (UIAdapter.shared.transferHeight(110) + UIAdapter.shared.transferWidth(200) + 64) - UIAdapter.shared.transferHeight(25), width: self.view.frame.width - UIAdapter.shared.transferWidth(30) - UIAdapter.shared.transferWidth(6), height: UIAdapter.shared.transferHeight(25)))
+                
+                self.worldChat!.enterText = UITextView(frame: CGRect(x: UIAdapter.shared.transferWidth(23), y:self.view.frame.height - (UIAdapter.shared.transferHeight(110) + UIAdapter.shared.transferWidth(200) + 64) - UIAdapter.shared.transferHeight(25) + UIAdapter.shared.transferHeight(3) , width: self.view.frame.width - UIAdapter.shared.transferWidth(30) - UIAdapter.shared.transferWidth(6) - UIAdapter.shared.transferWidth(55), height: UIAdapter.shared.transferHeight(25) - UIAdapter.shared.transferHeight(6) ))
+                
+                self.tableScrollToBottom()
+            });
+            
         }
         return true
     }

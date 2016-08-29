@@ -11,40 +11,33 @@ import Foundation
 extension SignUp{
     
     func onReceived(message: RCMessage!, left nLeft: Int32, object: AnyObject!) {
+        
         if message.content.isMemberOfClass(RCTextMessage.classForCoder()){
-            if(nLeft > 1){
-            let content =  message.content as! RCTextMessage
-            if(nLeft == 0 ){
-            var paras : String = (message.content as! RCTextMessage).extra
+            if (message.conversationType == RCConversationType.ConversationType_CHATROOM){
             
-            let data = paras.dataUsingEncoding(NSUTF8StringEncoding)
-            do {
-                let dictionary = try NSJSONSerialization.JSONObjectWithData(data!, options: []) as? [String:AnyObject]
+                if(nLeft == 0 ){
                 
-                print(dictionary)
+                let content =  message.content as! RCTextMessage
+                let text = content.content
                 
-                let model = ChatMessageModel.getModelFromDictionary(dictionary)
-                if(model.type == "chatroom"){
-                    
-                    print(content.content)
-                    
-                    dispatch_async(dispatch_get_main_queue(), {
-                        self.chatDetail.addObject(content.content!)
-                        let count = self.chatDetail.count
-                        self.worldChat!.worldChatDetail!.reloadData()
-                        self.worldChat!.worldChatDetail!.scrollToRowAtIndexPath( NSIndexPath(forRow: count - 1  , inSection :0) , atScrollPosition: UITableViewScrollPosition.Bottom, animated: true)
-                    });
-                    
-                    
+                let id = message.targetId
+                
+                let speakContent = "\(content.extra)说:\(text)"
+                
+                dispatch_async(dispatch_get_main_queue(), {
+                    self.chatDetail.addObject(speakContent)
+                    let count = self.chatDetail.count
+                    self.worldChat!.worldChatDetail!.reloadData()
+                    self.worldChat!.worldChatDetail!.scrollToRowAtIndexPath( NSIndexPath(forRow: count - 1  , inSection :0) , atScrollPosition: UITableViewScrollPosition.Bottom, animated: true)
+                });
+
+                
+                }else{
+                   return
                 }
-            } catch let error as NSError {
-                print(error)
-             }
+            }else{
+                 self.updateChatCount()
             }
-
-          }
-            
-
         }
     }
     
@@ -54,7 +47,8 @@ extension SignUp{
     
     
     func joinCurrentChatRoom(){
-       RCIMClient.sharedRCIMClient().joinChatRoom("1", messageCount: -1, success: {
+       // 0 是联盟 1是部落
+       RCIMClient.sharedRCIMClient().joinChatRoom("0", messageCount: -1, success: {
         
            print("进入聊天室成功")
         
@@ -62,5 +56,19 @@ extension SignUp{
             print(error)
         }
     }
+    
+    func updateChatCount(){
+        dispatch_async(dispatch_get_main_queue(), {
+            let unreadCount = RCIMClient.sharedRCIMClient().getUnreadCount([1,3])
+            let chatButton = ChatNavigationView(frame: CGRect(x: 0, y: 0, width: UIAdapter.shared.transferWidth(30) + 5, height: UIAdapter.shared.transferHeight(12) + 20) )
+            chatButton.chat!.setBackgroundImage(UIImage(named: "friend"), forState: UIControlState.Normal)
+            chatButton.count!.text = "\(unreadCount)"
+            
+            
+            let rightBarButton = UIBarButtonItem(customView: chatButton)
+            self.navigationItem.rightBarButtonItem = rightBarButton
+        });
+    }
+
     
 }
