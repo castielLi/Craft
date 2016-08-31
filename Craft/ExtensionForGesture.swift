@@ -86,6 +86,9 @@ extension SignUp{
         
         if !self.completeState{
             
+            self.worldChatEnterFormOriginFrame = self.worldChat!.enterForm!.frame
+            self.worldChatEnterTextOriginFrame = self.worldChat!.enterText!.frame
+            
             self.ovalShapeLayer!.hidden = true
             self.shapeLayer!.hidden = true
             
@@ -120,7 +123,9 @@ extension SignUp{
                     
             })
             self.completeState = !self.completeState
+            if(self.chatDetail.count > 0){
             self.worldChat!.worldChatDetail!.scrollToRowAtIndexPath( NSIndexPath(forRow: self.chatDetail.count - 1  , inSection :0) , atScrollPosition: UITableViewScrollPosition.Bottom, animated: true)
+            }
         }
     }
     

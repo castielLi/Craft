@@ -48,7 +48,7 @@ extension SignUp{
     
     func joinCurrentChatRoom(){
        // 0 是联盟 1是部落
-       RCIMClient.sharedRCIMClient().joinChatRoom("0", messageCount: -1, success: {
+       RCIMClient.sharedRCIMClient().joinChatRoom(self.chatRoomId, messageCount: -1, success: {
         
            print("进入聊天室成功")
         
@@ -56,6 +56,18 @@ extension SignUp{
             print(error)
         }
     }
+    
+    func quitCurrentChatRoom(){
+        // 0 是联盟 1是部落
+        RCIMClient.sharedRCIMClient().joinChatRoom(self.chatRoomId, messageCount: -1, success: {
+            
+            print("退出聊天室成功")
+            
+        }) { (error) in
+            print(error)
+        }
+    }
+    
     
     func updateChatCount(){
         dispatch_async(dispatch_get_main_queue(), {

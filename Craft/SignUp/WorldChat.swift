@@ -93,6 +93,7 @@ class WorldChat: UIView {
         }
         
         self.allianceButton = UIButton()
+        self.allianceButton!.tag = 100
         self.allianceButton!.setBackgroundImage(UIImage(named: "allianceButton"), forState: UIControlState.Normal)
         self.addSubview(self.allianceButton!)
         
@@ -104,6 +105,7 @@ class WorldChat: UIView {
         }
         
         self.tribeButton = UIButton()
+        self.allianceButton!.tag = 101
         self.tribeButton!.setBackgroundImage(UIImage(named: "tribeButton"), forState: UIControlState.Normal)
         self.addSubview(self.tribeButton!)
         
@@ -115,6 +117,7 @@ class WorldChat: UIView {
         }
         
         self.raidButton = UIButton()
+        self.allianceButton!.tag = 102
         self.raidButton!.setBackgroundImage(UIImage(named: "raidButton"), forState: UIControlState.Normal)
         self.addSubview(self.raidButton!)
         

@@ -14,6 +14,10 @@ class SignUp: ViewControllerBase ,RCIMClientReceiveMessageDelegate,UITextViewDel
     var service : SignUpService?
     var selectedIndex : Int = 1
     
+    // 0是联盟 1是部落
+    var chatRoomIndex : Int = 0
+    var chatRoomId : String = "0"
+    
     //datasource for activity
     var myActivitiesDatasource : NSMutableArray?
     var originActivityDatasource : NSMutableArray?
@@ -22,7 +26,6 @@ class SignUp: ViewControllerBase ,RCIMClientReceiveMessageDelegate,UITextViewDel
     var firstTime : Bool = true
     var backGroundImage : UIImageView?
     var bloodBackGroundImage : UIImageView?
-    var backGroundImageNumber : Int = 1
     var timer:NSTimer?
     var verifyRequestCount : Int = 5
     var timeView : TimerView?
@@ -52,6 +55,8 @@ class SignUp: ViewControllerBase ,RCIMClientReceiveMessageDelegate,UITextViewDel
     var dHeight : CGFloat?
     var firstTimeEnter : Bool = true;
     var textViewInitialHeight: CGFloat = 0
+    var worldChatEnterFormOriginFrame : CGRect?
+    var worldChatEnterTextOriginFrame : CGRect?
     
     
     var chatDetail:NSMutableArray = []
@@ -196,13 +201,39 @@ class SignUp: ViewControllerBase ,RCIMClientReceiveMessageDelegate,UITextViewDel
        self.worldChat!.worldChatDetail!.tag = 1
        self.worldChat!.worldChatDetail!.delegate = self
        self.worldChat!.worldChatDetail!.dataSource = self
+       
+       self.worldChat!.sendButton?.addTarget(self, action: "sendMessage:", forControlEvents: UIControlEvents.TouchUpInside)
+        
+    
+       self.worldChat!.allianceButton!.addTarget(self, action: "", forControlEvents: UIControlEvents.TouchUpInside)
+       self.worldChat!.tribeButton!.addTarget(self, action: "", forControlEvents: UIControlEvents.TouchUpInside)
+       self.worldChat!.raidButton!.addTarget(self, action: "", forControlEvents: UIControlEvents.TouchUpInside)
+        
+       
     }
+    
+    
+    func worldChatChatRoomSelected(sender : UIButton){
+        self.chatDetail.removeAllObjects()
+        if sender.tag == 100{
+            self.quitCurrentChatRoom()
+            self.chatRoomId = "0"
+            self.joinCurrentChatRoom()
+        }else if sender.tag == 101{
+            self.quitCurrentChatRoom()
+            self.chatRoomId = "1"
+            self.joinCurrentChatRoom()
+        }else{
+            self.quitCurrentChatRoom()
+        }
+    }
+    
+    
     
     func setBackGround(){
         self.backGroundImage = UIImageView(frame: CGRectMake(0, 0, self.view.frame.width, self.view.frame.height))
         let path = NSBundle.mainBundle().pathForResource("MainBackGround", ofType: "png")
         self.backGroundImage!.image = UIImage(contentsOfFile: path!)
-        self.backGroundImageNumber += 1
         self.view.addSubview(self.backGroundImage!)
         
         
@@ -369,33 +400,11 @@ class SignUp: ViewControllerBase ,RCIMClientReceiveMessageDelegate,UITextViewDel
         self.timeView!.joinButton!.layer.addSublayer(ovalShapeLayer!)
     }
     
-    func updateTimer(sender: NSTimer) {
-        if(verifyRequestCount < 1)
-        {
-            timer!.invalidate()
-            timer = nil
-            
-            UIView.animateWithDuration(1, animations: { () -> Void in
-                self.backGroundImage!.alpha = 0.5
-                self.backGroundImage!.setNeedsDisplay()
-                }, completion: { (finished) -> Void in
-                    self.backGroundImage!.layer.removeAllAnimations()
-                    self.backGroundImage!.image = UIImage(named: "MainBackGround\(self.backGroundImageNumber)")
-                    UIView.animateWithDuration(2, animations: { () -> Void in
-                        self.backGroundImage!.alpha = 1
-                        }, completion: { (finished) -> Void in
-                            self.backGroundImage!.layer.removeAllAnimations()
-                            self.verifyRequestCount = 5
-                            self.timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: "updateTimer:", userInfo: nil, repeats: true)
-                            self.backGroundImageNumber = (self.backGroundImageNumber % 4) + 1
-                    })
-            })
-          }
-         self.verifyRequestCount -= 1
-    }
-
     
         func joinButtonClick(sender : UIButton){
+            
+            MsgBoxHelper.show("", message: "")
+            
             
             let soundId = soundPlay!.sound.valueForKey(SoundResource.clickEventSound) as! String
             let id = UInt32(soundId)
@@ -543,41 +552,39 @@ class SignUp: ViewControllerBase ,RCIMClientReceiveMessageDelegate,UITextViewDel
     
     func textView(textView: UITextView, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool {
         if (text == "\n"){
-            
-            let model = ChatMessageModel()
-            model.type = "chatroom"
-            model.userName = "hello world"
-            model.userId = "1"
-            
-            let para = model.currentModelToJsonString()
-            print(para)
-            
-            let message = RCTextMessage(content: textView.text)
-            message.extra = para
-            RCIMClient.sharedRCIMClient().sendMessage(RCConversationType.ConversationType_PRIVATE, targetId: "1", content: message, pushContent: nil, success: { (messageId) in
-                print("发送成功")
-                }, error: { (error, messageId) in
-                    print("发送失败")
-            })
-            
-            textView.resignFirstResponder()
-            textView.text = ""
-            
-            
-            dispatch_async(dispatch_get_main_queue(), {
-
-    
-                self.worldChat!.enterForm = UIView(frame: CGRect(x: UIAdapter.shared.transferWidth(18), y:self.view.frame.height - (UIAdapter.shared.transferHeight(110) + UIAdapter.shared.transferWidth(200) + 64) - UIAdapter.shared.transferHeight(25), width: self.view.frame.width - UIAdapter.shared.transferWidth(30) - UIAdapter.shared.transferWidth(6), height: UIAdapter.shared.transferHeight(25)))
-                
-                self.worldChat!.enterText = UITextView(frame: CGRect(x: UIAdapter.shared.transferWidth(23), y:self.view.frame.height - (UIAdapter.shared.transferHeight(110) + UIAdapter.shared.transferWidth(200) + 64) - UIAdapter.shared.transferHeight(25) + UIAdapter.shared.transferHeight(3) , width: self.view.frame.width - UIAdapter.shared.transferWidth(30) - UIAdapter.shared.transferWidth(6) - UIAdapter.shared.transferWidth(55), height: UIAdapter.shared.transferHeight(25) - UIAdapter.shared.transferHeight(6) ))
-                
-                self.tableScrollToBottom()
-            });
+      
             
         }
         return true
     }
 
+    
+    func sendMessage(sender: UIButton){
+        
+        let message = RCTextMessage(content: self.worldChat!.enterText!.text)
+        message.extra = DBBaseInfoHelper.GetCurrentUserInfo()![1] as! String
+        RCIMClient.sharedRCIMClient().sendMessage(RCConversationType.ConversationType_PRIVATE, targetId: "1", content: message, pushContent: nil, success: { (messageId) in
+            print("发送成功")
+            
+              self.chatDetail.addObject("我说:\(self.worldChat!.enterText!.text)")
+            
+             dispatch_async(dispatch_get_main_queue(), {
+                //
+                self.worldChat?.worldChatDetail!.reloadData()
+                self.worldChat!.enterText!.resignFirstResponder()
+                self.worldChat!.enterText!.text = ""
+                self.worldChat!.enterForm!.frame = CGRect(x: self.worldChat!.enterForm!.frame.origin.x  , y: self.worldChat!.enterForm!.frame.origin.y, width: self.worldChatEnterFormOriginFrame!.width, height: self.worldChatEnterFormOriginFrame!.height)
+                self.worldChat!.enterText!.frame =
+                    CGRect(x: self.worldChat!.enterText!.frame.origin.x  , y: self.worldChat!.enterText!.frame.origin.y, width: self.worldChatEnterTextOriginFrame!.width, height: self.worldChatEnterTextOriginFrame!.height)
+                
+                self.tableScrollToBottom()
+            });
+
+            
+            }, error: { (error, messageId) in
+                print("发送失败")
+        })
+}
 
     
     

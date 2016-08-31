@@ -31,14 +31,14 @@ class TimerView: UIView {
         self.joinButtonBackGround!.layer.cornerRadius = UIAdapter.shared.transferWidth(100)
         
         
-        let beffect = UIBlurEffect(style: UIBlurEffectStyle.Light)
-        let view = UIVisualEffectView(effect: beffect)
-        
-        view.frame = self.joinButtonBackGround!.bounds
-        self.joinButtonBackGround!.addSubview(view)
+//        let beffect = UIBlurEffect(style: UIBlurEffectStyle.Light)
+//        let view = UIVisualEffectView(effect: beffect)
+//        
+//        view.frame = self.joinButtonBackGround!.bounds
+//        self.joinButtonBackGround!.addSubview(view)
         self.addSubview(self.joinButtonBackGround!)
         
-        
+        self.joinButtonBackGround!.image = UIImage(named: "signupBack")
         
         self.joinButton = UIButton(frame: CGRectMake(0,
             0,UIAdapter.shared.transferWidth(200), UIAdapter.shared.transferWidth(200)))

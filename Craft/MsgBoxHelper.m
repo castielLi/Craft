@@ -7,6 +7,7 @@
 //
 
 #import "MsgBoxHelper.h"
+#import "CustomAlert.h"
 
 @interface MsgBoxHelper(){
     
@@ -16,10 +17,8 @@
 @implementation MsgBoxHelper
 
 +(void)show :(NSString*)title message:(NSString*)message{
-    UIAlertView* alert = [[UIAlertView alloc]init];
-    alert.message = message;
-    alert.title = title;
-    [alert addButtonWithTitle:@"OK"];
+    CustomAlert* alert = [[CustomAlert alloc]initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height) type:title message:message];
+
     [alert show];
 }
 
