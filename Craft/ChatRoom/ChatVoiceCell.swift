@@ -10,6 +10,8 @@ import Foundation
 
 class ChatVoiceCell: ChatCell {
     /// Store a wave image.
+    private var messageModel : ChatMessage?
+    
     var imageViewWave: UIImageView?
     let newHeight: CGFloat = 60
     /// The closure which will be executed when playing voice.
@@ -41,8 +43,15 @@ class ChatVoiceCell: ChatCell {
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        // Because there is 5 pixels disparity in background image, so here use gapLabelMessage to make up.
-        var y = self.imageViewAvatar!.frame.origin.y + self.gapLabelMessage
+        
+        var y : CGFloat = 0
+        if !self.messageModel!.showName{
+            y = self.imageViewAvatar!.frame.origin.y + self.gapLabelMessage
+        }else{
+            y = self.imageViewAvatar!.frame.origin.y + 25
+        }
+        
+
         var x = self.imageViewAvatar!.frame.origin.x + (self.message!.ownerType == .Mine ? -self.gapBackground - self.gapBackground - self.gapLabelMessage - self.imageViewWave!.frame.width : self.gapBackground + self.gapBackground + self.gapLabelMessage + self.imageViewAvatar!.frame.width)
         self.imageViewWave?.frame.origin = CGPointMake(x, y)
         
@@ -61,6 +70,7 @@ class ChatVoiceCell: ChatCell {
     
     override func setMessage(message: ChatMessage) {
         super.setMessage(message)
+        self.messageModel = message
         if self.message!.ownerType == .Mine {
             self.imageViewWave?.image = UIImage(named: "message_voice_sender_normal")
         } else {

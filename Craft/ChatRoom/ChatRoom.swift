@@ -448,10 +448,11 @@ class ChatRoom: ViewControllerBase , UITextViewDelegate ,RCIMClientReceiveMessag
             print("发送成功")
 
             let username : String? = self.chatType! == RCConversationType.ConversationType_PRIVATE ? nil : DBBaseInfoHelper.GetCurrentUserInfo()![1] as! String
-            
+            let type = self.chatType! == RCConversationType.ConversationType_PRIVATE ? false : true
             dispatch_async(dispatch_get_main_queue(), {
                 let txtMsg = ChatTextMessage(ownerType: .Mine, messageType: .Text, portrait: UIImage(contentsOfFile: NSBundle.mainBundle().pathForResource("10", ofType: "jpeg")!)! ,username: username)
                 txtMsg.text = self.enterForm!.enterTextView!.text
+                txtMsg.showName = type
                 self.data!.addObject(txtMsg)
                 self.detailTable!.reloadData()
                 self.enterForm!.enterTextView!.resignFirstResponder()
@@ -590,11 +591,13 @@ class ChatRoom: ViewControllerBase , UITextViewDelegate ,RCIMClientReceiveMessag
                 
                 let username : String? = self.chatType! == RCConversationType.ConversationType_PRIVATE ? nil : DBBaseInfoHelper.GetCurrentUserInfo()![1] as! String
                 
+                let type = self.chatType! == RCConversationType.ConversationType_PRIVATE ? false : true
+                
                 let voiceMsg = ChatVoiceMessage(ownerType: .Mine, messageType: .Voice, portrait: UIImage(contentsOfFile: NSBundle.mainBundle().pathForResource("10", ofType: "jpeg")!)!, voiceSecs: self.rtAudio.recordedDuration! , username: username)
                 
                 var path = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] + "/tmp.wav"
                 let data = NSData(contentsOfFile: path)
-                
+                voiceMsg.showName = type
                 voiceMsg.voiceData = data!
                 self.data!.addObject(voiceMsg)
                 self.detailTable!.reloadData()

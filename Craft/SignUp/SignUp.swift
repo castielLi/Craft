@@ -563,7 +563,12 @@ class SignUp: ViewControllerBase ,RCIMClientReceiveMessageDelegate,UITextViewDel
     func sendMessage(sender: UIButton){
         
         let message = RCTextMessage(content: self.worldChat!.enterText!.text)
-        message.extra = "\(DBBaseInfoHelper.GetCurrentUserInfo()![1] as! String):\(nearActivityModel!.profressionTyep):\(nearActivityModel!.profressionId)"
+        
+        nearActivityModel = NearActivityModel()
+        nearActivityModel!.profressionType = 1
+        nearActivityModel!.profressionId = 1
+        
+        message.extra = "\(DBBaseInfoHelper.GetCurrentUserInfo()![1] as! String):\(nearActivityModel!.profressionType):\(nearActivityModel!.profressionId)"
         RCIMClient.sharedRCIMClient().sendMessage(RCConversationType.ConversationType_PRIVATE, targetId: "1", content: message, pushContent: nil, success: { (messageId) in
             print("发送成功")
             

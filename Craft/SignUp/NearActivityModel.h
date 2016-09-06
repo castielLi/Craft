@@ -11,7 +11,7 @@
 @interface NearActivityModel : NSObject
 
 @property int haveTankCount;
-@property int profressionTyep;
+@property int profressionType;
 @property int profressionId;
 @property (nonatomic,strong) NSString * chatId;
 @property int haveDPSCount;

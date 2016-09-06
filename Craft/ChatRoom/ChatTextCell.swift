@@ -11,6 +11,7 @@ import UIKit
 class ChatTextCell: ChatCell {
     
     private var messageLabel: UILabel?
+    private var messageModel : ChatMessage?
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -45,7 +46,7 @@ class ChatTextCell: ChatCell {
     
     override func setMessage(message: ChatMessage) {
         super.setMessage(message)
-
+        self.messageModel = message
         self.messageLabel?.text = (message as! ChatTextMessage).text
         self.messageLabel?.frame = CGRect(origin: self.messageLabel!.frame.origin, size: (message as! ChatTextMessage).messageSize!)
     }
@@ -54,14 +55,16 @@ class ChatTextCell: ChatCell {
         super.layoutSubviews()
         
         // Because there is 5 pixels disparity in background image, so here use gapLabelMessage to make up.
-        var y = self.imageViewAvatar!.frame.origin.y + self.gapLabelMessage 
+//        var y = self.imageViewAvatar!.frame.origin.y + self.imageViewMessageBackground!.frame.origin.y
+        var y : CGFloat = 0
+        if !self.messageModel!.showName{
+         y = self.imageViewAvatar!.frame.origin.y + self.gapLabelMessage
+        }else{
+           y = self.imageViewAvatar!.frame.origin.y + 25
+        }
         var x = self.imageViewAvatar!.frame.origin.x + (self.message!.ownerType == .Mine ? -self.gapBackground - self.gapBackground - self.gapLabelMessage - self.messageLabel!.frame.width : self.imageViewAvatar!.frame.width + self.gapBackground + self.gapBackground + self.gapLabelMessage)
         self.messageLabel?.frame.origin = CGPointMake(x, y)
         
-//        x -= 18
-//        y = self.imageViewAvatar!.frame.origin.y - 5    //There is 5 pixels different in background image.
-//        let h = max(self.messageLabel!.frame.height + 30, self.imageViewAvatar!.frame.height + 10)
-//        self.imageViewMessageBackground?.frame = CGRectMake(x, y, self.messageLabel!.frame.width + 40, h)
         
         x = x - self.gapLabelMessage - self.gapBackground
         y = y - self.gapLabelMessage - self.gapBackground

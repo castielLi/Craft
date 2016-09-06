@@ -69,7 +69,9 @@ class ChatCell: UITableViewCell {
     
     private func createNameLabel() {
         if self.username == nil {
-            self.username = UILabel(frame : CGRect(x: 0, y: 0, width: 30, height: 10))
+            self.username = UILabel(frame : CGRect(x: 0, y: 0, width: 30, height: 12))
+            self.username!.textColor = UIColor.whiteColor()
+            self.username!.font = UIFont(name: "KaiTi", size: 10)
             self.username!.hidden = true
             self.addSubview(self.username!)
         }
@@ -84,13 +86,15 @@ class ChatCell: UITableViewCell {
         }
         
         if self.message!.showName{
-            
+            self.username!.hidden = false
             if self.message!.ownerType == .Mine {
-                self.imageViewAvatar?.frame.origin = CGPointMake(self.frame.width - self.gapPortrait - self.imageViewAvatar!.frame.width, self.gapPortrait)
+                self.username!.frame.origin = CGPointMake(self.frame.width - self.gapPortrait - self.imageViewAvatar!.frame.width - 10 - 30, self.gapPortrait)
             } else {
-                self.username!.frame.origin = CGPointMake(self.imageViewAvatar!.frame.origin.x + self.imageViewAvatar!.frame.width + 5  , self.imageViewAvatar!.frame.origin.y)
+                self.username!.frame.origin = CGPointMake(self.imageViewAvatar!.frame.origin.x + self.imageViewAvatar!.frame.width + 10  , self.imageViewAvatar!.frame.origin.y)
             }
             
+        }else{
+           self.username!.hidden = true
         }
     }
     
@@ -99,11 +103,14 @@ class ChatCell: UITableViewCell {
         self.imageViewAvatar?.image = message.portrait
         switch message.ownerType {
         case .Mine:
-            self.imageViewMessageBackground?.image = UIImage(named: "message_sender_background_normal")?.resizableImageWithCapInsets(UIEdgeInsetsMake(28, 20, 15, 20), resizingMode: .Stretch)
-            self.imageViewMessageBackground?.highlightedImage = UIImage(named: "message_sender_background_highlight")?.resizableImageWithCapInsets(UIEdgeInsetsMake(28, 20, 15, 20), resizingMode: .Stretch)
+            self.imageViewMessageBackground?.image = UIImage(named: "message_sender_background_normal")?.resizableImageWithCapInsets(UIEdgeInsetsMake(28, self.message!.showName ?35:20, 15, 20), resizingMode: .Stretch)
+            self.imageViewMessageBackground?.highlightedImage = UIImage(named: "message_sender_background_highlight")?.resizableImageWithCapInsets(UIEdgeInsetsMake(28, self.message!.showName ?35:20, 15, 20), resizingMode: .Stretch)
         case .Other:
-            self.imageViewMessageBackground?.image = UIImage(named: "message_receiver_background_normal")?.resizableImageWithCapInsets(UIEdgeInsetsMake(28, 20, 15, 20), resizingMode: .Stretch)
-            self.imageViewMessageBackground?.highlightedImage = UIImage(named: "message_receiver_background_highlight")?.resizableImageWithCapInsets(UIEdgeInsetsMake(28, 20, 15, 20), resizingMode: .Stretch)
+            self.imageViewMessageBackground?.image = UIImage(named: "message_receiver_background_normal")?.resizableImageWithCapInsets(UIEdgeInsetsMake(28, self.message!.showName ?35:20, 15, 20), resizingMode: .Stretch)
+            self.imageViewMessageBackground?.highlightedImage = UIImage(named: "message_receiver_background_highlight")?.resizableImageWithCapInsets(UIEdgeInsetsMake(28, self.message!.showName ?35:20, 15, 20), resizingMode: .Stretch)
+        }
+        if self.message!.showName{
+        self.username?.text = message.username!
         }
     }
 }
