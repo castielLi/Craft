@@ -47,6 +47,7 @@
 		182BE1781D5618E700224330 /* ActivityDetailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 182BE1771D5618E700224330 /* ActivityDetailModel.m */; };
 		182BE17B1D56198300224330 /* ActivityDetailContentModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 182BE17A1D56198300224330 /* ActivityDetailContentModel.m */; };
 		182BE17E1D561CC600224330 /* ActivityMemberItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 182BE17D1D561CC600224330 /* ActivityMemberItem.m */; };
+		182DF4841D7E61A900E9D8BE /* NearActivityModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 182DF4831D7E61A900E9D8BE /* NearActivityModel.m */; };
 		1832D26B1D198A37000803FF /* WorldChat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1832D26A1D198A37000803FF /* WorldChat.swift */; };
 		1835FA161D5CAC3C00ECA50A /* RegisterForLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1835FA151D5CAC3C00ECA50A /* RegisterForLogin.swift */; };
 		1837D2361CFAE2B700FFE3FD /* ExtensionTableForChatRoom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1837D2351CFAE2B700FFE3FD /* ExtensionTableForChatRoom.swift */; };
@@ -263,6 +264,8 @@
 		182BE17A1D56198300224330 /* ActivityDetailContentModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ActivityDetailContentModel.m; path = SignUp/ActivityDetailContentModel.m; sourceTree = "<group>"; };
 		182BE17C1D561CC600224330 /* ActivityMemberItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ActivityMemberItem.h; path = SignUp/ActivityMemberItem.h; sourceTree = "<group>"; };
 		182BE17D1D561CC600224330 /* ActivityMemberItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ActivityMemberItem.m; path = SignUp/ActivityMemberItem.m; sourceTree = "<group>"; };
+		182DF4821D7E61A900E9D8BE /* NearActivityModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NearActivityModel.h; path = SignUp/NearActivityModel.h; sourceTree = "<group>"; };
+		182DF4831D7E61A900E9D8BE /* NearActivityModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NearActivityModel.m; path = SignUp/NearActivityModel.m; sourceTree = "<group>"; };
 		1832D26A1D198A37000803FF /* WorldChat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WorldChat.swift; path = SignUp/WorldChat.swift; sourceTree = "<group>"; };
 		1835FA151D5CAC3C00ECA50A /* RegisterForLogin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterForLogin.swift; sourceTree = "<group>"; };
 		1837D2351CFAE2B700FFE3FD /* ExtensionTableForChatRoom.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtensionTableForChatRoom.swift; sourceTree = "<group>"; };
@@ -950,6 +953,8 @@
 				182BE17A1D56198300224330 /* ActivityDetailContentModel.m */,
 				182BE17C1D561CC600224330 /* ActivityMemberItem.h */,
 				182BE17D1D561CC600224330 /* ActivityMemberItem.m */,
+				182DF4821D7E61A900E9D8BE /* NearActivityModel.h */,
+				182DF4831D7E61A900E9D8BE /* NearActivityModel.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -1587,6 +1592,7 @@
 				18A593DC1C099D4100458308 /* CellType.swift in Sources */,
 				1809CC4E1D5F428D00FDA00C /* DutyResponseView.m in Sources */,
 				CD5EB3921D195EF300802FC4 /* RTAudioItem.swift in Sources */,
+				182DF4841D7E61A900E9D8BE /* NearActivityModel.m in Sources */,
 				18BD4A311D1AC2A800585D1D /* RCIMdelegateForSignUp.swift in Sources */,
 				18A593D81C099C5300458308 /* TableViewBaseCell.swift in Sources */,
 				18AFE5D11CBE6FF1000DAD84 /* AddNewActivity.swift in Sources */,

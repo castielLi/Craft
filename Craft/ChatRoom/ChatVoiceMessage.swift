@@ -15,9 +15,11 @@ class ChatVoiceMessage: ChatMessage {
     /// Data of wav-format voice.
     var voiceData: NSData?
     
-    init(ownerType: MessageOwnerType, messageType: MessageType, portrait: UIImage, voiceSecs: Int) {
+    private var label: UILabel?
+    
+    init(ownerType: MessageOwnerType, messageType: MessageType, portrait: UIImage, voiceSecs: Int , username : String?) {
         self.voiceSecs = voiceSecs
-        super.init(ownerType: ownerType, messageType: messageType, portrait: portrait)
+        super.init(ownerType: ownerType, messageType: messageType, portrait: portrait , username: username)
         self.cellIdentity = "voiceMessageCell"
     }
 

@@ -17,6 +17,8 @@
 
 -(void)GetApplylistDidFinish:(ApiResult *)result response:(id)response;
 
+-(void)GetNearActivityDidFinish:(ApiResult *)result response:(id)response;
+
 -(void)DealApplyRequestFinish:(ApiResult *)result response:(id)response index:(NSString*)index;
 
 @end
@@ -40,5 +42,7 @@
 -(void)applyRequest:(NSString*)activityId requestUserId:(NSString*)userId index:(NSString*)index;
 
 -(void)refuseRequest:(NSString*)activityId requestUserId:(NSString*)userId index:(NSString*)index;
+
+-(void)getNearActivity;
 
 @end

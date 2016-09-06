@@ -22,9 +22,13 @@ extension ChatRoom{
             
             if (message.conversationType == RCConversationType.ConversationType_CHATROOM){
                 if(nLeft == 0){
+                    
+                    let spearker = content.extra.characters.split(":")[0]
+
                     dispatch_async(dispatch_get_main_queue(), {
-                    let txtMsg = ChatTextMessage(ownerType: .Other, messageType: .Text, portrait: UIImage(contentsOfFile: NSBundle.mainBundle().pathForResource("10", ofType: "jpeg")!)!)
+                    let txtMsg = ChatTextMessage(ownerType: .Other, messageType: .Text, portrait: UIImage(contentsOfFile: NSBundle.mainBundle().pathForResource("10", ofType: "jpeg")!)! , username: "\(spearker)")
                     txtMsg.text = text
+                    txtMsg.showName = true
                     self.data?.addObject(txtMsg)
                     self.detailTable!.reloadData()
                     self.tableScrollToBottom()
@@ -90,8 +94,14 @@ extension ChatRoom{
                     }
                 }
                 else{
-                    let txtMsg = ChatTextMessage(ownerType: .Other, messageType: .Text, portrait: UIImage(contentsOfFile: NSBundle.mainBundle().pathForResource("10", ofType: "jpeg")!)!)
+                    
+                    let type = message.conversationType == RCConversationType.ConversationType_GROUP ? true:false
+                    
+                    let name : String? = message.conversationType == RCConversationType.ConversationType_GROUP ? "\(content.extra.characters.split(":")[0])": nil
+                    
+                    let txtMsg = ChatTextMessage(ownerType: .Other, messageType: .Text, portrait: UIImage(contentsOfFile: NSBundle.mainBundle().pathForResource("10", ofType: "jpeg")!)!,username: name)
                     txtMsg.text = text
+                    txtMsg.showName = type
                     self.data?.addObject(txtMsg)
                     self.detailTable!.reloadData()
                     self.tableScrollToBottom()
@@ -111,10 +121,13 @@ extension ChatRoom{
             
             if (message.conversationType == RCConversationType.ConversationType_CHATROOM){
                 if(nLeft == 0){
-                    dispatch_async(dispatch_get_main_queue(), {
-                    let voiceMsg = ChatVoiceMessage(ownerType: .Other, messageType: .Voice, portrait: UIImage(contentsOfFile: NSBundle.mainBundle().pathForResource("10", ofType: "jpeg")!)!, voiceSecs: duration)
-                    voiceMsg.voiceData = data
                     
+                    let spearker = content.extra.characters.split(":")[0]
+                    
+                    dispatch_async(dispatch_get_main_queue(), {
+                    let voiceMsg = ChatVoiceMessage(ownerType: .Other, messageType: .Voice, portrait: UIImage(contentsOfFile: NSBundle.mainBundle().pathForResource("10", ofType: "jpeg")!)!, voiceSecs: duration , username: "\(spearker)")
+                    voiceMsg.voiceData = data
+                    voiceMsg.showName = true
                     self.data?.addObject(voiceMsg)
                     self.detailTable!.reloadData()
                     
@@ -179,9 +192,8 @@ extension ChatRoom{
                     }
                 }
             }else{
-                let voiceMsg = ChatVoiceMessage(ownerType: .Other, messageType: .Voice, portrait: UIImage(contentsOfFile: NSBundle.mainBundle().pathForResource("10", ofType: "jpeg")!)!, voiceSecs: duration)
+                let voiceMsg = ChatVoiceMessage(ownerType: .Other, messageType: .Voice, portrait: UIImage(contentsOfFile: NSBundle.mainBundle().pathForResource("10", ofType: "jpeg")!)!, voiceSecs: duration , username: nil)
                     voiceMsg.voiceData = data
-
                         self.data?.addObject(voiceMsg)
                         self.detailTable!.reloadData()
 

@@ -432,14 +432,14 @@ extension ChatRoom : UITableViewDelegate,UITableViewDataSource{
                         // voice
                         let durant = item.valueForKey("content")!.valueForKey("duration") as! Int
                         let voiceData = item.valueForKey("content")!.valueForKey("wavAudioData") as! NSData
-                        let voiceMsg = ChatVoiceMessage(ownerType: ownerType, messageType: .Voice, portrait: UIImage(contentsOfFile: NSBundle.mainBundle().pathForResource("10", ofType: "jpeg")!)!, voiceSecs: durant)
+                        let voiceMsg = ChatVoiceMessage(ownerType: ownerType, messageType: .Voice, portrait: UIImage(contentsOfFile: NSBundle.mainBundle().pathForResource("10", ofType: "jpeg")!)!, voiceSecs: durant, username: nil)
                         voiceMsg.voiceData = voiceData
                         self.data!.insertObject(voiceMsg, atIndex: 0)
                         
                     } else {
                         let content = item.valueForKey("content")!.valueForKey("content")
                         
-                        let txtMsg = ChatTextMessage(ownerType: ownerType, messageType: .Text, portrait: UIImage(contentsOfFile: NSBundle.mainBundle().pathForResource("10", ofType: "jpeg")!)!)
+                        let txtMsg = ChatTextMessage(ownerType: ownerType, messageType: .Text, portrait: UIImage(contentsOfFile: NSBundle.mainBundle().pathForResource("10", ofType: "jpeg")!)! , username: nil)
                         txtMsg.text = content as! String
                         self.data!.insertObject(txtMsg, atIndex: 0)
                         
@@ -468,18 +468,22 @@ extension ChatRoom : UITableViewDelegate,UITableViewDataSource{
                     let objectName = item.valueForKey("objectName") as! String
                     let nameComponents = objectName.componentsSeparatedByString(":")
                     
+                    let username = DBBaseInfoHelper.GetCurrentUserInfo()![1] as! String
+                        
                     if nameComponents[1] == "VcMsg" {
                         // voice
                         let durant = item.valueForKey("content")!.valueForKey("duration") as! Int
                         let voiceData = item.valueForKey("content")!.valueForKey("wavAudioData") as! NSData
-                        let voiceMsg = ChatVoiceMessage(ownerType: ownerType, messageType: .Voice, portrait: UIImage(contentsOfFile: NSBundle.mainBundle().pathForResource("10", ofType: "jpeg")!)!, voiceSecs: durant)
+                        let voiceMsg = ChatVoiceMessage(ownerType: ownerType, messageType: .Voice, portrait: UIImage(contentsOfFile: NSBundle.mainBundle().pathForResource("10", ofType: "jpeg")!)!, voiceSecs: durant ,username: username)
+                        voiceMsg.showName = true
                         voiceMsg.voiceData = voiceData
                         self.data!.insertObject(voiceMsg, atIndex: 0)
                         
                     } else {
                         let content = item.valueForKey("content")!.valueForKey("content")
                         
-                        let txtMsg = ChatTextMessage(ownerType: ownerType, messageType: .Text, portrait: UIImage(contentsOfFile: NSBundle.mainBundle().pathForResource("10", ofType: "jpeg")!)!)
+                        let txtMsg = ChatTextMessage(ownerType: ownerType, messageType: .Text, portrait: UIImage(contentsOfFile: NSBundle.mainBundle().pathForResource("10", ofType: "jpeg")!)!,username: username)
+                        txtMsg.showName = true
                         txtMsg.text = content as! String
                         self.data!.insertObject(txtMsg, atIndex: 0)
                         }

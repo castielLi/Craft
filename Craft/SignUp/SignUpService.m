@@ -9,6 +9,7 @@
 #import "SignUpService.h"
 #import "ActivityItemModel.h"
 #import "ActivityDetailModel.h"
+#import "NearActivityModel.h"
 
 @interface SignUpService ()
 {
@@ -211,6 +212,36 @@
                  [self.delegate DealApplyRequestFinish:result response:response index:index];
               }];
     
+}
+
+-(void)getNearActivity{
+    NSString * faction = @"";
+    NSString * userId = @"";
+    NSDictionary * profileValues = [_dbHelper DatabaseQueryWithParameters:@[@"userid"] query:@"select userid from Profile" values:nil];
+    if (profileValues != nil){
+        userId = [profileValues valueForKey:@"userid"];
+    }
+    
+    NSDictionary * factionValues = [_dbHelper DatabaseQueryWithParameters:@[@"faction"] query:@"select faction from Faction" values:nil];
+    if (factionValues != nil){
+        faction = [factionValues valueForKey:@"faction"];
+    }
+    
+    NSInteger factionValue = [faction integerValue];
+    NSDictionary * parameters = @{@"userId":userId,@"faction":@(factionValue)};
+    
+    [_restService post:@"/api/activity/near_activity" parameters:parameters
+              callback:^ (ApiResult *result, id response){
+                  if(result.state){
+                      NearActivityModel * model = [NearActivityModel mj_objectWithKeyValues:response];
+                      result.data = model;
+                      [self.delegate GetMyActivityDidFinish:result response:response];
+                  }else{
+                      [self.delegate GetMyActivityDidFinish:result response:response];
+                  }
+              }];
+    
+
 }
 
 @end

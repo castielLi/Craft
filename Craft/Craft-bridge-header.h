@@ -21,6 +21,7 @@
 #import "DutyResponseView.h"
 #import "ProfileModel.h"
 #import "UserInfoModel.h"
+#import "NearActivityModel.h"
 
 
 //oc framework

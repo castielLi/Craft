@@ -22,7 +22,13 @@ extension SignUp{
                 
                 let id = message.targetId
                 
-                let speakContent = "\(content.extra)说:\(text)"
+                let spearker = content.extra.characters.split(":")[0]
+                    
+                let profressType = content.extra.characters.split(":")[1]
+                    
+                let profressId = content.extra.characters.split(":")[2]
+                    
+                let speakContent = "\(spearker)说:\(text)"
                 
                 dispatch_async(dispatch_get_main_queue(), {
                     self.chatDetail.addObject(speakContent)

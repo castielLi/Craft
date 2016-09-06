@@ -13,6 +13,8 @@ class ChatCell: UITableViewCell {
     var imageViewAvatar: UIImageView?
     var imageViewMessageBackground: UIImageView?
     var message: ChatMessage?
+    var username : UILabel?
+    
     /// This defined the gap that from portrait to its nearest bound, its super view's bound.
     let gapPortrait: CGFloat = 10
     /// This defined the gap that from background image view to its nearest portrait bound.
@@ -40,6 +42,7 @@ class ChatCell: UITableViewCell {
         
         self.createAvatar()
         self.createMessageBackground()
+        self.createNameLabel()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -64,12 +67,30 @@ class ChatCell: UITableViewCell {
         }
     }
     
+    private func createNameLabel() {
+        if self.username == nil {
+            self.username = UILabel(frame : CGRect(x: 0, y: 0, width: 30, height: 10))
+            self.username!.hidden = true
+            self.addSubview(self.username!)
+        }
+    }
+    
     override func layoutSubviews() {
         super.layoutSubviews()
         if self.message!.ownerType == .Mine {
             self.imageViewAvatar?.frame.origin = CGPointMake(self.frame.width - self.gapPortrait - self.imageViewAvatar!.frame.width, self.gapPortrait)
         } else {
             self.imageViewAvatar?.frame.origin = CGPointMake(self.gapPortrait, self.gapPortrait)
+        }
+        
+        if self.message!.showName{
+            
+            if self.message!.ownerType == .Mine {
+                self.imageViewAvatar?.frame.origin = CGPointMake(self.frame.width - self.gapPortrait - self.imageViewAvatar!.frame.width, self.gapPortrait)
+            } else {
+                self.username!.frame.origin = CGPointMake(self.imageViewAvatar!.frame.origin.x + self.imageViewAvatar!.frame.width + 5  , self.imageViewAvatar!.frame.origin.y)
+            }
+            
         }
     }
     

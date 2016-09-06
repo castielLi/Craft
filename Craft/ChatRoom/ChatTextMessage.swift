@@ -29,8 +29,8 @@ class ChatTextMessage: ChatMessage {
     private var label: UILabel?
     
     
-    override init(ownerType: MessageOwnerType, messageType: MessageType, portrait: UIImage) {
-        super.init(ownerType: ownerType, messageType: messageType, portrait: portrait)
+    override init(ownerType: MessageOwnerType, messageType: MessageType, portrait: UIImage , username : String?) {
+        super.init(ownerType: ownerType, messageType: messageType, portrait: portrait ,username: username)
         if self.label == nil {
             self.label = UILabel()
             self.label?.numberOfLines = 0

@@ -20,15 +20,18 @@ enum MessageOwnerType: Int {
 
 class ChatMessage {
     var portrait: UIImage
+    var showName : Bool = false
     var ownerType: MessageOwnerType
     var messageType: MessageType
     /// Time when message sent. May be optional?
     var date: String?
+    var username : String?
     var cellIdentity: String = "textMessageCell"
     
-    init(ownerType: MessageOwnerType, messageType: MessageType, portrait: UIImage) {
+    init(ownerType: MessageOwnerType, messageType: MessageType, portrait: UIImage , username : String?) {
         self.ownerType = ownerType
         self.messageType = messageType
         self.portrait = portrait
+        self.username = username
     }
 }

@@ -17,6 +17,7 @@ class SignUp: ViewControllerBase ,RCIMClientReceiveMessageDelegate,UITextViewDel
     // 0是联盟 1是部落
     var chatRoomIndex : Int = 0
     var chatRoomId : String = "0"
+    var nearActivityModel : NearActivityModel?
     
     //datasource for activity
     var myActivitiesDatasource : NSMutableArray?
@@ -562,7 +563,7 @@ class SignUp: ViewControllerBase ,RCIMClientReceiveMessageDelegate,UITextViewDel
     func sendMessage(sender: UIButton){
         
         let message = RCTextMessage(content: self.worldChat!.enterText!.text)
-        message.extra = DBBaseInfoHelper.GetCurrentUserInfo()![1] as! String
+        message.extra = "\(DBBaseInfoHelper.GetCurrentUserInfo()![1] as! String):\(nearActivityModel!.profressionTyep):\(nearActivityModel!.profressionId)"
         RCIMClient.sharedRCIMClient().sendMessage(RCConversationType.ConversationType_PRIVATE, targetId: "1", content: message, pushContent: nil, success: { (messageId) in
             print("发送成功")
             
@@ -584,9 +585,18 @@ class SignUp: ViewControllerBase ,RCIMClientReceiveMessageDelegate,UITextViewDel
             }, error: { (error, messageId) in
                 print("发送失败")
         })
-}
+     }
 
-    
+    func GetNearActivityDidFinish(result: ApiResult!, response: AnyObject!) {
+        self.closeProgress()
+        if(result.state){
+        
+            nearActivityModel = result.data as! NearActivityModel
+            
+        }else{
+           MsgBoxHelper.show("错误", message: result.message)
+        }
+    }
     
     
     /*

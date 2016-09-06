@@ -447,9 +447,10 @@ class ChatRoom: ViewControllerBase , UITextViewDelegate ,RCIMClientReceiveMessag
         RCIMClient.sharedRCIMClient().sendMessage(self.chatType!, targetId: self.targetId!, content: message, pushContent: nil, success: { (messageId) in
             print("发送成功")
 
+            let username : String? = self.chatType! == RCConversationType.ConversationType_PRIVATE ? nil : DBBaseInfoHelper.GetCurrentUserInfo()![1] as! String
             
             dispatch_async(dispatch_get_main_queue(), {
-                let txtMsg = ChatTextMessage(ownerType: .Mine, messageType: .Text, portrait: UIImage(contentsOfFile: NSBundle.mainBundle().pathForResource("10", ofType: "jpeg")!)!)
+                let txtMsg = ChatTextMessage(ownerType: .Mine, messageType: .Text, portrait: UIImage(contentsOfFile: NSBundle.mainBundle().pathForResource("10", ofType: "jpeg")!)! ,username: username)
                 txtMsg.text = self.enterForm!.enterTextView!.text
                 self.data!.addObject(txtMsg)
                 self.detailTable!.reloadData()
@@ -578,16 +579,18 @@ class ChatRoom: ViewControllerBase , UITextViewDelegate ,RCIMClientReceiveMessag
                 cType = "private"
             }
             
-            model.type = cType
-            model.userName = "test"
-            model.userId = "1"
-            
-            message.extra = model.currentModelToJsonString()
+//            model.type = cType
+//            model.userName = "test"
+//            model.userId = "1"
+//            
+//            message.extra = model.currentModelToJsonString()
             RCIMClient.sharedRCIMClient().sendMessage(self.chatType!, targetId: self.targetId!, content: message, pushContent: nil, success: {
                 mesageId in
                 print("sent successfully")
                 
-                let voiceMsg = ChatVoiceMessage(ownerType: .Mine, messageType: .Voice, portrait: UIImage(contentsOfFile: NSBundle.mainBundle().pathForResource("10", ofType: "jpeg")!)!, voiceSecs: self.rtAudio.recordedDuration!)
+                let username : String? = self.chatType! == RCConversationType.ConversationType_PRIVATE ? nil : DBBaseInfoHelper.GetCurrentUserInfo()![1] as! String
+                
+                let voiceMsg = ChatVoiceMessage(ownerType: .Mine, messageType: .Voice, portrait: UIImage(contentsOfFile: NSBundle.mainBundle().pathForResource("10", ofType: "jpeg")!)!, voiceSecs: self.rtAudio.recordedDuration! , username: username)
                 
                 var path = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] + "/tmp.wav"
                 let data = NSData(contentsOfFile: path)
