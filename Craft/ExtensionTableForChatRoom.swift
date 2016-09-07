@@ -468,7 +468,15 @@ extension ChatRoom : UITableViewDelegate,UITableViewDataSource{
                     let objectName = item.valueForKey("objectName") as! String
                     let nameComponents = objectName.componentsSeparatedByString(":")
                     
-                    let username = DBBaseInfoHelper.GetCurrentUserInfo()![1] as! String
+                    let content = item.valueForKey("content")!
+                    
+                    var username = ""
+                        if(content.valueForKey("extra") != nil){
+                            username = content.valueForKey("extra")!.componentsSeparatedByString(":")[0]
+                        }else{
+                           username = "未知"
+                        }
+                    
                         
                     if nameComponents[1] == "VcMsg" {
                         // voice

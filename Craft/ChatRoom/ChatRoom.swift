@@ -428,6 +428,10 @@ class ChatRoom: ViewControllerBase , UITextViewDelegate ,RCIMClientReceiveMessag
             return
         }
         
+        if(self.enterForm!.enterTextView!.text == ""){
+           return
+        }
+        
         
         let message = RCTextMessage(content: self.enterForm!.enterTextView!.text)
         let model = ChatMessageModel()
@@ -444,11 +448,16 @@ class ChatRoom: ViewControllerBase , UITextViewDelegate ,RCIMClientReceiveMessag
             cType = "private"
         }
         
+        let username : String? = self.chatType! == RCConversationType.ConversationType_PRIVATE ? nil : DBBaseInfoHelper.GetCurrentUserInfo()![1] as! String
+        
+        let type = self.chatType! == RCConversationType.ConversationType_PRIVATE ? false : true
+        if(username != nil){
+            message.extra = username
+        }
+        
         RCIMClient.sharedRCIMClient().sendMessage(self.chatType!, targetId: self.targetId!, content: message, pushContent: nil, success: { (messageId) in
             print("发送成功")
 
-            let username : String? = self.chatType! == RCConversationType.ConversationType_PRIVATE ? nil : DBBaseInfoHelper.GetCurrentUserInfo()![1] as! String
-            let type = self.chatType! == RCConversationType.ConversationType_PRIVATE ? false : true
             dispatch_async(dispatch_get_main_queue(), {
                 let txtMsg = ChatTextMessage(ownerType: .Mine, messageType: .Text, portrait: UIImage(contentsOfFile: NSBundle.mainBundle().pathForResource("10", ofType: "jpeg")!)! ,username: username)
                 txtMsg.text = self.enterForm!.enterTextView!.text
@@ -584,14 +593,17 @@ class ChatRoom: ViewControllerBase , UITextViewDelegate ,RCIMClientReceiveMessag
 //            model.userName = "test"
 //            model.userId = "1"
 //            
-//            message.extra = model.currentModelToJsonString()
+//
+            let username : String? = self.chatType! == RCConversationType.ConversationType_PRIVATE ? nil : DBBaseInfoHelper.GetCurrentUserInfo()![1] as! String
+            
+            let type = self.chatType! == RCConversationType.ConversationType_PRIVATE ? false : true
+            if(username != nil){
+            message.extra = username
+            }
+            
             RCIMClient.sharedRCIMClient().sendMessage(self.chatType!, targetId: self.targetId!, content: message, pushContent: nil, success: {
                 mesageId in
                 print("sent successfully")
-                
-                let username : String? = self.chatType! == RCConversationType.ConversationType_PRIVATE ? nil : DBBaseInfoHelper.GetCurrentUserInfo()![1] as! String
-                
-                let type = self.chatType! == RCConversationType.ConversationType_PRIVATE ? false : true
                 
                 let voiceMsg = ChatVoiceMessage(ownerType: .Mine, messageType: .Voice, portrait: UIImage(contentsOfFile: NSBundle.mainBundle().pathForResource("10", ofType: "jpeg")!)!, voiceSecs: self.rtAudio.recordedDuration! , username: username)
                 

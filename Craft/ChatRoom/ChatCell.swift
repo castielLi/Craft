@@ -69,7 +69,7 @@ class ChatCell: UITableViewCell {
     
     private func createNameLabel() {
         if self.username == nil {
-            self.username = UILabel(frame : CGRect(x: 0, y: 0, width: 30, height: 12))
+            self.username = UILabel(frame : CGRect(x: 0, y: 0, width: 70, height: 12))
             self.username!.textColor = UIColor.whiteColor()
             self.username!.font = UIFont(name: "KaiTi", size: 10)
             self.username!.hidden = true
@@ -88,9 +88,11 @@ class ChatCell: UITableViewCell {
         if self.message!.showName{
             self.username!.hidden = false
             if self.message!.ownerType == .Mine {
-                self.username!.frame.origin = CGPointMake(self.frame.width - self.gapPortrait - self.imageViewAvatar!.frame.width - 10 - 30, self.gapPortrait)
+                self.username!.frame.origin = CGPointMake(self.frame.width - self.gapPortrait - self.imageViewAvatar!.frame.width - 10 - 70, self.gapPortrait)
+                self.username!.textAlignment = NSTextAlignment.Right
             } else {
                 self.username!.frame.origin = CGPointMake(self.imageViewAvatar!.frame.origin.x + self.imageViewAvatar!.frame.width + 10  , self.imageViewAvatar!.frame.origin.y)
+                self.username!.textAlignment = NSTextAlignment.Left
             }
             
         }else{

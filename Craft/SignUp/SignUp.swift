@@ -564,6 +564,10 @@ class SignUp: ViewControllerBase ,RCIMClientReceiveMessageDelegate,UITextViewDel
         
         let message = RCTextMessage(content: self.worldChat!.enterText!.text)
         
+        if message == ""{
+           return
+        }
+        
         nearActivityModel = NearActivityModel()
         nearActivityModel!.profressionType = 1
         nearActivityModel!.profressionId = 1
